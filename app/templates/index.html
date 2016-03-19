@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guestbook</title>
+    <!-- Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<body>
+    <h1>Data: The Gathering</h1>
+    <h2>All hope abandon ye who enter here.</h2>
+    <form method="POST" action="">
+        <label for="name">Name:</label>
+        <input id="name" name="name" type="text" autofocus/>
+        <br/><br/>
+        <input type="submit"/>
+    </form>
+    <h2>Previous Guests:</h2>
+    <ol>
+        {% for guest in guests %}
+        <li>{{ guest.name }}</li>
+        {% endfor %}
+    </ol>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
