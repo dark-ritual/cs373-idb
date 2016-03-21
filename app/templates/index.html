@@ -4,9 +4,35 @@
     <meta charset="UTF-8">
     <title>Guestbook</title>
     <!-- Bootstrap Stylesheet -->
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
 </head>
 <body>
+        <!-- Nav Bar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./index.html">Dark Ritual</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./index.html">Home</a></li>
+            <li><a href="./cards.html">Cards</a></li>
+            <li><a href="./artists.html">Artists</a></li>
+            <li><a href="./sets.html">Sets</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <!-- Other -->
+    <p>q</p>
+    <p>q</p>
     <h1>Data: The Gathering</h1>
     <h2>All hope abandon ye who enter here.</h2>
     <form method="POST" action="">
@@ -22,8 +48,8 @@
         {% endfor %}
     </ol>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="../static/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
 </body>
 </html>
