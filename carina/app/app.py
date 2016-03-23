@@ -3,7 +3,8 @@ import os
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask.ext.script import Manager
-from flask.ext.sqlalchemy import SQLAlchemy, schema.ForeignKey
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy.schema import ForeignKey
 
 
 logging.basicConfig(
