@@ -1,6 +1,11 @@
 # SQLAlchemy Model creation
 
 from flask.ext.sqlalchemy import SQLAlchemy
+#from sqlalchemy import Table, Column, Integer, Float, ForeignKey, String
+#from sqlalchemy.orm import relationship, backref
+#from flask.ext.script import Manager
+
+db = SQLAlchemy()
 
 class Artist(db.Model):
     __tablename__ = 'artist'
