@@ -10,7 +10,7 @@ logging.basicConfig(
     level=logging.DEBUG,
     format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
-logger.debug("Welcome to Carina Guestbook")
+logger.debug("Welcome to Data: The Gathering!")
 
 
 SQLALCHEMY_DATABASE_URI = \
@@ -32,6 +32,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 manager = Manager(app)
 db = SQLAlchemy(app)
 
+# Route for Home page
+@app.route('/index.html', methods=['GET', 'POST'])
+def indexHTML():
+    return redirect(url_for('index'))
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -45,6 +49,30 @@ def index():
         return redirect(url_for('index'))
 
     return render_template('index.html', guests=Guest.query.all())
+
+# Route for Cards page
+@app.route('/cards.html', methods=['GET'])
+def cards():
+    logger.debug("cards")
+    return render_template('cards.html')
+
+# Route for Artists page
+@app.route('/artists.html', methods=['GET'])
+def artists():
+    logger.debug("artists")
+    return render_template('artists.html')
+
+# Route for Sets page
+@app.route('/sets.html', methods=['GET'])
+def sets():
+    logger.debug("sets")
+    return render_template('sets.html')
+
+# Route for About page
+@app.route('/about.html', methods=['GET'])
+def about():
+    logger.debug("about")
+    return render_template('about.html')
 
 
 class Guest(db.Model):
