@@ -31,3 +31,9 @@ body {
 .bottom-margin {
 	margin-bottom: 50px;
 }
+
+.center {
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
