@@ -19,3 +19,7 @@ dark.controller('SetsController', ['$scope', function($scope) {
 dark.controller('ArtistsController', ['$scope', function($scope) {
 
 } ]);
+
+dark.controller('AboutController', ['$scope', function($scope) {
+
+} ]);
