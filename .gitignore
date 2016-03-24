@@ -4,3 +4,4 @@ __pycache__
 *.tmp
 *.bak
 *.nfs*
+*.DS_Store
