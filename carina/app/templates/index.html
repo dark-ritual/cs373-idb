@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="../static/css/custom-css.css">
 </head>
 
-
-
-<body>
+<body ng-app="dark">
         <!-- Nav Bar -->
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
       <div class="container">
@@ -28,44 +26,32 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="./index.html">Home</a></li>
-            <li><a href="./cards.html">Cards</a></li>
-            <li><a href="./artists.html">Artists</a></li>
-            <li><a href="./sets.html">Sets</a></li>
+            <li class="active"><a href="#/home">Home</a></li>
+            <li><a href="#/cards">Cards</a></li>
+            <li><a href="#/artists">Artists</a></li>
+            <li><a href="#/sets">Sets</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    
-    <!-- Header -->
-    <div class="container-fluid bottom-margin">
-        <div class="row">
-            <img src="../static/images/header.jpg" class="img-responsive">
-        </div>
+    	
+    <!-- This is where Angular injects its templates -->
+    <div class="view-container">
+        <div ng-view class="view-frame"></div>
     </div>
 	
-
-
-	<!-- Main Content -->
-	<div class="container container-extra">
-		<div class="row bottom-margin">
-			<span class="yelling-font">HELLO?</span> 
-			<p>HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO
-    		 HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO
-	    	 HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO
-		     HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO
-			 HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO HELLO
-		</div> <!-- /row -->
-		
-		<div class="row">
-			<span class="yelling-font">LOOK!</span>
-			<p>[chanting intensifies]
-		</div> <!-- /row -->
-	</div> <!--/Main Content container -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../static/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../static/js/bootstrap.min.js"></script>
+    <!-- AngularJs Necessary -->
+    <script src="../static/js/angular.min.js"></script>
+    <script src="../static/js/angular-route.min.js"></script>
+    <script src="../static/js/angular-resource.min.js"></script>
+    <!-- Our Angular Application -->
+    <script src="../static/js/dark.js"></script>
+    <script src="../static/js/dark-controllers.js"></script>
+    <script src="../static/js/dark-cards-services.js"></script>
 </body>
 </html>

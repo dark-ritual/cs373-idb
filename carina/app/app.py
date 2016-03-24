@@ -1,5 +1,6 @@
 import logging
 import os
+import json
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask.ext.script import Manager
@@ -33,7 +34,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 manager = Manager(app)
 db = SQLAlchemy(app)
 
-# Route for Home page
+# Routes for Home page (NOTE:INDEX IS THE ONLY TEMPLATE SERVED BY SERVER, ALL OTHERS ARE LOADED BY ANGULAR!)
 @app.route('/index.html', methods=['GET', 'POST'])
 def indexHTML():
     return redirect(url_for('index'))
@@ -43,29 +44,12 @@ def index():
     logger.debug("index")
     return render_template('index.html', cards=Card.query.all())
 
-# Route for Cards page
-@app.route('/cards.html', methods=['GET'])
-def cards():
+# TODO: Routes for JSON API REST Endpoints
+@app.route('/api/cards',  methods=['GET', 'POST'])
+def cardsAPI():
     logger.debug("cards")
-    return render_template('cards.html')
-
-# Route for Artists page
-@app.route('/artists.html', methods=['GET'])
-def artists():
-    logger.debug("artists")
-    return render_template('artists.html')
-
-# Route for Sets page
-@app.route('/sets.html', methods=['GET'])
-def sets():
-    logger.debug("sets")
-    return render_template('sets.html')
-
-# Route for About page
-@app.route('/about.html', methods=['GET'])
-def about():
-    logger.debug("about")
-    return render_template('about.html')
+    cards = [card.serialize for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
+    return json.dumps(cards)
 
 # SQLAlchemy Model creation
 
@@ -104,6 +88,14 @@ class Card(db.Model):
     def __repr__(self):
         return "[Card: id={}, name={}, url={}, store_url={}, colors={}, cost={}, cnc={}]".format(self.id, self.name, self.url, self.store_url, self.colors, self.cost, self.cnc)
 
+    @property
+    def serialize(self):
+        return dict(id=self.id, name=self.name, url=self.url, store_url=self.store_url, colors=self.colors, cost=self.cost, cnc=self.cnc)
+
+    @property
+    def serialize_many2many(self):
+        return [ item.serialize for item in self.many2many ]
+
 class Edition(db.Model):
     __tablename__ = 'edition'
 
@@ -126,8 +118,8 @@ def create_db():
 def create_dummy_data():
     logger.debug("create_test_data")
     app.config['SQLALCHEMY_ECHO'] = True
-    guest = Guest(name='Steve')
-    db.session.add(guest)
+    card = Card(name='Steve',url='url',store_url='store_url',colors='colors',cost='11',cnc=0)
+    db.session.add(card)
     db.session.commit()
 
 @manager.command
