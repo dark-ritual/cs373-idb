@@ -1,5 +1,5 @@
 # data-the-gathering
-Welcome to our beautiful repo! Use **Data: The Gathering** to run a database and website that allow the manipulatio of data regarding Magic: The Gathering. If you would like to use or fork, feel free to go crazy!
+Welcome to our beautiful repo! Use **Data: The Gathering** to run a database and website that allow the manipulation of data regarding Magic: The Gathering. If you would like to use or fork, feel free to go crazy!
 
 `git clone https://github.com/dark-ritual/cs373-idb`
 
