@@ -2,25 +2,19 @@ import logging
 import os
 
 from flask import Flask, render_template, request, redirect, url_for
-from flask.ext.script import Manager
+from flask_script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.schema import ForeignKey
 
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.ERROR,
     format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 logger.debug("Welcome to Data: The Gathering!")
 
 
-SQLALCHEMY_DATABASE_URI = \
-    '{engine}://{username}:{password}@{hostname}/{database}'.format(
-        engine='mysql+pymysql',
-        username=os.getenv('MYSQL_USER'),
-        password=os.getenv('MYSQL_PASSWORD'),
-        hostname=os.getenv('MYSQL_HOST'),
-        database=os.getenv('MYSQL_DATABASE'))
+SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
 
 logger.debug("The log statement below is for educational purposes only. Do *not* log credentials.")
 logger.debug("%s", SQLALCHEMY_DATABASE_URI)
@@ -98,11 +92,11 @@ class Card(db.Model):
     store_url = db.Column(db.String(256), nullable=False)
     colors = db.Column(db.String(256), nullable=False)
     cost = db.Column(db.String(256), nullable=False)
-    cnc = db.Column(db.Integer, nullable=False)
+    cmc = db.Column(db.Integer, nullable=False)
     editions_FK = db.relationship('Edition', backref ='card', lazy='dynamic')
 
     def __repr__(self):
-        return "[Card: id={}, name={}, url={}, store_url={}, colors={}, cost={}, cnc={}]".format(self.id, self.name, self.url, self.store_url, self.colors, self.cost, self.cnc)
+        return "[Card: id={}, name={}, url={}, store_url={}, colors={}, cost={}, cmc={}]".format(self.id, self.name, self.url, self.store_url, self.colors, self.cost, self.cmc)
 
 class Edition(db.Model):
     __tablename__ = 'edition'
@@ -113,19 +107,19 @@ class Edition(db.Model):
     card_id = db.Column(db.Integer, db.ForeignKey('card.id'))
 
     def __repr__(self):
-        return "[Artist: id={}, name={}]".format(self.id, self.name)
+        return "[Edition: multiverse_id={}, artist_id={}, set_id={}, card_id={}]".format(self.multiverse_id, self.artist_id, self.set_id, self.card_id)
 
 
 @manager.command
 def create_db():
     logger.debug("create_db")
-    app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SQLALCHEMY_ECHO'] = False
     db.create_all()
 
 @manager.command
 def create_dummy_data():
     logger.debug("create_test_data")
-    app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SQLALCHEMY_ECHO'] = False
     guest = Guest(name='Steve')
     db.session.add(guest)
     db.session.commit()
@@ -133,7 +127,7 @@ def create_dummy_data():
 @manager.command
 def drop_db():
     logger.debug("drop_db")
-    app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SQLALCHEMY_ECHO'] = False
     db.drop_all()
 
 
