@@ -48,7 +48,7 @@ status:
 
 test: TestIDB1.tmp
 
-idb1-tests:
+IDB1-tests:
 	git clone https://github.com/dark-ritual/cs373-idb.git
 
 models.html: models.py
