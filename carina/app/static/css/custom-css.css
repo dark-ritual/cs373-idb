@@ -31,3 +31,15 @@ body {
 .bottom-margin {
 	margin-bottom: 50px;
 }
+
+.centerimg {
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#roundedbg {
+	border-radius: 15px 50px;
+	background: #FFFFFF;
+	padding: 20px;
+}

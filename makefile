@@ -48,13 +48,13 @@ status:
 
 test: TestIDB1.tmp
 
-netflix-tests:
+IDB1-tests:
 	git clone https://github.com/dark-ritual/cs373-idb.git
 
 models.html: models.py
 	pydoc3 -w models
 
-models.log:
+IDB1.log:
 	git log > models.log
 
 TestIDB1.tmp: tests.py

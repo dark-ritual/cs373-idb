@@ -10,6 +10,7 @@ sudo: false
 install:
     - pip install --upgrade pip
     - pip --version
+    - pip install coverage
     - pip install flask-sqlalchemy
 
 before_script:
@@ -20,9 +21,9 @@ before_script:
 script:
     - date
     - ls -al
-    - make idb1-tests
+    - make IDB1-tests
     - ls -al
-    - make IDB1.html
+    - make models.html
     - ls -al
     - make IDB1.log
     - ls -al
