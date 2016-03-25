@@ -22,7 +22,7 @@ script:
     - ls -al
     - make idb1-tests
     - ls -al
-    - make IDB1.html
+    - make models.html
     - ls -al
     - make IDB1.log
     - ls -al
