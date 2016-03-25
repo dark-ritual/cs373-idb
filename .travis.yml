@@ -10,6 +10,7 @@ sudo: false
 install:
     - pip install --upgrade pip
     - pip --version
+    - pip install coverage3
     - pip install flask-sqlalchemy
 
 before_script:
