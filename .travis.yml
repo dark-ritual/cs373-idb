@@ -32,4 +32,4 @@ script:
 	- make check
 
 notifications:
-  slack: sweprojectgroup:kf6stc2FL06Z0ra8zpQzLuvK
+    slack: sweprojectgroup:kf6stc2FL06Z0ra8zpQzLuvK
