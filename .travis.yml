@@ -29,4 +29,7 @@ script:
     - ls -al
     - make test
     - ls -al
-#	- make check
+	- make check
+
+notifications:
+  slack: sweprojectgroup:kf6stc2FL06Z0ra8zpQzLuvK
