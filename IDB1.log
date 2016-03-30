@@ -1,3 +1,21 @@
+commit a031ab18e640f1559344707d7c366bd81b85b70f
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Mar 30 18:04:34 2016 -0500
+
+    apiary.apib is no longer empty
+
+commit d7318e8f67879948de0e9a23a853b77123c830b6
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Mar 30 16:14:21 2016 -0500
+
+    removed failing test
+
+commit cdfdd6f07998cf8db7c1c1701cb53967d5ff21c3
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Mar 30 15:44:59 2016 -0500
+
+    changed log name in makefile and recompiled log
+
 commit 0476cb18fe7b0d5ca21afc87834e0ed0995cbe23
 Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
 Date:   Wed Mar 30 14:22:05 2016 -0700
