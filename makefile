@@ -55,7 +55,7 @@ models.html: models.py
 	pydoc3 -w models
 
 IDB1.log:
-	git log > models.log
+	git log > IDB1.log
 
 TestIDB1.tmp: tests.py
 	coverage3 run    --branch tests.py >  tests.tmp 2>&1

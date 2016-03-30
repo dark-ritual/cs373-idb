@@ -1,3 +1,28 @@
+commit 0476cb18fe7b0d5ca21afc87834e0ed0995cbe23
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Mar 30 14:22:05 2016 -0700
+
+    moved tests.py from carina folder to top-level
+
+commit c9f7c21f357a619b6841a781db9c44f9785d485a
+Merge: 6e47c7d 32ef012
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 21:58:02 2016 -0500
+
+    Merge branch 'dev'
+
+commit 32ef012e98cdca1b0a41abebbc323bb8ea76198b
+Author: Mark Lindberg <marklindberg@wireless-10-147-162-81.public.utexas.edu>
+Date:   Thu Mar 24 21:56:27 2016 -0500
+
+    Add log.
+
+commit 6e47c7d0f56bdfaafb84518de6b95e8f271c44cf
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 21:54:45 2016 -0500
+
+    Minor typo. Closed #8. Closed #12. Closed #11. Closed #10. Closed #6. Closed #5. Closed #13.
+
 commit c1184de4399d0024b682c1e3a7c73ff10c19f02e
 Author: Mark Lindberg <marklindberg@wireless-10-147-162-81.public.utexas.edu>
 Date:   Thu Mar 24 21:33:06 2016 -0500
