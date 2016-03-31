@@ -110,6 +110,41 @@ class Edition(db.Model):
         return "[Edition: multiverse_id={}, artist_id={}, set_id={}, card_id={}]".format(self.multiverse_id, self.artist_id, self.set_id, self.card_id)
 
 
+def addArtist(aid, name):
+    artist = Artist()
+    artist.id = aid
+    artist.name = name
+    db.session.add(artist)
+    db.session.commit()
+
+def addCard(cid, name, colors, cost, cmc):
+    card = Card()
+    card.id = cid
+    card.name = name
+    card.url = 'http://dunno'
+    card.store_url = 'https://also.dunno'
+    card.colors = colors
+    card.cost = cost
+    card.cmc = cmc
+    db.session.add(card)
+    db.session.commit()
+
+def addEdition(mid, aid, sid, cid):
+    edition = Edition()
+    edition.multiverse_id = mid
+    edition.artist_id = aid
+    edition.set_id = sid
+    edition.card_id = cid
+    db.session.add(edition)
+    db.session.commit()
+
+def addSet(sid, name):
+    fred = Set()
+    fred.id = sid
+    fred.name = name
+    db.session.add(fred)
+    db.session.commit()
+
 @manager.command
 def create_db():
     logger.debug("create_db")

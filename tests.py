@@ -1,42 +1,10 @@
 import unittest
+
 from carina.app import app
-import sys
-from sqlalchemy.exc import SQLAlchemyError
-
-def addArtist(aid, name):
-    artist = app.Artist()
-    artist.id = aid
-    artist.name = name
-    app.db.session.add(artist)
-    app.db.session.commit()
-
-def addCard(cid, name, colors, cost, cmc):
-    card = app.Card()
-    card.id = cid
-    card.name = name
-    card.url = 'http://dunno'
-    card.store_url = 'https://also.dunno'
-    card.colors = colors
-    card.cost = cost
-    card.cmc = cmc
-    app.db.session.add(card)
-    app.db.session.commit()
-
-def addEdition(mid, aid, sid, cid):
-    edition = app.Edition()
-    edition.multiverse_id = mid
-    edition.artist_id = aid
-    edition.set_id = sid
-    edition.card_id = cid
-    app.db.session.add(edition)
-    app.db.session.commit()
-
-def addSet(sid, name):
-    fred = app.Set()
-    fred.id = sid
-    fred.name = name
-    app.db.session.add(fred)
-    app.db.session.commit()
+#from carina.app.app import addArtist
+#from carina.app.app import addCard
+#from carina.app.app import addEdition
+#from carina.app.app import addSet
 
 class MainTestCase(unittest.TestCase):
 
@@ -46,14 +14,14 @@ class MainTestCase(unittest.TestCase):
         app.create_db()
 
     def test_artist_1(self):
-        addArtist(1, 'Mark')
+        app.addArtist(1, 'Mark')
         artists = app.Artist.query.all()
         self.assertEqual(len(artists), 1)
         self.assertEqual(artists[0].name, 'Mark')
         self.assertEqual(artists[0].id, 1)
 
     def test_artist_2(self):
-        addArtist(2, 'Stephanie')
+        app.addArtist(2, 'Stephanie')
         artists = app.Artist.query.all()
         self.assertEqual(len(artists), 2)
         self.assertEqual(artists[1].name, 'Stephanie')
@@ -61,7 +29,7 @@ class MainTestCase(unittest.TestCase):
 
     def test_artist_3(self):
         try:
-            addArtist(1, 'Mark')
+            app.addArtist(1, 'Mark')
         except:
             app.db.session.rollback()
         else:
@@ -70,7 +38,7 @@ class MainTestCase(unittest.TestCase):
             assert 0
 
     def test_card_1(self):
-        addCard(1, 'Isolation Zone', 'White', '{2}{W}{W}', 4)
+        app.addCard(1, 'Isolation Zone', 'White', '{2}{W}{W}', 4)
         cards = app.Card.query.all()
         self.assertEqual(len(cards), 1)
         self.assertEqual(cards[0].name, 'Isolation Zone')
@@ -79,8 +47,8 @@ class MainTestCase(unittest.TestCase):
         self.assertEqual(cards[0].cmc, 4)
 
     def test_card_2(self):
-        addCard(2, 'Kor Sky Climber', 'White', '{2}{W}', 3)
-        addCard(3, "Iona's Blessing", 'White', '{3}{W}', 4)
+        app.addCard(2, 'Kor Sky Climber', 'White', '{2}{W}', 3)
+        app.addCard(3, "Iona's Blessing", 'White', '{3}{W}', 4)
         cards = app.Card.query.all()
         self.assertEqual(len(cards), 3)
         self.assertEqual(cards[2].name, "Iona's Blessing")
@@ -90,7 +58,7 @@ class MainTestCase(unittest.TestCase):
 
     def test_card_3(self):
         try:
-            addCard(1, 'Isolation Zone', 'White', '{2}{W}{W}', 4)
+            app.addCard(1, 'Isolation Zone', 'White', '{2}{W}{W}', 4)
         except:
             app.db.session.rollback()
         else:
@@ -99,8 +67,8 @@ class MainTestCase(unittest.TestCase):
             assert 0
 
     def test_edition_1(self):
-        addSet(1, 'OGW')
-        addEdition(42, 1, 1, 1)
+        app.addSet(1, 'OGW')
+        app.addEdition(42, 1, 1, 1)
         editions = app.Edition.query.all()
         self.assertEqual(len(editions), 1)
         e = editions[0]
@@ -110,7 +78,7 @@ class MainTestCase(unittest.TestCase):
         self.assertEqual(e.card_id, 1)
 
     def test_edition_2(self):
-        addEdition(666, 2, 1, 1)
+        app.addEdition(666, 2, 1, 1)
         editions = app.Edition.query.all()
         self.assertEqual(len(editions), 2)
         e = editions[1]
@@ -121,7 +89,7 @@ class MainTestCase(unittest.TestCase):
 
     def test_edition_3(self):
         try:
-            addEdition(42, 2, 1, 1)
+            app.addEdition(42, 2, 1, 1)
         except:
             app.db.session.rollback()
         else:
@@ -148,7 +116,7 @@ class MainTestCase(unittest.TestCase):
         self.assertEqual(sets[0].id, 1)
 
     def test_set_2(self):
-        addSet(2, 'Stephanie')
+        app.addSet(2, 'Stephanie')
         sets = app.Set.query.all()
         self.assertEqual(len(sets), 2)
         self.assertEqual(sets[1].name, 'Stephanie')
@@ -156,7 +124,7 @@ class MainTestCase(unittest.TestCase):
 
     def test_set_3(self):
         try:
-            addSet(1, 'Mark')
+            app.addSet(1, 'Mark')
         except:
             app.db.session.rollback()
         else:
