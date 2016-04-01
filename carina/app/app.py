@@ -1,25 +1,28 @@
 import logging
 import os
+import json
 
-from collections import OrderedDict
-from flask import Flask, render_template, request, redirect, url_for, Response
-from flask_script import Manager
+from flask import Flask, render_template, redirect, url_for
+from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
-from json import dumps
-from sqlalchemy.schema import ForeignKey
 
+##################################################################
+######################## SETUP ###################################
+##################################################################
 
 logging.basicConfig(
-    level=logging.ERROR,
+    level=logging.DEBUG,
     format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
-logger.debug("Welcome to Data: The Gathering!")
 
 
-SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name'
-
-logger.debug("The log statement below is for educational purposes only. Do *not* log credentials.")
-logger.debug("%s", SQLALCHEMY_DATABASE_URI)
+SQLALCHEMY_DATABASE_URI = \
+    '{engine}://{username}:{password}@{hostname}/{database}'.format(
+        engine='mysql+pymysql',
+        username=os.getenv('MYSQL_USER'),
+        password=os.getenv('MYSQL_PASSWORD'),
+        hostname=os.getenv('MYSQL_HOST'),
+        database=os.getenv('MYSQL_DATABASE'))
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
@@ -29,70 +32,45 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 manager = Manager(app)
 db = SQLAlchemy(app)
 
-# Route for Home page
-@app.route('/index.html', methods=['GET', 'POST'])
-def indexHTML():
-    return redirect(url_for('index'))
-
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    logger.debug("index")
-    return render_template('index.html', cards=Card.query.all())
-
-# Route for Cards page
-@app.route('/cards.html', methods=['GET'])
-def cards():
-    logger.debug("cards")
-    return render_template('cards.html')
-
-# Route for Artists page
-@app.route('/artists.html', methods=['GET'])
-def artists():
-    logger.debug("artists")
-    return render_template('artists.html')
-
-# Route for Sets page
-@app.route('/sets.html', methods=['GET'])
-def sets():
-    logger.debug("sets")
-    return render_template('sets.html')
-
-# Route for About page
-@app.route('/about.html', methods=['GET'])
-def about():
-    logger.debug("about")
-    return render_template('about.html')
-
-# THE API STUFF
-# All artists
-@app.route('/artists', methods=['GET'])
-def get_artists():
-    return Response(dumps([a.list_all() for a in Artist.query.all()]))
-
-# SQLAlchemy Model creation
+##################################################################
+######################## MODELS ##################################
+##################################################################
 
 class Artist(db.Model):
     __tablename__ = 'artist'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), nullable=False)
-    editions_FK = db.relationship('Edition', backref ='artist', lazy='dynamic')
-
-    def list_all(self):
-        return OrderedDict([('artist',self.name),('artist_id',self.id)])
+    editions_id = db.relationship('Edition', backref ='artist', lazy='dynamic')
 
     def __repr__(self):
         return "[Artist: id={}, name={}]".format(self.id, self.name)
+    
+    @property
+    def serialize(self):
+        return dict(id=self.id, name=self.name)
+
+    @property
+    def serialize_many2many(self):
+        return [ item.serialize for item in self.many2many ]
 
 class Set(db.Model):
     __tablename__ = 'set'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), nullable=False)
-    editions_FK = db.relationship('Edition', backref ='set', lazy='dynamic')
+    editions_id = db.relationship('Edition', backref ='set', lazy='dynamic')
 
     def __repr__(self):
         return "[Set: id={}, name={}]".format(self.id, self.name)
+    
+    @property
+    def serialize(self):
+        return dict(id=self.id, name=self.name)
+
+    @property
+    def serialize_many2many(self):
+        return [ item.serialize for item in self.many2many ]
 
 class Card(db.Model):
     __tablename__ = 'card'
@@ -103,79 +81,95 @@ class Card(db.Model):
     store_url = db.Column(db.String(256), nullable=False)
     colors = db.Column(db.String(256), nullable=False)
     cost = db.Column(db.String(256), nullable=False)
-    cmc = db.Column(db.Integer, nullable=False)
-    editions_FK = db.relationship('Edition', backref ='card', lazy='dynamic')
+    cnc = db.Column(db.Integer, nullable=False)
+    editions_id = db.relationship('Edition', backref ='card', lazy='dynamic')
 
     def __repr__(self):
-        return "[Card: id={}, name={}, url={}, store_url={}, colors={}, cost={}, cmc={}]".format(self.id, self.name, self.url, self.store_url, self.colors, self.cost, self.cmc)
+        return "[Card: id={}, name={}, url={}, store_url={}, colors={}, cost={}, cnc={}]".format(self.id, self.name, self.url, self.store_url, self.colors, self.cost, self.cnc)
+
+    @property
+    def serialize(self):
+        return dict(id=self.id, name=self.name, url=self.url, store_url=self.store_url, colors=self.colors, cost=self.cost, cnc=self.cnc)
+
+    @property
+    def serialize_many2many(self):
+        return [ item.serialize for item in self.many2many ]
 
 class Edition(db.Model):
     __tablename__ = 'edition'
 
-    multiverse_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
     set_id = db.Column(db.Integer, db.ForeignKey('set.id'))
     card_id = db.Column(db.Integer, db.ForeignKey('card.id'))
 
     def __repr__(self):
-        return "[Edition: multiverse_id={}, artist_id={}, set_id={}, card_id={}]".format(self.multiverse_id, self.artist_id, self.set_id, self.card_id)
+        return "[Edition: id={}]".format(self.id)
+    
+    @property
+    def serialize(self):
+        return dict(multiverse_id=self.multiverse_id, artist_id=self.artist_id, set_id=self.set_id, card_id=self.card_id)
 
+    @property
+    def serialize_many2many(self):
+        return [ item.serialize for item in self.many2many ]
 
-def addArtist(aid, name):
-    artist = Artist()
-    artist.id = aid
-    artist.name = name
-    db.session.add(artist)
-    db.session.commit()
+##################################################################
+###################### VIEWS/CONTROLLERS #########################
+##################################################################
 
-def addCard(cid, name, colors, cost, cmc):
-    card = Card()
-    card.id = cid
-    card.name = name
-    card.url = 'http://dunno'
-    card.store_url = 'https://also.dunno'
-    card.colors = colors
-    card.cost = cost
-    card.cmc = cmc
-    db.session.add(card)
-    db.session.commit()
+######################
+# Routes for Home page (NOTE:INDEX IS THE ONLY TEMPLATE SERVED BY SERVER, ALL OTHERS ARE LOADED BY ANGULAR!)
+######################
+@app.route('/index.html', methods=['GET', 'POST'])
+def indexHTML():
+    return redirect(url_for('index'))
 
-def addEdition(mid, aid, sid, cid):
-    edition = Edition()
-    edition.multiverse_id = mid
-    edition.artist_id = aid
-    edition.set_id = sid
-    edition.card_id = cid
-    db.session.add(edition)
-    db.session.commit()
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    logger.debug("index")
+    return render_template('index.html', cards=Card.query.all())
 
-def addSet(sid, name):
-    fred = Set()
-    fred.id = sid
-    fred.name = name
-    db.session.add(fred)
-    db.session.commit()
+######################
+# Routes for JSON API REST Endpoints
+######################
+@app.route('/api/cards',  methods=['GET', 'POST'])
+def cardsAPI():
+    logger.debug("cards")
+    cards = [card.serialize for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
+    return json.dumps(cards)
+
+##################################################################
+###################### FLASK MANAGER COMMANDS ####################
+##################################################################
+
 
 @manager.command
 def create_db():
     logger.debug("create_db")
-    app.config['SQLALCHEMY_ECHO'] = False
+    app.config['SQLALCHEMY_ECHO'] = True
     db.create_all()
 
 @manager.command
 def create_dummy_data():
     logger.debug("create_test_data")
-    app.config['SQLALCHEMY_ECHO'] = False
-    guest = Guest(name='Steve')
-    db.session.add(guest)
+    app.config['SQLALCHEMY_ECHO'] = True
+    card = Card(name='Steve',url='url',store_url='store_url',colors='colors',cost='11',cnc=0)
+    db.session.add(card)
     db.session.commit()
 
 @manager.command
 def drop_db():
     logger.debug("drop_db")
-    app.config['SQLALCHEMY_ECHO'] = False
+    app.config['SQLALCHEMY_ECHO'] = True
     db.drop_all()
 
+##################################################################
+###################### PYTHON MAIN ###############################
+##################################################################
+logger.debug("Welcome to Data: The Gathering!")
+logger.debug("The log statement below is for educational purposes only. Do *not* log credentials.")
+logger.debug("%s", SQLALCHEMY_DATABASE_URI)
 
 if __name__ == '__main__':
     manager.run()
