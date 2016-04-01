@@ -1,9 +1,11 @@
 import logging
 import os
 
-from flask import Flask, render_template, request, redirect, url_for
+from collections import OrderedDict
+from flask import Flask, render_template, request, redirect, url_for, Response
 from flask_script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
+from json import dumps
 from sqlalchemy.schema import ForeignKey
 
 
@@ -61,6 +63,12 @@ def about():
     logger.debug("about")
     return render_template('about.html')
 
+# THE API STUFF
+# All artists
+@app.route('/artists', methods=['GET'])
+def get_artists():
+    return Response(dumps([a.list_all() for a in Artist.query.all()]))
+
 # SQLAlchemy Model creation
 
 class Artist(db.Model):
@@ -69,6 +77,9 @@ class Artist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), nullable=False)
     editions_FK = db.relationship('Edition', backref ='artist', lazy='dynamic')
+
+    def list_all(self):
+        return OrderedDict([('artist',self.name),('artist_id',self.id)])
 
     def __repr__(self):
         return "[Artist: id={}, name={}]".format(self.id, self.name)
