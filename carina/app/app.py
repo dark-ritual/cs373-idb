@@ -144,30 +144,47 @@ def index():
 ######################
 # Routes for JSON API REST Endpoints
 ######################
+@app.route('/api/artists',  methods=['GET', 'POST'])
+def artistsAPI():
+    logger.debug("artists")
+    artists = [artist.serialize_part for artist in Artist.query.all()]
+    return json.dumps(artists)
+
+@app.route('/api/artists/<path:artist_id>',  methods=['GET', 'POST'])
+def artistAPI(artist_id):
+    logger.debug("artist")
+    artist = [Artist.query.get(artist_id).serialize_full]
+    return json.dumps(artist)
+
+@app.route('/api/sets',  methods=['GET', 'POST'])
+def setsAPI():
+    logger.debug("sets")
+    sets = [card_set.serialize_part for card_set in Set.query.all()]
+    return json.dumps(sets)
+
+@app.route('/api/sets/<path:set_id>',  methods=['GET', 'POST'])
+def setAPI(set_id):
+    logger.debug("card_set")
+    card_set = [Set.query.get(set_id).serialize_full]
+    return json.dumps(card_set)
+
 @app.route('/api/cards',  methods=['GET', 'POST'])
 def cardsAPI():
     logger.debug("cards")
     cards = [card.serialize_part for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
     return json.dumps(cards)
 
-@app.route('/api/cards/<path:id>',  methods=['GET', 'POST'])
-def cardsAPI(id):
-    logger.debug("cards")
-    card = [Card.query.get(id).serialize_full] #NOTE: thanks to the @property serializers on the Card model!
+@app.route('/api/cards/<path:card_id>',  methods=['GET', 'POST'])
+def cardAPI(card_id):
+    logger.debug("card")
+    card = [Card.query.get(card_id).serialize_full]
     return json.dumps(card)
 
-
-@app.route('/api/artists',  methods=['GET', 'POST'])
-def cardsAPI():
-    logger.debug("cards")
-    artists = [artist.serialize_part for artist in Artist.query.all()] #NOTE: thanks to the @property serializers on the Card model!
-    return json.dumps(artists)
-
-@app.route('/api/artists/<int:id>',  methods=['GET', 'POST'])
-def cardsAPI(id):
-    logger.debug("cards")
-    artist = [Artist.query.get(id).serialize_full] #NOTE: thanks to the @property serializers on the Card model!
-    return json.dumps(artist)
+@app.route('/api/editions/<path:multiverse_id>',  methods=['GET', 'POST'])
+def editionAPI(multiverse_id):
+    logger.debug("edition")
+    edition = [Edition.query.get(multiverse_id).serialize]
+    return json.dumps(card)
 
 ##################################################################
 ###################### FLASK MANAGER COMMANDS ####################
