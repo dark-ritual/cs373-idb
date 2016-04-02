@@ -39,7 +39,7 @@ db = SQLAlchemy(app)
 class Artist(db.Model):
     __tablename__ = 'artist'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(256), primary_key=True)
     name = db.Column(db.String(256), nullable=False)
     editions_id = db.relationship('Edition', backref ='artist', lazy='dynamic')
 
@@ -47,8 +47,12 @@ class Artist(db.Model):
         return "[Artist: id={}, name={}]".format(self.id, self.name)
     
     @property
-    def serialize(self):
+    def serialize_part(self):
         return dict(id=self.id, name=self.name)
+    
+    @property
+    def serialize_full(self):
+        return dict(id=self.id, name=self.name, editions_id=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -57,7 +61,7 @@ class Artist(db.Model):
 class Set(db.Model):
     __tablename__ = 'set'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String(256), nullable=False)
     editions_id = db.relationship('Edition', backref ='set', lazy='dynamic')
 
@@ -65,8 +69,12 @@ class Set(db.Model):
         return "[Set: id={}, name={}]".format(self.id, self.name)
     
     @property
-    def serialize(self):
+    def serialize_part(self):
         return dict(id=self.id, name=self.name)
+    
+    @property
+    def serialize_full(self):
+        return dict(id=self.id, name=self.name, editions_id=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -75,7 +83,7 @@ class Set(db.Model):
 class Card(db.Model):
     __tablename__ = 'card'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(256), primary_key=True)
     name = db.Column(db.String(256), nullable=False)
     url = db.Column(db.String(256), nullable=False)
     store_url = db.Column(db.String(256), nullable=False)
@@ -88,8 +96,12 @@ class Card(db.Model):
         return "[Card: id={}, name={}, url={}, store_url={}, colors={}, cost={}, cnc={}]".format(self.id, self.name, self.url, self.store_url, self.colors, self.cost, self.cnc)
 
     @property
-    def serialize(self):
+    def serialize_part(self):
         return dict(id=self.id, name=self.name, url=self.url, store_url=self.store_url, colors=self.colors, cost=self.cost, cnc=self.cnc)
+
+    @property
+    def serialize_full(self):
+        return dict(id=self.id, name=self.name, url=self.url, store_url=self.store_url, colors=self.colors, cost=self.cost, cnc=self.cnc, editions_id=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -98,7 +110,7 @@ class Card(db.Model):
 class Edition(db.Model):
     __tablename__ = 'edition'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(256, primary_key=True)
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
     set_id = db.Column(db.Integer, db.ForeignKey('set.id'))
     card_id = db.Column(db.Integer, db.ForeignKey('card.id'))
@@ -136,8 +148,27 @@ def index():
 @app.route('/api/cards',  methods=['GET', 'POST'])
 def cardsAPI():
     logger.debug("cards")
-    cards = [card.serialize for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
+    cards = [card.serialize_part for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
     return json.dumps(cards)
+
+@app.route('/api/cards/<path:id>',  methods=['GET', 'POST'])
+def cardsAPI(id):
+    logger.debug("cards")
+    card = [Card.query.get(id).serialize_full] #NOTE: thanks to the @property serializers on the Card model!
+    return json.dumps(card)
+
+
+@app.route('/api/artists',  methods=['GET', 'POST'])
+def cardsAPI():
+    logger.debug("cards")
+    artists = [artist.serialize_part for artist in Artist.query.all()] #NOTE: thanks to the @property serializers on the Card model!
+    return json.dumps(artists)
+
+@app.route('/api/artists/<int:id>',  methods=['GET', 'POST'])
+def cardsAPI(id):
+    logger.debug("cards")
+    artist = [Artist.query.get(id).serialize_full] #NOTE: thanks to the @property serializers on the Card model!
+    return json.dumps(artist)
 
 ##################################################################
 ###################### FLASK MANAGER COMMANDS ####################
