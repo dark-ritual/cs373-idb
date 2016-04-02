@@ -1,0 +1,180 @@
+FORMAT: 1A
+HOST: http://darkritual.cards/api
+
+# Data: The Gathering API
+
+Data: The Gathering is a simple API allowing players to view cards, sets, and artists.
+
+## All Editions of All Cards [/cards]
+
+### List All cards [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Dark Ritual",
+                "id": "dark-ritual",
+                "url": "https://api.deckbrew.com/mtg/cards/dark-ritual",
+                "types": [
+                    "instant"
+                ],
+                "colors": [
+                    "black"
+                ],
+                "cmc": 1,
+                "cost": "{B}",
+                "text": "Add {B}{B}{B} to your mana pool.",
+                "formats": {
+                    "commander": "legal",
+                    "legacy": "legal",
+                    "vintage": "legal"
+                },
+                "editions": [
+                    {
+                        "multiverse_id": 1149,
+                        "number": "",
+                        "set": "Revised Edition",
+                        "set_id": "3ED",
+                        "rarity": "common",
+                        "artist": "Sandra Everingham",
+                        "artist_id": "sandra-everingham",
+                        "layout": "normal"
+                    },
+                    ...
+                ]
+            },
+            ...
+        ]
+
+## All Editions of a Card [/cards/{id}]
+
+### List ONE card by id [GET]
+
++ Response 200 (application/json)
+
+        {
+            "name": "Dark Ritual",
+            "id": "dark-ritual",
+            "types": [
+                "instant"
+            ],
+            "colors": [
+                "black"
+            ],
+            "cmc": 1,
+            "cost": "{B}",
+            "text": "Add {B}{B}{B} to your mana pool.",
+            "formats": {
+                "commander": "legal",
+                "legacy": "legal",
+                "vintage": "legal"
+            },
+            "editions": [
+                {
+                    "multiverse_id": 1149,
+                    "number": "",
+                    "set": "Revised Edition",
+                    "set_id": "3ED",
+                    "rarity": "common",
+                    "artist": "Sandra Everingham",
+                    "artist_id": "sandra-everingham",
+                    "layout": "normal"
+                },
+                ...
+            ]
+        }
+        
+## Specific Edition of a Card [/editions/{multiverseid}]
+
+### List ONE card edition by multiverse_id [GET]
+
++ Response 200 (application/json)
+
+        {
+            "name": "Dark Ritual",
+            "id": "dark-ritual",
+            "multiverse_id": 1149,
+            "number": "",
+            "set": "Revised Edition",
+            "set_id": "3ED",
+            "rarity": "common",
+            "artist": "Sandra Everingham",
+            "artist_id": "sandra-everingham",
+            "layout": "normal"
+        }
+            
+
+## All sets [/sets]
+
+### List ALL sets [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "set": "Revised Edition",
+                "set_id": "3ED"
+            },
+            ...
+        ]
+
+## All card editions in a set [/sets/{set_id}]
+
+### List card editions by set_id [GET]
+
++ Response 200 (application/json)
+
+        {
+            [
+                {
+                    "name": "Dark Ritual",
+                    "id": "dark-ritual",
+                    "multiverse_id": 1149,
+                    "number": "",
+                    "rarity": "common",
+                    "artist": "Sandra Everingham",
+                    "artist_id": "sandra-everingham",
+                    "layout": "normal"
+                },
+                ...
+            ]
+        }
+
+## All artists [/artists]
+
+### List all artists [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "artist": "Sandra Everingham",
+                "artist_id": "sandra-everingham"
+            },
+            ...
+        ]
+
+## All card editions by an artist [/artists/{artist_id}]
+
+### List card editions by artist_id [GET]
+
++ Response 200 (application/json)
+
+        {
+            "artist": "Sandra Everingham",
+            "artist_id": "sandra-everingham",
+            "editions": [
+                {
+                    "name": "Dark Ritual",
+                    "id": "dark-ritual",
+                    "multiverse_id": 1149,
+                    "number": "",
+                    "set": "Revised Edition",
+                    "set_id": "3ED",
+                    "rarity": "common",
+                    "layout": "normal"
+                },
+                ...
+            ]
+        }
