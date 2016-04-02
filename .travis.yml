@@ -7,6 +7,9 @@ python:
 
 sudo: false
 
+services:
+    - mysql
+
 install:
     - pip install --upgrade pip
     - pip --version
@@ -17,6 +20,7 @@ before_script:
     - uname -a
     - printenv
     - pip list
+    - mysql -e 'create database guestbook;'
 
 script:
     - date
