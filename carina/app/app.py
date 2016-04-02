@@ -16,13 +16,14 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-SQLALCHEMY_DATABASE_URI = \
-    '{engine}://{username}:{password}@{hostname}/{database}'.format(
-        engine='mysql+pymysql',
-        username=os.getenv('MYSQL_USER'),
-        password=os.getenv('MYSQL_PASSWORD'),
-        hostname=os.getenv('MYSQL_HOST'),
-        database=os.getenv('MYSQL_DATABASE'))
+SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name'
+# TODO: RESTORE THIS FOR THE SERVER!!!
+#    '{engine}://{username}:{password}@{hostname}/{database}'.format(
+#        engine='mysql+pymysql',
+#        username=os.getenv('MYSQL_USER'),
+#        password=os.getenv('MYSQL_PASSWORD'),
+#        hostname=os.getenv('MYSQL_HOST'),
+#        database=os.getenv('MYSQL_DATABASE'))
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
@@ -39,20 +40,20 @@ db = SQLAlchemy(app)
 class Artist(db.Model):
     __tablename__ = 'artist'
 
-    id = db.Column(db.String(256), primary_key=True)
+    artist_id = db.Column(db.String(256), primary_key=True)
     name = db.Column(db.String(256), nullable=False)
     editions_id = db.relationship('Edition', backref ='artist', lazy='dynamic')
 
     def __repr__(self):
-        return "[Artist: id={}, name={}]".format(self.id, self.name)
-    
+        return "[Artist: artist_id={}, name={}]".format(self.artist_id, self.name)
+
     @property
     def serialize_part(self):
-        return dict(id=self.id, name=self.name)
+        return dict(artist_id=self.artist_id, name=self.name)
     
     @property
     def serialize_full(self):
-        return dict(id=self.id, name=self.name, editions_id=self.serialize_many2many)
+        return dict(artist_id=self.artist_id, name=self.name, editions_id=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -61,20 +62,20 @@ class Artist(db.Model):
 class Set(db.Model):
     __tablename__ = 'set'
 
-    id = db.Column(db.String, primary_key=True)
+    set_id = db.Column(db.String(256), primary_key=True)
     name = db.Column(db.String(256), nullable=False)
     editions_id = db.relationship('Edition', backref ='set', lazy='dynamic')
 
     def __repr__(self):
-        return "[Set: id={}, name={}]".format(self.id, self.name)
-    
+        return "[Set: set_id={}, name={}]".format(self.set_id, self.name)
+
     @property
     def serialize_part(self):
-        return dict(id=self.id, name=self.name)
+        return dict(set_id=self.set_id, name=self.name)
     
     @property
     def serialize_full(self):
-        return dict(id=self.id, name=self.name, editions_id=self.serialize_many2many)
+        return dict(set_id=self.set_id, name=self.name, editions_id=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -83,25 +84,23 @@ class Set(db.Model):
 class Card(db.Model):
     __tablename__ = 'card'
 
-    id = db.Column(db.String(256), primary_key=True)
+    card_id = db.Column(db.String(256), primary_key=True)
     name = db.Column(db.String(256), nullable=False)
-    url = db.Column(db.String(256), nullable=False)
-    store_url = db.Column(db.String(256), nullable=False)
     colors = db.Column(db.String(256), nullable=False)
     cost = db.Column(db.String(256), nullable=False)
-    cnc = db.Column(db.Integer, nullable=False)
-    editions_id = db.relationship('Edition', backref ='card', lazy='dynamic')
+    cmc = db.Column(db.Integer, nullable=False)
+    multiverses_id = db.relationship('Edition', backref ='card', lazy='dynamic')
 
     def __repr__(self):
-        return "[Card: id={}, name={}, url={}, store_url={}, colors={}, cost={}, cnc={}]".format(self.id, self.name, self.url, self.store_url, self.colors, self.cost, self.cnc)
+        return "[Card: id={}, name={}, colors={}, cost={}, cmc={}]".format(self.card_id, self.name, self.colors, self.cost, self.cmc)
 
     @property
     def serialize_part(self):
-        return dict(id=self.id, name=self.name, url=self.url, store_url=self.store_url, colors=self.colors, cost=self.cost, cnc=self.cnc)
+        return dict(card_id=self.card_id, name=self.name, url=self.url, store_url=self.store_url, colors=self.colors, cost=self.cost, cnc=self.cnc)
 
     @property
     def serialize_full(self):
-        return dict(id=self.id, name=self.name, url=self.url, store_url=self.store_url, colors=self.colors, cost=self.cost, cnc=self.cnc, editions_id=self.serialize_many2many)
+        return dict(card_id=self.card_id, name=self.name, url=self.url, store_url=self.store_url, colors=self.colors, cost=self.cost, cnc=self.cnc, editions_id=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -110,14 +109,14 @@ class Card(db.Model):
 class Edition(db.Model):
     __tablename__ = 'edition'
 
-    id = db.Column(db.String(256, primary_key=True)
-    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
-    set_id = db.Column(db.Integer, db.ForeignKey('set.id'))
-    card_id = db.Column(db.Integer, db.ForeignKey('card.id'))
+    multiverse_id = db.Column(db.Integer, primary_key=True)
+    artist_id = db.Column(db.String(256), db.ForeignKey('artist.artist_id'))
+    set_id = db.Column(db.String(256), db.ForeignKey('set.set_id'))
+    card_id = db.Column(db.String(256), db.ForeignKey('card.card_id'))
 
     def __repr__(self):
-        return "[Edition: id={}]".format(self.id)
-    
+        return "[Edition: multiverse_id={}]".format(self.multiverse_id)
+
     @property
     def serialize(self):
         return dict(multiverse_id=self.multiverse_id, artist_id=self.artist_id, set_id=self.set_id, card_id=self.card_id)
@@ -174,25 +173,59 @@ def cardsAPI(id):
 ###################### FLASK MANAGER COMMANDS ####################
 ##################################################################
 
+def addArtist(aid, name):
+    artist = Artist()
+    artist.artist_id = aid
+    artist.name = name
+    db.session.add(artist)
+    db.session.commit()
+
+def addCard(cid, name, colors, cost, cmc):
+    card = Card()
+    card.card_id = cid
+    card.name = name
+    card.url = 'http://dunno'
+    card.store_url = 'https://also.dunno'
+    card.colors = colors
+    card.cost = cost
+    card.cmc = cmc
+    db.session.add(card)
+    db.session.commit()
+
+def addEdition(mid, aid, sid, cid):
+    edition = Edition()
+    edition.multiverse_id = mid
+    edition.artist_id = aid
+    edition.set_id = sid
+    edition.card_id = cid
+    db.session.add(edition)
+    db.session.commit()
+
+def addSet(sid, name):
+    fred = Set()
+    fred.set_id = sid
+    fred.name = name
+    db.session.add(fred)
+    db.session.commit()
 
 @manager.command
 def create_db():
     logger.debug("create_db")
-    app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SQLALCHEMY_ECHO'] = False
     db.create_all()
 
 @manager.command
 def create_dummy_data():
     logger.debug("create_test_data")
-    app.config['SQLALCHEMY_ECHO'] = True
-    card = Card(name='Steve',url='url',store_url='store_url',colors='colors',cost='11',cnc=0)
+    app.config['SQLALCHEMY_ECHO'] = False
+    card = Card(name='Steve',url='url',store_url='store_url',colors='colors',cost='11',cmc=0)
     db.session.add(card)
     db.session.commit()
 
 @manager.command
 def drop_db():
     logger.debug("drop_db")
-    app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SQLALCHEMY_ECHO'] = False
     db.drop_all()
 
 ##################################################################
