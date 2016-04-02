@@ -18,14 +18,14 @@ class MainTestCase(unittest.TestCase):
         artists = app.Artist.query.all()
         self.assertEqual(len(artists), 1)
         self.assertEqual(artists[0].name, 'Mark')
-        self.assertEqual(artists[0].id, 1)
+        self.assertEqual(artists[0].artist_id, 1)
 
     def test_artist_2(self):
         app.addArtist(2, 'Stephanie')
         artists = app.Artist.query.all()
         self.assertEqual(len(artists), 2)
         self.assertEqual(artists[1].name, 'Stephanie')
-        self.assertEqual(artists[1].id, 2)
+        self.assertEqual(artists[1].artist_id, 2)
 
     def test_artist_3(self):
         try:
@@ -98,7 +98,7 @@ class MainTestCase(unittest.TestCase):
             assert 0
 
     def test_edition_4(self):
-        stephanie = app.Artist.query.filter_by(id=2).first()
+        stephanie = app.Artist.query.filter_by(artist_id=2).first()
         app.db.session.delete(stephanie)
         app.db.session.commit()
         editions = app.Edition.query.all()
@@ -113,14 +113,14 @@ class MainTestCase(unittest.TestCase):
         sets = app.Set.query.all()
         self.assertEqual(len(sets), 1)
         self.assertEqual(sets[0].name, 'OGW')
-        self.assertEqual(sets[0].id, 1)
+        self.assertEqual(sets[0].set_id, 1)
 
     def test_set_2(self):
         app.addSet(2, 'Stephanie')
         sets = app.Set.query.all()
         self.assertEqual(len(sets), 2)
         self.assertEqual(sets[1].name, 'Stephanie')
-        self.assertEqual(sets[1].id, 2)
+        self.assertEqual(sets[1].set_id, 2)
 
     def test_set_3(self):
         try:

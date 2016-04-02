@@ -24,7 +24,7 @@ def doInsertCard(card):
         toughness = card['toughness']
     else:
         toughness = None
-
+    in
 
 def main():
     url = "http://api.deckbrew.com/mtg/cards?page={}"
