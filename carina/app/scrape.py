@@ -1,30 +1,31 @@
 from requests import get
 
 def doInsertCard(card):
-    cost    = card['cost']
-    cmc     = card['cmc']
-    text    = card['text']
-    types   = card['types']
-    name    = card['name']
-    cid     = card['id'] # cid = card id
-    formats = card['formats']
+    a       = {}
+    a['cost']    = card['cost']
+    a['cmc']     = card['cmc']
+    a['text']    = card['text']
+    a['types']   = card['types']
+    a['name']    = card['name']
+    a['card_id'] = card['id']
+    a['formats'] = card['formats']
     if 'subtypes' in card:
-        subtypes = card['subtypes']
+        a['subtypes'] = card['subtypes']
     else:
-        subtypes = None
+        a['subtypes'] = None
     if 'colors' in card:
-        colors = card['colors']
+        a['colors'] = card['colors']
     else:
-        colors = None
+        a['colors'] = None
     if 'power' in card:
-        power = card['power']
+        a['power'] = card['power']
     else:
-        power = None
+        a['power'] = None
     if 'toughness' in card:
-        toughness = card['toughness']
+        a['toughness'] = card['toughness']
     else:
-        toughness = None
-    in
+        a['toughness'] = None
+    addCard(a)
 
 def main():
     url = "http://api.deckbrew.com/mtg/cards?page={}"
