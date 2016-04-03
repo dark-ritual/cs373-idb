@@ -1,7 +1,9 @@
 FILES :=                              	  \
+    .gitignore                            \
     .travis.yml                           \
+    makefile                              \
     apiary.apib							  \
-    IDB1.log                       	 	  \
+    IDB2.log                       	 	  \
     models.html                      	  \
     models.py                        	  \
     tests.py                        	  \
@@ -36,8 +38,8 @@ config:
 
 scrub:
 	make clean
-	rm -f  IDB1.html
-	rm -f  IDB1.log
+	rm -f  IDB2.html
+	rm -f  IDB2.log
 
 status:
 	make clean
@@ -46,18 +48,18 @@ status:
 	git remote -v
 	git status
 
-test: TestIDB1.tmp
+test: TestIDB2.tmp
 
 IDB1-tests:
 	git clone https://github.com/dark-ritual/cs373-idb.git
 
 models.html: models.py
-	pydoc3 -w models
+	pydoc3 -w models 
 
-IDB1.log:
-	git log > IDB1.log
+IDB2.log:
+	git log > IDB2.log
 
-TestIDB1.tmp: tests.py
+TestIDB2.tmp: tests.py
 	coverage3 run    --branch tests.py >  tests.tmp 2>&1
 	coverage3 report -m --omit='/lusr/lib/python3.4/*'  >> tests.tmp
 	cat tests.tmp
