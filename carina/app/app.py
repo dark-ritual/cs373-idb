@@ -16,7 +16,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name'
+SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name?charset=utf8'
 # TODO: RESTORE THIS FOR THE SERVER!!!
 #    '{engine}://{username}:{password}@{hostname}/{database}'.format(
 #        engine='mysql+pymysql',
@@ -97,7 +97,7 @@ class Card(db.Model):
     colors = db.Column(db.String(256), nullable=False)
     cost = db.Column(db.String(256), nullable=False)
     cmc = db.Column(db.Integer, nullable=False)
-    text = db.Column(db.String(512), nullable=True)
+    text = db.Column(db.String(1024), nullable=True)
     types = db.Column(db.String(256), nullable=False)
     formats = db.Column(db.String(256), nullable=False)
     subtypes = db.Column(db.String(256), nullable=True)
@@ -149,14 +149,14 @@ class Card(db.Model):
 class Edition(db.Model):
     __tablename__ = 'edition'
 
-    multiverse_id = db.Column(db.Integer, primary_key=True)
+    multiverse_id = db.Column(db.String(256), primary_key=True)
     artist_id = db.Column(db.String(256), db.ForeignKey('artist.artist_id'))
     set_id = db.Column(db.String(256), db.ForeignKey('set.set_id'))
     card_id = db.Column(db.String(256), db.ForeignKey('card.card_id'))
     image_url = db.Column(db.String(256), nullable=False)
     flavor = db.Column(db.String(512), nullable=True)
     rarity = db.Column(db.String(256), nullable=False)
-    number = db.Column(db.Integer, nullable=False)
+    number = db.Column(db.String(256), nullable=False)
     layout = db.Column(db.String(256), nullable=False)
 
     def __init__(self, multiverse_id, artist_id, set_id, card_id, image_url,

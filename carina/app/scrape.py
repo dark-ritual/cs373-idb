@@ -3,31 +3,31 @@ from requests import get
 import app
 
 def doInsertCard(card):
-    a       = {}
-    a['cost']    = card['cost']
-    a['cmc']     = card['cmc']
-    a['text']    = card['text']
-    a['types']   = str(card['types'])
-    a['name']    = card['name']
-    a['card_id'] = card['id']
-    a['formats'] = str(card['formats'])
+    card_args       = {}
+    card_args['cost']    = card['cost']
+    card_args['cmc']     = card['cmc']
+    card_args['text']    = card['text'].replace('−', '-')
+    card_args['types']   = str(card['types'])
+    card_args['name']    = card['name']
+    card_args['card_id'] = card['id']
+    card_args['formats'] = str(card['formats'])
     if 'subtypes' in card:
-        a['subtypes'] = str(card['subtypes'])
+        card_args['subtypes'] = str(card['subtypes'])
     else:
-        a['subtypes'] = None
+        card_args['subtypes'] = None
     if 'colors' in card:
-        a['colors'] = str(card['colors'])
+        card_args['colors'] = str(card['colors'])
     else:
-        a['colors'] = None
+        card_args['colors'] = '[]'
     if 'power' in card:
-        a['power'] = card['power']
+        card_args['power'] = card['power']
     else:
-        a['power'] = None
+        card_args['power'] = None
     if 'toughness' in card:
-        a['toughness'] = card['toughness']
+        card_args['toughness'] = card['toughness']
     else:
-        a['toughness'] = None
-    app.addCard(a)
+        card_args['toughness'] = None
+    app.addCard(card_args)
 
 def idify(artist):
     return artist.lower().replace(' ', '_')
@@ -35,9 +35,7 @@ def idify(artist):
 def doInsertArtist(info):
     artist = info['artist']
     artist_id = idify(artist)
-    print("Artist:", artist, artist_id)
     artists = app.Artist.query.filter_by(artist_id=artist_id).all()
-    print(artists)
     if len(artists) == 0:
         artist_args = dict(artist_id=artist_id, name=artist)
         app.addArtist(artist_args)
@@ -54,17 +52,27 @@ def doInsertSet(info):
 
 def doInsertEdition(card_id, info):
     edition_args = {}
-    edition_args['multiverse_id'] = info['multiverse_id']
-    edition_args['artist_id'] = idify(info['artist'])
-    edition_args['set_id'] = info['set_id']
-    edition_args['card_id'] = card_id
-    edition_args['image_url'] = info['image_url']
-    edition_args['flavor'] = info['flavor']
+    edition_args['multiverse_id'] = str(info['multiverse_id'])
+    edition_args['artist_id']     = idify(info['artist'])
+    edition_args['set_id']        = info['set_id']
+    edition_args['card_id']       = card_id
+    edition_args['image_url']     = info['image_url']
+    try:
+        edition_args['flavor'] = info['flavor']
+    except:
+        edition_args['flavor'] = ''
     edition_args['rarity'] = info['rarity']
-    edition_args['number'] = info['number']
+    edition_args['number'] = info['number'].strip('★')
     if edition_args['number'] == '':
         edition_args['number'] = '0'
     edition_args['layout'] = info['layout']
+    if (edition_args['layout'] in ['split', 'flip']) or edition_args['rarity'] not in ['common, uncommon', 'rare', 'mythic']:
+        seen = app.Edition.query.filter_by(multiverse_id=edition_args['multiverse_id']+'a').all()
+        if len(seen) == 1:
+            edition_args['multiverse_id'] = edition_args['multiverse_id'] + 'b'
+        else:
+            edition_args['multiverse_id'] = edition_args['multiverse_id'] + 'a'
+    print(edition_args['multiverse_id'])
     app.addEdition(edition_args)
 
 def main():
@@ -73,24 +81,34 @@ def main():
     url = "http://api.deckbrew.com/mtg/cards?page={}"
     i = 1
     total = 0
+    skipped = 0
     g = get(url.format(i))
     j = g.json()
-    # TODO: UNCOMMENT ME!!!!
-    #while len(j) > 0:
-    #    total += len(j)
-    #    i += 1
-    #    g = get(url.format(i))
-    #    j = g.json()
-    #    for thing in j:
-    thing = j[1]
-    doInsertCard(thing)
-    print("EDS:", thing['editions'])
-    for ed in thing['editions']:
-        print(ed['multiverse_id'])
-        doInsertArtist(ed)
-        doInsertSet(ed)
-        doInsertEdition(thing['id'], ed)
-    print("I IZ DUN!", total)
+    while len(j) > 0:
+        total += len(j)
+        for thing in j:
+            print(thing['id'])
+            if thing['editions'][0]['set_id'] in ['UGL', 'UNH']:
+                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                skipped += 1
+                continue # Unhinged, Unglued.
+            doInsertCard(thing)
+            for ed in thing['editions']:
+                print(ed['multiverse_id'])
+                if ed['multiverse_id'] == 0:
+                    print("*******************************************")
+                    skipped += 1
+                    continue
+                doInsertArtist(ed)
+                doInsertSet(ed)
+                doInsertEdition(thing['id'], ed)
+        i += 1
+        g = get(url.format(i))
+        j = g.json()
+    print("Done!")
+    print("Total:  ",total)
+    print("Skipped:", skipped)
+    print("Stored: ", total - skipped)
 
 if __name__ == '__main__':
     main()
