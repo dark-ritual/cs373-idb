@@ -39,9 +39,9 @@ db = SQLAlchemy(app)
 class Artist(db.Model):
     __tablename__ = 'artist'
 
-    artist_id = db.Column(db.String(256), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), nullable=False)
-    edition_ids = db.relationship('Edition', backref ='artist', lazy='dynamic')
+    editions = db.relationship('Edition', backref ='artist', lazy='dynamic')
 
     def __init__(self, artist_id, name):
         self.artist_id = artist_id
@@ -51,12 +51,8 @@ class Artist(db.Model):
         return "[Artist: artist_id={}, name={}]".format(self.artist_id, self.name)
 
     @property
-    def serialize_part(self):
+    def serialize(self):
         return dict(artist_id=self.artist_id, name=self.name)
-
-    @property
-    def serialize_full(self):
-        return dict(artist_id=self.artist_id, name=self.name, edition_ids=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -65,9 +61,9 @@ class Artist(db.Model):
 class Set(db.Model):
     __tablename__ = 'set'
 
-    set_id = db.Column(db.String(256), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), nullable=False)
-    editions_id = db.relationship('Edition', backref ='set', lazy='dynamic')
+    editions = db.relationship('Edition', backref ='set', lazy='dynamic')
 
     def __init__(self, set_id, name):
         self.set_id = set_id
@@ -77,12 +73,8 @@ class Set(db.Model):
         return "[Set: set_id={}, name={}]".format(self.set_id, self.name)
 
     @property
-    def serialize_part(self):
+    def serialize(self):
         return dict(set_id=self.set_id, name=self.name)
-
-    @property
-    def serialize_full(self):
-        return dict(set_id=self.set_id, name=self.name, editions_id=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -91,7 +83,7 @@ class Set(db.Model):
 class Card(db.Model):
     __tablename__ = 'card'
 
-    card_id = db.Column(db.String(256), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), nullable=False)
     colors = db.Column(db.String(256), nullable=False)
     cost = db.Column(db.String(256), nullable=False)
@@ -102,7 +94,7 @@ class Card(db.Model):
     subtypes = db.Column(db.String(256), nullable=True)
     power = db.Column(db.String(256), nullable=True)
     toughness = db.Column(db.String(256), nullable=True)
-    multiverse_ids = db.relationship('Edition', backref ='card', lazy='dynamic')
+    editions = db.relationship('Edition', backref ='card', lazy='dynamic')
 
     def __init__(self, cost, cmc, text, types, name, card_id, formats,
                  subtypes, colors, power, toughness):
@@ -127,7 +119,7 @@ class Card(db.Model):
                     self.power, self.toughness)
 
     @property
-    def serialize_part(self):
+    def serialize(self):
         return dict(card_id=self.card_id, name=self.name, url=self.url,
                     store_url=self.store_url, colors=self.colors,
                     cost=self.cost, cmc=self.cmc, text=self.text,
@@ -136,22 +128,16 @@ class Card(db.Model):
                     toughness=self.toughness)
 
     @property
-    def serialize_full(self):
-        d = self.serialize_part()
-        d[multiverse_ids] = self.serialize_many2many
-        return d
-
-    @property
     def serialize_many2many(self):
         return [ item.serialize for item in self.many2many ]
 
 class Edition(db.Model):
     __tablename__ = 'edition'
 
-    multiverse_id = db.Column(db.String(256), primary_key=True)
-    artist_id = db.Column(db.String(256), db.ForeignKey('artist.artist_id'))
-    set_id = db.Column(db.String(256), db.ForeignKey('set.set_id'))
-    card_id = db.Column(db.String(256), db.ForeignKey('card.card_id'))
+    id = db.Column(db.Integer, primary_key=True)
+    artist_id = db.Column(db.Integer, db.ForeignKey('artist.artist_id'))
+    set_id = db.Column(db.Integer, db.ForeignKey('set.set_id'))
+    card_id = db.Column(db.Integer, db.ForeignKey('card.card_id'))
     image_url = db.Column(db.String(256), nullable=False)
     flavor = db.Column(db.String(512), nullable=True)
     rarity = db.Column(db.String(256), nullable=False)
@@ -202,7 +188,7 @@ def indexHTML():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     logger.debug("index")
-    return render_template('index.html', cards=Card.query.all())
+    return render_template('index.html')
 
 ######################
 # Routes for JSON API REST Endpoints
@@ -234,7 +220,8 @@ def setAPI(set_id):
 @app.route('/api/cards',  methods=['GET', 'POST'])
 def cardsAPI():
     logger.debug("cards")
-    cards = [card.serialize_part for card in Card.query.all()]
+    cards = [card.serialize for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
+    return json.dumps(cards)
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET', 'POST'])
 def cardAPI(card_id):

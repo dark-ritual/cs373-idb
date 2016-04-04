@@ -4,7 +4,7 @@ body {
     background-size: contain;
     background-image: url('../images/header.jpg');
     min-height: 2000px;
-    padding-top: 200px;
+    padding-top: 300px;
     color: white;
 }
 	
@@ -48,4 +48,12 @@ body {
     line-height: 1.1;
     color: orange;
 
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: #202020;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #CC3300;
 }
