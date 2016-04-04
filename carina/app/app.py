@@ -234,8 +234,7 @@ def setAPI(set_id):
 @app.route('/api/cards',  methods=['GET', 'POST'])
 def cardsAPI():
     logger.debug("cards")
-    cards = [card.serialize_part for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
-    return json.dumps(cards)
+    cards = [card.serialize_part for card in Card.query.all()]
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET', 'POST'])
 def cardAPI(card_id):

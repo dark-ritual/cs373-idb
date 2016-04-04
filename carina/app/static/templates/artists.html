@@ -50,6 +50,15 @@
 						<td><center>Basic Land</center></td>
 						<td><center>0</center></td>
 						<td><center>-</center></td>
+					</tr>	
+					<tr ng-repeat="card in cards">
+						<td>{{card.name}}</td>
+						<td><center>{{card.url}}</center></td>
+						<td><center>{{card.store_url}}</center></td>
+						<td><center>{{card.colors}}</center></td>
+						<td><center>{{card.cost}}</center></td>
+						<td><center>-</center></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

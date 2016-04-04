@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var dark = angular.module('dark', ['ngRoute', 'darkControllers', 'cardsServices']);
+var dark = angular.module('dark', ['ngRoute', 'darkControllers', 'cardsServices', 'setsServices', 'artistsServices', 'aboutServices', 'homeServices', 'itemServices']);
 
 dark.config([ '$routeProvider' , function($routeProvider){
 	$routeProvider.when('/cards', {

@@ -13,13 +13,11 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 } ]);
 
 dark.controller('SetsController', ['$scope', function($scope) {
+	$scope.sets = Sets.query();
 
 } ]);
 
 dark.controller('ArtistsController', ['$scope', function($scope) {
-
-} ]);
-
-dark.controller('AboutController', ['$scope', function($scope) {
+	$scope.artists = Artists.query();
 
 } ]);
