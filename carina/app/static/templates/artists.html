@@ -56,7 +56,16 @@
         <td>{{ artist.set }}</td>
         <td>{{ artist.type }}</td>
         <td>{{ artist.cmc }}</td>
-        <td>{{ artist.cost }}</td>
+        <td>
+        	<span ng-repeat="color in artist.cost">
+        	<div ng-if="color.type == 'any'" class="mtg-any{{color.value}} mtg-color"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'white'" class="mtg-white mtg-color"></div>
+        	<img ng-repeat="i in range(0,color.value)" ng-if="color.type == 'blue'" src="../static/images/blue.gif" alt="{{color.value}}" style="width: 20px; height: 20px;">
+        	<img ng-repeat="i in range(0,color.value)" ng-if="color.type == 'green'" src="../static/images/green.gif" alt="{{color.value}}" style="width: 20px; height: 20px;">
+        	<img ng-repeat="i in range(0,color.value)" ng-if="color.type == 'red'" src="../static/images/red.gif" alt="{{color.value}}" style="width: 20px; height: 20px;">
+        	<img ng-repeat="i in range(0,color.value)" ng-if="color.type == 'black'" src="../static/images/black.gif" alt="{{color.value}}" style="width: 20px; height: 20px;">
+        </span>
+		</td>
       </tr>
     </tbody>
   </table>

@@ -57,3 +57,21 @@ body {
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #CC3300;
 }
+
+.mtg-color {
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+}
+
+.mtg-white {
+	background: url('../images/Mana.svg') -80px -70px;
+	background-size: 200px 200px;
+	background-repeat: no-repeat;
+}
+
+.mtg-any6 {
+	background: url('../images/Mana.svg') -120px -30px;
+	background-size: 200px 200px;
+	background-repeat: no-repeat;
+}
