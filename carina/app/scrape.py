@@ -92,6 +92,10 @@ def main():
                 print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 skipped += 1
                 continue # Unhinged, Unglued.
+            if thing['editions'][0]['layout'] != 'normal':
+                print("#########################################")
+                skipped += 1
+                continue # double faced, split, etc.
             doInsertCard(thing)
             for ed in thing['editions']:
                 print(ed['multiverse_id'])
@@ -102,6 +106,7 @@ def main():
                 doInsertArtist(ed)
                 doInsertSet(ed)
                 doInsertEdition(thing['id'], ed)
+        break
         i += 1
         g = get(url.format(i))
         j = g.json()
