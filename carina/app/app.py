@@ -39,10 +39,10 @@ db = SQLAlchemy(app)
 
 class Artist(db.Model):
     __tablename__ = 'artist'
-
-    artist_id = db.Column(db.String(256), primary_key=True)
-    name = db.Column(db.String(256), nullable=False)
+    artist_id   = db.Column(db.String(256),  primary_key=True)
+    name        = db.Column(db.String(256),  nullable=False)
     edition_ids = db.relationship('Edition', backref ='artist', lazy='dynamic')
+
 
     def __init__(self, artist_id, name):
         self.artist_id = artist_id
@@ -52,12 +52,8 @@ class Artist(db.Model):
         return "[Artist: artist_id={}, name={}]".format(self.artist_id, self.name)
 
     @property
-    def serialize_part(self):
+    def serialize(self):
         return dict(artist_id=self.artist_id, name=self.name)
-
-    @property
-    def serialize_full(self):
-        return dict(artist_id=self.artist_id, name=self.name, edition_ids=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -66,24 +62,20 @@ class Artist(db.Model):
 class Set(db.Model):
     __tablename__ = 'set'
 
-    set_id = db.Column(db.String(256), primary_key=True)
-    name = db.Column(db.String(256), nullable=False)
+    set_id      = db.Column(db.String(256),  primary_key=True)
+    name        = db.Column(db.String(256),  nullable=False)
     editions_id = db.relationship('Edition', backref ='set', lazy='dynamic')
 
     def __init__(self, set_id, name):
         self.set_id = set_id
-        self.name = name
+        self.name   = name
 
     def __repr__(self):
         return "[Set: set_id={}, name={}]".format(self.set_id, self.name)
 
     @property
-    def serialize_part(self):
+    def serialize(self):
         return dict(set_id=self.set_id, name=self.name)
-
-    @property
-    def serialize_full(self):
-        return dict(set_id=self.set_id, name=self.name, editions_id=self.serialize_many2many)
 
     @property
     def serialize_many2many(self):
@@ -92,17 +84,17 @@ class Set(db.Model):
 class Card(db.Model):
     __tablename__ = 'card'
 
-    card_id = db.Column(db.String(256), primary_key=True)
-    name = db.Column(db.String(256), nullable=False)
-    colors = db.Column(db.String(256), nullable=False)
-    cost = db.Column(db.String(256), nullable=False)
-    cmc = db.Column(db.Integer, nullable=False)
-    text = db.Column(db.String(1024), nullable=True)
-    types = db.Column(db.String(256), nullable=False)
-    formats = db.Column(db.String(256), nullable=False)
-    subtypes = db.Column(db.String(256), nullable=True)
-    power = db.Column(db.String(256), nullable=True)
-    toughness = db.Column(db.String(256), nullable=True)
+    card_id        = db.Column(db.String(256),  primary_key=True)
+    name           = db.Column(db.String(256),  nullable=False)
+    colors         = db.Column(db.String(256),  nullable=False)
+    cost           = db.Column(db.String(256),  nullable=False)
+    cmc            = db.Column(db.Integer,      nullable=False)
+    text           = db.Column(db.String(1024), nullable=True)
+    types          = db.Column(db.String(256),  nullable=False)
+    formats        = db.Column(db.String(256),  nullable=False)
+    subtypes       = db.Column(db.String(256),  nullable=True)
+    power          = db.Column(db.String(256),  nullable=True)
+    toughness      = db.Column(db.String(256),  nullable=True)
     multiverse_ids = db.relationship('Edition', backref ='card', lazy='dynamic')
 
     def __init__(self, cost, cmc, text, types, name, card_id, formats,
@@ -128,19 +120,13 @@ class Card(db.Model):
                     self.power, self.toughness)
 
     @property
-    def serialize_part(self):
+    def serialize(self):
         return dict(card_id=self.card_id, name=self.name, url=self.url,
                     store_url=self.store_url, colors=self.colors,
                     cost=self.cost, cmc=self.cmc, text=self.text,
                     types=self.types, formats=self.formats,
                     subtypes=self.subtypes, power=self.power,
                     toughness=self.toughness)
-
-    @property
-    def serialize_full(self):
-        d = self.serialize_part()
-        d[multiverse_ids] = self.serialize_many2many
-        return d
 
     @property
     def serialize_many2many(self):
@@ -150,26 +136,26 @@ class Edition(db.Model):
     __tablename__ = 'edition'
 
     multiverse_id = db.Column(db.String(256), primary_key=True)
-    artist_id = db.Column(db.String(256), db.ForeignKey('artist.artist_id'))
-    set_id = db.Column(db.String(256), db.ForeignKey('set.set_id'))
-    card_id = db.Column(db.String(256), db.ForeignKey('card.card_id'))
-    image_url = db.Column(db.String(256), nullable=False)
-    flavor = db.Column(db.String(512), nullable=True)
-    rarity = db.Column(db.String(256), nullable=False)
-    number = db.Column(db.String(256), nullable=False)
-    layout = db.Column(db.String(256), nullable=False)
+    artist_id     = db.Column(db.String(256), db.ForeignKey('artist.artist_id'))
+    set_id        = db.Column(db.String(256), db.ForeignKey('set.set_id'))
+    card_id       = db.Column(db.String(256), db.ForeignKey('card.card_id'))
+    image_url     = db.Column(db.String(256), nullable=False)
+    flavor        = db.Column(db.String(512), nullable=True)
+    rarity        = db.Column(db.String(256), nullable=False)
+    number        = db.Column(db.String(256), nullable=False)
+    layout        = db.Column(db.String(256), nullable=False)
 
     def __init__(self, multiverse_id, artist_id, set_id, card_id, image_url,
                  flavor, rarity, number, layout):
         self.multiverse_id = multiverse_id
-        self.artist_id = artist_id
-        self.set_id = set_id
-        self.card_id = card_id
-        self.image_url = image_url
-        self.flavor = flavor
-        self.rarity = rarity
-        self.number = number
-        self.layout = layout
+        self.artist_id     = artist_id
+        self.set_id        = set_id
+        self.card_id       = card_id
+        self.image_url     = image_url
+        self.flavor        = flavor
+        self.rarity        = rarity
+        self.number        = number
+        self.layout        = layout
 
     def __repr__(self):
         return """[Edition: multiverse_id={}, artist_id={}, set_id={},
@@ -203,7 +189,7 @@ def indexHTML():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     logger.debug("index")
-    return render_template('index.html', cards=Card.query.all())
+    return render_template('index.html')
 
 ######################
 # Routes for JSON API REST Endpoints
@@ -235,7 +221,7 @@ def setAPI(set_id):
 @app.route('/api/cards',  methods=['GET', 'POST'])
 def cardsAPI():
     logger.debug("cards")
-    cards = [card.serialize_part for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
+    cards = [card.serialize for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
     return json.dumps(cards)
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET', 'POST'])
