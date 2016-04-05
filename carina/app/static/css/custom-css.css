@@ -7,6 +7,20 @@ body {
     padding-top: 300px;
     color: white;
 }
+
+th{
+	width: 100px;
+	text-align: left;
+	font-weight: bold;
+	font-size: 2em;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+a{
+	color: orange;
+    text-decoration: none;
+    background-color: transparent;
+}
 	
 .navbar-default {
 	background-color: #000000;
@@ -50,8 +64,12 @@ body {
 
 }
 
+.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: #707070;
+}
+
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-   background-color: #202020;
+   background-color: #303030;
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
