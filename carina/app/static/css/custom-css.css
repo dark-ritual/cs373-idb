@@ -54,3 +54,9 @@ body {
 	border-top: none !important;
 	border-bottom: none !important;
 }
+
+#roundedbg {
+ background: #404040;
+ -moz-border-radius: 6px; 
+ border-radius: 10px;
+}
