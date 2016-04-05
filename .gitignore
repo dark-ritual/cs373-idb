@@ -6,3 +6,5 @@ __pycache__
 *.bak
 *.nfs*
 *.DS_Store
+.project
+.pydevproject
