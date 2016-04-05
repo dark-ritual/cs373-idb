@@ -84,7 +84,7 @@ class MainTestCase(unittest.TestCase):
     def test_edition_1(self):
         set_args = dict(set_id='OGW', name='Oath of the Gatewatch')
         app.addSet(set_args)
-        editionargs = dict(multiverse_id=42, artist_id='1', set_id='OGW',
+        editionargs = dict(multiverse_id='42', artist_id='1', set_id='OGW',
                            image_url='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=407532&type=card',
                            card_id='1', flavor='When properly aligned...',
                            rarity='uncommon', number=22, layout='normal')
@@ -92,13 +92,13 @@ class MainTestCase(unittest.TestCase):
         editions = app.Edition.query.all()
         self.assertEqual(len(editions), 1)
         e = editions[0]
-        self.assertEqual(e.multiverse_id, 42)
+        self.assertEqual(e.multiverse_id, '42')
         self.assertEqual(e.artist_id, '1')
         self.assertEqual(e.set_id, 'OGW')
         self.assertEqual(e.card_id, '1')
 
     def test_edition_2(self):
-        editionargs = dict(multiverse_id=666, artist_id='2', set_id='OGW',
+        editionargs = dict(multiverse_id='666', artist_id='2', set_id='OGW',
                            image_url='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=407534&type=card',
                            card_id='2', flavor='With rope...',
                            rarity='common', number=24, layout='normal')
@@ -106,7 +106,7 @@ class MainTestCase(unittest.TestCase):
         editions = app.Edition.query.all()
         self.assertEqual(len(editions), 2)
         e = editions[1]
-        self.assertEqual(e.multiverse_id, 666)
+        self.assertEqual(e.multiverse_id, '666')
         self.assertEqual(e.artist_id, '2')
         self.assertEqual(e.set_id, 'OGW')
         self.assertEqual(e.card_id, '2')
@@ -128,7 +128,7 @@ class MainTestCase(unittest.TestCase):
         editions = app.Edition.query.all()
         self.assertEqual(len(editions), 2)
         e = editions[1]
-        self.assertEqual(e.multiverse_id, 666)
+        self.assertEqual(e.multiverse_id, '666')
         self.assertEqual(e.artist_id, None)
         self.assertEqual(e.set_id, 'OGW')
         self.assertEqual(e.card_id, '2')
