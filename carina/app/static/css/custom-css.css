@@ -58,9 +58,45 @@ body {
   background-color: #CC3300;
 }
 
-.mtg-color {
+.mtg-standard {
 	height: 20px;
 	width: 20px;
+	display: inline-block;
+}
+
+.mtg-million-size {
+	height: 20px;
+	width: 98px;
+	display: inline-block;
+}
+
+.mtg-hundred-size {
+	height: 20px;
+	width: 36px;
+	display: inline-block;
+}
+
+.mtg-chaos-size {
+	height: 20px;
+	width: 24px;
+	display: inline-block;
+}
+
+.mtg-half-size {
+	height: 20px;
+	width: 10px;
+	display: inline-block;
+}
+
+.mtg-slash-size {
+	height: 20px;
+	width: 8px;
+	display: inline-block;
+}
+
+.mtg-phyrexia-size {
+	height: 20px;
+	width: 12px;
 	display: inline-block;
 }
 
@@ -406,26 +442,44 @@ body {
 	background-repeat: no-repeat;
 }
 
-.mtg-white {
-	background: url('../images/Mana.svg') -80px -70px;
+.mtg-million {
+	background: url('../images/Mana.svg') -0px -150px;
 	background-size: 200px 200px;
 	background-repeat: no-repeat;
 }
 
-.mtg-white {
-	background: url('../images/Mana.svg') -80px -70px;
+.mtg-hundred {
+	background: url('../images/Mana.svg') -98px -150px;
 	background-size: 200px 200px;
 	background-repeat: no-repeat;
 }
 
-.mtg-white {
-	background: url('../images/Mana.svg') -80px -70px;
+.mtg-chaos {
+	background: url('../images/Mana.svg') -135px -150px;
 	background-size: 200px 200px;
 	background-repeat: no-repeat;
 }
 
-.mtg-white {
-	background: url('../images/Mana.svg') -80px -70px;
+.mtg-white-half {
+	background: url('../images/Mana.svg') -159px -150px;
+	background-size: 200px 200px;
+	background-repeat: no-repeat;
+}
+
+.mtg-red-half {
+	background: url('../images/Mana.svg') -169px -150px;
+	background-size: 200px 200px;
+	background-repeat: no-repeat;
+}
+
+.mtg-slash {
+	background: url('../images/Mana.svg') -180px -150px;
+	background-size: 200px 200px;
+	background-repeat: no-repeat;
+}
+
+.mtg-phyrexia {
+	background: url('../images/Mana.svg') -188px -150px;
 	background-size: 200px 200px;
 	background-repeat: no-repeat;
 }
