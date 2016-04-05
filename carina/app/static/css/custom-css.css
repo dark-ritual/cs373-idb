@@ -49,3 +49,8 @@ body {
     color: orange;
 
 }
+
+.table th, .table td {
+	border-top: none !important;
+	border-bottom: none !important;
+}
