@@ -50,7 +50,7 @@ body {
 
 }
 
-.table th, .table td {
+#no-borders-table {
 	border-top: none !important;
 	border-bottom: none !important;
 }
