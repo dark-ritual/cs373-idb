@@ -49,3 +49,23 @@ body {
     color: orange;
 
 }
+
+#no-borders-table {
+	border-top: none !important;
+	border-bottom: none !important;
+}
+
+#roundedbg {
+	width: 700px;
+	/*display: inline-block;*/
+	background: #333333;
+	-moz-border-radius: 6px; 
+	border-radius: 15px 50px;
+	overflow: hidden;
+	padding: 20px;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
