@@ -40,8 +40,8 @@ db = SQLAlchemy(app)
 class Artist(db.Model):
     __tablename__ = 'artist'
 
-    artist_id = db.Column(db.String(256), primary_key=True)
-    name = db.Column(db.String(256), nullable=False)
+    artist_id   = db.Column(db.String(256),  primary_key=True)
+    name        = db.Column(db.String(256),  nullable=False)
     edition_ids = db.relationship('Edition', backref ='artist', lazy='dynamic')
 
     def __init__(self, artist_id, name):
@@ -66,13 +66,13 @@ class Artist(db.Model):
 class Set(db.Model):
     __tablename__ = 'set'
 
-    set_id = db.Column(db.String(256), primary_key=True)
-    name = db.Column(db.String(256), nullable=False)
+    set_id      = db.Column(db.String(256),  primary_key=True)
+    name        = db.Column(db.String(256),  nullable=False)
     editions_id = db.relationship('Edition', backref ='set', lazy='dynamic')
 
     def __init__(self, set_id, name):
         self.set_id = set_id
-        self.name = name
+        self.name   = name
 
     def __repr__(self):
         return "[Set: set_id={}, name={}]".format(self.set_id, self.name)
@@ -92,17 +92,17 @@ class Set(db.Model):
 class Card(db.Model):
     __tablename__ = 'card'
 
-    card_id = db.Column(db.String(256), primary_key=True)
-    name = db.Column(db.String(256), nullable=False)
-    colors = db.Column(db.String(256), nullable=False)
-    cost = db.Column(db.String(256), nullable=False)
-    cmc = db.Column(db.Integer, nullable=False)
-    text = db.Column(db.String(1024), nullable=True)
-    types = db.Column(db.String(256), nullable=False)
-    formats = db.Column(db.String(256), nullable=False)
-    subtypes = db.Column(db.String(256), nullable=True)
-    power = db.Column(db.String(256), nullable=True)
-    toughness = db.Column(db.String(256), nullable=True)
+    card_id        = db.Column(db.String(256),  primary_key=True)
+    name           = db.Column(db.String(256),  nullable=False)
+    colors         = db.Column(db.String(256),  nullable=False)
+    cost           = db.Column(db.String(256),  nullable=False)
+    cmc            = db.Column(db.Integer,      nullable=False)
+    text           = db.Column(db.String(1024), nullable=True)
+    types          = db.Column(db.String(256),  nullable=False)
+    formats        = db.Column(db.String(256),  nullable=False)
+    subtypes       = db.Column(db.String(256),  nullable=True)
+    power          = db.Column(db.String(256),  nullable=True)
+    toughness      = db.Column(db.String(256),  nullable=True)
     multiverse_ids = db.relationship('Edition', backref ='card', lazy='dynamic')
 
     def __init__(self, cost, cmc, text, types, name, card_id, formats,
@@ -150,26 +150,26 @@ class Edition(db.Model):
     __tablename__ = 'edition'
 
     multiverse_id = db.Column(db.String(256), primary_key=True)
-    artist_id = db.Column(db.String(256), db.ForeignKey('artist.artist_id'))
-    set_id = db.Column(db.String(256), db.ForeignKey('set.set_id'))
-    card_id = db.Column(db.String(256), db.ForeignKey('card.card_id'))
-    image_url = db.Column(db.String(256), nullable=False)
-    flavor = db.Column(db.String(512), nullable=True)
-    rarity = db.Column(db.String(256), nullable=False)
-    number = db.Column(db.String(256), nullable=False)
-    layout = db.Column(db.String(256), nullable=False)
+    artist_id     = db.Column(db.String(256), db.ForeignKey('artist.artist_id'))
+    set_id        = db.Column(db.String(256), db.ForeignKey('set.set_id'))
+    card_id       = db.Column(db.String(256), db.ForeignKey('card.card_id'))
+    image_url     = db.Column(db.String(256), nullable=False)
+    flavor        = db.Column(db.String(512), nullable=True)
+    rarity        = db.Column(db.String(256), nullable=False)
+    number        = db.Column(db.String(256), nullable=False)
+    layout        = db.Column(db.String(256), nullable=False)
 
     def __init__(self, multiverse_id, artist_id, set_id, card_id, image_url,
                  flavor, rarity, number, layout):
         self.multiverse_id = multiverse_id
-        self.artist_id = artist_id
-        self.set_id = set_id
-        self.card_id = card_id
-        self.image_url = image_url
-        self.flavor = flavor
-        self.rarity = rarity
-        self.number = number
-        self.layout = layout
+        self.artist_id     = artist_id
+        self.set_id        = set_id
+        self.card_id       = card_id
+        self.image_url     = image_url
+        self.flavor        = flavor
+        self.rarity        = rarity
+        self.number        = number
+        self.layout        = layout
 
     def __repr__(self):
         return """[Edition: multiverse_id={}, artist_id={}, set_id={},
