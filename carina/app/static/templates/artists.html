@@ -58,12 +58,72 @@
         <td>{{ artist.cmc }}</td>
         <td>
         	<span ng-repeat="color in artist.cost">
-        	<div ng-if="color.type == 'any'" class="mtg-any{{color.value}} mtg-color"></div>
-        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'white'" class="mtg-white mtg-color"></div>
-        	<img ng-repeat="i in range(0,color.value)" ng-if="color.type == 'blue'" src="../static/images/blue.gif" alt="{{color.value}}" style="width: 20px; height: 20px;">
-        	<img ng-repeat="i in range(0,color.value)" ng-if="color.type == 'green'" src="../static/images/green.gif" alt="{{color.value}}" style="width: 20px; height: 20px;">
-        	<img ng-repeat="i in range(0,color.value)" ng-if="color.type == 'red'" src="../static/images/red.gif" alt="{{color.value}}" style="width: 20px; height: 20px;">
-        	<img ng-repeat="i in range(0,color.value)" ng-if="color.type == 'black'" src="../static/images/black.gif" alt="{{color.value}}" style="width: 20px; height: 20px;">
+        	<div ng-if="color.type == 'any'" class="mtg-any{{color.value}} mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any0'" class="mtg-any0 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any1'" class="mtg-any1 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any2'" class="mtg-any2 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any3'" class="mtg-any3 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any4'" class="mtg-any4 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any5'" class="mtg-any5 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any6'" class="mtg-any6 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any7'" class="mtg-any7 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any8'" class="mtg-any8 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any9'" class="mtg-any9 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any10'" class="mtg-any10 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any11'" class="mtg-any11 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any12'" class="mtg-any12 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any13'" class="mtg-any13 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any14'" class="mtg-any14 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any15'" class="mtg-any15 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any16'" class="mtg-any16 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any17'" class="mtg-any17 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any18'" class="mtg-any18 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any19'" class="mtg-any19 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any20'" class="mtg-any20 mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'anyX'" class="mtg-anyX mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'anyY'" class="mtg-anyY mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'anyZ'" class="mtg-anyZ mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'white'" class="mtg-white mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'blue'" class="mtg-blue mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'black'" class="mtg-black mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'red'" class="mtg-red mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'green'" class="mtg-green mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'snow'" class="mtg-snow mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'white-blue'" class="mtg-white-blue mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'white-black'" class="mtg-white-black mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'blue-black'" class="mtg-blue-black mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'blue-red'" class="mtg-blue-red mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'black-red'" class="mtg-black-red mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'black-green'" class="mtg-black-green mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'red-white'" class="mtg-red-white mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'red-green'" class="mtg-red-green mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'green-white'" class="mtg-green-white mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'green-blue'" class="mtg-green-blue mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any2-white'" class="mtg-any2-white mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any2-blue'" class="mtg-any2-blue mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any2-black'" class="mtg-any2-black mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any2-red'" class="mtg-any2-red mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'any2-green'" class="mtg-any2-green mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'phyrexia-white'" class="mtg-phyrexia-white mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'phyrexia-blue'" class="mtg-phyrexia-blue mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'phyrexia-black'" class="mtg-phyrexia-black mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'phyrexia-red'" class="mtg-phyrexia-red mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'phyrexia-green'" class="mtgphyrexia-green mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'tapA'" class="mtg-tapA mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'untap'" class="mtg-untap mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'infinity'" class="mtg-infinity mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'half'" class="mtg-half mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'tapB'" class="mtg-tapB mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'tapC'" class="mtg-tabC mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'white-old'" class="mtg-white-old mtg-standard"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'million'" class="mtg-million mtg-million-size"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'hundred'" class="mtg-hundred mtg-hundred-size"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'chaos'" class="mtg-chaos mtg-chaos-size"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'white-half'" class="mtg-white-half mtg-half-size"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'red-half'" class="mtg-red-half mtg-half-size"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'slash'" class="mtg-slash mtg-slash-size"></div>
+        	<div ng-repeat="i in range(0,color.value)" ng-if="color.type == 'phyrexia'" class="mtg-phyrexia mtg-phyrexia-size"></div>
+        	
         </span>
 		</td>
       </tr>
