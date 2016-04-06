@@ -207,6 +207,20 @@ def serialize_artist_table_data():
           '''
     return list(db.engine.execute(sql))
 
+def serialize_set_table_data():
+    sql = '''select     s.name,
+                        count(*) as total,
+                        cast(sum(case when e.rarity='common' then 1 else 0 end) as signed) as commons,
+                        cast(sum(case when e.rarity='uncommon' then 1 else 0 end) as signed) as uncommons,
+                        cast(sum(case when e.rarity='rare' then 1 else 0 end) as signed) as rares,
+                        cast(sum(case when e.rarity='mythic' then 1 else 0 end) as signed) as mythics
+             from       `set` as s
+             inner join edition as e
+             on         s.set_id=e.set_id
+             group by   s.set_id
+          '''
+    return list(db.engine.execute(sql))
+
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################
 ##################################################################
