@@ -2,7 +2,7 @@
 
 /* Card Instance Services */
 
-var instanceServices = angular.module('cardinstanceServices', ['ngResource']);
+var cardinstanceServices = angular.module('cardinstanceServices', ['ngResource']);
 
 cardinstanceServices.factory('CardInstance', [ '$resource', function($resource) {
 /*	
