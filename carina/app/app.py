@@ -40,13 +40,13 @@ db = SQLAlchemy(app)
 class Artist(db.Model):
     __tablename__ = 'artist'
 
-    artist_id   = db.Column(db.String(256),  primary_key=True)
-    name        = db.Column(db.String(256),  nullable=False)
-    edition_ids = db.relationship('Edition', backref ='artist', lazy='dynamic')
+    artist_id      = db.Column(db.String(256),  primary_key=True)
+    name           = db.Column(db.String(256),  nullable=False)
+    multiverse_ids = db.relationship('Edition', backref ='artist', lazy='dynamic')
 
     def __init__(self, artist_id, name):
         self.artist_id = artist_id
-        self.name = name
+        self.name      = name
 
     def __repr__(self):
         return "[Artist: artist_id={}, name={}]".format(self.artist_id, self.name)
@@ -57,18 +57,20 @@ class Artist(db.Model):
 
     @property
     def serialize_full(self):
-        return dict(artist_id=self.artist_id, name=self.name, edition_ids=self.serialize_many2many)
+        d = self.serialize_part
+        d[multiverse_ids] = self.serialize_multiverse_ids
+        return d
 
     @property
-    def serialize_many2many(self):
-        return [ item.serialize for item in self.many2many ]
+    def serialize_multiverse_ids(self):
+        return [ item.serialize for item in self.multiverse_ids ]
 
 class Set(db.Model):
     __tablename__ = 'set'
 
-    set_id      = db.Column(db.String(256),  primary_key=True)
-    name        = db.Column(db.String(256),  nullable=False)
-    editions_id = db.relationship('Edition', backref ='set', lazy='dynamic')
+    set_id         = db.Column(db.String(256),  primary_key=True)
+    name           = db.Column(db.String(256),  nullable=False)
+    multiverse_ids = db.relationship('Edition', backref ='set', lazy='dynamic')
 
     def __init__(self, set_id, name):
         self.set_id = set_id
@@ -83,11 +85,13 @@ class Set(db.Model):
 
     @property
     def serialize_full(self):
-        return dict(set_id=self.set_id, name=self.name, editions_id=self.serialize_many2many)
+        d = self.serialize_part
+        d[multiverse_ids] = self.serialize_multiverse_ids
+        return d
 
     @property
-    def serialize_many2many(self):
-        return [ item.serialize for item in self.many2many ]
+    def serialize_multiverse_ids(self):
+        return [ item.serialize for item in self.multiverse_ids ]
 
 class Card(db.Model):
     __tablename__ = 'card'
@@ -138,13 +142,13 @@ class Card(db.Model):
 
     @property
     def serialize_full(self):
-        d = self.serialize_part()
-        d[multiverse_ids] = self.serialize_many2many
+        d = self.serialize_part
+        d[multiverse_ids] = self.serialize_multiverse_ids
         return d
 
     @property
-    def serialize_many2many(self):
-        return [ item.serialize for item in self.many2many ]
+    def serialize_multiverse_ids(self):
+        return [ item.serialize for item in self.multiverse_ids ]
 
 class Edition(db.Model):
     __tablename__ = 'edition'
@@ -159,7 +163,7 @@ class Edition(db.Model):
     number        = db.Column(db.String(256), nullable=False)
     layout        = db.Column(db.String(256), nullable=False)
 
-    def __init__(self, multiverse_id, artist_id, set_id, card_id, image_url,
+    def __init__(self, multiverse_ids, artist_id, set_id, card_id, image_url,
                  flavor, rarity, number, layout):
         self.multiverse_id = multiverse_id
         self.artist_id     = artist_id
@@ -172,22 +176,18 @@ class Edition(db.Model):
         self.layout        = layout
 
     def __repr__(self):
-        return """[Edition: multiverse_id={}, artist_id={}, set_id={},
+        return """[Edition: multiverse_ids={}, artist_id={}, set_id={},
                    card_id={}, image_url={}, flavor={}, rarity={},
-                   number={}, layout={}]""".format(self.multiverse_id,
+                   number={}, layout={}]""".format(self.multiverse_ids,
                     self.artist_id, self.set_id, self.card_id, self.image_url,
                     self.flavor, self.rarity, self.number, self.layout)
 
     @property
     def serialize(self):
-        return dict(multiverse_id=self.multiverse_id, artist_id=self.artist_id,
+        return dict(multiverse_ids=self.multiverse_ids, artist_id=self.artist_id,
                     set_id=self.set_id, card_id=self.card_id,
                     image_url=self.image_url, flavor=self.flavor,
                     rarity=self.rarity, number=self.number, layout=self.layout)
-
-    @property
-    def serialize_many2many(self):
-        return [ item.serialize for item in self.many2many ]
 
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################
