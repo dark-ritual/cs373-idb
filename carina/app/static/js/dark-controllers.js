@@ -189,3 +189,11 @@ dark.controller('ArtistsController', ['$scope', function($scope, Artists) {
 	                  { artist: "Nils Hamm", cards: 1, common: 231365165,  uncommon: 3, rare: 1, mythic: 3}
 	    ];
 } ]);
+
+//#################################################
+//#############Card Instance Controller#####################
+//#################################################
+
+dark.controller('CardInstanceController', ['$scope', function($scope, CardInstance) {
+
+} ]);
