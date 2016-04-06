@@ -136,9 +136,9 @@ class Edition(db.Model):
     __tablename__ = 'edition'
 
     multiverse_id = db.Column(db.String(191), primary_key=True)
-    artist_id     = db.Column(db.String(256), db.ForeignKey('artist.artist_id'))
-    set_id        = db.Column(db.String(256), db.ForeignKey('set.set_id'))
-    card_id       = db.Column(db.String(256), db.ForeignKey('card.card_id'))
+    artist_id     = db.Column(db.String(191), db.ForeignKey('artist.artist_id'))
+    set_id        = db.Column(db.String(3)  , db.ForeignKey('set.set_id'))
+    card_id       = db.Column(db.String(191), db.ForeignKey('card.card_id'))
     image_url     = db.Column(db.String(256), nullable=False)
     flavor        = db.Column(db.String(512), nullable=True)
     rarity        = db.Column(db.String(256), nullable=False)
