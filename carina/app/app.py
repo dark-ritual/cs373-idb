@@ -1,6 +1,7 @@
 import logging
 import os
 import json
+from getpass import getuser
 
 from flask import Flask, render_template, redirect, url_for
 from flask.ext.script import Manager
@@ -16,14 +17,16 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-#SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name?charset=utf8'
-SQLALCHEMY_DATABASE_URI = \
-    '{engine}://{username}:{password}@{hostname}/{database}'.format(
-        engine='mysql+pymysql',
-        username=os.getenv('MYSQL_USER'),
-        password=os.getenv('MYSQL_PASSWORD'),
-        hostname=os.getenv('MYSQL_HOST'),
-        database=os.getenv('MYSQL_DATABASE'))
+if getuser() == 'marklindberg':
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name?charset=utf8'
+else:
+    SQLALCHEMY_DATABASE_URI = \
+        '{engine}://{username}:{password}@{hostname}/{database}?charset=utf8'.format(
+            engine='mysql+pymysql',
+            username=os.getenv('MYSQL_USER', 'root'),
+            password=os.getenv('MYSQL_PASSWORD', ''),
+            hostname=os.getenv('MYSQL_HOST', '127.0.0.1'),
+            database=os.getenv('MYSQL_DATABASE', 'guestbook'))
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
@@ -163,7 +166,7 @@ class Edition(db.Model):
     number        = db.Column(db.String(256), nullable=False)
     layout        = db.Column(db.String(256), nullable=False)
 
-    def __init__(self, multiverse_ids, artist_id, set_id, card_id, image_url,
+    def __init__(self, multiverse_id, artist_id, set_id, card_id, image_url,
                  flavor, rarity, number, layout):
         self.multiverse_id = multiverse_id
         self.artist_id     = artist_id
