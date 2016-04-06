@@ -12,7 +12,7 @@ th{
 	width: 100px;
 	text-align: left;
 	font-weight: bold;
-	font-size: 2em;
+	font-size: 1.75em;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
@@ -503,7 +503,7 @@ hbar {
 	background-size: 200px 200px;
 	background-repeat: no-repeat;
 
-#no-borders-table {
+.no-borders-table {
 	border-top: none !important;
 	border-bottom: none !important;
 }
