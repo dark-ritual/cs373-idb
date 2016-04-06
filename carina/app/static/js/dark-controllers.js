@@ -4,8 +4,30 @@
 
 var darkControllers = angular.module('darkControllers', []);
 
-dark.controller('HomeController', ['$scope', function($scope, Home) {
+//#################################################
+//#############Home Controller#####################
+//#################################################
 
+dark.controller('HomeController', ['$scope', function($scope) {
+
+} ]);
+
+//#################################################
+//#############About Controller####################
+//#################################################
+
+dark.controller('AboutController', ['$scope', function($scope) {
+
+} ]);
+
+//#################################################
+//#############NavBar Controller###################
+//#################################################
+
+dark.controller('ActiveNavBarController', [ '$scope', '$location', function($scope, $location) {
+	$scope.isActive = function(viewLocation) {
+		return viewLocation === $location.path();
+	};
 } ]);
 
 //#################################################
