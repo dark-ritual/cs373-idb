@@ -5,159 +5,189 @@ from carina.app import app
 #from carina.app.app import addCard
 #from carina.app.app import addEdition
 #from carina.app.app import addSet
+from sqlalchemy import exc
 
 class MainTestCase(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(self):
-        app.drop_db()
-        app.create_db()
+    # @classmethod
+    # def setUpClass(self):
+    #     app.drop_db()
+    #     app.create_db()
 
     def test_artist_1(self):
-        artist_args = dict(artist_id='1', name='Mark')
+        oldlen = len(app.Artist.query.all())
+        artist_args = dict(artist_id='mark', name='Mark')
         app.addArtist(artist_args)
-        artists = app.Artist.query.all()
-        self.assertEqual(len(artists), 1)
-        self.assertEqual(artists[0].name, 'Mark')
-        self.assertEqual(artists[0].artist_id, '1')
+        self.assertEqual(oldlen + 1, app.Artist.query.all())
+        single = app.Artist.query.get('mark')
+        self.assertEqual(single.artist_id, 'mark')
+        self.assertEqual(single.name, 'Mark')
+        db.session.delete(single)
+        db.session.commit()
 
     def test_artist_2(self):
-        artist_args = dict(artist_id='2', name='Stephanie')
+        oldlen = len(app.Artist.query.all())
+        artist_args = dict(artist_id='stephanie', name='Stephanie')
         app.addArtist(artist_args)
-        artists = app.Artist.query.all()
-        self.assertEqual(len(artists), 2)
-        self.assertEqual(artists[1].name, 'Stephanie')
-        self.assertEqual(artists[1].artist_id, '2')
+        self.assertEqual(oldlen + 1, app.Artist.query.all())
+        single = app.Artist.query.get('stephanie')
+        self.assertEqual(single.artist_id, 'stephanie')
+        self.assertEqual(single.name,      'Stephanie')
+        db.session.delete(single)
+        db.session.commit()
 
     def test_artist_3(self):
+        artist_args = dict(artist_id='mark', name='Mark')
+        app.addArtist(artist_args)
         try:
-            artist_args = dict(artist_id='1', name='Mark')
             app.addArtist(artist_args)
-        except:
+        except exc.IntegrityError:
             app.db.session.rollback()
         else:
-            print("No error.") # We know this is the wrong way to do this,
-                               # but the regular way didn't work.
+            print("No error.")
             assert 0
+        db.session.delete(app.Artist.query.get('mark'))
+        db.session.commit()
 
     def test_card_1(self):
-        cardargs = dict(card_id='1', name='Isolation Zone', colors='[White]',
-                        cost='{2}{W}{W}', cmc=4, text='Lorem ipsum',
-                        formats='standard=True', types='Enchantment',
+        oldlen = len(app.Card.query.all())
+        card_args = dict(card_id='test-card', name='Test Card', colors='[White]',
+                        cost='{2}{W}{W}', cmc=4, text='You know what it is',
+                        types='Enchantment', formats='standard=True',
                         subtypes=None, power=None, toughness=None)
-        app.addCard(cardargs)
-        cards = app.Card.query.all()
-        self.assertEqual(len(cards), 1)
-        self.assertEqual(cards[0].name, 'Isolation Zone')
-        self.assertEqual(cards[0].colors, '[White]')
-        self.assertEqual(cards[0].cost, '{2}{W}{W}')
-        self.assertEqual(cards[0].cmc, 4)
+        app.addCard(card_args)
+        single = app.Card.query.get('test-card')
+        self.assertEqual(oldlen + 1, app.Card.query.all())
+        self.assertEqual(single.name,   'Test Card')
+        self.assertEqual(single.colors, '[White]')
+        self.assertEqual(single.cost,   '{2}{W}{W}')
+        self.assertEqual(single.cmc,    4)
+        db.session.delete(app.Card.query.get('test-card'))
+        db.session.commit()
 
     def test_card_2(self):
-        cardargs = dict(card_id='2', name='Kor Sky Climber', colors='[White]',
+        oldlen = len(app.Card.query.all())
+        card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Kor Ally', power=3, toughness=2)
-        app.addCard(cardargs)
-        cardargs = dict(card_id='3', name="Iona's Blessing", colors='[White]',
-                        cost='{3}{W}', cmc=4, text='Lorem ipsum',
+                        subtypes='Sample', power=3, toughness=2)
+        app.addCard(card_args)
+        card_args = dict(card_id='spooky-card', name="Spooky Card", colors='[Black]',
+                        cost='{3}{B}', cmc=4, text='Boo',
                         formats='standard=True', types='Enchantment',
                         subtypes='Aura', power=None, toughness=None)
-        app.addCard(cardargs)
-        cards = app.Card.query.all()
-        self.assertEqual(len(cards), 3)
-        self.assertEqual(cards[2].name, "Iona's Blessing")
-        self.assertEqual(cards[2].colors, '[White]')
-        self.assertEqual(cards[2].cost, '{3}{W}')
-        self.assertEqual(cards[2].cmc, 4)
+        app.addCard(card_args)
+        self.assertEqual(oldlen + 2, app.Card.query.all())
+        single = app.Card.query.get('spooky-card')
+        self.assertEqual(single.name, "Spooky Card")
+        self.assertEqual(single.colors, '[Black]')
+        self.assertEqual(single.cost, '{3}{B}')
+        self.assertEqual(single.cmc, 4)
+        db.session.delete(app.Card.query.get('sample-text'))
+        db.session.commit()
+        db.session.delete(single)
+        db.session.commit()
 
     def test_card_3(self):
+        card_args = dict(card_id='bad-card', name="Bad Card", colors='[Red]',
+                    cost='{3}{R}', cmc=4, text='Bad',
+                    formats='standard=True', types='Enchantment',
+                    subtypes='Aura', power=None, toughness=None)
+        app.addCard(card_args)
         try:
-            app.addCard('1', 'Isolation Zone', 'White', '{2}{W}{W}', 4)
-        except:
+            app.addCard(card_args)
+        except exc.IntegrityError:
             app.db.session.rollback()
         else:
             print("No error.") # We know this is the wrong way to do this,
                                # but the regular way didn't work.
             assert 0
+        db.session.delete(app.Card.query.get('bad-card'))
+        db.session.commit()
 
     def test_edition_1(self):
-        set_args = dict(set_id='OGW', name='Oath of the Gatewatch')
-        app.addSet(set_args)
-        editionargs = dict(multiverse_id='42', artist_id='1', set_id='OGW',
-                           image_url='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=407532&type=card',
-                           card_id='1', flavor='When properly aligned...',
-                           rarity='uncommon', number=22, layout='normal')
-        app.addEdition(editionargs)
-        editions = app.Edition.query.all()
-        self.assertEqual(len(editions), 1)
-        e = editions[0]
-        self.assertEqual(e.multiverse_id, '42')
-        self.assertEqual(e.artist_id, '1')
-        self.assertEqual(e.set_id, 'OGW')
-        self.assertEqual(e.card_id, '1')
+        oldlen = len(app.Edition.query.all())
+        edition_args = dict(multiverse_id='-999', artist_id='barack-obama', set_id='XXX',
+                           image_url='dummy-url',
+                           card_id='obamacare', flavor='When properly aligned...',
+                           rarity='rare', number=22, layout='normal')
+        app.addEdition(edition_args)
+        self.assertEqual(oldlen + 1, len(app.Edition.query.all()))
+        single = app.Edition.query.get('-999')
+        self.assertEqual(single.multiverse_id, '-999')
+        self.assertEqual(single.artist_id, 'barack-obama')
+        self.assertEqual(single.set_id, 'XXX')
+        self.assertEqual(single.card_id, 'obamacare')
+        db.session.delete(app.Edition.query.get('-999'))
+        db.session.commit()
 
     def test_edition_2(self):
-        editionargs = dict(multiverse_id='666', artist_id='2', set_id='OGW',
-                           image_url='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=407534&type=card',
-                           card_id='2', flavor='With rope...',
+        oldlen = len(app.Edition.query.all())
+        edition_args = dict(multiverse_id='-666', artist_id='vladimir-putin', set_id='XXX',
+                           image_url='dummy-url',
+                           card_id='gazprom', flavor='With rope...',
                            rarity='common', number=24, layout='normal')
-        app.addEdition(editionargs)
-        editions = app.Edition.query.all()
-        self.assertEqual(len(editions), 2)
-        e = editions[1]
-        self.assertEqual(e.multiverse_id, '666')
-        self.assertEqual(e.artist_id, '2')
-        self.assertEqual(e.set_id, 'OGW')
-        self.assertEqual(e.card_id, '2')
+        app.addEdition(edition_args)
+        self.assertEqual(oldlen + 1, len(app.Edition.query.all()))
+        single = app.Edition.query.get('-666')
+        self.assertEqual(single.multiverse_id, '-666')
+        self.assertEqual(single.artist_id, 'vladimir-putin')
+        self.assertEqual(single.set_id, 'XXX')
+        self.assertEqual(single.card_id, 'gazprom')
+        db.session.delete(app.Edition.query.get('-666'))
+        db.session.commit()
 
     def test_edition_3(self):
+        edition_args = dict (multiverse_id='-7')
+        app.addEdition(edition_args)
         try:
-            app.addEdition(42, '2', '1', '1')
-        except:
+            app.addEdition(edition_args)
+        except exc.IntegrityError:
             app.db.session.rollback()
         else:
-            print("No error.") # We know this is the wrong way to do this,
-                               # but the regular way didn't work.
+            print("No error.")
             assert 0
-
-    def test_edition_4(self):
-        stephanie = app.Artist.query.filter_by(artist_id='2').first()
-        app.db.session.delete(stephanie)
-        app.db.session.commit()
-        editions = app.Edition.query.all()
-        self.assertEqual(len(editions), 2)
-        e = editions[1]
-        self.assertEqual(e.multiverse_id, '666')
-        self.assertEqual(e.artist_id, None)
-        self.assertEqual(e.set_id, 'OGW')
-        self.assertEqual(e.card_id, '2')
+        db.session.delete(app.Edition.query.get('-7'))
+        db.session.commit()
 
     def test_set_1(self):
-        sets = app.Set.query.all()
-        self.assertEqual(len(sets), 1)
-        self.assertEqual(sets[0].name, 'Oath of the Gatewatch')
-        self.assertEqual(sets[0].set_id, 'OGW')
+        oldlen = len(app.Set.query.all())
+        set_args = dict(set_id='XXX' name='Xtra Xtravagant Xet')
+        self.assertEqual(oldlen + 1, app.Set.query.all())
+        single = app.Set.query.get('XXX')
+        self.assertEqual(single.set_id, 'XXX')
+        self.assertEqual(single.name, 'Xtra Xtravagant Xet')
+        db.session.delete(app.Edition.query.get('XXX'))
+        db.session.commit()
 
     def test_set_2(self):
-        set_args = dict(set_id='BFZ', name='Battle for Zendikar')
+        oldlen = len(app.Set.query.all())
+        set_args = dict(set_id='XXX' name='Xtra Xtravagant Xet')
         app.addSet(set_args)
-        sets = app.Set.query.all()
-        self.assertEqual(len(sets), 2)
-        sets = app.Set.query.filter_by(set_id='BFZ')
-        self.assertEqual(sets[0].name, 'Battle for Zendikar')
-        self.assertEqual(sets[0].set_id, 'BFZ')
+        set_args = dict(set_id='YYY', name='Yonder Yip Yaps')
+        app.addSet(set_args)
+        self.assertEqual(oldlen + 2, app.Set.query.all())
+        single = app.Set.query.get(set_id='YYY')
+        self.assertEqual(single.set_id, 'YYY')
+        self.assertEqual(single.name, 'Yonder Yip Yaps')
+        db.session.delete(app.Edition.query.get('XXX'))
+        db.session.commit()
+        db.session.delete(single)
+        db.session.commit()
 
     def test_set_3(self):
+        set_args = dict(set_id='ZZZ', name='Zany Ziggurat Zaar')
+        app.addSet(set_args)
         try:
-            set_args = dict(set_id='OGW', name='Oath of the Gatewatch')
             app.addSet(set_args)
-        except:
+        except exc.IntegrityError:
             app.db.session.rollback()
         else:
             print("No error.") # We know this is the wrong way to do this,
                                # but the regular way didn't work.
             assert 0
+        db.session.delete(app.Edition.query.get('ZZZ'))
+        db.session.commit()
 
 
 if __name__ == '__main__':
