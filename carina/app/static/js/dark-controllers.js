@@ -62,10 +62,52 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	
 	// create the list of entries
 	$scope.cards = [
-	                { artist: "Steve Argyle", card: "Admonition Angel", set: "WorldWake",  type: "Creature - Angel", rarity: "Uncommon", cost: [{type:"white", value:4}]},
-	                { artist: "Jeff A. Manges", card: "Deep Water", set: "The Dark",  type: "Enchantment", rarity: "Mythic", cost: [{type:"anyX", value:3}]},
-	                { artist: "Nils Hamm", card: "Mountain", set: "All Sets",  type: "Basic Land", rarity: "Common", cost: [{type:"any0", value:1}]}
+		{
+		    "types": "['creature']",
+		    "cmc": 2,
+		    "name": "Advance Scout",
+		    "formats": "{'vintage': 'legal', 'legacy': 'legal', 'commander': 'legal'}",
+		    "card_id": "advance-scout",
+		    "subtypes": "['human', 'scout', 'soldier']",
+		    "cost": "{1}{W}",
+		    "text": "First strike\n{W}: Target creature gains first strike until end of turn.",
+		    "colors": "['white']",
+		    "toughness": "1",
+		    "power": "1"
+		  },
+		  {
+		    "types": "['creature']",
+		    "cmc": 4,
+		    "name": "Advanced Hoverguard",
+		    "formats": "{'modern': 'legal', 'vintage': 'legal', 'legacy': 'legal', 'commander': 'legal'}",
+		    "card_id": "advanced-hoverguard",
+		    "subtypes": "['drone']",
+		    "cost": "{3}{U}",
+		    "text": "Flying\n{U}: Advanced Hoverguard gains shroud until end of turn. (It can't be the target of spells or abilities.)",
+		    "colors": "['blue']",
+		    "toughness": "2",
+		    "power": "2"
+		  },
+		  {
+		    "types": "['conspiracy']",
+		    "cmc": 0,
+		    "name": "Advantageous Proclamation",
+		    "formats": "{}",
+		    "card_id": "advantageous-proclamation",
+		    "subtypes": null,
+		    "cost": "",
+		    "text": "(Start the game with this conspiracy face up in the command zone.)\nYour minimum deck size is reduced by five.",
+		    "colors": "[]",
+		    "toughness": null,
+		    "power": null
+		  },
 	  ];
+	for(card in $scope.cards) {
+		currentCost = card.cost;
+		// TODO: parse currentCost to get a color "type" and a numerical "value" for every color in the string
+		newCost = [{type:"white", value:4}];
+		card.cost = newCost;
+	}
 } ]);
 
 //#################################################
