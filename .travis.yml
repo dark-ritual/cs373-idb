@@ -14,7 +14,7 @@ install:
     - pip install --upgrade pip
     - pip --version
     - pip install coverage
-    - pip install flask-sqlalchemy
+    - pip3 install flask-sqlalchemy
 
 before_script:
     - uname -a
