@@ -4,8 +4,6 @@ language: python
 
 python:
     - "3.4"
-before_script:
-    - mysql -e 'create database myapp_test;'
 
 sudo: required
 
