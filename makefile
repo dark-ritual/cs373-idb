@@ -59,6 +59,5 @@ IDB2.log:
 
 TestIDB2.tmp: tests.py
 	coverage run    --branch tests.py  >  tests.tmp 2>&1
-	coverage report -m --omit='/lusr/lib/python3.4/*'  >> tests.tmp
-	coverage report -m --omit='/home/travis/virtualenv/python*'  >> tests.tmp
+	coverage report -m --omit='/lusr/lib/python3.4/*,/home/travis/virtualenv/python*'  >> tests.tmp
 	cat tests.tmp
