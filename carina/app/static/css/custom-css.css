@@ -519,6 +519,15 @@ hbar {
 	padding: 20px;
 }
 
+#roundedbg-table {
+	/*display: inline-block;*/
+	background: #333333;
+	-moz-border-radius: 6px; 
+	border-radius: 15px 50px;
+	overflow: hidden;
+	padding: 20px;
+}
+
 .col-centered{
     float: none;
     margin: 0 auto;
