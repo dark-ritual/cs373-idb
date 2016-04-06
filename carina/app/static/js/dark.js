@@ -2,9 +2,10 @@
 
 /* App Module */
 
-var dark = angular.module('dark', ['ngRoute', 'darkControllers', 'cardsServices']);
+var dark = angular.module('dark', [ 'ngRoute', 'darkControllers',
+		'cardsServices', 'setsServices', 'artistsServices' ]);
 
-dark.config([ '$routeProvider' , function($routeProvider){
+dark.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/cards', {
 		templateUrl : '../static/templates/cards.html',
 		controller : 'CardsController'
@@ -21,4 +22,4 @@ dark.config([ '$routeProvider' , function($routeProvider){
 		templateUrl : '../static/templates/home.html',
 		controller : 'HomeController'
 	})
-}]);
+} ]);

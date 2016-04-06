@@ -1,67 +1,32 @@
-<div class=container>
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Card</th>
-						<th><center>Artist</center></th>
-						<th><center>Set</center></th>
-						<th><center>Type</center></th>
-						<th><center>Converted Mana Cost</center></th>
-						<th><center>Cost</center></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=197160">Admonition Angel</a></td>
-						<td><center>
-								<a href="http://gatherer.wizards.com/Pages/Search/Default.aspx?action=advanced&artist=[%22Steve%20Argyle%22]">Steve Argyle</a>
-							</center></td>
-						<td><center>
-								<a href="http://mtgsalvation.gamepedia.com/Worldwake">WorldWake</a>
-							</center></td>
-						<td><center>Creature - Angel</center></td>
-						<td><center>6</center></td>
-						<td><center>
-								<img src="../static/images/3generic.png" alt="3" style="width: 20px; height: 20px;"><img src="../static/images/air.gif" alt="air" style="width: 20px; height: 20px;"><img src="../static/images/air.gif" alt="air" style="width: 20px; height: 20px;"><img src="../static/images/air.gif" alt="air" style="width: 20px; height: 20px;">
-							</center></td>
-					</tr>
-					<tr>
-						<td><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=1749">Deep Water</a></td>
-						<td><center>
-								<a href="http://gatherer.wizards.com/Pages/Search/Default.aspx?action=advanced&artist=[%22Jeff%20A.%20Menges%22]">Jeff A. Manges</a>
-							</center></td>
-						<td><center>
-								<a href="http://mtgsalvation.gamepedia.com/The_Dark">The Dark</a>
-							</center></td>
-						<td><center>Enchantment</center></td>
-						<td><center>2</center></td>
-						<td><center>
-								<img src="../static/images/water.gif" alt="water" style="width: 20px; height: 20px;"><img src="../static/images/water.gif" alt="water" style="width: 20px; height: 20px;">
-							</center></td>
-					</tr>
-					<tr>
-						<td><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=405307">Mountain</a></td>
-						<td><center>
-								<a href="http://gatherer.wizards.com/Pages/Search/Default.aspx?action=advanced&artist=[%22Nils%20Hamm%22]">Nils Hamm</a>
-							</center></td>
-						<td><center>All Sets</center></td>
-						<td><center>Basic Land</center></td>
-						<td><center>0</center></td>
-						<td><center>-</center></td>
-					</tr>
-					<tr ng-repeat="card in cards">
-						<td>{{card.name}}</td>
-						<td><center>{{card.url}}</center></td>
-						<td><center>{{card.store_url}}</center></td>
-						<td><center>{{card.colors}}</center></td>
-						<td><center>{{card.cost}}</center></td>
-						<td><center>-</center></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+<div class="container" ng-controller="CardsController">
+  
+  <table class="table table-striped table-hover table-condensed">
+    
+    <thead>
+      <tr>
+      	<th ng-repeat="tableHeader in tableHeaders">
+          <a href ng-click="sort(tableHeader)">
+            {{tableHeader.label}} 
+            <span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr ng-repeat="card in cards | orderBy:sortType:sortReverse">
+        <td>{{ card.card }}</td>
+        <td>{{ card.artist }}</td>
+        <td>{{ card.set }}</td>
+        <td>{{ card.type }}</td>
+        <td>{{ card.rarity }}</td>
+        <td>
+        <span ng-repeat="color in card.cost">
+        		<div ng-repeat="i in range(0,color.value)" class="mtg-{{color.type}} mtg-standard"></div>
+        </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
