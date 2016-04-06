@@ -16,14 +16,14 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name?charset=utf8'
-#SQLALCHEMY_DATABASE_URI = \
-#    '{engine}://{username}:{password}@{hostname}/{database}?charset=utf8'.format(
-#        engine='mysql+pymysql',
-#        username=os.getenv('MYSQL_USER', 'root'),
-#        password=os.getenv('MYSQL_PASSWORD', ''),
-#        hostname=os.getenv('MYSQL_HOST', '127.0.0.1'),
-#        database=os.getenv('MYSQL_DATABASE', 'guestbook'))
+#SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name?charset=utf8'
+SQLALCHEMY_DATABASE_URI = \
+    '{engine}://{username}:{password}@{hostname}/{database}?charset=utf8'.format(
+        engine='mysql+pymysql',
+        username=os.getenv('MYSQL_USER', 'root'),
+        password=os.getenv('MYSQL_PASSWORD', ''),
+        hostname=os.getenv('MYSQL_HOST', '127.0.0.1'),
+        database=os.getenv('MYSQL_DATABASE', 'guestbook'))
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
