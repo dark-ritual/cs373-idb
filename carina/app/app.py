@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 #SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name?charset=utf8'
 SQLALCHEMY_DATABASE_URI = \
-    '{engine}://{username}:{password}@{hostname}/{database}'.format(
+    '{engine}://{username}:{password}@{hostname}/{database}?charset=utf8'.format(
         engine='mysql+pymysql',
         username=os.getenv('MYSQL_USER', 'root'),
         password=os.getenv('MYSQL_PASSWORD', ''),
