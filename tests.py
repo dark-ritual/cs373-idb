@@ -9,6 +9,12 @@ from sqlalchemy import exc
 
 class MainTestCase(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        app.create_db()
+        # This will not hurt the DB if there is database in there.
+        # But it is necessary for Travis where there is no DB already set-up.
+
     def test_artist_1(self):
         oldlen = len(app.Artist.query.all())
         artist_args = dict(artist_id='mark', name='Mark')
