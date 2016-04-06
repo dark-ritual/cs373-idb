@@ -18,12 +18,12 @@ logger = logging.getLogger(__name__)
 
 #SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name?charset=utf8'
 SQLALCHEMY_DATABASE_URI = \
-    '{engine}://{username}:{password}@{hostname}/{database}'.format(
+    '{engine}://{username}:{password}@{hostname}/{database}?charset=utf8'.format(
         engine='mysql+pymysql',
-        username=os.getenv('MYSQL_USER'),
-        password=os.getenv('MYSQL_PASSWORD'),
-        hostname=os.getenv('MYSQL_HOST'),
-        database=os.getenv('MYSQL_DATABASE'))
+        username=os.getenv('MYSQL_USER', 'root'),
+        password=os.getenv('MYSQL_PASSWORD', ''),
+        hostname=os.getenv('MYSQL_HOST', '127.0.0.1'),
+        database=os.getenv('MYSQL_DATABASE', 'guestbook'))
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
@@ -39,7 +39,7 @@ db = SQLAlchemy(app)
 
 class Artist(db.Model):
     __tablename__ = 'artist'
-    artist_id   = db.Column(db.String(256),  primary_key=True)
+    artist_id   = db.Column(db.String(191),  primary_key=True)
     name        = db.Column(db.String(256),  nullable=False)
     edition_ids = db.relationship('Edition', backref ='artist', lazy='dynamic')
 
@@ -62,7 +62,7 @@ class Artist(db.Model):
 class Set(db.Model):
     __tablename__ = 'set'
 
-    set_id      = db.Column(db.String(256),  primary_key=True)
+    set_id      = db.Column(db.String(191),  primary_key=True)
     name        = db.Column(db.String(256),  nullable=False)
     editions_id = db.relationship('Edition', backref ='set', lazy='dynamic')
 
@@ -84,7 +84,7 @@ class Set(db.Model):
 class Card(db.Model):
     __tablename__ = 'card'
 
-    card_id        = db.Column(db.String(256),  primary_key=True)
+    card_id        = db.Column(db.String(191),  primary_key=True)
     name           = db.Column(db.String(256),  nullable=False)
     colors         = db.Column(db.String(256),  nullable=False)
     cost           = db.Column(db.String(256),  nullable=False)
@@ -135,10 +135,10 @@ class Card(db.Model):
 class Edition(db.Model):
     __tablename__ = 'edition'
 
-    multiverse_id = db.Column(db.String(256), primary_key=True)
-    artist_id     = db.Column(db.String(256), db.ForeignKey('artist.artist_id'))
-    set_id        = db.Column(db.String(256), db.ForeignKey('set.set_id'))
-    card_id       = db.Column(db.String(256), db.ForeignKey('card.card_id'))
+    multiverse_id = db.Column(db.String(191), primary_key=True)
+    artist_id     = db.Column(db.String(191), db.ForeignKey('artist.artist_id'))
+    set_id        = db.Column(db.String(191), db.ForeignKey('set.set_id'))
+    card_id       = db.Column(db.String(191), db.ForeignKey('card.card_id'))
     image_url     = db.Column(db.String(256), nullable=False)
     flavor        = db.Column(db.String(512), nullable=True)
     rarity        = db.Column(db.String(256), nullable=False)

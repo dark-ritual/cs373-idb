@@ -14,7 +14,8 @@ install:
     - pip install --upgrade pip
     - pip --version
     - pip install coverage
-    - pip3 install flask-sqlalchemy
+    - pip install flask-sqlalchemy
+    - pip install -r carina/app/requirements.txt
 
 before_script:
     - uname -a
