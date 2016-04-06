@@ -509,8 +509,15 @@ hbar {
 	border-bottom: none !important;
 }
 
-#roundedbg {
-	width: 700px;
+#roundedbg-about{
+    border-radius: 15px 50px;
+    background: #FFFFFF ;
+    padding: 20px;
+}
+
+
+#roundedbg-card {
+	/*width: 700px;*/
 	/*display: inline-block;*/
 	background: #333333;
 	-moz-border-radius: 6px; 
