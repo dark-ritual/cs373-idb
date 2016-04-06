@@ -502,6 +502,7 @@ hbar {
 	background: url('../images/Mana.svg') -188px -150px;
 	background-size: 200px 200px;
 	background-repeat: no-repeat;
+}
 
 #no-borders-table {
 	border-top: none !important;
