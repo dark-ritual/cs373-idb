@@ -68,6 +68,7 @@ class Artist(db.Model):
     def serialize_multiverse_ids(self):
         return [ item.serialize for item in self.multiverse_ids ]
 
+
 class Set(db.Model):
     __tablename__ = 'set'
 
@@ -191,6 +192,20 @@ class Edition(db.Model):
                     set_id=self.set_id, card_id=self.card_id,
                     image_url=self.image_url, flavor=self.flavor,
                     rarity=self.rarity, number=self.number, layout=self.layout)
+
+def serialize_artist_table_data():
+    sql = '''select     a.name,
+                        count(*) as total,
+                        cast(sum(case when e.rarity='common' then 1 else 0 end) as signed) as commons,
+                        cast(sum(case when e.rarity='uncommon' then 1 else 0 end) as signed) as uncommons,
+                        cast(sum(case when e.rarity='rare' then 1 else 0 end) as signed) as rares,
+                        cast(sum(case when e.rarity='mythic' then 1 else 0 end) as signed) as mythics
+             from       artist as a
+             inner join edition as e
+             on         a.artist_id=e.artist_id
+             group by   a.artist_id
+          '''
+    return list(db.engine.execute(sql))
 
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################
