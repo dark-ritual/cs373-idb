@@ -18,7 +18,7 @@ class MainTestCase(unittest.TestCase):
     def test_artist_repr(self):
         artist_args = dict(artist_id='peter', name='Peter')
         app.addArtist(artist_args)
-        self.assertEqual('[Artist: artist_id=peter, name=Peter]', repr(app.Artist.query.get('peter'))
+        self.assertEqual('[Artist: artist_id=peter, name=Peter]', repr(app.Artist.query.get('peter')))
         app.Artist.query.filter_by(artist_id='peter').delete()
         app.db.session.commit()
 
@@ -107,6 +107,16 @@ class MainTestCase(unittest.TestCase):
             print("No error.")
             assert 0
         app.Artist.query.filter_by(artist_id='mark').delete()
+        app.db.session.commit()
+
+    def test_card_repr(self):
+        card_args = dict(card_id='test-card', name='Test Card', colors=['white'],
+                        cost='{2}{W}{W}', cmc=4, text='You know what it is',
+                        types=['enchantment'], formats={'standard':'legal'},
+                        subtypes=None, power=None, toughness=None)
+        app.addCard(card_args)
+        self.assertEqual('[Card: card_id=test-card, name=Test Card, colors=[\'white\'], cost={2}{W}{W}, cmc=4, text=You know what it is, types=[\'enchantment\'], formats{\'standard\':\'legal\'}, subtypes=None, power=None, toughness=None]', repr(app.Card.query.get('test-card')))
+        app.Card.query.filter_by(card_id='test-card').delete()
         app.db.session.commit()
 
     def test_card_1(self):
