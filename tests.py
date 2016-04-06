@@ -44,7 +44,7 @@ class MainTestCase(unittest.TestCase):
             app.addArtist(artist_args)
         except exc.IntegrityError:
             app.db.session.rollback()
-        else:
+        else: # pragma: no cover
             print("No error.")
             assert 0
         app.Artist.query.filter_by(artist_id='mark').delete()
@@ -98,7 +98,7 @@ class MainTestCase(unittest.TestCase):
             app.addCard(card_args)
         except exc.IntegrityError:
             app.db.session.rollback()
-        else:
+        else: # pragma: no cover
             print("No error.") # We know this is the wrong way to do this,
                                # but the regular way didn't work.
             assert 0
@@ -181,7 +181,7 @@ class MainTestCase(unittest.TestCase):
             app.addEdition(edition_args)
         except exc.IntegrityError:
             app.db.session.rollback()
-        else:
+        else: # pragma: no cover
             print("No error.")
             assert 0
         app.Edition.query.filter_by(multiverse_id='-666').delete()
@@ -222,7 +222,7 @@ class MainTestCase(unittest.TestCase):
             app.addSet(set_args)
         except exc.IntegrityError:
             app.db.session.rollback()
-        else:
+        else: # pragma: no cover
             print("No error.")
             assert 0
         app.Set.query.filter_by(set_id='XXX').delete()
