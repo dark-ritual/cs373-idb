@@ -2,13 +2,8 @@
 
 /* Tests Services */
 
-var testsServices = angular.module('testsServices', ['ngResource']);
+var testsServices = angular.module('testsServices', []);
 
-testsServices.factory('Tests', [ '$resource', function($resource) {
-	/*return $resource('../api/artists', {}, {
-		query: {
-			method: 'GET',
-			isArray: true
-		}
-	});*/
+testsServices.controller('Tests', [ function($scope $http) {
+
 }]);
