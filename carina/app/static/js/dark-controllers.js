@@ -62,8 +62,7 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	
 	// create the list of entries
 	$scope.cards = [
-	                /*
-	                 * {
+	                {
 		    "types": "['creature']",
 		    "cmc": 2,
 		    "name": "Advance Scout",
@@ -108,9 +107,17 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 		// TODO: parse currentCost to get a color "type" and a numerical "value" for every color in the string
 		newCost = [{type:"white", value:4}];
 		card.cost = newCost;
+		card.artist = 
+		
 	}
-	                 * */
-	                { artist: "Steve Argyle", card: "Admonition Angel", set: "WorldWake",  type: "Creature - Angel", rarity: "Uncommon", cost: [{type:"white", value:4}]},
+	                
+	                { artist: "Steve Argyle", 
+	                	card: "Admonition Angel", 
+	                	set: "WorldWake",  
+	                	type: "Creature - Angel", 
+	                	rarity: "Uncommon", 
+	                	cost: [{type:"white", value:4}]
+	                },
 	                { artist: "Jeff A. Manges", card: "Deep Water", set: "The Dark",  type: "Enchantment", rarity: "Mythic", cost: [{type:"anyX", value:3}]},
 	                { artist: "Nils Hamm", card: "Mountain", set: "All Sets",  type: "Basic Land", rarity: "Common", cost: [{type:"any0", value:1}]}
 	  ];
