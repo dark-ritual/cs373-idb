@@ -13,7 +13,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 ##################################################################
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.ERROR,
     format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -338,7 +338,7 @@ if __name__ == '__main__':
 
 @app.route('/tests/runtests')
 def tests():
-    p = subprocess.Popen(["make", "test"],
+    p = subprocess.Popen(["python3", "tests.py"],
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE,
         stdin = subprocess.PIPE)
