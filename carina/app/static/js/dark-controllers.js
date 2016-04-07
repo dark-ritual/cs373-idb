@@ -282,3 +282,22 @@ dark.controller('SetsInstanceController', ['$scope', function($scope, SetsInstan
 
 	$scope.set = "Worldwake";
 } ]);
+
+//###############################################
+//#############Tests Controller##################
+//###############################################
+
+dark.controller('TestsController', ['$scope', '$http', function($scope, $http, TestsInstance) {
+	$scope.result = "Click below to run tests (may take a few moments)."
+	$scope.runtests = function() {
+		$http.get('/tests/runtests').then(
+			function(response) {
+				$scope.result = response.data.result;
+	      }, 
+	      function(response){
+	       	console.log("Tests failed.");
+	       	$scope.result = "Failed to run tests.";
+	      }
+      );
+	}
+} ]);

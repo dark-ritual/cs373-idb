@@ -1,6 +1,7 @@
 import logging
 import os
 import json
+import subprocess
 from getpass import getuser
 
 from flask import Flask, render_template, redirect, url_for
@@ -330,3 +331,16 @@ logger.debug("%s", SQLALCHEMY_DATABASE_URI)
 
 if __name__ == '__main__':
     manager.run()
+
+##################################################################
+###################### PYTHON TESTS ##############################
+##################################################################
+
+@app.route('/tests/runtests')
+def tests():
+    p = subprocess.Popen(["make", "test"],
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE,
+        stdin = subprocess.PIPE)
+    out, err = p.communicate()
+    return render_template('tests.html', output = err + out)
