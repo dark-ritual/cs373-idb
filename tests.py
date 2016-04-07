@@ -119,6 +119,16 @@ class MainTestCase(unittest.TestCase):
         app.Card.query.filter_by(card_id='test-card').delete()
         app.db.session.commit()
 
+    def test_card_serialize_part(self):
+        card_args = dict(card_id='test-card', name='Test Card', colors=['white'],
+                        cost='{2}{W}{W}', cmc=4, text='You know what it is',
+                        types=['enchantment'], formats={'standard':'legal'},
+                        subtypes=None, power=None, toughness=None)
+        app.addCard(card_args)
+        self.assertEqual(card_args, app.Card.query.get('test-card').serialize_part)
+        app.Card.query.filter_by(card_id='test-card').delete()
+        app.db.session.commit()
+
     def test_card_1(self):
         oldlen = len(app.Card.query.all())
         card_args = dict(card_id='test-card', name='Test Card', colors='[White]',
