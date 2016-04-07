@@ -238,7 +238,7 @@ dark.controller('ArtistsInstanceController', ['$scope', function($scope, Artists
 	
 	// create the list of entries
 	$scope.artistsinstance = [
-	                  { image: "../static/images/imagename", text: "Admonition Angel\nSteve Argyle\nFlying\nLandfall — Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.\nWhen Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.", sets: "WorldWake"},
+	                  { image: "../static/images/imagename", name: "Admonition Angel", artist:"Steve Argyle", type:"Creature - Flying", text:"Landfall — Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.\nWhen Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.", sets: "WorldWake"},
 	                  { image: "../static/images/imagename", text: "Angelic Arbiter...\nText to\nfill in.", sets: "Magic: The Gathering-Commander"},
 	    ];
 

@@ -23,7 +23,12 @@
         <tbody>
           <tr ng-repeat="artistinstance in artistsinstance | orderBy:sortType:sortReverse">
             <td>{{ artistinstance.image }}</td>
-            <td>{{ artistinstance.text }}</td>
+              <td>
+                <b>{{ artistinstance.name }} </b>
+                <br>{{ artistinstance.artist }}
+                <br>{{ artistinstance.type }}
+                <br>{{ artistinstance.text }}
+              </td>
             <td>{{ artistinstance.sets }}</td>
           </td>
         </tbody>
