@@ -138,9 +138,10 @@ dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Arti
 //#############Card Instance Controller#####################
 //##########################################################
 
-dark.controller('CardInstanceController', ['$scope', function($scope, CardInstance) {
+dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstance', function($scope, $routeParams, CardInstance) {
 
-	$scope.name = "Admonition Angel";
+	$scope.cardinstance = CardInstance.query($routeParams)
+	$scope.name = $routeParams;
 	$scope.artist = "Steve Argyle";
 	$scope.sets = "Worldwake";
 	$scope.type = "Creature-Angel";

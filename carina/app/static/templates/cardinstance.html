@@ -3,7 +3,7 @@
   <div class="container" id="roundedbg-card">
 
   	<div class="col-sm-6 center-block" style="width: 40%; max-width: 800px; table-layout: fixed;">
-  	  <img class="center-block" src="../static/images/admonitionangel.jpg" width="250px">
+  	  <img class="center-block" src="{{  cardinstance[0].multiverse_ids[0].image_url  }}" width="250px">
   	</div>
 
   	<div class="col-sm-6 center-block">
@@ -11,39 +11,39 @@
         <tbody>
           <tr>
             <td class="text-right" width="75px"><b>Name:</b></td>
-            <td width="150px">{{ name }}</td>
+            <td width="150px">{{ cardinstance[0].name }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Artist:</b></td>
-            <td>{{ artist }}</td>
+            <td>{{ cardinstance[0].multiverse_ids[0].artist_id }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Sets:</b></td>
-            <td>{{ sets }}</td>
+            <td>{{ cardinstance[0].multiverse_ids[0].set_id }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Type:</b></td>
-            <td>{{ type }}</td>
+            <td>{{ cardinstance[0].types }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Converted Mana Cost:</b></td>
-            <td>{{ cmc }}</td>
+            <td>{{ cardinstance[0].cmc }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Cost:</b></td>
-            <td><img src="../static/images/3generic.png" alt="3" style="width:20px;height:20px;"><img src="../static/images/air.gif" alt="air" style="width:20px;height:20px;"><img src="../static/images/air.gif" alt="air" style="width:20px;height:20px;"><img src="../static/images/air.gif" alt="air" style="width:20px;height:20px;"></td>
+            <td> {{  cardinstance[0].cost  }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Card Text:</b></td>
-            <td>{{ text }} </td>
+            <td>{{ cardinstance[0].text }} </td>
           </tr>
           <tr>
             <td class="text-right"><b>P/T:</b></td>
-            <td>{{ pt }}</td>
+            <td>{{ cardinstance[0].power }} / {{ cardinstance[0].toughness }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Rarity:</b></td>
-            <td>{{ rarity }}</td>
+            <td>{{ cardinstance[0].multiverse_ids[0].rarity }}</td>
           </tr>
         </tbody>
       </table>
