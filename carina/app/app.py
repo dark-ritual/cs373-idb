@@ -6,6 +6,7 @@ from getpass import getuser
 from flask import Flask, render_template, redirect, url_for
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
+from array import array
 
 ##################################################################
 ######################## SETUP ###################################
@@ -209,7 +210,11 @@ def serialize_artist_table_data():
              on         a.artist_id=e.artist_id
              group by   a.artist_id
           '''
-    return list(db.engine.execute(sql))
+    # convert the list of dicts to an array of objects
+    ret = []
+    for i in db.engine.execute(sql).fetchall():
+        ret.append({'name':i['name'], 'total':i['total'], 'commons':i['commons'], 'uncommons':i['uncommons'], 'rares':i['rares'], 'mythics':i['mythics']})
+    return ret
 
 def serialize_set_table_data():
     sql = '''select     s.name,
@@ -223,7 +228,11 @@ def serialize_set_table_data():
              on         s.set_id=e.set_id
              group by   s.set_id
           '''
-    return list(db.engine.execute(sql))
+    # convert the list of dicts to an array of objects
+    ret = []
+    for i in db.engine.execute(sql).fetchall():
+        ret.append({'name':i['name'], 'total':i['total'], 'commons':i['commons'], 'uncommons':i['uncommons'], 'rares':i['rares'], 'mythics':i['mythics']})
+    return ret 
 
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################
@@ -232,11 +241,11 @@ def serialize_set_table_data():
 ######################
 # Routes for Home page (NOTE:INDEX IS THE ONLY TEMPLATE SERVED BY SERVER, ALL OTHERS ARE LOADED BY ANGULAR!)
 ######################
-@app.route('/index.html', methods=['GET', 'POST'])
+@app.route('/index.html', methods=['GET'])
 def indexHTML():
     return redirect(url_for('index'))
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
     logger.debug("index")
     return render_template('index.html', cards=Card.query.all())
@@ -250,6 +259,10 @@ def artistsAPI():
     artists = [artist.serialize_part for artist in Artist.query.all()]
     return json.dumps(artists)
 
+@app.route('/api/artistTable', methods=['GET'])
+def artistTable():
+    return json.dumps(serialize_artist_table_data())
+
 @app.route('/api/artists/<path:artist_id>', methods=['GET', 'POST'])
 def artistAPI(artist_id):
     logger.debug("artist")
@@ -261,6 +274,10 @@ def setsAPI():
     logger.debug("sets")
     sets = [card_set.serialize_part for card_set in Set.query.all()]
     return json.dumps(sets)
+
+@app.route('/api/setTable', methods=['GET'])
+def setTable():
+    return json.dumps(serialize_set_table_data())
 
 @app.route('/api/sets/<path:set_id>',  methods=['GET', 'POST'])
 def setAPI(set_id):

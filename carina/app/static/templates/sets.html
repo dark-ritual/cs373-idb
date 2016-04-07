@@ -16,16 +16,12 @@
     
     <tbody>
       <tr ng-repeat="set in sets | orderBy:sortType:sortReverse">
-        <td></td>
-        <td>{{ set.uncommon }}</td>
-        <td>{{ set.common }}</td>
-        <td>{{ set.rare }}</td>
-        <td>{{ set.mythic }}</td>
-        <td>
-        <span ng-repeat="color in set.symbol">
-        		<div ng-repeat="i in range(0,color.value)" class="mtg-{{color.type}} mtg-standard"></div>
-        </span>
-        </td>
+        <td>{{ set.name }}</td>
+        <td>{{ set.uncommons }}</td>
+        <td>{{ set.commons }}</td>
+        <td>{{ set.rares }}</td>
+        <td>{{ set.mythics }}</td>
+        <td>{{ set.total }}</td>
       </tr>
     </tbody>
   </table>

@@ -107,11 +107,9 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 		// TODO: parse currentCost to get a color "type" and a numerical "value" for every color in the string
 		newCost = [{type:"white", value:4}];
 		card.cost = newCost;
-		card.artist = 
-		
 	}
 	                
-	                { artist: "Steve Argyle", 
+	$scope.cards= [ { artist: "Steve Argyle", 
 	                	card: "Admonition Angel", 
 	                	set: "WorldWake",  
 	                	type: "Creature - Angel", 
@@ -127,21 +125,11 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 //#############Sets Controller#####################
 //#################################################
 
-dark.controller('SetsController', ['$scope', function($scope, Sets) {
+dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	$scope.lastSortType = 'set';
 	$scope.sortType     = 'set'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Set", sortType:"set"}, {label: "Common", sortType:"common"}, {label: "Uncommon", sortType:"uncommon"}, {label: "Rare", sortType:"rare"}, {label: "Mythic", sortType:"mythic"}, {label: "Symbol", sortType:"symbol"}];
-	
-	$scope.range = function(start, end)
-	{
-	    var array = new Array();
-	    for(var i = start; i < end; i++)
-	    {
-	        array.push(i);
-	    }
-	    return array;
-	}
+	$scope.tableHeaders = [{label: "Set", sortType:"set"}, {label: "Common", sortType:"common"}, {label: "Uncommon", sortType:"uncommon"}, {label: "Rare", sortType:"rare"}, {label: "Mythic", sortType:"mythic"}, {label: "Total", sortType:"total"}];
 	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
@@ -153,32 +141,18 @@ dark.controller('SetsController', ['$scope', function($scope, Sets) {
 	}
 	
 	// create the list of entries
-	$scope.sets = [
-	                { set: "Steve Argyle", common: 10, uncommon: 5,  rare: 35, mythic: 8746, symbol: [{type:"chaos", value:1}]},
-	                { set: "Jeff A. Manges", common: 105, uncommon: 300,  rare: 5466, mythic: 564, symbol: [{type:"untap", value:1}]},
-	                { set: "Nils Hamm", common: 100000000000, uncommon: 9000000000000,  rare: 568468465465466, mythic: 5648946513216486, symbol: [{type:"million", value:1}]}
-	  ];
+	$scope.sets = Sets.query();
 } ]);
 
 //#################################################
 //#############Artists Controller##################
 //#################################################
 
-dark.controller('ArtistsController', ['$scope', function($scope, Artists) {
+dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Artists) {
 	$scope.lastSortType = 'artist';
 	$scope.sortType     = 'artist'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Artist", sortType:"artist"}, {label: "Cards", sortType:"cards"}, {label: "Common", sortType:"common"}, {label: "Uncommon", sortType:"uncommon"}, {label: "Rare", sortType:"rare"}, {label: "Mythic", sortType:"mythic"}];
-	
-	$scope.range = function(start, end)
-	{
-	    var array = new Array();
-	    for(var i = start; i < end; i++)
-	    {
-	        array.push(i);
-	    }
-	    return array;
-	}
+	$scope.tableHeaders = [{label: "Artist", sortType:"artist"}, {label: "Total", sortType:"total"}, {label: "Common", sortType:"common"}, {label: "Uncommon", sortType:"uncommon"}, {label: "Rare", sortType:"rare"}, {label: "Mythic", sortType:"mythic"}];
 	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
@@ -190,11 +164,7 @@ dark.controller('ArtistsController', ['$scope', function($scope, Artists) {
 	}
 	
 	// create the list of entries
-	$scope.artists = [
-	                  { artist: "Steve Argyle", cards: 65484, common: 13215,  uncommon: 1, rare: 3, mythic: 2},
-	                  { artist: "Jeff A. Manges", cards: 897465, common: 2,  uncommon: 2, rare: 2, mythic: 1},
-	                  { artist: "Nils Hamm", cards: 1, common: 231365165,  uncommon: 3, rare: 1, mythic: 3}
-	    ];
+	$scope.artists = Artists.query();
 } ]);
 
 //#################################################
