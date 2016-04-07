@@ -50,8 +50,8 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	    return array;
 	}
 	
-	$scope.splitString = function(s){
-		var array = s.split(',');
+	$scope.splitString = function(s, char){
+		var array = s.split(char);
 		return array;
 	}
 	
