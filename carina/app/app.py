@@ -337,7 +337,7 @@ if __name__ == '__main__': # pragma: no cover
 ##################################################################
 
 @app.route('/tests/runtests')
-def tests():
+def tests(): # pragma: no cover
     p = subprocess.Popen(["python3", "tests.py"],
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE,
