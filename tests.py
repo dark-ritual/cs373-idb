@@ -22,14 +22,14 @@ class MainTestCase(unittest.TestCase):
         app.Artist.query.filter_by(artist_id='peter').delete()
         app.db.session.commit()
 
-    def test_serialize_part(self):
+    def test_artist_serialize_part(self):
         artist_args = dict(artist_id='peter', name='Peter')
         app.addArtist(artist_args)
         self.assertEqual(artist_args, app.Artist.query.get('peter').serialize_part)
         app.Artist.query.filter_by(artist_id='peter').delete()
         app.db.session.commit()
 
-    def test_serialize_full(self):
+    def test_artist_serialize_full(self):
         artist_args = dict(artist_id='stephanie', name='Stephanie')
         app.addArtist(artist_args)
         set_args = dict(set_id='SOA', name='Set of Awesome')
@@ -42,9 +42,9 @@ class MainTestCase(unittest.TestCase):
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
                            card_id='sample-text', flavor='With rope...',
-                           rarity='common', number=24, layout='normal')
+                           rarity='common', number='24', layout='normal')
         app.addEdition(edition_args)
-        artist_args[multiverse_ids] = app.Edition.query.get('-666').serialize
+        artist_args['multiverse_ids'] = [app.Edition.query.get('-666').serialize]
         self.assertEqual(artist_args, app.Artist.query.get('stephanie').serialize_full)
         app.Edition.query.filter_by(multiverse_id='-666').delete()
         app.Card.query.filter_by(card_id='sample-text').delete()
@@ -65,7 +65,7 @@ class MainTestCase(unittest.TestCase):
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
                            card_id='sample-text', flavor='With rope...',
-                           rarity='common', number=24, layout='normal')
+                           rarity='common', number='24', layout='normal')
         app.addEdition(edition_args)
         self.assertEqual([edition_args], app.Artist.query.get('stephanie').serialize_multiverse_ids)
         app.Edition.query.filter_by(multiverse_id='-666').delete()
@@ -118,7 +118,6 @@ class MainTestCase(unittest.TestCase):
         self.assertEqual('''[Card: card_id=test-card, name=Test Card, colors=['White'], cost={2}{W}{W}, cmc=4,
                    text=You know what it is, types=['Enchantment'], formats={'standard':'legal'}, subtypes=None, power=None,
                    toughness=None]''', repr(app.Card.query.get('test-card')))
-        print(repr(app.Card.query.get('test-card')))
         app.Card.query.filter_by(card_id='test-card').delete()
         app.db.session.commit()
 
