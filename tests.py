@@ -110,19 +110,22 @@ class MainTestCase(unittest.TestCase):
         app.db.session.commit()
 
     def test_card_repr(self):
-        card_args = dict(card_id='test-card', name='Test Card', colors=['white'],
+        card_args = dict(card_id='test-card', name='Test Card', colors="['White']",
                         cost='{2}{W}{W}', cmc=4, text='You know what it is',
-                        types=['enchantment'], formats={'standard':'legal'},
+                        types="['Enchantment']", formats="{'standard':'legal'}",
                         subtypes=None, power=None, toughness=None)
         app.addCard(card_args)
-        self.assertEqual('[Card: card_id=test-card, name=Test Card, colors=[\'white\'], cost={2}{W}{W}, cmc=4, text=You know what it is, types=[\'enchantment\'], formats{\'standard\':\'legal\'}, subtypes=None, power=None, toughness=None]', repr(app.Card.query.get('test-card')))
+        self.assertEqual('''[Card: card_id=test-card, name=Test Card, colors=['White'], cost={2}{W}{W}, cmc=4,
+                   text=You know what it is, types=['Enchantment'], formats={'standard':'legal'}, subtypes=None, power=None,
+                   toughness=None]''', repr(app.Card.query.get('test-card')))
+        print(repr(app.Card.query.get('test-card')))
         app.Card.query.filter_by(card_id='test-card').delete()
         app.db.session.commit()
 
     def test_card_serialize_part(self):
-        card_args = dict(card_id='test-card', name='Test Card', colors=['white'],
+        card_args = dict(card_id='test-card', name='Test Card', colors='[White]',
                         cost='{2}{W}{W}', cmc=4, text='You know what it is',
-                        types=['enchantment'], formats={'standard':'legal'},
+                        types='Enchantment', formats='standard=True',
                         subtypes=None, power=None, toughness=None)
         app.addCard(card_args)
         self.assertEqual(card_args, app.Card.query.get('test-card').serialize_part)
