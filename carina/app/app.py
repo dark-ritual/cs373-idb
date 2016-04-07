@@ -17,8 +17,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-if getuser() == 'marklindberg':
+if getuser() == 'marklindberg': # pragma: no cover
     SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name?charset=utf8'
+elif getuser() == 'pscamman':
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:asdf@127.0.0.1/db?charset=utf8'
+
 else:
     SQLALCHEMY_DATABASE_URI = \
         '{engine}://{username}:{password}@{hostname}/{database}?charset=utf8'.format(

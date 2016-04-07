@@ -15,6 +15,65 @@ class MainTestCase(unittest.TestCase):
         # This will not hurt the DB if there is database in there.
         # But it is necessary for Travis where there is no DB already set-up.
 
+    def test_artist_repr(self):
+        artist_args = dict(artist_id='peter', name='Peter')
+        app.addArtist(artist_args)
+        self.assertEqual('[Artist: artist_id=peter, name=Peter]', repr(app.Artist.query.get('peter')))
+        app.Artist.query.filter_by(artist_id='peter').delete()
+        app.db.session.commit()
+
+    def test_serialize_part(self):
+        artist_args = dict(artist_id='peter', name='Peter')
+        app.addArtist(artist_args)
+        self.assertEqual(artist_args, app.Artist.query.get('peter').serialize_part)
+        app.Artist.query.filter_by(artist_id='peter').delete()
+        app.db.session.commit()
+
+    def test_serialize_full(self):
+        artist_args = dict(artist_id='stephanie', name='Stephanie')
+        app.addArtist(artist_args)
+        set_args = dict(set_id='SOA', name='Set of Awesome')
+        app.addSet(set_args)
+        card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
+                        cost='{2}{W}', cmc=3, text='Flying',
+                        formats='standard=True', types='Creature',
+                        subtypes='Sample', power=3, toughness=2)
+        app.addCard(card_args)
+        edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
+                           image_url='dummy-url',
+                           card_id='sample-text', flavor='With rope...',
+                           rarity='common', number=24, layout='normal')
+        app.addEdition(edition_args)
+        artist_args[multiverse_ids] = app.Edition.query.get('-666').serialize
+        self.assertEqual(artist_args, app.Artist.query.get('stephanie').serialize_full)
+        app.Edition.query.filter_by(multiverse_id='-666').delete()
+        app.Card.query.filter_by(card_id='sample-text').delete()
+        app.Set.query.filter_by(set_id='SOA').delete()
+        app.Artist.query.filter_by(artist_id='stephanie').delete()
+        app.db.session.commit()
+
+    def test_serialize_multiverse_ids(self):
+        artist_args = dict(artist_id='stephanie', name='Stephanie')
+        app.addArtist(artist_args)
+        set_args = dict(set_id='SOA', name='Set of Awesome')
+        app.addSet(set_args)
+        card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
+                        cost='{2}{W}', cmc=3, text='Flying',
+                        formats='standard=True', types='Creature',
+                        subtypes='Sample', power=3, toughness=2)
+        app.addCard(card_args)
+        edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
+                           image_url='dummy-url',
+                           card_id='sample-text', flavor='With rope...',
+                           rarity='common', number=24, layout='normal')
+        app.addEdition(edition_args)
+        self.assertEqual([edition_args], app.Artist.query.get('stephanie').serialize_multiverse_ids)
+        app.Edition.query.filter_by(multiverse_id='-666').delete()
+        app.Card.query.filter_by(card_id='sample-text').delete()
+        app.Set.query.filter_by(set_id='SOA').delete()
+        app.Artist.query.filter_by(artist_id='stephanie').delete()
+        app.db.session.commit()
+
     def test_artist_1(self):
         oldlen = len(app.Artist.query.all())
         artist_args = dict(artist_id='mark', name='Mark')
@@ -44,10 +103,30 @@ class MainTestCase(unittest.TestCase):
             app.addArtist(artist_args)
         except exc.IntegrityError:
             app.db.session.rollback()
-        else:
+        else: # pragma: no cover
             print("No error.")
             assert 0
         app.Artist.query.filter_by(artist_id='mark').delete()
+        app.db.session.commit()
+
+    def test_card_repr(self):
+        card_args = dict(card_id='test-card', name='Test Card', colors=['white'],
+                        cost='{2}{W}{W}', cmc=4, text='You know what it is',
+                        types=['enchantment'], formats={'standard':'legal'},
+                        subtypes=None, power=None, toughness=None)
+        app.addCard(card_args)
+        self.assertEqual('[Card: card_id=test-card, name=Test Card, colors=[\'white\'], cost={2}{W}{W}, cmc=4, text=You know what it is, types=[\'enchantment\'], formats{\'standard\':\'legal\'}, subtypes=None, power=None, toughness=None]', repr(app.Card.query.get('test-card')))
+        app.Card.query.filter_by(card_id='test-card').delete()
+        app.db.session.commit()
+
+    def test_card_serialize_part(self):
+        card_args = dict(card_id='test-card', name='Test Card', colors=['white'],
+                        cost='{2}{W}{W}', cmc=4, text='You know what it is',
+                        types=['enchantment'], formats={'standard':'legal'},
+                        subtypes=None, power=None, toughness=None)
+        app.addCard(card_args)
+        self.assertEqual(card_args, app.Card.query.get('test-card').serialize_part)
+        app.Card.query.filter_by(card_id='test-card').delete()
         app.db.session.commit()
 
     def test_card_1(self):
@@ -98,7 +177,7 @@ class MainTestCase(unittest.TestCase):
             app.addCard(card_args)
         except exc.IntegrityError:
             app.db.session.rollback()
-        else:
+        else: # pragma: no cover
             print("No error.") # We know this is the wrong way to do this,
                                # but the regular way didn't work.
             assert 0
@@ -111,14 +190,14 @@ class MainTestCase(unittest.TestCase):
         app.addArtist(artist_args)
         set_args = dict(set_id='XXX', name='Xtra Xtravagant Xet')
         app.addSet(set_args)
-        card_args = dict(card_id='shooting-peter', name='Sample Text', colors='[White]',
+        card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
                         subtypes='Sample', power=3, toughness=2)
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-999', artist_id='mark', set_id='XXX',
                            image_url='dummy-url',
-                           card_id='shooting-peter', flavor='When properly aligned...',
+                           card_id='sample-text', flavor='When properly aligned...',
                            rarity='rare', number=22, layout='normal')
         app.addEdition(edition_args)
         self.assertEqual(oldlen + 1, len(app.Edition.query.all()))
@@ -126,9 +205,9 @@ class MainTestCase(unittest.TestCase):
         self.assertEqual(single.multiverse_id, '-999')
         self.assertEqual(single.artist_id, 'mark')
         self.assertEqual(single.set_id, 'XXX')
-        self.assertEqual(single.card_id, 'shooting-peter')
+        self.assertEqual(single.card_id, 'sample-text')
         app.Edition.query.filter_by(multiverse_id='-999').delete()
-        app.Card.query.filter_by(card_id='shooting-peter').delete()
+        app.Card.query.filter_by(card_id='sample-text').delete()
         app.Set.query.filter_by(set_id='XXX').delete()
         app.Artist.query.filter_by(artist_id='mark').delete()
         app.db.session.commit()
@@ -139,14 +218,14 @@ class MainTestCase(unittest.TestCase):
         app.addArtist(artist_args)
         set_args = dict(set_id='SOA', name='Set of Awesome')
         app.addSet(set_args)
-        card_args = dict(card_id='peter-fail', name='Sample Text', colors='[White]',
+        card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
                         subtypes='Sample', power=3, toughness=2)
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
-                           card_id='peter-fail', flavor='With rope...',
+                           card_id='sample-text', flavor='With rope...',
                            rarity='common', number=24, layout='normal')
         app.addEdition(edition_args)
         self.assertEqual(oldlen + 1, len(app.Edition.query.all()))
@@ -154,9 +233,9 @@ class MainTestCase(unittest.TestCase):
         self.assertEqual(single.multiverse_id, '-666')
         self.assertEqual(single.artist_id, 'stephanie')
         self.assertEqual(single.set_id, 'SOA')
-        self.assertEqual(single.card_id, 'peter-fail')
+        self.assertEqual(single.card_id, 'sample-text')
         app.Edition.query.filter_by(multiverse_id='-666').delete()
-        app.Card.query.filter_by(card_id='peter-fail').delete()
+        app.Card.query.filter_by(card_id='sample-text').delete()
         app.Set.query.filter_by(set_id='SOA').delete()
         app.Artist.query.filter_by(artist_id='stephanie').delete()
         app.db.session.commit()
@@ -167,25 +246,25 @@ class MainTestCase(unittest.TestCase):
         app.addArtist(artist_args)
         set_args = dict(set_id='SOA', name='Set of Awesome')
         app.addSet(set_args)
-        card_args = dict(card_id='peter-fail', name='Sample Text', colors='[White]',
+        card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
                         subtypes='Sample', power=3, toughness=2)
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
-                           card_id='peter-fail', flavor='With rope...',
+                           card_id='sample-text', flavor='With rope...',
                            rarity='common', number=24, layout='normal')
         app.addEdition(edition_args)
         try:
             app.addEdition(edition_args)
         except exc.IntegrityError:
             app.db.session.rollback()
-        else:
+        else: # pragma: no cover
             print("No error.")
             assert 0
         app.Edition.query.filter_by(multiverse_id='-666').delete()
-        app.Card.query.filter_by(card_id='peter-fail').delete()
+        app.Card.query.filter_by(card_id='sample-text').delete()
         app.Set.query.filter_by(set_id='SOA').delete()
         app.Artist.query.filter_by(artist_id='stephanie').delete()
         app.db.session.commit()
@@ -222,11 +301,11 @@ class MainTestCase(unittest.TestCase):
             app.addSet(set_args)
         except exc.IntegrityError:
             app.db.session.rollback()
-        else:
+        else: # pragma: no cover
             print("No error.")
             assert 0
         app.Set.query.filter_by(set_id='XXX').delete()
         app.db.session.commit()
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     unittest.main()
