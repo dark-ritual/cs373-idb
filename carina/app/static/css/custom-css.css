@@ -539,3 +539,9 @@ hbar {
     float: none;
     margin: 0 auto;
 }
+
+#roundedbg-tests{
+    border-radius: 15px;
+    background: #FFFFFF ;
+    padding: 20px;
+}
