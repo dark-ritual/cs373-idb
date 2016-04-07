@@ -196,4 +196,13 @@ dark.controller('ArtistsController', ['$scope', function($scope, Artists) {
 
 dark.controller('CardInstanceController', ['$scope', function($scope, CardInstance) {
 
+	$scope.name = "Admonition Angel";
+	$scope.artist = "Steve Argyle";
+	$scope.sets = "Worldwake";
+	$scope.type = "Creature-Angel";
+	$scope.cmc = "6";
+	$scope.text = "Maybe included?";
+	$scope.pt = "6/6";
+	$scope.rarity = "Mythic Rare";
+
 } ]);

@@ -19,6 +19,8 @@ logger = logging.getLogger(__name__)
 
 if getuser() == 'marklindberg':
     SQLALCHEMY_DATABASE_URI = 'mysql://root:aoeuidhtns@127.0.0.1/db_name?charset=utf8'
+elif getuser() == 'javier' :
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@127.0.0.1/guestbook?charset=utf8'
 else:
     SQLALCHEMY_DATABASE_URI = \
         '{engine}://{username}:{password}@{hostname}/{database}?charset=utf8'.format(
