@@ -1,0 +1,37 @@
+<div class="container" ng-controller="SetsInstanceController">
+
+	<div class="view-container">
+		<p class="yelling-font text-center">{{ set }} </p>
+	</div>
+
+	<div class="container" id="roundedbg-table">
+  		<div class="col-md-12 center-block">
+	   	<table class="table table-striped table-hover table-condensed">
+	   		<thread>
+	          	<tr>
+	            	<th ng-repeat="tableHeader in tableHeaders">
+		              	<a href ng-click="sort(tableHeader)">
+		                {{tableHeader.label}} 
+		                <span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+		                <span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+		              	</a>
+	            	</th>
+	          	</tr>
+	   		</thread>
+
+	   		<tbody>
+              	<tr ng-repeat="setinstance in setsinstance | orderBy:sortType:sortReverse">
+                	<td> {{ setinstance.image }} </td>
+                	<td>
+                  	<b>{{ setinstance.name }} </b>
+	                  <br>{{ setinstance.artist }}
+	                  <br>{{ setinstance.type }}
+	                  <br>{{ setinstance.text }}
+                	</td>
+               	<td style="width: 125px"><img src="../static/images/worldwake-rare.jpg"> {{ setinstance.sets }}</td>
+             	</tr>
+          	</tbody>
+       	</table>
+		</div>
+  	</div>
+</div>

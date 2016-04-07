@@ -19,8 +19,8 @@ dark.config([ '$routeProvider', function($routeProvider) {
 		templateUrl : '../static/templates/about.html',
 		controller : 'AboutController'
 	}).when('/temp', {
-		templateUrl : '../static/templates/artistsinstance.html',
-		controller : 'CardInstanceController'
+		templateUrl : '../static/templates/setsinstance.html',
+		controller : 'SetsInstanceController'
 	}).otherwise({
 		templateUrl : '../static/templates/home.html',
 		controller : 'HomeController'
