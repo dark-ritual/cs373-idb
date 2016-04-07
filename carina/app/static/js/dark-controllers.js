@@ -293,7 +293,9 @@ darkControllers.controller('TestsController', function($scope, $http) {
 	$scope.runtests = function() {
 		$http.get('/tests/runtests')
 		.then(function (response) {
-			$scope.result = response.data;
+			var txt = document.createElement("textarea");
+			txt.innerHTML = response.data;
+			$scope.result = txt.value;
 	   }) 
 	}
 } );
