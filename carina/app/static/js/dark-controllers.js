@@ -287,7 +287,7 @@ dark.controller('SetsInstanceController', ['$scope', function($scope, SetsInstan
 //#############Tests Controller##################
 //###############################################
 
-darkControllers.controller('TestsController', function($scope, $http) {
+darkControllers.controller('TestsController', function($scope, $http, $location) {
 	$scope.result = "Click below to run tests (may take a few moments)."
 
 	$scope.runtests = function() {
@@ -295,7 +295,8 @@ darkControllers.controller('TestsController', function($scope, $http) {
 		.then(function (response) {
 			var txt = document.createElement("textarea");
 			txt.innerHTML = response.data;
-			$scope.result = txt.value;
+			var text = txt.value;
+			$scope.result = txt.value;//.substring(2,text.length - 1).replace(/\\n/g, "<br>");
 	   }) 
 	}
 } );
