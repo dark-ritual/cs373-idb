@@ -546,3 +546,7 @@ hbar {
     background: #FFFFFF ;
     padding: 20px;
 }
+
+p.big{
+	line-height: 1.2;
+}
