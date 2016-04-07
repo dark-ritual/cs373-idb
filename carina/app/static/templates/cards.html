@@ -16,11 +16,11 @@
     
     <tbody>
       <tr ng-repeat="card in cards | orderBy:sortType:sortReverse">
-        <td>{{ card.name }}</td>
-        <td>{{ card.artists }}</td>
-        <td>{{ card.sets }}</td>
-        <td>{{ card.editions }}</td>
-        <td>{{ card.rarities }}</td>
+        <td><a href="http://darkritual.cards/{{ card.name }}">{{ card.name }}</td>
+        <td>{{ splitString(card.artists) }}</td>
+        <td>{{ splitString(card.sets) }}</td>
+        <td>{{ count(splitString(card.editions)) }}</td>
+        <td>{{ splitString(card.rarities) }}</td>
         <td>{{ card.cost }}</td>
       </tr>
     </tbody>

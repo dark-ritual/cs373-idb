@@ -39,9 +39,8 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	$scope.sortType     = 'card'; // set the default sort type
 	$scope.sortReverse  = false;
 	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Edition(s)", sortType:"editions"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
-
 	
-	/*$scope.range = function(start, end)
+	$scope.range = function(start, end)
 	{
 	    var array = new Array();
 	    for(var i = start; i < end; i++)
@@ -49,7 +48,12 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	        array.push(i);
 	    }
 	    return array;
-	}*/
+	}
+	
+	$scope.splitString = function(s){
+		var array = s.split(',');
+		return array;
+	}
 	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
@@ -58,6 +62,10 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 		} else {
 			$scope.lastSortType = $scope.sortType;
 		}
+	}
+	
+	$scope.count = function(a){
+		return a.length;
 	}
 	
 	// create the list of entries
@@ -88,6 +96,11 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 		} else {
 			$scope.lastSortType = $scope.sortType;
 		}
+	}
+	
+	$scope.splitString = function(string){
+		var array = string.split(',');
+		return array;
 	}
 	
 	// create the list of entries
