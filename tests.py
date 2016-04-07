@@ -37,7 +37,7 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
@@ -60,7 +60,7 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
@@ -139,7 +139,7 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
@@ -162,7 +162,7 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
@@ -197,7 +197,7 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         card_args = dict(card_id='spooky-card', name="Spooky Card", colors='[Black]',
                         cost='{3}{B}', cmc=4, text='Boo',
@@ -232,6 +232,15 @@ class MainTestCase(unittest.TestCase):
         app.db.session.commit()
 
     def test_edition_repr(self):
+        artist_args = dict(artist_id='mark', name='Mark')
+        app.addArtist(artist_args)
+        set_args = dict(set_id='XXX', name='Xtra Xtravagant Xet')
+        app.addSet(set_args)
+        card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
+                        cost='{2}{W}', cmc=3, text='Flying',
+                        formats='standard=True', types='Creature',
+                        subtypes='Sample', power='3', toughness='2')
+        app.addCard(card_args)
         edition_args = dict(multiverse_id='-999', artist_id='mark', set_id='XXX',
                            image_url='dummy-url',
                            card_id='sample-text', flavor='When properly aligned...',
@@ -241,16 +250,31 @@ class MainTestCase(unittest.TestCase):
                    card_id=sample-text, image_url=dummy-url, flavor=When properly aligned..., rarity=rare,
                    number=22, layout=normal]''', repr(app.Edition.query.get('-999')))
         app.Edition.query.filter_by(multiverse_id='-999').delete()
+        app.Card.query.filter_by(card_id='sample-text').delete()
+        app.Set.query.filter_by(set_id='XXX').delete()
+        app.Artist.query.filter_by(artist_id='mark').delete()
         app.db.session.commit()
 
     def test_edition_serialize(self):
+        artist_args = dict(artist_id='mark', name='Mark')
+        app.addArtist(artist_args)
+        set_args = dict(set_id='XXX', name='Xtra Xtravagant Xet')
+        app.addSet(set_args)
+        card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
+                        cost='{2}{W}', cmc=3, text='Flying',
+                        formats='standard=True', types='Creature',
+                        subtypes='Sample', power='3', toughness='2')
+        app.addCard(card_args)
         edition_args = dict(multiverse_id='-999', artist_id='mark', set_id='XXX',
                            image_url='dummy-url',
                            card_id='sample-text', flavor='When properly aligned...',
                            rarity='rare', number='22', layout='normal')
         app.addEdition(edition_args)
         self.assertEqual(edition_args, app.Edition.query.get('-999').serialize)
-        app.Edition.query.filter_by(edition_id='-999').delete()
+        app.Edition.query.filter_by(multiverse_id='-999').delete()
+        app.Card.query.filter_by(card_id='sample-text').delete()
+        app.Set.query.filter_by(set_id='XXX').delete()
+        app.Artist.query.filter_by(artist_id='mark').delete()
         app.db.session.commit()
 
     def test_edition_1(self):
@@ -262,12 +286,12 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-999', artist_id='mark', set_id='XXX',
                            image_url='dummy-url',
                            card_id='sample-text', flavor='When properly aligned...',
-                           rarity='rare', number=22, layout='normal')
+                           rarity='rare', number='22', layout='normal')
         app.addEdition(edition_args)
         self.assertEqual(oldlen + 1, len(app.Edition.query.all()))
         single = app.Edition.query.get('-999')
@@ -290,12 +314,12 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
                            card_id='sample-text', flavor='With rope...',
-                           rarity='common', number=24, layout='normal')
+                           rarity='common', number='24', layout='normal')
         app.addEdition(edition_args)
         self.assertEqual(oldlen + 1, len(app.Edition.query.all()))
         single = app.Edition.query.get('-666')
@@ -318,12 +342,12 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
                            card_id='sample-text', flavor='With rope...',
-                           rarity='common', number=24, layout='normal')
+                           rarity='common', number='24', layout='normal')
         app.addEdition(edition_args)
         try:
             app.addEdition(edition_args)
@@ -360,7 +384,7 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
@@ -383,7 +407,7 @@ class MainTestCase(unittest.TestCase):
         card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
                         cost='{2}{W}', cmc=3, text='Flying',
                         formats='standard=True', types='Creature',
-                        subtypes='Sample', power=3, toughness=2)
+                        subtypes='Sample', power='3', toughness='2')
         app.addCard(card_args)
         edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
                            image_url='dummy-url',
