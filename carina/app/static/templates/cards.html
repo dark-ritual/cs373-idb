@@ -16,16 +16,12 @@
     
     <tbody>
       <tr ng-repeat="card in cards | orderBy:sortType:sortReverse">
-        <td>{{ card.card }}</td>
-        <td>{{ card.artist }}</td>
-        <td>{{ card.set }}</td>
-        <td>{{ card.type }}</td>
-        <td>{{ card.rarity }}</td>
-        <td>
-        <span ng-repeat="color in card.cost">
-        		<div ng-repeat="i in range(0,color.value)" class="mtg-{{color.type}} mtg-standard"></div>
-        </span>
-        </td>
+        <td>{{ card.name }}</td>
+        <td>{{ card.artists }}</td>
+        <td>{{ card.sets }}</td>
+        <td>{{ card.editions }}</td>
+        <td>{{ card.rarities }}</td>
+        <td>{{ card.cost }}</td>
       </tr>
     </tbody>
   </table>

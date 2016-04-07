@@ -197,6 +197,31 @@ class Edition(db.Model):
                     set_id=self.set_id, card_id=self.card_id,
                     image_url=self.image_url, flavor=self.flavor,
                     rarity=self.rarity, number=self.number, layout=self.layout)
+        
+def serialize_card_table_data():
+    sql = '''SELECT
+                c.name,
+                c.cost,
+                GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR ', ') AS editions,
+                GROUP_CONCAT(DISTINCT e.rarity SEPARATOR ', ') AS rarities,
+                GROUP_CONCAT(DISTINCT a.name SEPARATOR ', ') AS artists,
+                GROUP_CONCAT(DISTINCT s.name  SEPARATOR ', ') AS sets
+            FROM
+                card AS c
+            LEFT JOIN
+                edition AS e ON e.card_id = c.card_id
+            LEFT JOIN
+                artist AS a ON a.artist_id = e.artist_id
+            LEFT JOIN
+                `set` AS s ON s.set_id = e.set_id
+            GROUP BY
+                c.name
+    '''
+    # convert the list of dicts to an array of objects
+    ret = []
+    for i in db.engine.execute(sql).fetchall():
+        ret.append({'name':i['name'], 'cost':i['cost'], 'editions':i['editions'], 'rarities':i['rarities'], 'artists':i['artists'], 'sets':i['sets']})
+    return ret
 
 def serialize_artist_table_data():
     sql = '''select     a.name,
@@ -290,6 +315,10 @@ def cardsAPI():
     logger.debug("cards")
     cards = [card.serialize_full for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
     return json.dumps(cards)
+
+@app.route('/api/cardsTable', methods=['GET'])
+def cardsTable():
+    return json.dumps(serialize_card_table_data())
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET', 'POST'])
 def cardAPI(card_id):

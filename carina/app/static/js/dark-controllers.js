@@ -38,10 +38,10 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	$scope.lastSortType = 'card';
 	$scope.sortType     = 'card'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Card", sortType:"card"}, {label: "Set", sortType:"set"}, {label: "Artist", sortType:"artist"}, {label: "Type", sortType:"type"}, {label: "Rarity", sortType:"rarity"}, {label: "Cost", sortType:"cost"}];
+	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Edition(s)", sortType:"editions"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
 
 	
-	$scope.range = function(start, end)
+	/*$scope.range = function(start, end)
 	{
 	    var array = new Array();
 	    for(var i = start; i < end; i++)
@@ -49,7 +49,7 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	        array.push(i);
 	    }
 	    return array;
-	}
+	}*/
 	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
@@ -61,64 +61,14 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	}
 	
 	// create the list of entries
-	$scope.cards = [
-	                {
-		    "types": "['creature']",
-		    "cmc": 2,
-		    "name": "Advance Scout",
-		    "formats": "{'vintage': 'legal', 'legacy': 'legal', 'commander': 'legal'}",
-		    "card_id": "advance-scout",
-		    "subtypes": "['human', 'scout', 'soldier']",
-		    "cost": "{1}{W}",
-		    "text": "First strike\n{W}: Target creature gains first strike until end of turn.",
-		    "colors": "['white']",
-		    "toughness": "1",
-		    "power": "1"
-		  },
-		  {
-		    "types": "['creature']",
-		    "cmc": 4,
-		    "name": "Advanced Hoverguard",
-		    "formats": "{'modern': 'legal', 'vintage': 'legal', 'legacy': 'legal', 'commander': 'legal'}",
-		    "card_id": "advanced-hoverguard",
-		    "subtypes": "['drone']",
-		    "cost": "{3}{U}",
-		    "text": "Flying\n{U}: Advanced Hoverguard gains shroud until end of turn. (It can't be the target of spells or abilities.)",
-		    "colors": "['blue']",
-		    "toughness": "2",
-		    "power": "2"
-		  },
-		  {
-		    "types": "['conspiracy']",
-		    "cmc": 0,
-		    "name": "Advantageous Proclamation",
-		    "formats": "{}",
-		    "card_id": "advantageous-proclamation",
-		    "subtypes": null,
-		    "cost": "",
-		    "text": "(Start the game with this conspiracy face up in the command zone.)\nYour minimum deck size is reduced by five.",
-		    "colors": "[]",
-		    "toughness": null,
-		    "power": null
-		  },
-	  ];
-	for(card in $scope.cards) {
+	$scope.cards = Cards.query();
+	                
+	/*for(card in $scope.cards) {
 		currentCost = card.cost;
 		// TODO: parse currentCost to get a color "type" and a numerical "value" for every color in the string
 		newCost = [{type:"white", value:4}];
 		card.cost = newCost;
-	}
-	                
-	$scope.cards= [ { artist: "Steve Argyle", 
-	                	card: "Admonition Angel", 
-	                	set: "WorldWake",  
-	                	type: "Creature - Angel", 
-	                	rarity: "Uncommon", 
-	                	cost: [{type:"white", value:4}]
-	                },
-	                { artist: "Jeff A. Manges", card: "Deep Water", set: "The Dark",  type: "Enchantment", rarity: "Mythic", cost: [{type:"anyX", value:3}]},
-	                { artist: "Nils Hamm", card: "Mountain", set: "All Sets",  type: "Basic Land", rarity: "Common", cost: [{type:"any0", value:1}]}
-	  ];
+	}*/
 } ]);
 
 //#################################################
@@ -129,7 +79,7 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	$scope.lastSortType = 'set';
 	$scope.sortType     = 'set'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Set", sortType:"set"}, {label: "Common", sortType:"common"}, {label: "Uncommon", sortType:"uncommon"}, {label: "Rare", sortType:"rare"}, {label: "Mythic", sortType:"mythic"}, {label: "Total", sortType:"total"}];
+	$scope.tableHeaders = [{label: "Set", sortType:"name"}, {label: "Common", sortType:"commons"}, {label: "Uncommon", sortType:"uncommons"}, {label: "Rare", sortType:"rares"}, {label: "Mythic", sortType:"mythics"}, {label: "Total", sortType:"total"}];
 	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
@@ -152,7 +102,7 @@ dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Arti
 	$scope.lastSortType = 'artist';
 	$scope.sortType     = 'artist'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Artist", sortType:"artist"}, {label: "Total", sortType:"total"}, {label: "Common", sortType:"common"}, {label: "Uncommon", sortType:"uncommon"}, {label: "Rare", sortType:"rare"}, {label: "Mythic", sortType:"mythic"}];
+	$scope.tableHeaders = [{label: "Artist", sortType:"name"}, {label: "Total", sortType:"total"}, {label: "Common", sortType:"commons"}, {label: "Uncommons", sortType:"uncommons"}, {label: "Rare", sortType:"rares"}, {label: "Mythic", sortType:"mythics"}];
 	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
