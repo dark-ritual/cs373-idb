@@ -137,8 +137,7 @@ class Card(db.Model):
 
     @property
     def serialize_part(self):
-        return dict(card_id=self.card_id, name=self.name, url=self.url,
-                    store_url=self.store_url, colors=self.colors,
+        return dict(card_id=self.card_id, name=self.name, colors=self.colors,
                     cost=self.cost, cmc=self.cmc, text=self.text,
                     types=self.types, formats=self.formats,
                     subtypes=self.subtypes, power=self.power,
@@ -147,7 +146,7 @@ class Card(db.Model):
     @property
     def serialize_full(self):
         d = self.serialize_part
-        d[multiverse_ids] = self.serialize_multiverse_ids
+        d['multiverse_ids'] = self.serialize_multiverse_ids
         return d
 
     @property
@@ -182,13 +181,13 @@ class Edition(db.Model):
     def __repr__(self):
         return """[Edition: multiverse_ids={}, artist_id={}, set_id={},
                    card_id={}, image_url={}, flavor={}, rarity={},
-                   number={}, layout={}]""".format(self.multiverse_ids,
+                   number={}, layout={}]""".format(self.multiverse_id,
                     self.artist_id, self.set_id, self.card_id, self.image_url,
                     self.flavor, self.rarity, self.number, self.layout)
 
     @property
     def serialize(self):
-        return dict(multiverse_ids=self.multiverse_ids, artist_id=self.artist_id,
+        return dict(multiverse_ids=self.multiverse_id, artist_id=self.artist_id,
                     set_id=self.set_id, card_id=self.card_id,
                     image_url=self.image_url, flavor=self.flavor,
                     rarity=self.rarity, number=self.number, layout=self.layout)
