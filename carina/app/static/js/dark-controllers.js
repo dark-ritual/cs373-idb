@@ -215,7 +215,7 @@ dark.controller('ArtistsInstanceController', ['$scope', function($scope, Artists
 	$scope.lastSortType = 'artist';
 	$scope.sortType     = 'artist'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Artist", sortType:"artist"}, {label: "Cards", sortType:"cards"}, {label: "Common", sortType:"common"}, {label: "Uncommon", sortType:"uncommon"}, {label: "Rare", sortType:"rare"}, {label: "Mythic", sortType:"mythic"}];
+	$scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Sets", sortType:"sets"}];
 	
 	$scope.range = function(start, end)
 	{
@@ -237,9 +237,8 @@ dark.controller('ArtistsInstanceController', ['$scope', function($scope, Artists
 	}
 	
 	// create the list of entries
-	$scope.artists = [
-	                  { artist: "Steve Argyle", cards: 65484, common: 13215,  uncommon: 1, rare: 3, mythic: 2},
-	                  { artist: "Jeff A. Manges", cards: 897465, common: 2,  uncommon: 2, rare: 2, mythic: 1},
-	                  { artist: "Nils Hamm", cards: 1, common: 231365165,  uncommon: 3, rare: 1, mythic: 3}
+	$scope.artistsinstance = [
+	                  { image: "../static/images/imagename", text: "Admonition Angel\nSteve Argyle\nFlying\nLandfall — Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.\nWhen Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.", sets: "WorldWake"},
+	                  { image: "../static/images/imagename", text: "Angelic Arbiter...\nText to\nfill in.", sets: "Magic: The Gathering-Commander"},
 	    ];
 } ]);
