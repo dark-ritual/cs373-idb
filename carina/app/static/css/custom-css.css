@@ -21,6 +21,10 @@ a{
     text-decoration: none;
     background-color: transparent;
 }
+
+p.capitalize{
+	text-transform: capitalize;
+}
 	
 .navbar-default {
 	background-color: #000000;

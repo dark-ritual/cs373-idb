@@ -201,6 +201,7 @@ class Edition(db.Model):
 def serialize_card_table_data():
     sql = '''SELECT
                 c.name,
+                c.card_id,
                 c.cost,
                 GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR ', ') AS editions,
                 GROUP_CONCAT(DISTINCT e.rarity SEPARATOR ', ') AS rarities,
@@ -220,7 +221,7 @@ def serialize_card_table_data():
     # convert the list of dicts to an array of objects
     ret = []
     for i in db.engine.execute(sql).fetchall():
-        ret.append({'name':i['name'], 'cost':i['cost'], 'editions':i['editions'], 'rarities':i['rarities'], 'artists':i['artists'], 'sets':i['sets']})
+        ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'], 'editions':i['editions'], 'rarities':i['rarities'], 'artists':i['artists'], 'sets':i['sets']})
     return ret
 
 def serialize_artist_table_data():

@@ -50,7 +50,7 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	    return array;
 	}
 	
-	$scope.splitString = function(s, char){
+	$scope.splitString = function(s, char, trim){
 		var array = s.split(char);
 		return array;
 	}
@@ -66,6 +66,10 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	
 	$scope.count = function(a){
 		return a.length;
+	}
+	
+	$scope.trim = function(a){
+		return s[1];
 	}
 	
 	// create the list of entries

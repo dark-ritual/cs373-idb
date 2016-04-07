@@ -9,6 +9,9 @@ dark.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/cards', {
 		templateUrl : '../static/templates/cards.html',
 		controller : 'CardsController'
+	}).when('/cards/:card_id', {
+		templateUrl : '../static/templates/cards.html',
+		controller : 'CardsController'
 	}).when('/sets', {
 		templateUrl : '../static/templates/sets.html',
 		controller : 'SetsController'

@@ -13,7 +13,7 @@ dark.directive('CardDirective', function()){
 		restrict: 'E',
 		link: function(scope, element, attrs){
 			scope.getContentUrl = function(){
-				return 'cards/' + attrs.ver + '.html';
+				return '#/cards/' + attrs.ver + '.html';
 			}
 		},
 		template: '<div ng-include"=getContentUrl()"></div>
