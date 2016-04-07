@@ -510,6 +510,7 @@ hbar {
 }
 
 #roundedbg-about{
+	 color: #000000;
     border-radius: 15px 50px;
     background: #FFFFFF ;
     padding: 20px;
