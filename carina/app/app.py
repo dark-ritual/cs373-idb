@@ -1,6 +1,7 @@
 import logging
 import os
 import json
+import subprocess
 from getpass import getuser
 
 from flask import Flask, render_template, redirect, url_for
@@ -13,7 +14,7 @@ from array import array
 ##################################################################
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.ERROR,
     format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -268,11 +269,11 @@ def serialize_set_table_data():
 # Routes for Home page (NOTE:INDEX IS THE ONLY TEMPLATE SERVED BY SERVER, ALL OTHERS ARE LOADED BY ANGULAR!)
 ######################
 @app.route('/index.html', methods=['GET'])
-def indexHTML():
+def indexHTML(): # pragma: no cover
     return redirect(url_for('index'))
 
 @app.route('/', methods=['GET'])
-def index():
+def index(): # pragma: no cover
     logger.debug("index")
     return render_template('index.html', cards=Card.query.all())
 
@@ -280,7 +281,7 @@ def index():
 # Routes for JSON API REST Endpoints
 ######################
 @app.route('/api/artists',  methods=['GET', 'POST'])
-def artistsAPI():
+def artistsAPI(): # pragma: no cover
     logger.debug("artists")
     artists = [artist.serialize_part for artist in Artist.query.all()]
     return json.dumps(artists)
@@ -290,13 +291,13 @@ def artistTable():
     return json.dumps(serialize_artist_table_data())
 
 @app.route('/api/artists/<path:artist_id>', methods=['GET', 'POST'])
-def artistAPI(artist_id):
+def artistAPI(artist_id): # pragma: no cover
     logger.debug("artist")
     artist = [Artist.query.get(artist_id).serialize_full]
     return json.dumps(artist)
 
 @app.route('/api/sets',  methods=['GET', 'POST'])
-def setsAPI():
+def setsAPI(): # pragma: no cover
     logger.debug("sets")
     sets = [card_set.serialize_part for card_set in Set.query.all()]
     return json.dumps(sets)
@@ -306,13 +307,13 @@ def setTable():
     return json.dumps(serialize_set_table_data())
 
 @app.route('/api/sets/<path:set_id>',  methods=['GET', 'POST'])
-def setAPI(set_id):
+def setAPI(set_id): # pragma: no cover
     logger.debug("card_set")
     card_set = [Set.query.get(set_id).serialize_full]
     return json.dumps(card_set)
 
 @app.route('/api/cards',  methods=['GET', 'POST'])
-def cardsAPI():
+def cardsAPI(): # pragma: no cover
     logger.debug("cards")
     cards = [card.serialize_full for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
     return json.dumps(cards)
@@ -322,13 +323,13 @@ def cardsTable():
     return json.dumps(serialize_card_table_data())
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET', 'POST'])
-def cardAPI(card_id):
+def cardAPI(card_id): # pragma: no cover
     logger.debug("card")
     card = [Card.query.get(card_id).serialize_full]
     return json.dumps(card)
 
 @app.route('/api/editions/<path:multiverse_id>',  methods=['GET', 'POST'])
-def editionAPI(multiverse_id):
+def editionAPI(multiverse_id): # pragma: no cover
     logger.debug("edition")
     edition = [Edition.query.get(multiverse_id).serialize]
     return json.dumps(card)
@@ -363,7 +364,7 @@ def create_db():
     db.create_all()
 
 @manager.command
-def drop_db():
+def drop_db(): # pragma: no cover
     logger.debug("drop_db")
     app.config['SQLALCHEMY_ECHO'] = False
     db.drop_all()
@@ -375,5 +376,18 @@ logger.debug("Welcome to Data: The Gathering!")
 logger.debug("The log statement below is for educational purposes only. Do *not* log credentials.")
 logger.debug("%s", SQLALCHEMY_DATABASE_URI)
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     manager.run()
+
+##################################################################
+###################### PYTHON TESTS ##############################
+##################################################################
+
+@app.route('/tests/runtests')
+def tests(): # pragma: no cover
+    p = subprocess.Popen(["python3", "tests.py"],
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE,
+        stdin = subprocess.PIPE)
+    out, err = p.communicate()
+    return render_template('tests.html', output = (err + out).decode())

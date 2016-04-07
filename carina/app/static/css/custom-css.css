@@ -514,6 +514,7 @@ hbar {
 }
 
 #roundedbg-about{
+	 color: #000000;
     border-radius: 15px 50px;
     background: #FFFFFF ;
     padding: 20px;
@@ -542,4 +543,14 @@ hbar {
 .col-centered{
     float: none;
     margin: 0 auto;
+}
+
+#roundedbg-tests{
+    border-radius: 15px;
+    background: #FFFFFF ;
+    padding: 20px;
+}
+
+p.big{
+	line-height: 1.2;
 }

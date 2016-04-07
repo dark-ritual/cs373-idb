@@ -16,6 +16,6 @@ dark.directive('CardDirective', function()){
 				return '#/cards/' + attrs.ver + '.html';
 			}
 		},
-		template: '<div ng-include"=getContentUrl()"></div>
+		template: '<div ng-include"=getContentUrl()"></div>'
 	}
-});
+};

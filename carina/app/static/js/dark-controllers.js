@@ -226,3 +226,21 @@ dark.controller('SetsInstanceController', ['$scope', function($scope, SetsInstan
 
 	$scope.set = "Worldwake";
 } ]);
+
+//###############################################
+//#############Tests Controller##################
+//###############################################
+
+darkControllers.controller('TestsController', function($scope, $http, $location) {
+	$scope.result = "Click below to run tests (may take a few moments)."
+
+	$scope.runtests = function() {
+		$http.get('/tests/runtests')
+		.then(function (response) {
+			var txt = document.createElement("textarea");
+			txt.innerHTML = response.data;
+			var text = txt.value;
+			$scope.result = txt.value;//.substring(2,text.length - 1).replace(/\\n/g, "<br>");
+	   }) 
+	}
+} );
