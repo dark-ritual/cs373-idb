@@ -206,3 +206,40 @@ dark.controller('CardInstanceController', ['$scope', function($scope, CardInstan
 	$scope.rarity = "Mythic Rare";
 
 } ]);
+
+//#################################################
+//#############Artists Instance Controller##################
+//#################################################
+
+dark.controller('ArtistsInstanceController', ['$scope', function($scope, ArtistsInstance) {
+	$scope.lastSortType = 'artist';
+	$scope.sortType     = 'artist'; // set the default sort type
+	$scope.sortReverse  = false;
+	$scope.tableHeaders = [{label: "Artist", sortType:"artist"}, {label: "Cards", sortType:"cards"}, {label: "Common", sortType:"common"}, {label: "Uncommon", sortType:"uncommon"}, {label: "Rare", sortType:"rare"}, {label: "Mythic", sortType:"mythic"}];
+	
+	$scope.range = function(start, end)
+	{
+	    var array = new Array();
+	    for(var i = start; i < end; i++)
+	    {
+	        array.push(i);
+	    }
+	    return array;
+	}
+	
+	$scope.sort = function(tableHeader) {
+		$scope.sortType = tableHeader.sortType;
+		if($scope.sortType == $scope.lastSortType) {
+			$scope.sortReverse = !$scope.sortReverse;
+		} else {
+			$scope.lastSortType = $scope.sortType;
+		}
+	}
+	
+	// create the list of entries
+	$scope.artists = [
+	                  { artist: "Steve Argyle", cards: 65484, common: 13215,  uncommon: 1, rare: 3, mythic: 2},
+	                  { artist: "Jeff A. Manges", cards: 897465, common: 2,  uncommon: 2, rare: 2, mythic: 1},
+	                  { artist: "Nils Hamm", cards: 1, common: 231365165,  uncommon: 3, rare: 1, mythic: 3}
+	    ];
+} ]);
