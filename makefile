@@ -53,7 +53,7 @@ test: TestIDB2.tmp
 IDB2-tests:
 	git clone https://github.com/dark-ritual/cs373-idb.git
 
-models.html: models.py
+models.html: app/models.py
 	pydoc -w models
 
 IDB2.log:
