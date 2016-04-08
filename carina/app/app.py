@@ -284,55 +284,65 @@ def index(): # pragma: no cover
 def artistsAPI(): # pragma: no cover
     logger.debug("artists")
     artists = [artist.serialize_part for artist in Artist.query.all()]
-    return json.dumps(artists)
+    return json.dumps(artists, sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 @app.route('/api/artistTable', methods=['GET'])
 def artistTable():
-    return json.dumps(serialize_artist_table_data())
+    return json.dumps(serialize_artist_table_data(), sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 @app.route('/api/artists/<path:artist_id>', methods=['GET', 'POST'])
 def artistAPI(artist_id): # pragma: no cover
     logger.debug("artist")
     artist = [Artist.query.get(artist_id).serialize_full]
-    return json.dumps(artist)
+    return json.dumps(artist, sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 @app.route('/api/sets',  methods=['GET', 'POST'])
 def setsAPI(): # pragma: no cover
     logger.debug("sets")
     sets = [card_set.serialize_part for card_set in Set.query.all()]
-    return json.dumps(sets)
+    return json.dumps(sets, sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 @app.route('/api/setTable', methods=['GET'])
 def setTable():
-    return json.dumps(serialize_set_table_data())
+    return json.dumps(serialize_set_table_data(), sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 @app.route('/api/sets/<path:set_id>',  methods=['GET', 'POST'])
 def setAPI(set_id): # pragma: no cover
     logger.debug("card_set")
     card_set = [Set.query.get(set_id).serialize_full]
-    return json.dumps(card_set)
+    return json.dumps(card_set, sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 @app.route('/api/cards',  methods=['GET', 'POST'])
 def cardsAPI(): # pragma: no cover
     logger.debug("cards")
     cards = [card.serialize_full for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
-    return json.dumps(cards)
+    return json.dumps(cards, sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 @app.route('/api/cardsTable', methods=['GET'])
 def cardsTable():
-    return json.dumps(serialize_card_table_data())
+    return json.dumps(serialize_card_table_data(), sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET', 'POST'])
 def cardAPI(card_id): # pragma: no cover
     logger.debug("card")
     card = [Card.query.get(card_id).serialize_full]
-    return json.dumps(card)
+    return json.dumps(card, sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 @app.route('/api/editions/<path:multiverse_id>',  methods=['GET', 'POST'])
 def editionAPI(multiverse_id): # pragma: no cover
     logger.debug("edition")
     edition = [Edition.query.get(multiverse_id).serialize]
-    return json.dumps(card)
+    return json.dumps(edition, sort_keys=True,
+...                  indent=4, separators=(',', ': '))
 
 ##################################################################
 ###################### FLASK MANAGER COMMANDS ####################
