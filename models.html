@@ -9,9 +9,20 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>models</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/marklindberg/Python/cs373-idb/models.py">/Users/marklindberg/Python/cs373-idb/models.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;SQLAlchemy&nbsp;Model&nbsp;creation</tt></p>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/javier/cs373/cs373-idb/models.py">/home/javier/cs373/cs373-idb/models.py</a></font></td></tr></table>
+    <p></p>
 <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="logging.html">logging</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="subprocess.html">subprocess</a><br>
+</td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -44,38 +55,35 @@
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Artist-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
-&nbsp;<br>
-Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
-values&nbsp;in&nbsp;``kwargs``.<br>
-&nbsp;<br>
-Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
-attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
-for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt></dd></dl>
+<dl><dt><a name="Artist-__init__"><strong>__init__</strong></a>(self, artist_id, name)</dt></dl>
 
 <dl><dt><a name="Artist-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
 
 <hr>
 Data descriptors defined here:<br>
-<dl><dt><strong>editions_FK</strong></dt>
+<dl><dt><strong>artist_id</strong></dt>
 </dl>
-<dl><dt><strong>id</strong></dt>
+<dl><dt><strong>multiverse_ids</strong></dt>
 </dl>
 <dl><dt><strong>name</strong></dt>
 </dl>
+<dl><dt><strong>serialize_full</strong></dt>
+</dl>
+<dl><dt><strong>serialize_multiverse_ids</strong></dt>
+</dl>
+<dl><dt><strong>serialize_part</strong></dt>
+</dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x104094ad0; Artist&gt;</dl>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x2b5df00761d0; Artist&gt;</dl>
 
-<dl><dt><strong>__table__</strong> = Table('artist', MetaData(bind=None), Column('id'...6), table=&lt;artist&gt;, nullable=False), schema=None)</dl>
+<dl><dt><strong>__table__</strong> = Table('artist', MetaData(bind=None), Column('art...6), table=&lt;artist&gt;, nullable=False), schema=None)</dl>
 
 <dl><dt><strong>__tablename__</strong> = 'artist'</dl>
 
 <hr>
 Methods inherited from flask_sqlalchemy.Model:<br>
-<dl><dt><strong>query</strong></dt>
-</dl>
-
+<strong>query</strong> = &lt;flask_sqlalchemy.BaseQuery object&gt;
 <hr>
 Data and other attributes inherited from flask_sqlalchemy.Model:<br>
 <dl><dt><strong>metadata</strong> = MetaData(bind=None)</dl>
@@ -112,48 +120,53 @@ standard&nbsp;query&nbsp;as&nbsp;well.</tt></dl>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Card-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
-&nbsp;<br>
-Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
-values&nbsp;in&nbsp;``kwargs``.<br>
-&nbsp;<br>
-Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
-attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
-for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt></dd></dl>
+<dl><dt><a name="Card-__init__"><strong>__init__</strong></a>(self, cost, cmc, text, types, name, card_id, formats, subtypes, colors, power, toughness)</dt></dl>
 
 <dl><dt><a name="Card-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
 
 <hr>
 Data descriptors defined here:<br>
-<dl><dt><strong>cnc</strong></dt>
+<dl><dt><strong>card_id</strong></dt>
+</dl>
+<dl><dt><strong>cmc</strong></dt>
 </dl>
 <dl><dt><strong>colors</strong></dt>
 </dl>
 <dl><dt><strong>cost</strong></dt>
 </dl>
-<dl><dt><strong>editions_FK</strong></dt>
+<dl><dt><strong>formats</strong></dt>
 </dl>
-<dl><dt><strong>id</strong></dt>
+<dl><dt><strong>multiverse_ids</strong></dt>
 </dl>
 <dl><dt><strong>name</strong></dt>
 </dl>
-<dl><dt><strong>store_url</strong></dt>
+<dl><dt><strong>power</strong></dt>
 </dl>
-<dl><dt><strong>url</strong></dt>
+<dl><dt><strong>serialize_full</strong></dt>
+</dl>
+<dl><dt><strong>serialize_multiverse_ids</strong></dt>
+</dl>
+<dl><dt><strong>serialize_part</strong></dt>
+</dl>
+<dl><dt><strong>subtypes</strong></dt>
+</dl>
+<dl><dt><strong>text</strong></dt>
+</dl>
+<dl><dt><strong>toughness</strong></dt>
+</dl>
+<dl><dt><strong>types</strong></dt>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1040d24d0; Card&gt;</dl>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x2b5df0076e90; Card&gt;</dl>
 
-<dl><dt><strong>__table__</strong> = Table('card', MetaData(bind=None), Column('id', ...er(), table=&lt;card&gt;, nullable=False), schema=None)</dl>
+<dl><dt><strong>__table__</strong> = Table('card', MetaData(bind=None), Column('card_..., String(length=256), table=&lt;card&gt;), schema=None)</dl>
 
 <dl><dt><strong>__tablename__</strong> = 'card'</dl>
 
 <hr>
 Methods inherited from flask_sqlalchemy.Model:<br>
-<dl><dt><strong>query</strong></dt>
-</dl>
-
+<strong>query</strong> = &lt;flask_sqlalchemy.BaseQuery object&gt;
 <hr>
 Data and other attributes inherited from flask_sqlalchemy.Model:<br>
 <dl><dt><strong>metadata</strong> = MetaData(bind=None)</dl>
@@ -190,14 +203,7 @@ standard&nbsp;query&nbsp;as&nbsp;well.</tt></dl>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Edition-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
-&nbsp;<br>
-Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
-values&nbsp;in&nbsp;``kwargs``.<br>
-&nbsp;<br>
-Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
-attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
-for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt></dd></dl>
+<dl><dt><a name="Edition-__init__"><strong>__init__</strong></a>(self, multiverse_id, artist_id, set_id, card_id, image_url, flavor, rarity, number, layout)</dt></dl>
 
 <dl><dt><a name="Edition-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
 
@@ -211,7 +217,19 @@ Data descriptors defined here:<br>
 </dl>
 <dl><dt><strong>card_id</strong></dt>
 </dl>
+<dl><dt><strong>flavor</strong></dt>
+</dl>
+<dl><dt><strong>image_url</strong></dt>
+</dl>
+<dl><dt><strong>layout</strong></dt>
+</dl>
 <dl><dt><strong>multiverse_id</strong></dt>
+</dl>
+<dl><dt><strong>number</strong></dt>
+</dl>
+<dl><dt><strong>rarity</strong></dt>
+</dl>
+<dl><dt><strong>serialize</strong></dt>
 </dl>
 <dl><dt><strong>set</strong></dt>
 </dl>
@@ -219,17 +237,15 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1040d2a10; Edition&gt;</dl>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x2b5df00aa690; Edition&gt;</dl>
 
-<dl><dt><strong>__table__</strong> = Table('edition', MetaData(bind=None), Column('mu...ignKey('card.id'), table=&lt;edition&gt;), schema=None)</dl>
+<dl><dt><strong>__table__</strong> = Table('edition', MetaData(bind=None), Column('mu...), table=&lt;edition&gt;, nullable=False), schema=None)</dl>
 
 <dl><dt><strong>__tablename__</strong> = 'edition'</dl>
 
 <hr>
 Methods inherited from flask_sqlalchemy.Model:<br>
-<dl><dt><strong>query</strong></dt>
-</dl>
-
+<strong>query</strong> = &lt;flask_sqlalchemy.BaseQuery object&gt;
 <hr>
 Data and other attributes inherited from flask_sqlalchemy.Model:<br>
 <dl><dt><strong>metadata</strong> = MetaData(bind=None)</dl>
@@ -266,38 +282,35 @@ standard&nbsp;query&nbsp;as&nbsp;well.</tt></dl>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Set-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
-&nbsp;<br>
-Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
-values&nbsp;in&nbsp;``kwargs``.<br>
-&nbsp;<br>
-Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
-attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
-for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt></dd></dl>
+<dl><dt><a name="Set-__init__"><strong>__init__</strong></a>(self, set_id, name)</dt></dl>
 
 <dl><dt><a name="Set-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
 
 <hr>
 Data descriptors defined here:<br>
-<dl><dt><strong>editions_FK</strong></dt>
-</dl>
-<dl><dt><strong>id</strong></dt>
+<dl><dt><strong>multiverse_ids</strong></dt>
 </dl>
 <dl><dt><strong>name</strong></dt>
 </dl>
+<dl><dt><strong>serialize_full</strong></dt>
+</dl>
+<dl><dt><strong>serialize_multiverse_ids</strong></dt>
+</dl>
+<dl><dt><strong>serialize_part</strong></dt>
+</dl>
+<dl><dt><strong>set_id</strong></dt>
+</dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x104094e50; Set&gt;</dl>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x2b5df0076650; Set&gt;</dl>
 
-<dl><dt><strong>__table__</strong> = Table('set', MetaData(bind=None), Column('id', I...=256), table=&lt;set&gt;, nullable=False), schema=None)</dl>
+<dl><dt><strong>__table__</strong> = Table('set', MetaData(bind=None), Column('set_id...=256), table=&lt;set&gt;, nullable=False), schema=None)</dl>
 
 <dl><dt><strong>__tablename__</strong> = 'set'</dl>
 
 <hr>
 Methods inherited from flask_sqlalchemy.Model:<br>
-<dl><dt><strong>query</strong></dt>
-</dl>
-
+<strong>query</strong> = &lt;flask_sqlalchemy.BaseQuery object&gt;
 <hr>
 Data and other attributes inherited from flask_sqlalchemy.Model:<br>
 <dl><dt><strong>metadata</strong> = MetaData(bind=None)</dl>
@@ -321,10 +334,24 @@ standard&nbsp;query&nbsp;as&nbsp;well.</tt></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-serialize_artist_table_data"><strong>serialize_artist_table_data</strong></a>()</dt></dl>
+ <dl><dt><a name="-serialize_card_table_data"><strong>serialize_card_table_data</strong></a>()</dt></dl>
+ <dl><dt><a name="-serialize_set_table_data"><strong>serialize_set_table_data</strong></a>()</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>db</strong> = &lt;SQLAlchemy engine=None&gt;</td></tr></table>
+<td width="100%"><strong>SQLALCHEMY_DATABASE_URI</strong> = 'mysql+pymysql://root:@127.0.0.1/guestbook?charset=utf8'<br>
+<strong>app</strong> = &lt;Flask 'models'&gt;<br>
+<strong>db</strong> = &lt;SQLAlchemy engine='mysql+pymysql://root:@127.0.0.1/guestbook?charset=utf8'&gt;<br>
+<strong>logger</strong> = &lt;logging.Logger object&gt;<br>
+<strong>manager</strong> = &lt;flask_script.Manager object&gt;</td></tr></table>
 </body></html>

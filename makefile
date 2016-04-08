@@ -52,7 +52,7 @@ IDB2-tests:
 	git clone https://github.com/dark-ritual/cs373-idb.git
 
 models.html: models.py
-	pydoc3 -w models
+	pydoc -w models
 
 IDB2.log:
 	git log > IDB2.log
