@@ -1,3 +1,93 @@
+commit 744ae7990f337daacc45208ba9ec8488cfac6ac6
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 18:46:42 2016 -0500
+
+    added links to other instances
+
+commit 89738732f2b485a3c6b45072cb9f491c07ef2c92
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 18:29:50 2016 -0500
+
+    card instance links added and iamges
+
+commit 2b2aecd9fafaffa5bc4501173687f68bfbb60027
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 17:54:20 2016 -0500
+
+    updated bout page
+
+commit d132d2b460cf98d2e48fb3f65ccbf7850059922f
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 17:43:28 2016 -0500
+
+    sets are now linkable
+
+commit 06bcc11fd3b06767633137db19acf60360297cab
+Merge: be38c0a 427044e
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 17:09:04 2016 -0500
+
+    merge
+
+commit be38c0ae986e057e1b04b4395415efa1b17b02d3
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 16:47:11 2016 -0500
+
+    sets in cards.html link to sets.html
+
+commit 427044e5d8df64e0fc35df4073ab25508bf0ebba
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Fri Apr 8 16:46:31 2016 -0500
+
+    Query fix
+
+commit 40a8d4303dfea2abec3d065b496420c8b7e1dc5d
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 16:17:29 2016 -0500
+
+    Revert "Merge branch 'master' into dev"
+    
+    This reverts commit 1fcb768ca8f84e990a50ba41192aa2a949f2f60d, reversing
+    changes made to ff5298782ce65c4ad675cf87ed4b2621859938cf.
+
+commit 1fcb768ca8f84e990a50ba41192aa2a949f2f60d
+Merge: ff52987 0c7189a
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 15:52:03 2016 -0500
+
+    Merge branch 'master' into dev
+
+commit ff5298782ce65c4ad675cf87ed4b2621859938cf
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 15:49:59 2016 -0500
+
+    attempting to link artists
+
+commit 0c7189aae54f1711403304bfacb8ab0fb024de2d
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Fri Apr 8 15:47:10 2016 -0500
+
+    Include set_ids in card table query
+
+commit e51743b611548fc0e45acff579cb67d7f6f65a61
+Merge: 58173e6 5430274
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 23:06:16 2016 -0500
+
+    Merge branch 'master' of https://github.com/dark-ritual/cs373-idb
+
+commit 58173e60968461c61d69438d4e68b92eef00b663
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 23:05:21 2016 -0500
+
+    Changed scrape to get every 20th page so gunicorn doesn't timeout
+
+commit 543027442205b7c80095ee976f476c54efef322c
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 22:14:06 2016 -0500
+
+    updated log
+
 commit 013eb5d9b5e1b31b29357db095a79e701e36f4e0
 Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
 Date:   Thu Apr 7 22:11:28 2016 -0500
