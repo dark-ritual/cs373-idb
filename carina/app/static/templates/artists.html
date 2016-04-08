@@ -16,12 +16,24 @@
     
     <tbody>
       <tr ng-repeat="artist in artists | orderBy:sortType:sortReverse">
-        <td>{{ artist.name }}</td>
-        <td>{{ artist.total }}</td>
-        <td>{{ artist.commons }}</td>
-        <td>{{ artist.uncommons }}</td>
-        <td>{{ artist.rares }}</td>
-        <td>{{ artist.mythics }}</td>
+        <td>
+          <a href="#/artists/{{ artist.artist_id }}">{{ artist.name }}
+        </td>
+        <td>
+          <p>{{ artist.total }}</p>
+        </td>
+        <td>
+          <p>{{ artist.commons }}</p>
+        </td>
+        <td>
+          <p>{{ artist.uncommons }}</p>
+        </td>
+        <td>
+          <p>{{ artist.rares }}</p>
+        </td>
+        <td>
+          <p>{{ artist.mythics }}</p>
+        </td>
       </tr>
     </tbody>
   </table>

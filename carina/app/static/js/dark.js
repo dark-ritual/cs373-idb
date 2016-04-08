@@ -3,7 +3,7 @@
 /* App Module */
 
 var dark = angular.module('dark', [ 'ngRoute', 'darkControllers',
-		'cardsServices', 'setsServices', 'artistsServices', 'cardinstanceServices' ]);
+		'cardsServices', 'setsServices', 'artistsServices', 'cardinstanceServices', 'artistinstanceServices' ]);
 
 dark.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/cards', {
@@ -12,6 +12,9 @@ dark.config([ '$routeProvider', function($routeProvider) {
 	}).when('/cards/:card_id', {
 		templateUrl : '../static/templates/cardinstance.html',
 		controller : 'CardInstanceController'
+	}).when('/artists/:artist_id', {
+		templateUrl : '../static/templates/artistinstance.html',
+		controller : 'ArtistInstanceController'
 	}).when('/sets', {
 		templateUrl : '../static/templates/sets.html',
 		controller : 'SetsController'

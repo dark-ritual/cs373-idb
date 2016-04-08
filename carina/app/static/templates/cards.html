@@ -20,7 +20,7 @@
         	<a href="#/cards/{{ card.card_id }}">{{ card.name }}
         </td>
         <td>
-        	<p ng-repeat="artist in splitString(card.artists, ',')"><{{ artist }}</p>
+        	<p ng-repeat="artist in splitString(card.artists, ',')">{{ artist }}</p>
         </td>
         <td>
         	<p ng-repeat="set in splitString(card.sets, ',')">{{ set }}</p>

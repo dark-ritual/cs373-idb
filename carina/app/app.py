@@ -227,6 +227,7 @@ def serialize_card_table_data():
 
 def serialize_artist_table_data():
     sql = '''select     a.name,
+                        a.artist_id,
                         count(*) as total,
                         cast(sum(case when e.rarity='common' then 1 else 0 end) as signed) as commons,
                         cast(sum(case when e.rarity='uncommon' then 1 else 0 end) as signed) as uncommons,
@@ -240,7 +241,7 @@ def serialize_artist_table_data():
     # convert the list of dicts to an array of objects
     ret = []
     for i in db.engine.execute(sql).fetchall():
-        ret.append({'name':i['name'], 'total':i['total'], 'commons':i['commons'], 'uncommons':i['uncommons'], 'rares':i['rares'], 'mythics':i['mythics']})
+        ret.append({'name':i['name'], 'artist_id':i['artist_id'], 'total':i['total'], 'commons':i['commons'], 'uncommons':i['uncommons'], 'rares':i['rares'], 'mythics':i['mythics']})
     return ret
 
 def serialize_set_table_data():
