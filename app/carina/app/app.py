@@ -209,7 +209,7 @@ def serialize_card_table_data():
                 GROUP_CONCAT(DISTINCT a.name SEPARATOR ', ') AS artists,
                 GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR ', ') AS artist_ids,
                 GROUP_CONCAT(DISTINCT s.name  SEPARATOR ', ') AS sets,
-                GROUP_CONCAT(DISTINCT e.set_id SEPARATOR ', ') AS set_ids
+                GROUP_CONCAT(DISTINCT s.set_id SEPARATOR ', ') AS set_ids
             FROM
                 card AS c
             LEFT JOIN
@@ -226,11 +226,15 @@ def serialize_card_table_data():
     for i in db.engine.execute(sql).fetchall():
         artists=[]
         artist_ids=i['artist_ids'].split(',')
-        key=0
-        for j in i['artists'].split(','):
-            artists.append({'artist_id':artist_ids[key], 'name':j})
-            key=key+1
-        ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'], 'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':i['sets'], 'set_ids':i['set_ids']})
+        for s, j in zip(artist_ids, i['artists'].split(',')):
+            artists.append({'artist_id':s, 'name':j})
+
+        sets=[]
+        set_ids=i['set_ids'].split(',')
+        for s, j in zip(set_ids, i['sets'].split(',')):
+            sets.append({'set_id':s.strip(), 'name':j})
+
+        ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'], 'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':sets})
     return ret
 
 def serialize_artist_table_data():
