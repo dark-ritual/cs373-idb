@@ -17,10 +17,10 @@
     <tbody>
       <tr ng-repeat="card in cards | orderBy:sortType:sortReverse">
         <td>
-        	<a href="#/cards/{{ card.card_id }}">{{ card.name }}
+        	<a href="#/cards/{{ card.card_id }}">{{ card.name }}</a>
         </td>
         <td>
-        	<p ng-repeat="artist in splitString(card.artists, ',')"><{{ artist }}</p>
+        	<p ng-repeat="artist in card.artists"><a href="#/artists/{{ artist.artist_id }}">{{ artist.name }}</a></p>
         </td>
         <td>
         	<p ng-repeat="set in splitString(card.sets, ',')">{{ set }}</p>
@@ -32,7 +32,7 @@
         	<p class="capitalize" ng-repeat="rarity in splitString(card.rarities, ',')">{{ rarity }}</p>
         </td>
         <td>
-        	<p ng-repeat="cost in splitString(card.cost, '}') track by $index">{{ cost }}</p>
+        	<div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
         </td>
       </tr>
     </tbody>

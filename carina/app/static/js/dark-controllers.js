@@ -50,8 +50,39 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	    return array;
 	}
 	
-	$scope.splitString = function(s, char, trim){
+	$scope.splitString = function(s, char){
 		var array = s.split(char);
+		return array;
+	}
+	
+	$scope.convertCost = function(costString){
+		costString = costString.replace(new RegExp("{","g"), '');
+		var array = costString.split("}");
+		for(var i=0;i<array.length;i++) {
+			if(array[i]=="U"){
+				array[i]="mtg-blue";
+			} else if(array[i]=="B"){
+				array[i]="mtg-black";
+			} else if(array[i]=="W"){
+				array[i]="mtg-white";
+			} else if(array[i]=="R"){
+				array[i]="mtg-red";
+			} else if(array[i]=="G"){
+				array[i]="mtg-green";
+			} else if(array[i]=="W/U") {
+				array[i]="mtg-white-blue";
+			} else {
+				if(array[i].length > 0) {
+					if(array[i].indexOf("/") > -1) {
+						if(array[i]=="2/U") {
+							array[i]="mtg-any2-blue";
+						}  
+					} else {
+						array[i]="mtg-any"+array[i];
+					}
+				}
+			}
+		}
 		return array;
 	}
 	
