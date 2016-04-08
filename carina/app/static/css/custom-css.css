@@ -543,3 +543,14 @@ hbar {
     float: none;
     margin: 0 auto;
 }
+
+.pagination>li>a, .pagination>li>span {
+	background-color: #303030;
+	border-color: #000;
+}
+
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+	background-color: #303030;
+	border-color: #000;
+	color: #fff;
+}

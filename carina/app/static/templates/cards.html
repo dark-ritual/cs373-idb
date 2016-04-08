@@ -15,7 +15,7 @@
     </thead>
     
     <tbody>
-      <tr ng-repeat="card in cards | orderBy:sortType:sortReverse">
+      <tr dir-paginate="card in cards | orderBy:sortType:sortReverse | itemsPerPage:10">
         <td>
         	<a href="#/cards/{{ card.card_id }}">{{ card.name }}</a>
         </td>
@@ -37,4 +37,11 @@
       </tr>
     </tbody>
   </table>
+  <center>
+  	<dir-pagination-controls
+       max-size="5"
+       direction-links="true"
+       boundary-links="true" >
+  	</dir-pagination-controls>
+  </center>
 </div>
