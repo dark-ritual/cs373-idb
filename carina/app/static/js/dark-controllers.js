@@ -39,7 +39,7 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	$scope.sortType     = 'card'; // set the default sort type
 	$scope.sortReverse  = false;
 	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Edition(s)", sortType:"editions"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
-	
+
 	$scope.range = function(start, end)
 	{
 	    var array = new Array();
@@ -49,12 +49,12 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	    }
 	    return array;
 	}
-	
+
 	$scope.splitString = function(s, char, trim){
 		var array = s.split(char);
 		return array;
 	}
-	
+
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
 		if($scope.sortType == $scope.lastSortType) {
@@ -63,18 +63,18 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 			$scope.lastSortType = $scope.sortType;
 		}
 	}
-	
+
 	$scope.count = function(a){
 		return a.length;
 	}
-	
+
 	$scope.trim = function(a){
 		return s[1];
 	}
-	
+
 	// create the list of entries
 	$scope.cards = Cards.query();
-	                
+
 	/*for(card in $scope.cards) {
 		currentCost = card.cost;
 		// TODO: parse currentCost to get a color "type" and a numerical "value" for every color in the string
@@ -92,7 +92,7 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	$scope.sortType     = 'set'; // set the default sort type
 	$scope.sortReverse  = false;
 	$scope.tableHeaders = [{label: "Set", sortType:"name"}, {label: "Common", sortType:"commons"}, {label: "Uncommon", sortType:"uncommons"}, {label: "Rare", sortType:"rares"}, {label: "Mythic", sortType:"mythics"}, {label: "Total", sortType:"total"}];
-	
+
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
 		if($scope.sortType == $scope.lastSortType) {
@@ -101,12 +101,12 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 			$scope.lastSortType = $scope.sortType;
 		}
 	}
-	
+
 	$scope.splitString = function(string){
 		var array = string.split(',');
 		return array;
 	}
-	
+
 	// create the list of entries
 	$scope.sets = Sets.query();
 } ]);
@@ -120,7 +120,7 @@ dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Arti
 	$scope.sortType     = 'artist'; // set the default sort type
 	$scope.sortReverse  = false;
 	$scope.tableHeaders = [{label: "Artist", sortType:"name"}, {label: "Total", sortType:"total"}, {label: "Common", sortType:"commons"}, {label: "Uncommon", sortType:"uncommons"}, {label: "Rare", sortType:"rares"}, {label: "Mythic", sortType:"mythics"}];
-	
+
 	$scope.range = function(start, end)
 	{
 	    var array = new Array();
@@ -130,12 +130,12 @@ dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Arti
 	    }
 	    return array;
 	}
-	
+
 	$scope.splitString = function(s, char, trim){
 		var array = s.split(char);
 		return array;
 	}
-	
+
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
 		if($scope.sortType == $scope.lastSortType) {
@@ -144,15 +144,15 @@ dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Arti
 			$scope.lastSortType = $scope.sortType;
 		}
 	}
-	
+
 	$scope.count = function(a){
 		return a.length;
 	}
-	
+
 	$scope.trim = function(a){
 		return s[1];
 	}
-	
+
 	// create the list of entries
 	$scope.artists = Artists.query();
 } ]);
@@ -174,7 +174,7 @@ dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstan
 dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistInstance', function($scope, $routeParams, ArtistInstance) {
 
 	$scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Sets", sortType:"sets"}];
-	
+
 	$scope.range = function(start, end)
 	{
 	    var array = new Array();
@@ -184,7 +184,7 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 	    }
 	    return array;
 	}
-	
+
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
 		if($scope.sortType == $scope.lastSortType) {
@@ -193,7 +193,7 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 			$scope.lastSortType = $scope.sortType;
 		}
 	}
-	
+
 	// create the list of entries
 	$scope.artistinstances = ArtistInstance.query($routeParams);
 
@@ -203,15 +203,13 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 } ]);
 
 //#######################################################
-//#############Sets Instance Controller##################
+//#############Set Instance Controller##################
 //#######################################################
 
-dark.controller('SetsInstanceController', ['$scope', function($scope, SetsInstance) {
-	$scope.lastSortType = 'sets';
-	$scope.sortType     = 'sets'; // set the default sort type
-	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Sets", sortType:"sets"}];
-	
+dark.controller('SetInstanceController', ['$scope', function($scope, SetsInstance) {
+
+    $scope.tableHeaders = [{label: "Card"}, {label: "Flavor Text"}, {label: "Artist"}];
+
 	$scope.range = function(start, end)
 	{
 	    var array = new Array();
@@ -221,7 +219,7 @@ dark.controller('SetsInstanceController', ['$scope', function($scope, SetsInstan
 	    }
 	    return array;
 	}
-	
+
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
 		if($scope.sortType == $scope.lastSortType) {
@@ -230,14 +228,16 @@ dark.controller('SetsInstanceController', ['$scope', function($scope, SetsInstan
 			$scope.lastSortType = $scope.sortType;
 		}
 	}
-	
+
 	// create the list of entries
-	$scope.setsinstance = [
+    $scope.setinstances = SetInstance.query($routeParams)
+/*	$scope.setsinstance = [
 	                  { image: "../static/images/imagename", name: "Admonition Angel", artist:"Steve Argyle", type:"Creature - Flying", text:"Landfall — Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.\nWhen Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.", sets: "WorldWake"},
 	                  { image: "../static/images/imagename", name: "Angelic Arbiter", artist: "Text to fill in...", sets: "Magic: The Gathering-Commander"},
 	    ];
+*/
 
-	$scope.set = "Worldwake";
+	//$scope.set = "Worldwake";
 } ]);
 
 //###############################################
@@ -254,6 +254,6 @@ darkControllers.controller('TestsController', function($scope, $http, $location)
 			txt.innerHTML = response.data;
 			var text = txt.value;
 			$scope.result = txt.value;//.substring(2,text.length - 1).replace(/\\n/g, "<br>");
-	   }) 
+	   })
 	}
 } );
