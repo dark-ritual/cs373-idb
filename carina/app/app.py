@@ -7,6 +7,7 @@ from getpass import getuser
 from flask import Flask, render_template, redirect, url_for
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
+from array import array
 
 ##################################################################
 ######################## SETUP ###################################
@@ -198,6 +199,39 @@ class Edition(db.Model):
                     image_url=self.image_url, flavor=self.flavor,
                     rarity=self.rarity, number=self.number, layout=self.layout)
 
+def serialize_card_table_data():
+    sql = '''SELECT
+                c.name,
+                c.card_id,
+                c.cost,
+                GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR ', ') AS editions,
+                GROUP_CONCAT(DISTINCT e.rarity SEPARATOR ', ') AS rarities,
+                GROUP_CONCAT(DISTINCT a.name SEPARATOR ', ') AS artists,
+                GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR ', ') AS artist_ids,
+                GROUP_CONCAT(DISTINCT s.name  SEPARATOR ', ') AS sets
+            FROM
+                card AS c
+            LEFT JOIN
+                edition AS e ON e.card_id = c.card_id
+            LEFT JOIN
+                artist AS a ON a.artist_id = e.artist_id
+            LEFT JOIN
+                `set` AS s ON s.set_id = e.set_id
+            GROUP BY
+                c.name
+    '''
+    # convert the list of dicts to an array of objects
+    ret = []
+    for i in db.engine.execute(sql).fetchall():
+        artists=[]
+        artist_ids=i['artist_ids'].split(',')
+        key=0
+        for j in i['artists'].split(','):
+            artists.append({'artist_id':artist_ids[key], 'name':j})
+            key=key+1
+        ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'], 'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':i['sets']})
+    return ret
+
 def serialize_artist_table_data():
     sql = '''select     a.name,
                         count(*) as total,
@@ -210,7 +244,11 @@ def serialize_artist_table_data():
              on         a.artist_id=e.artist_id
              group by   a.artist_id
           '''
-    return list(db.engine.execute(sql))
+    # convert the list of dicts to an array of objects
+    ret = []
+    for i in db.engine.execute(sql).fetchall():
+        ret.append({'name':i['name'], 'total':i['total'], 'commons':i['commons'], 'uncommons':i['uncommons'], 'rares':i['rares'], 'mythics':i['mythics']})
+    return ret
 
 def serialize_set_table_data():
     sql = '''select     s.name,
@@ -224,7 +262,11 @@ def serialize_set_table_data():
              on         s.set_id=e.set_id
              group by   s.set_id
           '''
-    return list(db.engine.execute(sql))
+    # convert the list of dicts to an array of objects
+    ret = []
+    for i in db.engine.execute(sql).fetchall():
+        ret.append({'name':i['name'], 'total':i['total'], 'commons':i['commons'], 'uncommons':i['uncommons'], 'rares':i['rares'], 'mythics':i['mythics']})
+    return ret
 
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################
@@ -233,11 +275,11 @@ def serialize_set_table_data():
 ######################
 # Routes for Home page (NOTE:INDEX IS THE ONLY TEMPLATE SERVED BY SERVER, ALL OTHERS ARE LOADED BY ANGULAR!)
 ######################
-@app.route('/index.html', methods=['GET', 'POST'])
+@app.route('/index.html', methods=['GET'])
 def indexHTML(): # pragma: no cover
     return redirect(url_for('index'))
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index(): # pragma: no cover
     logger.debug("index")
     return render_template('index.html', cards=Card.query.all())
@@ -251,6 +293,10 @@ def artistsAPI(): # pragma: no cover
     artists = [artist.serialize_part for artist in Artist.query.all()]
     return json.dumps(artists)
 
+@app.route('/api/artistTable', methods=['GET'])
+def artistTable():
+    return json.dumps(serialize_artist_table_data())
+
 @app.route('/api/artists/<path:artist_id>', methods=['GET', 'POST'])
 def artistAPI(artist_id): # pragma: no cover
     logger.debug("artist")
@@ -263,6 +309,10 @@ def setsAPI(): # pragma: no cover
     sets = [card_set.serialize_part for card_set in Set.query.all()]
     return json.dumps(sets)
 
+@app.route('/api/setTable', methods=['GET'])
+def setTable():
+    return json.dumps(serialize_set_table_data())
+
 @app.route('/api/sets/<path:set_id>',  methods=['GET', 'POST'])
 def setAPI(set_id): # pragma: no cover
     logger.debug("card_set")
@@ -274,6 +324,10 @@ def cardsAPI(): # pragma: no cover
     logger.debug("cards")
     cards = [card.serialize_full for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
     return json.dumps(cards)
+
+@app.route('/api/cardsTable', methods=['GET'])
+def cardsTable():
+    return json.dumps(serialize_card_table_data())
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET', 'POST'])
 def cardAPI(card_id): # pragma: no cover

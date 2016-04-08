@@ -15,18 +15,33 @@
     </thead>
     
     <tbody>
-      <tr ng-repeat="card in cards | orderBy:sortType:sortReverse">
-        <td>{{ card.card }}</td>
-        <td>{{ card.artist }}</td>
-        <td>{{ card.set }}</td>
-        <td>{{ card.type }}</td>
-        <td>{{ card.rarity }}</td>
+      <tr dir-paginate="card in cards | orderBy:sortType:sortReverse | itemsPerPage:10">
         <td>
-        <span ng-repeat="color in card.cost">
-        		<div ng-repeat="i in range(0,color.value)" class="mtg-{{color.type}} mtg-standard"></div>
-        </span>
+        	<a href="#/cards/{{ card.card_id }}">{{ card.name }}</a>
+        </td>
+        <td>
+        	<p ng-repeat="artist in card.artists"><a href="#/artists/{{ artist.artist_id }}">{{ artist.name }}</a></p>
+        </td>
+        <td>
+        	<p ng-repeat="set in splitString(card.sets, ',')">{{ set }}</p>
+        </td>
+        <td>
+        	{{ count(splitString(card.editions)) }}
+        </td>
+        <td>
+        	<p class="capitalize" ng-repeat="rarity in splitString(card.rarities, ',')">{{ rarity }}</p>
+        </td>
+        <td>
+        	<div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
         </td>
       </tr>
     </tbody>
   </table>
+  <center>
+  	<dir-pagination-controls
+       max-size="5"
+       direction-links="true"
+       boundary-links="true" >
+  	</dir-pagination-controls>
+  </center>
 </div>

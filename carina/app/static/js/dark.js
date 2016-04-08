@@ -3,10 +3,13 @@
 /* App Module */
 
 var dark = angular.module('dark', [ 'ngRoute', 'darkControllers',
-		'cardsServices', 'setsServices', 'artistsServices', 'cardinstanceServices' ]);
+		'cardsServices', 'setsServices', 'artistsServices', 'cardinstanceServices','angularUtils.directives.dirPagination' ]);
 
 dark.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/cards', {
+		templateUrl : '../static/templates/cards.html',
+		controller : 'CardsController'
+	}).when('/cards/:card_id', {
 		templateUrl : '../static/templates/cards.html',
 		controller : 'CardsController'
 	}).when('/sets', {

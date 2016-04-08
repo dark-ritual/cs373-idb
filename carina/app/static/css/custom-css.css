@@ -21,6 +21,10 @@ a{
     text-decoration: none;
     background-color: transparent;
 }
+
+p.capitalize{
+	text-transform: capitalize;
+}
 	
 .navbar-default {
 	background-color: #000000;
@@ -541,12 +545,13 @@ hbar {
     margin: 0 auto;
 }
 
-#roundedbg-tests{
-    border-radius: 15px;
-    background: #FFFFFF ;
-    padding: 20px;
+.pagination>li>a, .pagination>li>span {
+	background-color: #303030;
+	border-color: #000;
 }
 
-p.big{
-	line-height: 1.2;
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+	background-color: #303030;
+	border-color: #000;
+	color: #fff;
 }
