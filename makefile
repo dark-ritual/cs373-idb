@@ -5,7 +5,7 @@ FILES :=                              	  \
     apiary.apib							  \
     IDB2.log                       	 	  \
     models.html                      	  \
-    qpp/models.py                        	  \
+    app/models.py                        	  \
     app/tests.py                        	  \
     UML.pdf
 
