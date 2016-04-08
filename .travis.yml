@@ -5,28 +5,36 @@ language: python
 python:
     - "3.4"
 
-sudo: false
+sudo: required
+
+services:
+    - mysql
 
 install:
     - pip install --upgrade pip
     - pip --version
     - pip install coverage
     - pip install flask-sqlalchemy
+    - pip install -r carina/app/requirements.txt
 
 before_script:
     - uname -a
     - printenv
     - pip list
+    - mysql -e 'create database guestbook;'
 
 script:
     - date
     - ls -al
-    - make IDB1-tests
+    - make IDB2-tests
     - ls -al
     - make models.html
     - ls -al
-    - make IDB1.log
+    - make IDB2.log
     - ls -al
 #    - make test
     - ls -al
-#	- make check
+    - make check
+
+notifications:
+    slack: sweprojectgroup:kf6stc2FL06Z0ra8zpQzLuvK

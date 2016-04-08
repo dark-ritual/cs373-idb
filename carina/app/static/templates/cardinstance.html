@@ -1,0 +1,54 @@
+<div class="container" ng-controller="CardInstanceController">
+
+  <div class="container" id="roundedbg-card">
+
+  	<div class="col-sm-6 center-block" style="width: 40%; max-width: 800px; table-layout: fixed;">
+  	  <img class="center-block" src="{{  cardinstance[0].multiverse_ids[0].image_url  }}" width="250px">
+  	</div>
+
+  	<div class="col-sm-6 center-block">
+  		<table class="table" id="no-borders-table">
+        <tbody>
+          <tr>
+            <td class="text-right" width="75px"><b>Name:</b></td>
+            <td width="150px">{{ cardinstance[0].name }}</td>
+          </tr>
+          <tr>
+            <td class="text-right"><b>Artist:</b></td>
+            <td>{{ cardinstance[0].multiverse_ids[0].artist_id }}</td>
+          </tr>
+          <tr>
+            <td class="text-right"><b>Sets:</b></td>
+            <td>{{ cardinstance[0].multiverse_ids[0].set_id }}</td>
+          </tr>
+          <tr>
+            <td class="text-right"><b>Type:</b></td>
+            <td>{{ cardinstance[0].types }}</td>
+          </tr>
+          <tr>
+            <td class="text-right"><b>Converted Mana Cost:</b></td>
+            <td>{{ cardinstance[0].cmc }}</td>
+          </tr>
+          <tr>
+            <td class="text-right"><b>Cost:</b></td>
+            <td> {{  cardinstance[0].cost  }}</td>
+          </tr>
+          <tr>
+            <td class="text-right"><b>Card Text:</b></td>
+            <td>{{ cardinstance[0].text }} </td>
+          </tr>
+          <tr>
+            <td class="text-right"><b>P/T:</b></td>
+            <td>{{ cardinstance[0].power }} / {{ cardinstance[0].toughness }}</td>
+          </tr>
+          <tr>
+            <td class="text-right"><b>Rarity:</b></td>
+            <td>{{ cardinstance[0].multiverse_ids[0].rarity }}</td>
+          </tr>
+        </tbody>
+      </table>
+  	</div>
+
+  </div>
+
+</div>

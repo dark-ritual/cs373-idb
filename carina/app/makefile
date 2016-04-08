@@ -1,7 +1,5 @@
 FILES :=                              	  \
-    .gitignore                            \
     .travis.yml                           \
-    makefile                              \
     apiary.apib							  \
     IDB2.log                       	 	  \
     models.html                      	  \
@@ -54,7 +52,7 @@ IDB2-tests:
 	git clone https://github.com/dark-ritual/cs373-idb.git
 
 models.html: models.py
-	pydoc -w models
+	pydoc3 -w models
 
 IDB2.log:
 	git log > IDB2.log

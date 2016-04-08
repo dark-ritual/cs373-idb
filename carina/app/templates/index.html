@@ -2,61 +2,61 @@
 <html lang="en-US">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Data: The Gathering</title>
-    
-    <!-- Bootstrap Stylesheet -->
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/css/custom-css.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Data: The Gathering</title>
+
+<!-- Bootstrap Stylesheet -->
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="../static/css/custom-css.css">
 </head>
 
+<body ng-app="dark">
+	<!-- Nav Bar -->
+	<nav ng-controller="ActiveNavBarController" class="navbar navbar-inverse navbar-fixed-top navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="./index.html"><img src="../static/images/logotransparent.png" alt="Data: The Gathering"></a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li ng-class="{ active: (isActive('') || isActive('/home'))}"><a href="#/home"><hbar>Home</hbar></a></li>
+					<li ng-class="{ active: isActive('/cards')}"><a href="#/cards"><hbar>Cards</hbar></a></li>
+					<li ng-class="{ active: isActive('/artists')}"><a href="#/artists"><hbar>Artists</hbar></a></li>
+					<li ng-class="{ active: isActive('/sets')}"><a href="#/sets"><hbar>Sets</hbar></a></li>
+					<li ng-class="{ active: isActive('/about')}"><a href="#/about"><hbar>About</hbar></a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
 
+	<!-- This is where Angular injects its templates -->
+	<div class="view-container">
+		<div ng-view class="view-frame"></div>
+	</div>
 
-<body>
-        <!-- Nav Bar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="./index.html"><img src="../static/images/logotransparent.png" alt="Data: The Gathering"></a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="./index.html">Home</a></li>
-            <li><a href="./cards.html">Cards</a></li>
-            <li><a href="./artists.html">Artists</a></li>
-            <li><a href="./sets.html">Sets</a></li>
-			<li><a href="./about.html">About</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    
-    <!-- Header -->
-    <div class="container-fluid bottom-margin">
-        <div class="row">
-            <img src="../static/images/header.jpg" class="img-responsive">
-        </div>
-    </div>
-	
-
-
-	<!-- Main Content -->
-	<div class="container container-extra" style="color:#FFFFFF">
-		<div class="row bottom-margin">
-			<span class="yelling-font">Welcome!</span> 
-			<p>The Dark Ritual presents: Data: The Gathering Database. Here, we have information regarding the cards, artists, and sets of MtG card game. Feel free to explore the website!
-		</div> <!-- /row -->
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../static/js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../static/js/bootstrap.min.js"></script>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="../static/js/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="../static/js/bootstrap.min.js"></script>
+	<!-- AngularJs Necessary -->
+	<script src="../static/js/angular.js"></script>
+	<script src="../static/js/angular-route.min.js"></script>
+	<script src="../static/js/angular-resource.min.js"></script>
+	<script src="../static/js/dirPagination.js"></script>
+	<!-- Our Angular Application -->
+	<script src="../static/js/dark.js"></script>
+	<script src="../static/js/dark-controllers.js"></script>
+	<script src="../static/js/dark-cards-services.js"></script>
+	<script src="../static/js/dark-artists-services.js"></script>
+	<script src="../static/js/dark-sets-services.js"></script>
+	<script src="../static/js/dark-cardinstance-services.js"></script>
+	<script src="../static/js/dark-artistinstance-services.js"></script>
+	<script src="../static/js/dark-setinstance-services.js"></script>
 </body>
 </html>

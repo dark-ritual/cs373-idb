@@ -2,6 +2,9 @@ __pycache__
 .coverage
 *.pyc
 *.tmp
+*.swp*
 *.bak
 *.nfs*
 *.DS_Store
+.project
+.pydevproject
