@@ -7,7 +7,7 @@ from carina.app import app
 #from carina.app.app import addSet
 from sqlalchemy import exc
 
-class MainTestCase(unittest.TestCase):
+class MainTestCase(unittest.TestCase): 
 
     @classmethod
     def setUpClass(cls):
