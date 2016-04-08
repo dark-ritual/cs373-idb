@@ -23,7 +23,6 @@
         	<p ng-repeat="artist in card.artists"><a href="#/artists/{{ artist.artist_id }}">{{ artist.name }}</a></p>
         </td>
         <td>
-          <p ng-repeat="set in card.sets"><a href="#/sets/{{ set.set_id }}">{{ set.name }}</a></p>
         	<p ng-repeat="set in splitString(card.sets, ',')"><a href="#/sets/{{ set.set_id }}">{{ set }}</a></p>
         </td>
         <td>
