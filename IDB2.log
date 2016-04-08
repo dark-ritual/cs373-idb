@@ -1,8 +1,33 @@
+commit 1c5853200380339276c94b53be9dd5b31f9adf51
+Merge: 2126b65 10b6ffd
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 21:59:51 2016 -0500
+
+    Merge branch 'master' of github.com:dark-ritual/cs373-idb
+
+commit 2126b65edde60be4469884dcb60a7b4a2a33b6e2
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 21:59:42 2016 -0500
+
+    Closed #42. Closed #34. Closed #33. Closed #27. Closed #26. Closed #21.
+
+commit 040b7060ee0773d8526c0cae89ef623b67a521bb
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 21:57:18 2016 -0500
+
+    reorganized folders
+
 commit ac6949d079b09d43622caad988b4575e77755e08
 Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
 Date:   Thu Apr 7 21:51:22 2016 -0500
 
     scrape updated
+
+commit 10b6ffd074a6cdcdf95427c9162b619cdd1f3c4f
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 7 21:49:46 2016 -0500
+
+    Update apiary.apib
 
 commit f410e0afaf87dd52f01c9e6f37b2f72c9cd3804b
 Merge: c3313ae c2419af
