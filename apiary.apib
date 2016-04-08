@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://api.darkritual.cards/
+HOST: http://darkritual.cards/api/
 
 # Data: The Gathering API
 
@@ -14,7 +14,7 @@ Data: The Gathering is a simple API allowing players to view cards, sets, and ar
         [
             {
                 "name": "Dark Ritual",
-                "id": "dark-ritual",
+                "card_id": "dark-ritual",
                 "url": "https://api.deckbrew.com/mtg/cards/dark-ritual",
                 "types": [
                     "instant"
@@ -30,19 +30,8 @@ Data: The Gathering is a simple API allowing players to view cards, sets, and ar
                     "legacy": "legal",
                     "vintage": "legal"
                 },
-                "editions": [
-                    {
-                        "multiverse_id": 1149,
-                        "number": "",
-                        "set": "Revised Edition",
-                        "set_id": "3ED",
-                        "rarity": "common",
-                        "artist": "Sandra Everingham",
-                        "artist_id": "sandra-everingham",
-                        "layout": "normal"
-                    },
-                    ...
-                ]
+                "power": "",
+                "toughness": ""
             },
             ...
         ]
@@ -70,15 +59,18 @@ Data: The Gathering is a simple API allowing players to view cards, sets, and ar
                 "legacy": "legal",
                 "vintage": "legal"
             },
-            "editions": [
+            "power": "",
+            "toughness": ""
+            "multiverse_ids": [
                 {
                     "multiverse_id": 1149,
-                    "number": "",
-                    "set": "Revised Edition",
-                    "set_id": "3ED",
-                    "rarity": "common",
-                    "artist": "Sandra Everingham",
                     "artist_id": "sandra-everingham",
+                    "set_id": "3ED",
+                    "card_id": "dark-ritual",
+                    "image_url": "https://image.deckbrew.com/mtg/multiverseid/1149.jpg"
+                    "rarity": "common",
+                    "flavor": "",
+                    "number": "",
                     "layout": "normal"
                 },
                 ...
@@ -92,15 +84,14 @@ Data: The Gathering is a simple API allowing players to view cards, sets, and ar
 + Response 200 (application/json)
 
         {
-            "name": "Dark Ritual",
-            "id": "dark-ritual",
             "multiverse_id": 1149,
-            "number": "",
-            "set": "Revised Edition",
-            "set_id": "3ED",
-            "rarity": "common",
-            "artist": "Sandra Everingham",
             "artist_id": "sandra-everingham",
+            "set_id": "3ED",
+            "card_id": "dark-ritual",
+            "image_url": "https://image.deckbrew.com/mtg/multiverseid/1149.jpg"
+            "rarity": "common",
+            "flavor": "",
+            "number": "",
             "layout": "normal"
         }
             
@@ -126,15 +117,18 @@ Data: The Gathering is a simple API allowing players to view cards, sets, and ar
 + Response 200 (application/json)
 
         {
-            [
+            "set_id": "3ED"
+            "name": "Revised Edition"
+            "multiverse_ids": [
                 {
-                    "name": "Dark Ritual",
-                    "id": "dark-ritual",
                     "multiverse_id": 1149,
-                    "number": "",
-                    "rarity": "common",
-                    "artist": "Sandra Everingham",
                     "artist_id": "sandra-everingham",
+                    "set_id": "3ED",
+                    "card_id": "dark-ritual",
+                    "image_url": "https://image.deckbrew.com/mtg/multiverseid/1149.jpg"
+                    "rarity": "common",
+                    "flavor": "",
+                    "number": "",
                     "layout": "normal"
                 },
                 ...
@@ -149,8 +143,9 @@ Data: The Gathering is a simple API allowing players to view cards, sets, and ar
 
         [
             {
-                "artist": "Sandra Everingham",
-                "artist_id": "sandra-everingham"
+                
+                "artist_id": "sandra-everingham",
+                "artist": "Sandra Everingham"
             },
             ...
         ]
@@ -162,17 +157,18 @@ Data: The Gathering is a simple API allowing players to view cards, sets, and ar
 + Response 200 (application/json)
 
         {
-            "artist": "Sandra Everingham",
             "artist_id": "sandra-everingham",
-            "editions": [
+            "artist": "Sandra Everingham",
+            "multiverse_ids": [
                 {
-                    "name": "Dark Ritual",
-                    "id": "dark-ritual",
                     "multiverse_id": 1149,
-                    "number": "",
-                    "set": "Revised Edition",
+                    "artist_id": "sandra-everingham",
                     "set_id": "3ED",
+                    "card_id": "dark-ritual",
+                    "image_url": "https://image.deckbrew.com/mtg/multiverseid/1149.jpg"
                     "rarity": "common",
+                    "flavor": "",
+                    "number": "",
                     "layout": "normal"
                 },
                 ...
