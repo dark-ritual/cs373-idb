@@ -31,7 +31,10 @@
           </tr>
           <tr>
             <td class="text-right"><b>Cost:</b></td>
-            <td> {{  cardinstance[0].cost  }}</td>
+            <td> 
+              {{  cardinstance[0].cost  }}
+              <div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
+            </td>
           </tr>
           <tr>
             <td class="text-right"><b>Card Text:</b></td>
