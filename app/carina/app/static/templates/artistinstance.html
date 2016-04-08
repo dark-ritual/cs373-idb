@@ -22,13 +22,13 @@
 
         <tbody>
           <tr ng-repeat="multiverse_id in artistinstances[0].multiverse_ids | orderBy:sortType:sortReverse">
-            <td><img src="{{ multiverse_id.image_url }}" height="150px"></td>
+            <td><a href="#/cards/{{ multiverse_id.card_id }}"><img src="{{ multiverse_id.image_url }}" height="150px" ></a></td>
             <td>
-              <b>{{ multiverse_id.card_id }} </b>
+              <b><a href="#/cards/{{ multiverse_id.card_id }}">{{ multiverse_id.card_id }} </a></b>
               <br>{{ multiverse_id.rarity }}
               <br>{{ multiverse_id.flavor }}
             </td>
-            <td>{{ multiverse_id.set_id }}</td>
+            <td><a href="#/sets/{{ multiverse_id.set_id }}">{{ multiverse_id.set_id }}</td>
           </tr>
         </tbody>
       </table>
