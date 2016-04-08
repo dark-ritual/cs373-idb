@@ -11,15 +11,15 @@
         <tbody>
           <tr>
             <td class="text-right" width="75px"><b>Name:</b></td>
-            <td width="150px">{{ cardinstance[0].name }}</td>
+            <td width="150px"><a href="#/cards/{{ cardinstance[0].card_id }}">{{ cardinstance[0].name }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Artist:</b></td>
-            <td>{{ cardinstance[0].multiverse_ids[0].artist_id }}</td>
+            <td><a href="#/artists/{{ cardinstance[0].multiverse_ids[0].artist_id }}">{{ cardinstance[0].multiverse_ids[0].artist_id }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Sets:</b></td>
-            <td>{{ cardinstance[0].multiverse_ids[0].set_id }}</td>
+            <td><a href="#/sets/{{ cardinstance[0].multiverse_ids[0].set_id  }}">{{ cardinstance[0].multiverse_ids[0].set_id }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Type:</b></td>
@@ -32,8 +32,7 @@
           <tr>
             <td class="text-right"><b>Cost:</b></td>
             <td> 
-              {{  cardinstance[0].cost  }}
-              <div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
+              <div ng-repeat="costClass in convertCost(cardinstance[0].cost) track by $index" class="{{ costClass }} mtg-standard"></div>
             </td>
           </tr>
           <tr>

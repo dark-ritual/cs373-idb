@@ -122,7 +122,7 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	$scope.lastSortType = 'set';
 	$scope.sortType     = 'set'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Set", sortType:"name"}, {label: "Common", sortType:"commons"}, {label: "Uncommon", sortType:"uncommons"}, {label: "Rare", sortType:"rares"}, {label: "Mythic", sortType:"mythics"}, {label: "Total", sortType:"total"}];
+	$scope.tableHeaders = [{label: "Set", sortType:"name"},  {label: "Common", sortType:"commons"}, {label: "Uncommon", sortType:"uncommons"}, {label: "Rare", sortType:"rares"}, {label: "Mythic", sortType:"mythics"}, {label: "Total", sortType:"total"}];
 
 	$scope.range = function(start, end)
 	{
