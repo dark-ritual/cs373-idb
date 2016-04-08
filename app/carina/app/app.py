@@ -208,7 +208,8 @@ def serialize_card_table_data():
                 GROUP_CONCAT(DISTINCT e.rarity SEPARATOR ', ') AS rarities,
                 GROUP_CONCAT(DISTINCT a.name SEPARATOR ', ') AS artists,
                 GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR ', ') AS artist_ids,
-                GROUP_CONCAT(DISTINCT s.name  SEPARATOR ', ') AS sets
+                GROUP_CONCAT(DISTINCT s.name  SEPARATOR ', ') AS sets,
+                GROUP_CONCAT(DISTINCT e.set_id SEPARATOR ', ') AS set_ids
             FROM
                 card AS c
             LEFT JOIN
@@ -229,7 +230,7 @@ def serialize_card_table_data():
         for j in i['artists'].split(','):
             artists.append({'artist_id':artist_ids[key], 'name':j})
             key=key+1
-        ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'], 'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':i['sets']})
+        ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'], 'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':i['sets'], 'set_ids':i['set_ids']})
     return ret
 
 def serialize_artist_table_data():

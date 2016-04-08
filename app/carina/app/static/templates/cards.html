@@ -17,13 +17,13 @@
     <tbody>
       <tr dir-paginate="card in cards | orderBy:sortType:sortReverse | itemsPerPage:25">
         <td>
-        	<a href="#/cards/{{ card.card_id }}">{{ card.name }}</a>
+        	<a href="#/cards/{{ card.card_id }}">{{ card }}</a>
         </td>
         <td>
         	<p ng-repeat="artist in card.artists"><a href="#/artists/{{ artist.artist_id }}">{{ artist.name }}</a></p>
         </td>
         <td>
-        	<p ng-repeat="set in splitString(card.sets, ',')"><a href="#/sets/{{ set.set_id }}">{{ set }}</a></p>
+        	<p ng-repeat="set in splitString(card.sets, ',')"><a href="#/sets/{{ set }}">{{ set }}</a></p>
         </td>
         <td>
         	{{ count(splitString(card.editions)) }}
