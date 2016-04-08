@@ -1,3 +1,46 @@
+commit 013eb5d9b5e1b31b29357db095a79e701e36f4e0
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 22:11:28 2016 -0500
+
+    fixed the fix
+
+commit e550059b522df89a31a6b347c3db5962359bcd21
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 22:10:25 2016 -0500
+
+    fixed check
+
+commit 044d1fa1c942ef6b027caccf1842d96fc6ed1b92
+Merge: aa0e1cf d9dcb1f
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 22:07:36 2016 -0500
+
+    Merge branch 'master' of github.com:dark-ritual/cs373-idb
+
+commit aa0e1cf4fb648a72385231b79b4d0314eb1a6f27
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 22:07:04 2016 -0500
+
+    fixed models
+
+commit d9dcb1ff3688b2a820d55b3ab4f1d49b63e87508
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 7 22:04:07 2016 -0500
+
+    Update makefile
+
+commit 05ead1ef8311abfd5936670e2c3976022b7e4c27
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 22:03:59 2016 -0500
+
+    fixed travis.yml error
+
+commit e8c25d7a0f9e74c791b949d214cc9d512d6389ea
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 22:01:50 2016 -0500
+
+    updated log
+
 commit 1c5853200380339276c94b53be9dd5b31f9adf51
 Merge: 2126b65 10b6ffd
 Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
