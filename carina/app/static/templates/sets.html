@@ -15,7 +15,7 @@
     </thead>
     
     <tbody>
-      <tr ng-repeat="set in sets | orderBy:sortType:sortReverse">
+      <tr dir-paginate="set in sets | orderBy:sortType:sortReverse | itemsPerPage:25">
         <td>
           <a href="#/sets/{{ set.set_id }}">{{ set.name }}
         </td>
@@ -27,4 +27,11 @@
       </tr>
     </tbody>
   </table>
+  <center>
+    <dir-pagination-controls
+       max-size="5"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+  </center>
 </div>

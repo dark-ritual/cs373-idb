@@ -15,7 +15,7 @@
     </thead>
     
     <tbody>
-      <tr ng-repeat="artist in artists | orderBy:sortType:sortReverse">
+      <tr dir-paginate="artist in artists | orderBy:sortType:sortReverse | itemsPerPage:25">
         <td>
           <a href="#/artists/{{ artist.artist_id }}">{{ artist.name }}
         </td>
@@ -37,4 +37,11 @@
       </tr>
     </tbody>
   </table>
+  <center>
+    <dir-pagination-controls
+       max-size="5"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+  </center>
 </div>

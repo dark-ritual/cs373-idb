@@ -15,7 +15,7 @@
     </thead>
     
     <tbody>
-      <tr dir-paginate="card in cards | orderBy:sortType:sortReverse | itemsPerPage:10">
+      <tr dir-paginate="card in cards | orderBy:sortType:sortReverse | itemsPerPage:25">
         <td>
         	<a href="#/cards/{{ card.card_id }}">{{ card.name }}</a>
         </td>
