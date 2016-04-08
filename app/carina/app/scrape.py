@@ -107,7 +107,7 @@ def main():
                 doInsertSet(ed)
                 doInsertEdition(thing['id'], ed)
 #        break
-        i += 20
+        i += 1
         g = get(url.format(i))
         j = g.json()
     print("Done!")

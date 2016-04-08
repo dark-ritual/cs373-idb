@@ -208,8 +208,7 @@ def serialize_card_table_data():
                 GROUP_CONCAT(DISTINCT e.rarity SEPARATOR ', ') AS rarities,
                 GROUP_CONCAT(DISTINCT a.name SEPARATOR ', ') AS artists,
                 GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR ', ') AS artist_ids,
-                GROUP_CONCAT(DISTINCT s.name  SEPARATOR ', ') AS sets,
-                GROUP_CONCAT(DISTINCT e.set_id SEPARATOR ', ') AS e.set_ids
+                GROUP_CONCAT(DISTINCT s.name  SEPARATOR ', ') AS sets
             FROM
                 card AS c
             LEFT JOIN
