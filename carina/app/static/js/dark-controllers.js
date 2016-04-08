@@ -171,8 +171,8 @@ dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstan
 //#############Artists Instance Controller##################
 //##########################################################
 
-dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistInstance',function($scope, $routeParams, ArtistInstance) {
-	
+dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistInstance', function($scope, $routeParams, ArtistInstance) {
+
 	$scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Sets", sortType:"sets"}];
 	
 	$scope.range = function(start, end)
@@ -195,7 +195,11 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 	}
 	
 	// create the list of entries
-	$scope.artistinstances = ArtistInstance.query($routeParams)
+	$scope.artistinstances = ArtistInstance.query($routeParams);
+
+	//$scope.getName = function(card_id){
+	//	return CardInstance.query(card_id).name;
+	//}
 } ]);
 
 //#######################################################

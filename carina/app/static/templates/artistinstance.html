@@ -21,16 +21,16 @@
         </thread>
 
         <tbody>
-          <tr ng-repeat="artistinstance in artistsinstance | orderBy:sortType:sortReverse">
-            <td>{{ artistinstance }}</td>
-              <td>
-                <b>{{ artistinstance.name }} </b>
-                <br>{{ artistinstance.artist }}
-                <br>{{ artistinstance.type }}
-                <br>{{ artistinstance.text }}
-              </td>
-            <td>{{ artistinstance.sets }}</td>
-          </td>
+          <tr ng-repeat="multiverse_id in artistinstances[0].multiverse_ids | orderBy:sortType:sortReverse">
+            <td><img src="{{ multiverse_id.image_url }}" height="150px"></td>
+            <td>
+              <b>{{ multiverse_id.card_id }} </b>
+              <br>{{ artistinstances[0].name}}
+              <br>{{ artistinstances[0].type }}
+              <br>{{ multiverse_id.flavor }}
+            </td>
+            <td>{{ multiverse_id.set_id }}</td>
+          </tr>
         </tbody>
       </table>
 		</div>
