@@ -1,0 +1,1554 @@
+commit ac6949d079b09d43622caad988b4575e77755e08
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 21:51:22 2016 -0500
+
+    scrape updated
+
+commit f410e0afaf87dd52f01c9e6f37b2f72c9cd3804b
+Merge: c3313ae c2419af
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 21:49:03 2016 -0500
+
+    merge
+
+commit c2419afe7cc53c40dccace320ddc0ce21c0a7961
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 21:45:32 2016 -0500
+
+    log and models.html
+
+commit 9d0c9f65d0fd8f9a20f509c0bffa0ee985acf4c2
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 21:41:47 2016 -0500
+
+    pagination completed
+
+commit 31b2097060898296f94c8a164b93a4387da3dfa2
+Merge: c143f1d b85fec5
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 21:34:03 2016 -0500
+
+    merge
+
+commit b85fec5efd757e8769238f20e67ad6e1966d9627
+Merge: 8f88839 7d461df
+Author: Mark Lindberg <marklindberg@wireless-10-147-1-86.public.utexas.edu>
+Date:   Thu Apr 7 21:24:18 2016 -0500
+
+    MERGE DAT S
+
+commit c143f1d76f3bb4d3571685758e5a62de7691b491
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 21:09:51 2016 -0500
+
+    setinstances works
+
+commit a06b08e69cc57f82076436dd7ecb13309a3a71e7
+Merge: 5f72df3 3d6ac59
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 20:44:49 2016 -0500
+
+    merge
+
+commit 5f72df35fc47df6592dc38252f8f03ad70d528ca
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 20:43:42 2016 -0500
+
+    artists instances done
+
+commit 3d6ac5982466fe1adea7fadec38351f2400257ec
+Author: Mark Lindberg <marklindberg@wireless-10-147-1-86.public.utexas.edu>
+Date:   Thu Apr 7 20:40:10 2016 -0500
+
+    BLEAOERCIHAOENTUH set first attempt needs werk.
+
+commit 7d461dfd428febe4f2949d566cd95e24164da7d5
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 19:55:58 2016 -0500
+
+    Added pagination to the cards table through the dirPagination directive
+
+commit 51c6a3cf9335f05ad52ae751d4c41036b59d5816
+Merge: 83034e0 dbb90e4
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 19:54:30 2016 -0500
+
+    Merge branch 'dynamicinstances' of github.com:dark-ritual/cs373-idb into dynamicinstances
+
+commit 83034e0ee9b1535e76925eebf24f969d4b68deed
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 19:54:20 2016 -0500
+
+    artists setup
+
+commit 060d72e7ff99c73599dc8b960ddd46ba521e1de9
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 19:17:19 2016 -0500
+
+    Cards table done. Just need links to work
+
+commit dbb90e455b9df7609e4ccb74dc6fedb5bd340b87
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 7 19:10:55 2016 -0500
+
+    Fixes app.py
+
+commit 0ecac33caacc56a82cdedf7c5696c87b2ad65c19
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 7 19:03:01 2016 -0500
+
+    app.py corrections
+
+commit 5ba1f49061307a8720816d546a16941cd03a9724
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 18:57:15 2016 -0500
+
+    card instance works
+
+commit b9429f314073ce0e494fdf8478301b6885c160c7
+Merge: bd23b44 8f88839
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 18:03:59 2016 -0500
+
+    merge
+
+commit 8f888397fc83400548d467fc831b6f1da28ae11b
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 16:28:16 2016 -0500
+
+    reorganized logos
+
+commit 35a91a274211906810a5617c7026842480d31856
+Merge: 93cccbe b8514b7
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 16:20:06 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit 93cccbe936e4f993f0db83e9bd8dd9fca30dc630
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 16:19:57 2016 -0500
+
+    added tool's logo
+
+commit bd23b442c6b99179a9173015375b4349ee1cc1d9
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 15:41:10 2016 -0500
+
+    Appending card_id to URL
+
+commit b8514b731700e4ed6a5fd39bb872e978c8ec5171
+Author: Mark Lindberg <marklindberg@wireless-10-147-1-86.public.utexas.edu>
+Date:   Thu Apr 7 15:15:39 2016 -0500
+
+    Refixing pragmatism.
+
+commit 628c2133d22988746fe1aa6a969334f10b382f90
+Merge: 0128462 5e609c2
+Author: Mark Lindberg <marklindberg@wireless-10-147-1-86.public.utexas.edu>
+Date:   Thu Apr 7 15:14:55 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit 01284629a191efc450c8c5ce97a7f63aa3a2b817
+Author: Mark Lindberg <marklindberg@wireless-10-147-1-86.public.utexas.edu>
+Date:   Thu Apr 7 15:14:53 2016 -0500
+
+    More tests and a bunch of pragmatic no-cover-ing.
+
+commit 5e609c2d2683f6c3bb76fd10b76c18ab8a58846e
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 14:23:23 2016 -0500
+
+    Closed #32. Closed #29. Closed #28. Closed #24. Closed #20.
+
+commit 60d60b9372d559d2a9f1dc2c6e0aecf98940b7b7
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 14:23:06 2016 -0500
+
+    Table fixes
+
+commit c5b14870c902aa3f87043ad383fe36bc0f16f17a
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 14:21:25 2016 -0500
+
+    Closed #41
+
+commit d2fd22e61e418d072977fbd88ab5de76f6178b11
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 14:02:14 2016 -0500
+
+    First attempt and making dynamic table links
+
+commit 2c52ac0fc0a0f8893b9a78ce38c64734aa54f7c8
+Merge: 6e644ae 8bb1ab3
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 13:49:50 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit 6e644ae8307abbf0676cb91028dfc083c7c8dd5e
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 13:49:41 2016 -0500
+
+    linked to tests from about page. Fixed about page color
+
+commit 7ad3f40191c757781d3c478b80a1f422fe4c6409
+Merge: 3c35d24 f44e8b9
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 13:27:12 2016 -0500
+
+    Merge branch 'instances' into dev
+
+commit f44e8b9298d44eef928d3de894e53f3c93a73a7f
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 13:26:48 2016 -0500
+
+    removed unnecessary debug text
+
+commit 87dae335ac135f9785dcbdfc463de872b83f8fd7
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 13:14:01 2016 -0500
+
+    tests text displays properly
+
+commit abfd821b83685c46c9073dd5bdd72eb7b2dedda9
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 11:38:11 2016 -0500
+
+    converted text
+
+commit bae6179c7ded98e358ef4e3b98a54b33112c9015
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 03:25:07 2016 -0500
+
+    we get some output i guess..... tests!
+
+commit 042a59b05eaad04835a87e2c1e65713216e7d77b
+Merge: cc4d390 8bb1ab3
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 02:19:20 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into localtemp
+    
+    Conflicts:
+    	carina/app/static/templates/artists.html
+
+commit cc4d3902f88dfa24dda4a472e8fb28bc15d6094f
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 02:17:23 2016 -0500
+
+    Populated cards with data from custom sql query
+
+commit 10cc3e8504bd259a846c606433025da99a5a7e96
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 7 02:12:29 2016 -0500
+
+    attempting tests
+
+commit a1d82d80854b8440c510ddc431b96284333dfda6
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 7 00:16:14 2016 -0500
+
+    Serailzed Sets and Artist query data and added routes in app.py. Implemented dynamic filling of tables on Artists and Sets pages. Woot!
+
+commit 8bb1ab3615d8962957a85125666e6d689c85fc55
+Merge: 9b7a1e1 3c35d24
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 23:32:57 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit 9b7a1e112861f7a89c61656b727d5f9ba5f5568f
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 23:32:52 2016 -0500
+
+    UNBREAKIFY\!
+
+commit 3c35d24bca9646d69434a103eefffe8c73133b3d
+Merge: 75f18a9 4b7b362
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 23:24:21 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit 75f18a9dab3c9553af26bf11d8cf6af15e79aea3
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 23:21:23 2016 -0500
+
+    added more variables for artists instance page
+
+commit 204b61eed14f9c2951c45519aeed7a65f296b783
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 23:15:22 2016 -0500
+
+    added angularized sets page
+
+commit 78e3f093ed774a1d716a29439cd6d18e719836b0
+Merge: cf48a66 551ea15
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Wed Apr 6 22:48:50 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into localtemp
+    
+    Conflicts:
+    	carina/app/app.py
+
+commit 4b7b362ea18a4caf025ac6d680d3bccfb7cecb92
+Merge: 551ea15 6d80636
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 22:47:17 2016 -0500
+
+    Merge branch 'dev-coverage' into dev
+
+commit 6d8063657fa4b27c5a7eedc9e4e9b016f7c8df1f
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 22:46:33 2016 -0500
+
+    Fixes tests
+
+commit 8aa0ac8ecca5df29b0661659acbf9e09f620a29e
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 22:28:47 2016 -0500
+
+    artists instance done
+
+commit 454f470c23445e08484056122bf78af253a16943
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Apr 6 22:17:01 2016 -0500
+
+    More tests
+
+commit 551ea1513a7e944f01b784f6c7d87cc6229622e8
+Merge: f08cce3 991c8c1
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 21:56:22 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit f08cce3ba81c494b48460fd65d8283c41ad59c6d
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 21:55:45 2016 -0500
+
+    started artists instance
+
+commit 991c8c175804ad58a939ddb8b72f575490f23793
+Merge: e6fc6f9 5f6a993
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 21:00:36 2016 -0500
+
+    Merge from dev-coverage
+
+commit 5f6a9930d47cd4f1c524f8d584de937679b1ef25
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 20:56:31 2016 -0500
+
+    Working tests for now
+
+commit e6fc6f98bf05c7e8396c281844265085004bac7e
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 20:50:21 2016 -0500
+
+    added local address to app.py, included break in scrape, and angularized card instance
+
+commit cf48a662c56b742b4525ebd6f892ea1cccc417a7
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Wed Apr 6 20:38:49 2016 -0500
+
+    stashing changes
+
+commit 82a2cffcfb30840a2e7f0b7112d3354460d93b95
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 20:34:47 2016 -0500
+
+    Intermediate commit
+
+commit 35d6778603673a0ab7ca4289593fe11b71cf704b
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Wed Apr 6 20:33:37 2016 -0500
+
+    Minor change to app.py
+
+commit 29ddafb4234ea4584eb69fc959d09716fcba9949
+Merge: 6d2f96e d311801
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 19:40:14 2016 -0500
+
+    Merge branch 'dev-coverage' of https://github.com/dark-ritual/cs373-idb into dev-coverage
+
+commit d311801080fcbb92e0540edf6a105a2ef05cc879
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Apr 6 19:30:13 2016 -0500
+
+    Intermediate commit
+
+commit 61f4a0ed3a92c0015f8bd438e973dce22f97898a
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 19:03:32 2016 -0500
+
+    missing /
+
+commit 11967c5d2fa880b2bf64eb2efda25062028f4c10
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 18:47:32 2016 -0500
+
+    fixed angular issues with card instances
+
+commit 51811f323708f577a920a9314867383a5fa5ff37
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Apr 6 18:28:33 2016 -0500
+
+    More tests
+
+commit 559e5dbccfca080ba9141a0512e91a896e198309
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Apr 6 18:07:49 2016 -0500
+
+    Showing output on travis
+
+commit 92db3cf814c9fe2d84ee75259101d08e0e71c42a
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 18:04:21 2016 -0500
+
+    fixed missing comma
+
+commit ae284809aaf19f9387017117a0603d45871b46f1
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Apr 6 17:49:04 2016 -0500
+
+    New tests
+
+commit 39d9636b7721eee8c6324b8b56dd567189f47222
+Merge: 264adbd 6d2f96e
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 17:46:21 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit 264adbd15f5a05d6d891c97054c534844790de44
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 17:46:10 2016 -0500
+
+    adding card instance angular page and temp nav button
+
+commit da3da3a1621a48b9f91ab05fd9767203616f5df3
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 17:45:43 2016 -0500
+
+    adding card instance angular page and temp nav button
+
+commit 6d2f96e3e31b9dca2f516ebbc9cb579627ad6214
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 17:35:39 2016 -0500
+
+    Function to retrieve data for sets.
+
+commit 2fd0ccc18562455b9324a64bf111f6d2cc9b92c9
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 17:13:21 2016 -0500
+
+    Method to obtain data for artist table.
+
+commit 016d0e6841deaf4da1e1d85b71158483fee59046
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Apr 6 16:58:38 2016 -0500
+
+    Ignoring lines
+
+commit 840b171cd5ec8b3497572cc07301e6d8cd0ced9f
+Merge: e32efae 4fae486
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 16:50:06 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit e32efaeef2b50b0cf59375426d56b62edc5126e7
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 16:50:02 2016 -0500
+
+    small modifications
+
+commit 4fae48631095a58e6c0dd627097f4a8783a69be4
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Apr 6 16:34:53 2016 -0500
+
+    Endpoint correction
+
+commit 0eab6b819bafedd2e882fcf2a9427ebc1ae483f2
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 16:13:24 2016 -0500
+
+    Fixing makefile now that Travis works again.
+
+commit 20fcc948b1b2f9149cee4f97e185442cc47829a2
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 16:10:19 2016 -0500
+
+    Attempt 238234 to fix Travis.
+
+commit 37026f34f30e80077e3ee5ed6775159f99a5bf7e
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 16:01:29 2016 -0500
+
+    Break makefile so Travis gives me info.
+
+commit fe7c5a6b7fe558956cc5db54ef2026cb5817ff0e
+Author: Mark Lindberg <marklindberg@wireless-10-147-211-157.public.utexas.edu>
+Date:   Wed Apr 6 15:57:03 2016 -0500
+
+    Fixed tests...
+
+commit 5c441614b59b2308c3b317d94c494e77c98fba21
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 14:49:55 2016 -0500
+
+    fixed about page formatting
+
+commit 3c38ea7f4210b561c5b3dd5e64e244a8e74a9029
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Apr 6 13:14:52 2016 -0500
+
+    fixed sets and artists template table size to none-static
+
+commit 32eaf1eaae2ae07b540c2b998dc2a62fb45e6f71
+Merge: c4f2166 e30e12e
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Apr 6 12:19:28 2016 -0500
+
+    Merging, re-fixing app.py
+
+commit c4f2166e54aa6577b28d7f870f00ac62ad2a3790
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Apr 6 12:01:14 2016 -0500
+
+    Test fixing
+
+commit e30e12eb55032a4263bf442410888d797f67060b
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Wed Apr 6 00:53:53 2016 -0500
+
+    Controller changes from last commit broke Cards page. Fixed.
+
+commit e0daa58f11c447ab24f323a72ff64fc602560be2
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Wed Apr 6 00:34:01 2016 -0500
+
+    Fixed API, can now be viewed via /api/cards /api/artists /api/sets
+
+commit 68e8497df0f2aeddbc6efd94524503a6b549f460
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 22:53:30 2016 -0500
+
+    Fixed Navbar
+
+commit b1519ff10715027034f31a2a6ecb718a76c0405c
+Merge: c169a50 0af318c
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 22:25:57 2016 -0500
+
+    Fixed table chevron behavior. Changed column data topics.
+
+commit c169a50a9072ad6f356709cf964591da0c7328f8
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 22:22:57 2016 -0500
+
+    Fixed table chevron behavior. Changed column data topics.
+
+commit 0af318c498af8d3cce45850d7c167dba18328647
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 21:40:43 2016 -0500
+
+    Stupid database string.
+
+commit c9defb99eb4399454df2e6da22da22bac3640bea
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 21:39:36 2016 -0500
+
+    Fix coverage.
+
+commit 8f62ab83ec912a7c2f7b1d18baca0668b546c5d4
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 21:35:44 2016 -0500
+
+    Fix setID length.
+
+commit d110eb0cce30cd0e3176f91e22f29195b00eaece
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 21:33:30 2016 -0500
+
+    makeflukeerville
+
+commit 9f54d693109d5e55b1e9a95e68ec95f612cfb6a5
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 21:27:36 2016 -0500
+
+    makefile mod
+
+commit aca43b404b35aa554dcc282cbf19da183f4e4d0a
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 21:22:58 2016 -0500
+
+    added cat tests.tmp to makefile
+
+commit 9539afd3404e5a70571f3225c36ce11c4061f91e
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 21:18:09 2016 -0500
+
+    added coverage omits for travis
+
+commit badc97147d9cc2ebac8792dc553efeee17052804
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 21:13:14 2016 -0500
+
+    fixed css for background colors. Closed #39
+
+commit a8a5734375d8aec074a739e3c124971268c51054
+Merge: b1a3b7e b206ac3
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 21:12:18 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit b206ac33ed917157767a58654b30a0151afc8b9a
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 21:07:27 2016 -0500
+
+    Attempt 5961 to fix Travis.
+
+commit b031c37e3a8676ef0ecf3d4b82aa7a31fd75042d
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 21:01:58 2016 -0500
+
+    Attempt 5960 to fix Travis.
+
+commit b1a3b7e51ff02ece2a6d5d28ba26e197ff7c9ea8
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 21:01:16 2016 -0500
+
+    updated apiary.apib
+
+commit 929919ee667dc98696b32eddf0e281f6acd997c8
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 20:53:14 2016 -0500
+
+    Attempt 4599 to fix Travis.
+
+commit 455647cde9cfe205f809c40d8dec03b0cf7fdf01
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 20:47:21 2016 -0500
+
+    Added twitter feed for MTG. Closed #31
+
+commit c9991b5103b608c0fc7465002735454480dd2321
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 20:46:35 2016 -0500
+
+    Attempt 459 to fix Travis.
+
+commit 4e1b9e8b6c00d22976db183592bb3b403b75d809
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 20:38:53 2016 -0500
+
+    updated UML. Closed #25
+
+commit daa951d10cfaf44ef858f4dc0f142d05f9642769
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 20:37:57 2016 -0500
+
+    updated UML
+
+commit 578372275b707679574683153812f0b31ba23ab3
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 20:29:14 2016 -0500
+
+    Attempt 389 to fix Travis.
+
+commit d364df93c2ecb5e11ec34833934567037da5e5be
+Merge: ec40c51 710445f
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 20:19:01 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit ec40c514daf05914aa1c02c5f62fe5f1b6a149f2
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 20:18:53 2016 -0500
+
+    Attempt 388 to fix Travis.
+
+commit 710445f72fbd4291fcbb2b77554c52fccb9a266c
+Merge: 1c44596 ed07596
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 20:17:02 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit 1c44596875f22ecb72776c30547e2694c37332ed
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 20:16:55 2016 -0500
+
+    Created scrapeDb.sh to populate docker database and added dependencies to requirements.txt
+
+commit 86a78f7890b4c3e8f949764a1a0222a1a60724c6
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Tue Apr 5 20:14:01 2016 -0500
+
+    Probably fix to API endpoints
+
+commit ed075963d2692a7bd0236c5b0a8c4b86cdb95197
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 20:12:42 2016 -0500
+
+    Attempt 387 to fix Travis.
+
+commit 0b1240469a134a31bac0b2752312cded30481e3d
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 20:00:51 2016 -0500
+
+    Attempt 386 to fix Travis.
+
+commit 4e49f5bd927c1b6ddfc4e9f17c9de390c783f171
+Author: Mark Lindberg <marklindberg@wireless-10-147-194-233.public.utexas.edu>
+Date:   Tue Apr 5 19:54:29 2016 -0500
+
+    Attempt 385 to fix Travis.
+
+commit 86ca780e75f59a836eb3922da68ce357ca86ec68
+Merge: 9ec9808 5198c8d
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 17:41:42 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit 9ec98088022a486e8b83dc882067b47daee872cc
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 17:40:54 2016 -0500
+
+    added artists and sets with their images/assets.
+
+commit 5198c8ddbf5d918c871a7dcd372be9c332228235
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 17:37:46 2016 -0500
+
+    Removed break from scrape.py
+
+commit f851e0a2611b569482f75ef22211adc4d3074d75
+Merge: 21b6c36 bf059a3
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 17:33:54 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit 21b6c3680db9d04e12de259d4a01ca0a5c2015b6
+Merge: 57ea009 694a67f
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 17:32:44 2016 -0500
+
+    Merge altDev into dev
+
+commit bf059a3bc29a5e087dac5d28b3dae29b90272e4c
+Author: Mark Lindberg <marklindberg@wireless-10-147-45-227.public.utexas.edu>
+Date:   Tue Apr 5 17:25:37 2016 -0500
+
+    Attempt 384 to fix Travis.
+
+commit 694a67f76896d77190938d1ca41262bb6958d501
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Tue Apr 5 17:22:42 2016 -0500
+
+    Readability edits
+
+commit 57ea0094c1d550bd3177d0b1108afba9d46e12c3
+Merge: febfd02 28f73a8
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 17:22:04 2016 -0500
+
+    Merge branch 'altDev' into dev
+
+commit fb04b8745fdcaedcab791e5af6d11cc22b5bf5a7
+Merge: 9296e4d a1f1524
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 17:10:40 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit a1f1524865250f4b2bc439dae7362fbd94ffba21
+Author: Mark Lindberg <marklindberg@wireless-10-147-45-227.public.utexas.edu>
+Date:   Tue Apr 5 16:54:38 2016 -0500
+
+    Fixing up the DB string.
+
+commit adb01096620ae080a8613d78f02e00274826e9ec
+Merge: 70de450 7be7acf
+Author: Mark Lindberg <marklindberg@wireless-10-147-45-227.public.utexas.edu>
+Date:   Tue Apr 5 16:52:49 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit 70de450f9142564cf811c0a9659048e4b10c2c80
+Author: Mark Lindberg <marklindberg@wireless-10-147-45-227.public.utexas.edu>
+Date:   Tue Apr 5 16:52:44 2016 -0500
+
+    Fixed tests to work with multiverse_id as string, and scrape to ignore non-normal-view cards.
+
+commit 9296e4d7e217d10d8bc6d5e89a91967e357043ea
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 15:39:11 2016 -0500
+
+    initial setup for sets page
+
+commit 7be7acfceddab81bd53038efb77a760e6de225c9
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 13:48:14 2016 -0500
+
+    updated card page for better content
+
+commit 3e24338f300ad9df3d11ac39c0b02a16ad9d4b26
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 13:14:21 2016 -0500
+
+    added more text to card instance
+
+commit 9761c62e0eefa704dbfb376a6dac2ad757720da0
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 13:03:39 2016 -0500
+
+    made the card and info show correctly
+
+commit d827246a0de61e504db67f8c20fc3be427bbd35b
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 12:48:57 2016 -0500
+
+    added styles for table and roundedbg.
+
+commit 68961cf1ec32f6aa7a8c7a090f1c24314e429294
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 5 12:40:07 2016 -0500
+
+    added card instance template. Beta
+
+commit 28f73a8a506e06eaf26bf13876673fe044db0eb0
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 5 01:14:25 2016 -0500
+
+    Done messing around with icons
+
+commit 11a46ddfadf2073b0594ae90ede4b03cf37f93be
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 4 22:53:52 2016 -0500
+
+    Added text wrap to table
+
+commit 0fb84433354b6b6489c074e6e289735ded16ffec
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 4 22:24:58 2016 -0500
+
+    Fixed column width. Changed Converted Mana Cost to CMC. Adjusted table appearance.
+
+commit 8f02f13dcb4a9cbd88f2ef7095f52b9f4bc5d2ac
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 4 21:58:05 2016 -0500
+
+    Minor fixes to test display of new icons.
+
+commit 20473205533a2ffbae271c3b6d77dbbe48646e6d
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 4 21:48:25 2016 -0500
+
+    Finished mapping icons. Testing icon display on Cards.html
+
+commit e5ee473b13febcf04e19c849e430e4b350efd9eb
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 4 21:01:07 2016 -0500
+
+    Removed old icons. No longer needed.
+
+commit 54d010f95407e8e448696170f66157d4be69a077
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 4 20:58:31 2016 -0500
+
+    Finished mapping standard 20px x 20px icons
+
+commit fabb5cc2b301eccf535cbf102242e80f196ff051
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 4 09:06:26 2016 -0500
+
+    Implemented sortable angular table for Sets
+
+commit ed5bc17929cd78d540409c3a432be88b4d87083c
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 4 01:38:27 2016 -0500
+
+    Implemented angular table for Cards. Added cost images from icon map
+
+commit e462e625c94737df5e6cf0d18b07cb2be82b678d
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 3 23:46:09 2016 -0500
+
+    Implemented sortable angular table for Artists
+
+commit ddd76b8b60d24be349eca313200df42a9659fa9b
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 3 19:12:35 2016 -0500
+
+    Created services and controllers for cards, artists, sets
+
+commit febfd02ec761c8e1c39d862e8b447ede62797599
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 3 18:45:35 2016 -0500
+
+    Reverted env variable in app.py
+
+commit fc7679cbe35671cb9f76ea095f3b885245a9fd6d
+Author: Mark Lindberg <marklindberg@Marks-MacBook-Pro.local>
+Date:   Sun Apr 3 01:48:17 2016 -0500
+
+    Scrape will now scrape the entire database\!
+
+commit 2cf942ab663b9b766a7600448762d0f18ac43b9f
+Author: Mark Lindberg <marklindberg@wireless-10-146-137-148.public.utexas.edu>
+Date:   Sat Apr 2 21:23:26 2016 -0500
+
+    Mark and Stephanie: Updated scrape.py to scrape info for Advance Scout (single card, 2 editions, 1 artist, 2 sets).
+
+commit a7c5f31c3dd2506f1bec8a4ad7170e7b55e94ddf
+Author: Mark Lindberg <marklindberg@wireless-10-146-137-148.public.utexas.edu>
+Date:   Sat Apr 2 20:39:05 2016 -0500
+
+    Stephanie and Mark: Updated models in app, tests to work with new models.
+
+commit c3313ae839253412ec58a44ad916e61b12823de5
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Sat Apr 2 18:04:57 2016 -0700
+
+    removed log and html
+
+commit e9feafd742d338f537f4efd9b393c4566479b842
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 2 18:56:43 2016 -0500
+
+    Add API endpoints
+
+commit 9b5d32b54b1b23bac75984dfd7b2192789922ad7
+Merge: b20939b aeb7324
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 2 18:40:31 2016 -0500
+
+    megerino
+
+commit b20939b857ee1ae16b092940023dc9ba2476dad7
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 2 18:29:42 2016 -0500
+
+    Preparing for conflicts
+
+commit aeb7324a7ae55555957df0926686ec8f54047b2f
+Merge: e05b2dc be37b93
+Author: Mark Lindberg <marklindberg@wireless-10-146-137-148.public.utexas.edu>
+Date:   Sat Apr 2 18:28:36 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit e05b2dcd44c0742c3bb847f389be386c6635bcdf
+Author: Mark Lindberg <marklindberg@wireless-10-146-137-148.public.utexas.edu>
+Date:   Sat Apr 2 18:28:21 2016 -0500
+
+    Updated app primary keys to strings.
+
+commit ce9bc2348dae1e5b79aa5fa5d6462b7f36878a89
+Author: Mark Lindberg <marklindberg@wireless-10-146-137-148.public.utexas.edu>
+Date:   Sat Apr 2 18:10:38 2016 -0500
+
+    Updated tests/app.py to fix id stuff.
+
+commit be37b93ef55868ab526ed532ca47354826358cb8
+Merge: 7c49035 83a4cf6
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 2 17:37:11 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/data-the-gathering into dev
+
+commit 7c49035ef22e381bd16ba0d3805bcd1dafadd8f9
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 2 17:37:00 2016 -0500
+
+    Slight apiary change
+
+commit ee5df2272d68dce2e750def4f9436d56aa188dd9
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Sat Apr 2 17:12:30 2016 -0700
+
+    loads and creates the mysql service and database
+
+commit 83a4cf6c3122c362e3398355e7f901d474c66dbd
+Merge: 6e9d145 ee5df22
+Author: Mark Lindberg <marklindberg@wireless-10-146-137-148.public.utexas.edu>
+Date:   Sat Apr 2 17:23:36 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit 6e9d1452575e70e62038713e265ae0b1e8c97fff
+Author: Mark Lindberg <marklindberg@wireless-10-146-137-148.public.utexas.edu>
+Date:   Sat Apr 2 17:23:34 2016 -0500
+
+    Git is a git.
+
+commit fbe172a97c2f67efe19645152ad368222a56716a
+Author: Mark Lindberg <marklindberg@wireless-10-146-137-148.public.utexas.edu>
+Date:   Sat Apr 2 17:23:02 2016 -0500
+
+    Beginning of scrape.py. Don't try to use.
+
+commit faa4f89f6c4e57efda6d498025fd66354cc3a812
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Fri Apr 1 00:02:37 2016 -0500
+
+    Refactored app.py
+    fixed SQLALCHEMY_DATABASE_URI to use the external MYSQL container again
+    removed all server-side routes except for index.html and Cards API example
+    Added @property serializers to all the Models
+    refactored/auto-formatted all html files
+
+commit 4e85d5f3fa88d310e101b7d90f7dc8516a404b43
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Mar 31 23:45:54 2016 -0500
+
+    brought back angularjs frontend
+
+commit 885b9e027469ef6ce85297226d75272977932a6b
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Mar 31 19:16:31 2016 -0500
+
+    First try on API code
+
+commit 63f7bd519647e4fbead72f848842019982fcbdc7
+Author: Mark Lindberg <marklindberg@wireless-10-146-152-59.public.utexas.edu>
+Date:   Thu Mar 31 15:49:49 2016 -0500
+
+    Fixed IDB1 --> IDB2, maybe fixed Travis/Coverage.
+
+commit 87ddc60e97c7051bfe61221adcb5409d5839d9ec
+Author: Mark Lindberg <marklindberg@wireless-10-146-152-59.public.utexas.edu>
+Date:   Thu Mar 31 15:42:57 2016 -0500
+
+    Moved useful functions from test.py to carina/app/app.py.
+
+commit d104da6a5ef41f271d6f275d100379e5eabcf774
+Merge: d43f93e 8b6755b
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Mar 31 15:13:22 2016 -0700
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit d43f93e26861cb49e198dc7336b93a5ddcbf5068
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Mar 31 15:13:13 2016 -0700
+
+    added google analytics to pages
+
+commit bb7e777347247db27bbded6c552c49481d832f72
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Mar 30 18:05:52 2016 -0500
+
+    IDB1.log updated
+
+commit a031ab18e640f1559344707d7c366bd81b85b70f
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Mar 30 18:04:34 2016 -0500
+
+    apiary.apib is no longer empty
+
+commit d7318e8f67879948de0e9a23a853b77123c830b6
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Mar 30 16:14:21 2016 -0500
+
+    removed failing test
+
+commit cdfdd6f07998cf8db7c1c1701cb53967d5ff21c3
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Mar 30 15:44:59 2016 -0500
+
+    changed log name in makefile and recompiled log
+
+commit 0476cb18fe7b0d5ca21afc87834e0ed0995cbe23
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Wed Mar 30 14:22:05 2016 -0700
+
+    moved tests.py from carina folder to top-level
+
+commit 8b6755bf58caacea4dcf16dad9960aa546517fb8
+Merge: dfdf158 4ff21e4
+Author: Mark Lindberg <marklindberg@wireless-10-146-14-188.public.utexas.edu>
+Date:   Tue Mar 29 19:42:12 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit dfdf1582e8413cdf0114d4e0b3525522f3c2d8b6
+Author: Mark Lindberg <marklindberg@wireless-10-146-14-188.public.utexas.edu>
+Date:   Tue Mar 29 19:42:04 2016 -0500
+
+    Updated tests to work (on my machine) with MYSQL. They actually make sense now. :P
+
+commit 4ff21e4ff3dbe08398d00c1cddc9b655b31dce6e
+Merge: b128d6e cbfe734
+Author: Javier Enrique de la Garza Sanchez <Javier Enrique de la Garza Sanchez>
+Date:   Tue Mar 29 17:38:59 2016 -0700
+
+    Merge branch 'dev' of github.com:dark-ritual/cs373-idb into dev
+
+commit b128d6e9813d8690df74a7b6bcc87384c89a445e
+Author: Javier Enrique de la Garza Sanchez <Javier Enrique de la Garza Sanchez>
+Date:   Tue Mar 29 17:38:39 2016 -0700
+
+    changed coverage to coverage3
+
+commit c19af4087668e60875af26017ead342950aa3385
+Author: Javier Enrique de la Garza Sanchez <Javier Enrique de la Garza Sanchez>
+Date:   Tue Mar 29 17:37:53 2016 -0700
+
+    make IDB1.log fixed
+
+commit cbfe7342ef2f97d942b9c950a990ddf64d009474
+Merge: 88c07c2 8cf864c
+Author: Mark Lindberg <marklindberg@wireless-10-146-14-188.public.utexas.edu>
+Date:   Tue Mar 29 17:00:43 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit 88c07c264975f019e26b31b4352a4acead60df4b
+Author: Mark Lindberg <marklindberg@wireless-10-146-14-188.public.utexas.edu>
+Date:   Tue Mar 29 17:00:14 2016 -0500
+
+    Moved tests to base dir, fixed imports.
+
+commit 8cf864cdd2405c0218c91568481664c5a62af293
+Author: Javier Enrique de la Garza Sanchez <Javier Enrique de la Garza Sanchez>
+Date:   Mon Mar 28 16:37:51 2016 -0700
+
+    fixes the fix to the tab error
+
+commit 9370b85daff2ecf7e8b3492d394d0b17e1848d17
+Author: Javier Enrique de la Garza Sanchez <Javier Enrique de la Garza Sanchez>
+Date:   Mon Mar 28 16:35:54 2016 -0700
+
+    fixes travis.yml tab error
+
+commit d9705ac1f88fd5479827cd1474d719f5e04d2c46
+Author: Javier Enrique de la Garza Sanchez <Javier Enrique de la Garza Sanchez>
+Date:   Mon Mar 28 16:16:12 2016 -0700
+
+    added travis integration with slack
+
+commit ba927f3371748dd14da4339ea17f7caf2f083725
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Fri Mar 25 00:45:09 2016 -0500
+
+    Added option to initDb to run the command on the WRONG container
+
+commit c9f7c21f357a619b6841a781db9c44f9785d485a
+Merge: 6e47c7d 32ef012
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 21:58:02 2016 -0500
+
+    Merge branch 'dev'
+
+commit 32ef012e98cdca1b0a41abebbc323bb8ea76198b
+Author: Mark Lindberg <marklindberg@wireless-10-147-162-81.public.utexas.edu>
+Date:   Thu Mar 24 21:56:27 2016 -0500
+
+    Add log.
+
+commit 6e47c7d0f56bdfaafb84518de6b95e8f271c44cf
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 21:54:45 2016 -0500
+
+    Minor typo. Closed #8. Closed #12. Closed #11. Closed #10. Closed #6. Closed #5. Closed #13.
+
+commit c1184de4399d0024b682c1e3a7c73ff10c19f02e
+Author: Mark Lindberg <marklindberg@wireless-10-147-162-81.public.utexas.edu>
+Date:   Thu Mar 24 21:33:06 2016 -0500
+
+    Stephanie: Add generated pydoc documentation, models.html
+
+commit 6c839d1d9033084656ab57f2b2d81c9a5ad0134b
+Merge: 347e2c5 acb99a0
+Author: Mark Lindberg <marklindberg@wireless-10-147-162-81.public.utexas.edu>
+Date:   Thu Mar 24 21:23:07 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit 347e2c5e26604f98e336928605afe44fd16df6b1
+Author: Mark Lindberg <marklindberg@wireless-10-147-162-81.public.utexas.edu>
+Date:   Thu Mar 24 21:23:04 2016 -0500
+
+    Add unit tests.
+
+commit acb99a07c4eb020a000537dd8480748da43a2abd
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 21:10:25 2016 -0500
+
+    added about page info. Closed #3. Closed #7.
+
+commit 3008671b62371379cbd518a382030c910fad461e
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Mar 24 20:37:18 2016 -0500
+
+    Update README.md
+
+commit b9af9d441c7eb099712ea5bc16db5f0af496ce65
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Mar 24 20:36:06 2016 -0500
+
+    Update README.md
+
+commit 182904f04cd67e407d038db728d95b333f085cc5
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Mar 24 20:35:36 2016 -0500
+
+    Update README.md
+
+commit aa607a5ba52b4eefa14a3260750967a67eaeb887
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 20:16:34 2016 -0500
+
+    Modified Tonya's image, fixed typo, added data sources
+
+commit e5b7cc0a46c757b562fbaa393d508b387959f48b
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 20:06:39 2016 -0500
+
+    Made home page text white
+
+commit a34e44860b7c333db4d4107225ee9cc92a4edd09
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 19:57:02 2016 -0500
+
+    Finished adding links; Members' info still blank
+
+commit ef68f7a23b1c1540094903cccd66401f164eb2da
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 19:43:59 2016 -0500
+
+    Moved 'Total # of commits, etc etc' toward top of page
+
+commit a669b41ce341866419a388c88e7dddf6f6d79198
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 19:27:32 2016 -0500
+
+    Messing around with design & requirements for page
+
+commit a199336b4c651cf71a0c2ad394acf95bba8572b2
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 19:24:31 2016 -0500
+
+    removed a 3
+
+commit 091c841e0667d66e97fa7819f3ba8a04e997a745
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 19:19:31 2016 -0500
+
+    added coverage dependencies
+
+commit e17fc1e92b62b3532921fc0c2b057f576b05ea01
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 19:15:42 2016 -0500
+
+     more fixes to travis and makefile
+
+commit c39f7cc4fa77f5e46baaad36350e807579a4c53f
+Merge: 82fdd54 f1ccd1c
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 19:05:36 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/data-the-gathering into dev
+
+commit 82fdd547d1f6b573ca083dfa231bab3416b9232e
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 19:05:15 2016 -0500
+
+    fixed travis and makefile inconsistencies
+
+commit f1ccd1cdf681b3cb1f3c8a89c69b24e3372551a8
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 18:55:21 2016 -0500
+
+    Organizing information and rows
+
+commit d79bfe60543843766fab1d556ce3b6d822e2e485
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 18:27:05 2016 -0500
+
+    Added clickable links to Artist names and Set names to the outside MtG Wiki
+
+commit 585aaccb3614e6514a875a1388abbc6d833b1faf
+Merge: a735121 7ab9f82
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 18:17:59 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/data-the-gathering into dev
+
+commit a7351211eb3b4b43ae598be5822dd6f180d08c7a
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 18:17:20 2016 -0500
+
+    Closed #16, Closed #9, Closed #8
+
+commit 7ab9f824e6de430c2b285a4fcd60556fd2210397
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 18:13:22 2016 -0500
+
+    Card names now link to an outside MtG Wiki
+
+commit 8aa0e53d5c5f09e67f23b434000420026d96d27f
+Merge: d183685 13a6270
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 18:00:16 2016 -0500
+
+    automerge
+
+commit d18368549d6e875f8c53e491fcdccd6d97fccb1b
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 17:59:20 2016 -0500
+
+    added new Converted Mana Cost column to cards, sets, artists pages
+
+commit 13a6270dc4e7d1e67731c6f739783bc91814fe3e
+Merge: 7da5de2 6c0ac74
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 17:50:05 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev
+
+commit 7da5de23ce33cebe8ee34ca1dead8d258a4e94c6
+Author: Tonya <t.howard@utexas.edu>
+Date:   Thu Mar 24 17:49:37 2016 -0500
+
+    Added About page to nav and skeleton design for aformentioned page
+
+commit 6c0ac7402368dd3fa6af8502a19764da4e1f3f09
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 17:26:34 2016 -0500
+
+    Updated UML to requirements
+
+commit 1340e992138034fb85845d4bbbb3895d8cd9a4ff
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 17:24:34 2016 -0500
+
+    removed filler text in index and added Sample introduction
+
+commit 607a999b39ad1020b6d187ce7bc5583c485faaf3
+Author: Mark Lindberg <marklindberg@wireless-10-147-162-81.public.utexas.edu>
+Date:   Thu Mar 24 17:11:44 2016 -0500
+
+    Fixed mana symbols and sizes.
+
+commit c872af7d800ae2001538070334f714fb8480c8c4
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 16:59:52 2016 -0500
+
+    Reversed and included card, set, and about page changes from shanells commit
+
+commit 181e5a9d3edeeeafbf91cdce27d428948285987d
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 16:56:11 2016 -0500
+
+    reverting
+
+commit 14c36b3cfcbf55221453eaa43053464de42f3e64
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 16:52:48 2016 -0500
+
+    Revert "Made index load for mobile devices"
+    
+    This reverts commit af438ffd2e3d6c79a2c70e723f61151a4cb3656c.
+
+commit 9dcfb767fe2f0263ebfbc7dd567c3aa3ef23ae3e
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Thu Mar 24 16:52:14 2016 -0500
+
+    Revert "Added About.html"
+    
+    This reverts commit 83ddcfe6697abfa97cffe1bd8b39e1cab7481a60.
+
+commit 83ddcfe6697abfa97cffe1bd8b39e1cab7481a60
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Mar 24 04:06:42 2016 -0500
+
+    Added About.html
+
+commit af438ffd2e3d6c79a2c70e723f61151a4cb3656c
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Mar 24 02:50:50 2016 -0500
+
+    Made index load for mobile devices
+
+commit fa754356605e3a6e450c418a378861612bf55ae0
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Mar 24 02:28:17 2016 -0500
+
+    Implemented AngularJs and lots of other stuff. Check the diff
+
+commit d61d58b4d93b5c34745f08c93e9573de7a19e06f
+Author: Shanell Smith <shanell.smith@utexas.edu>
+Date:   Wed Mar 23 22:06:59 2016 -0500
+
+    Fixed all the errors. Will now deploy.
+
+commit c34aa4a1d768ea593edfb0ebf585cf025bc60b19
+Author: Tonya <t.howard@utexas.edu>
+Date:   Wed Mar 23 19:31:13 2016 -0500
+
+    Tweaked splash page a bit; still has filler content
+
+commit de9bb334cfe7a3189966d6864c635f738bea81a3
+Merge: fd6f3ec 1e3fa90
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Wed Mar 23 15:51:20 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/data-the-gathering into dev
+
+commit fd6f3ec05d18047e057f969e858742479ba34066
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Wed Mar 23 15:51:13 2016 -0500
+
+    completed makefile, .gitignore, and added placeholder tests
+
+commit 1e3fa90427cd958a63e2deeb30962e1aa347e698
+Author: Stephanie Wilbur <stephanie.wilbur@utexas.edu>
+Date:   Wed Mar 23 15:40:37 2016 -0500
+
+    Change IDB to IDB1 to match Downing's spec
+
+commit e5f9e4f085e54480361aee9e3534f47a077df6b9
+Author: Stephanie Wilbur <stephanie.wilbur@utexas.edu>
+Date:   Wed Mar 23 15:37:12 2016 -0500
+
+    Populate .travis.yml, will currently fail, referencing things that aren't in the makefile yet
+
+commit 661b9a72fc94195f50e6f8a48b909a963ce1b301
+Merge: 0537e91 cf5d5de
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Wed Mar 23 15:24:51 2016 -0500
+
+    Merge branch 'dev' of github.com:dark-ritual/data-the-gathering into dev
+
+commit 0537e91b9d538f0c4782072fa66b548d9c650cad
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Wed Mar 23 15:24:44 2016 -0500
+
+    updated uml and changed from png to pdf
+
+commit cf5d5de95dc2e0347dfd51862eacae05b9744a7e
+Author: Tonya <t.howard@utexas.edu>
+Date:   Wed Mar 23 15:21:44 2016 -0500
+
+    Updates look of splash page, added logo, header, and custom css
+
+commit 4376e091e8f7635f04bc7f8afc5f403e2d40d5b0
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Wed Mar 23 15:19:18 2016 -0500
+
+    updated uml and changed from png to pdf
+
+commit 80d2583d0e1c619ebe99dd22cb35eb0b8536d9b4
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Wed Mar 23 15:13:12 2016 -0500
+
+    model.py compiles
+
+commit bdefe769466966fa31e8960fde3fb633e363c23f
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Wed Mar 23 15:01:07 2016 -0500
+
+    reorganized directory to comply with requirements
+
+commit c4dac5a27ac5ebf3fa044319341f1758b220f592
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Wed Mar 23 12:33:42 2016 -0500
+
+    added foreign key imports and created models for Card, Set, Artist, and Edition
+
+commit d0fd3fb3020a947d53004a4ad2a1aac12049a2b5
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Mar 22 19:43:36 2016 -0500
+
+    Added page routes to app.py closes #17
+
+commit 3d6e5658f45ce31b7b4a72c5b34fd40326439c4e
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Mar 21 22:14:39 2016 -0500
+
+    added helper scripts for running app locally in a python3 virtualenv, also added destroy script for carina cluster.
+
+commit 838f1ceca23cd06c4e4398666f46a4f49aaeed64
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Mon Mar 21 17:54:40 2016 -0500
+
+    added UML diagram. Closed #4
+
+commit e3e32dcc83f07b184aff09bc950e7d804383b587
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Mar 20 22:32:47 2016 -0500
+
+    Fixed Navbar highlighting and page body style. This closes #1 and #2. Also right aligned Navbar buttons.
+
+commit 36fe770215418b543bbdd97e9afa68a59f827603
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Sun Mar 20 20:09:10 2016 -0500
+
+    added default navbar to index and fixed bootstrap/js dependencies
+
+commit 0a6a10e113bcce4411e87a3d8654e0e13d71ae09
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Sun Mar 20 20:05:14 2016 -0500
+
+    made logo link to index.html
+
+commit 8960e47c211a851b5c7259bafb65e4b0fb9c5ca3
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Sun Mar 20 20:00:49 2016 -0500
+
+    added sets page
+
+commit 58ced65bf1795a5519122ee6e598b9514191e6aa
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Sun Mar 20 19:54:08 2016 -0500
+
+    reorganized table contents
+
+commit 6858cd22db8d666e701038a06e03d2f20e51b800
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Sun Mar 20 19:50:09 2016 -0500
+
+    added artists page
+
+commit c2ffce2b44350d32b0501fc08e478ad272ab43b8
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Sun Mar 20 19:35:38 2016 -0500
+
+    fixed navbar links, changed order of tabs
+
+commit 6ca67c087e6a90783375784a3c0b0d82f86336af
+Author: Javier Enrique De la Garza Sanchez <javier.delagarza@gmail.com>
+Date:   Sun Mar 20 19:28:47 2016 -0500
+
+    Added card page
+
+commit 81759107787c0bbe3fdb1b49caf83af45912b99c
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Fri Mar 18 23:37:48 2016 -0500
+
+    Initial python web app commit using flask and sqlcomposer and bootstrap/jquery
+
+commit 1e96a988beb92f0066c8f4bb426d4342cb6af3ee
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Wed Mar 16 20:47:58 2016 -0500
+
+    Initial commit
+
+commit 5438861057bca7148fda92cef410fa2a130faa1c
+Author: dark-ritual <dark.ritual.mtg@gmail.com>
+Date:   Wed Mar 16 19:29:23 2016 -0500
+
+    Initial commit
