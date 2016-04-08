@@ -16,9 +16,11 @@
     
     <tbody>
       <tr ng-repeat="set in sets | orderBy:sortType:sortReverse">
-        <td>{{ set.name }}</td>
-        <td>{{ set.uncommons }}</td>
+        <td>
+          <a href="#/sets/{{ set.set_id }}">{{ set.name }}
+        </td>
         <td>{{ set.commons }}</td>
+        <td>{{ set.uncommons }}</td>
         <td>{{ set.rares }}</td>
         <td>{{ set.mythics }}</td>
         <td>{{ set.total }}</td>

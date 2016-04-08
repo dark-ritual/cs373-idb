@@ -32,7 +32,7 @@
         	<p class="capitalize" ng-repeat="rarity in splitString(card.rarities, ',')">{{ rarity }}</p>
         </td>
         <td>
-        	<p ng-repeat="cost in splitString(card.cost, '}') track by $index">{{ cost }}</p>
+          {{ card.cost }}
         </td>
       </tr>
     </tbody>

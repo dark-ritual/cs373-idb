@@ -93,6 +93,16 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	$scope.sortReverse  = false;
 	$scope.tableHeaders = [{label: "Set", sortType:"name"}, {label: "Common", sortType:"commons"}, {label: "Uncommon", sortType:"uncommons"}, {label: "Rare", sortType:"rares"}, {label: "Mythic", sortType:"mythics"}, {label: "Total", sortType:"total"}];
 
+	$scope.range = function(start, end)
+	{
+	    var array = new Array();
+	    for(var i = start; i < end; i++)
+	    {
+	        array.push(i);
+	    }
+	    return array;
+	}
+
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
 		if($scope.sortType == $scope.lastSortType) {
@@ -105,6 +115,14 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	$scope.splitString = function(string){
 		var array = string.split(',');
 		return array;
+	}
+
+	$scope.count = function(a){
+		return a.length;
+	}
+
+	$scope.trim = function(a){
+		return s[1];
 	}
 
 	// create the list of entries
@@ -173,7 +191,7 @@ dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstan
 
 dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistInstance', function($scope, $routeParams, ArtistInstance) {
 
-	$scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Sets", sortType:"sets"}];
+	$scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Set", sortType:"sets"}];
 
 	$scope.range = function(start, end)
 	{
@@ -206,9 +224,9 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 //#############Set Instance Controller##################
 //#######################################################
 
-dark.controller('SetInstanceController', ['$scope', function($scope, SetsInstance) {
+dark.controller('SetInstanceController', ['$scope',  '$routeParams', 'SetInstance', function($scope, $routeParams, SetInstance) {
 
-    $scope.tableHeaders = [{label: "Card"}, {label: "Flavor Text"}, {label: "Artist"}];
+    $scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Artist"}];
 
 	$scope.range = function(start, end)
 	{

@@ -1,12 +1,13 @@
-<div class="container" ng-controller="SetsInstanceController">
+<div class="container" ng-controller="SetInstanceController">
 
 	<div class="view-container">
-		<p class="yelling-font text-center">{{ set }} </p>
+		<p class="yelling-font text-center">{{ setinstances[0].name }} </p>
 	</div>
 
 	<div class="container" id="roundedbg-table">
   		<div class="col-md-12 center-block">
 	   	<table class="table table-striped table-hover table-condensed">
+
 	   		<thread>
 	          	<tr>
 	            	<th ng-repeat="tableHeader in tableHeaders">
@@ -19,18 +20,18 @@
 	          	</tr>
 	   		</thread>
 
-	   		<tbody>
-              	<tr ng-repeat="setinstance in setsinstance | orderBy:sortType:sortReverse">
-                	<td> {{ setinstance.image }} </td>
-                	<td>
-                  	<b>{{ setinstance.name }} </b>
-	                  <br>{{ setinstance.artist }}
-	                  <br>{{ setinstance.type }}
-	                  <br>{{ setinstance.text }}
-                	</td>
-               	<td style="width: 125px"><img src="../static/images/worldwake-rare.jpg"> {{ setinstance.sets }}</td>
-             	</tr>
-          	</tbody>
+	        <tbody>
+	          <tr ng-repeat="multiverse_id in setinstances[0].multiverse_ids | orderBy:sortType:sortReverse">
+	            <td><img src="{{ multiverse_id.image_url }}" height="150px"></td>
+	            <td>
+	              <b>{{ multiverse_id.card_id }} </b>
+	              <br>{{ setinstances[0].name}}
+	              <br>{{ setinstances[0].type }}
+	              <br>{{ multiverse_id.flavor }}
+	            </td>
+	            <td>{{ multiverse_id.artist_id }}</td>
+	          </tr>
+	        </tbody>
        	</table>
 		</div>
   	</div>

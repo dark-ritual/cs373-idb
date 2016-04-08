@@ -2,7 +2,7 @@
 
 /* Set Services */
 
-var setinstanceServices = angular.module('setsinstanceServices', ['ngResource']);
+var setinstanceServices = angular.module('setinstanceServices', ['ngResource']);
 
 setinstanceServices.factory('SetInstance', [ '$resource', '$routeParams', function($resource, $routeParams) {
 
