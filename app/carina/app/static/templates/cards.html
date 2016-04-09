@@ -26,7 +26,7 @@
           <p ng-repeat="set in card.sets"><a href="#/sets/{{ set.set_id }}"> {{  set.name  }}
         </td>
         <td>
-        	{{ count(splitString(card.editions)) }}
+        	<div ng-if="card.editions != None">{{ count(splitString(card.editions)) }}</div>
         </td>
         <td>
         	<p class="capitalize" ng-repeat="rarity in splitString(card.rarities, ',')">{{ rarity }}</p>
