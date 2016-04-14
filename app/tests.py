@@ -67,6 +67,7 @@ class MainTestCase(unittest.TestCase):
                            card_id='sample-text', flavor='With rope...',
                            rarity='common', number='24', layout='normal')
         app.addEdition(edition_args)
+        edition_args = dict(card_name='Sample Text', set_name="Set of Awesome", artist_name='Stephanie', **edition_args)
         self.assertEqual([edition_args], app.Artist.query.get('stephanie').serialize_multiverse_ids)
         app.Edition.query.filter_by(multiverse_id='-666').delete()
         app.Card.query.filter_by(card_id='sample-text').delete()
@@ -194,6 +195,7 @@ class MainTestCase(unittest.TestCase):
                            card_id='sample-text', flavor='With rope...',
                            rarity='common', number='24', layout='normal')
         app.addEdition(edition_args)
+        edition_args = dict(card_name='Sample Text', set_name="Set of Awesome", artist_name='Stephanie', **edition_args)
         self.assertEqual([edition_args], app.Card.query.get('sample-text').serialize_multiverse_ids)
         app.Edition.query.filter_by(multiverse_id='-666').delete()
         app.Card.query.filter_by(card_id='sample-text').delete()
@@ -295,6 +297,7 @@ class MainTestCase(unittest.TestCase):
                            card_id='sample-text', flavor='When properly aligned...',
                            rarity='rare', number='22', layout='normal')
         app.addEdition(edition_args)
+        edition_args = dict(card_name='Sample Text', set_name="Xtra Xtravagant Xet", artist_name='Mark', **edition_args)
         self.assertEqual(edition_args, app.Edition.query.get('-999').serialize)
         app.Edition.query.filter_by(multiverse_id='-999').delete()
         app.Card.query.filter_by(card_id='sample-text').delete()
@@ -439,6 +442,7 @@ class MainTestCase(unittest.TestCase):
                            card_id='sample-text', flavor='With rope...',
                            rarity='common', number='24', layout='normal')
         app.addEdition(edition_args)
+        edition_args = dict(card_name='Sample Text', set_name="Set of Awesome", artist_name='Stephanie', **edition_args)
         self.assertEqual([edition_args], app.Set.query.get('SOA').serialize_multiverse_ids)
         app.Edition.query.filter_by(multiverse_id='-666').delete()
         app.Card.query.filter_by(card_id='sample-text').delete()
