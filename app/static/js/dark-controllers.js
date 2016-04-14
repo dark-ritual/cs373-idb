@@ -38,7 +38,7 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	$scope.lastSortType = 'card';
 	$scope.sortType     = 'card'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Edition(s)", sortType:"editions"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
+	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Edition(s)", sortType:"num_editions"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
 
 	$scope.range = function(start, end)
 	{
