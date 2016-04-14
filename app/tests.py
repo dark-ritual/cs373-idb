@@ -1,6 +1,6 @@
 import unittest
 
-from carina.app import app
+import app
 #from carina.app.app import addArtist
 #from carina.app.app import addCard
 #from carina.app.app import addEdition
