@@ -197,7 +197,8 @@ class Edition(db.Model):
         return dict(multiverse_id=self.multiverse_id, artist_id=self.artist_id,
                     set_id=self.set_id, card_id=self.card_id,
                     image_url=self.image_url, flavor=self.flavor,
-                    rarity=self.rarity, number=self.number, layout=self.layout)
+                    rarity=self.rarity, number=self.number, layout=self.layout,
+                    card_name=self.card.name, artist_name=self.artist.name, set_name=self.set.name)
 
 def serialize_card_table_data():
     sql = '''SELECT
@@ -209,7 +210,8 @@ def serialize_card_table_data():
                 GROUP_CONCAT(DISTINCT a.name SEPARATOR ', ') AS artists,
                 GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR ', ') AS artist_ids,
                 GROUP_CONCAT(DISTINCT s.name  SEPARATOR ', ') AS sets,
-                GROUP_CONCAT(DISTINCT s.set_id SEPARATOR ', ') AS set_ids
+                GROUP_CONCAT(DISTINCT s.set_id SEPARATOR ', ') AS set_ids,
+                count(*) AS num_editions
             FROM
                 card AS c
             LEFT JOIN
@@ -246,7 +248,9 @@ def serialize_card_table_data():
                 else:
                     sets.append({'set_id':'', 'name':j})
                 key=key+1
-        ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'], 'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':sets})
+        ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'],
+        'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':sets, 
+        'num_editions':i['num_editions']})
     return ret
 
 def serialize_artist_table_data():
