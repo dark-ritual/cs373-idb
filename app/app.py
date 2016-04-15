@@ -310,10 +310,11 @@ def index(): # pragma: no cover
 ######################
 # Routes for JSON API REST Endpoints
 ######################
-@app.route('/api/artists',  methods=['GET', 'POST'])
-def artistsAPI(): # pragma: no cover
+@app.route('/api/artists/<int:page>',  methods=['GET', 'POST'])
+def artistsAPI(page): # pragma: no cover
     logger.debug("artists")
-    artists = [artist.serialize_part for artist in Artist.query.all()]
+    LIM = 25 # page length
+    artists = [artist.serialize_part for artist in Artist.query.limit(LIM).offset(LIM*(page-1)).all()]
     return json.dumps(artists, sort_keys=True,
                      indent=4, separators=(',', ': '))
 
@@ -329,10 +330,11 @@ def artistAPI(artist_id): # pragma: no cover
     return json.dumps(artist, sort_keys=True,
                      indent=4, separators=(',', ': '))
 
-@app.route('/api/sets',  methods=['GET', 'POST'])
-def setsAPI(): # pragma: no cover
+@app.route('/api/sets/<int:page>',  methods=['GET', 'POST'])
+def setsAPI(page): # pragma: no cover
     logger.debug("sets")
-    sets = [card_set.serialize_part for card_set in Set.query.all()]
+    LIM = 25 # page length
+    sets = [card_set.serialize_part for card_set in Set.query.limit(LIM).offset(LIM*(page-1)).all()]
     return json.dumps(sets, sort_keys=True,
                      indent=4, separators=(',', ': '))
 
@@ -348,10 +350,11 @@ def setAPI(set_id): # pragma: no cover
     return json.dumps(card_set, sort_keys=True,
                      indent=4, separators=(',', ': '))
 
-@app.route('/api/cards',  methods=['GET', 'POST'])
-def cardsAPI(): # pragma: no cover
+@app.route('/api/cards/<int:page>',  methods=['GET', 'POST'])
+def cardsAPI(page): # pragma: no cover
     logger.debug("cards")
-    cards = [card.serialize_full for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
+    LIM = 25 # page length
+    cards = [card.serialize_full for card in Card.query.limit(LIM).offset(LIM*(page-1)).all()]
     return json.dumps(cards, sort_keys=True,
                      indent=4, separators=(',', ': '))
 
