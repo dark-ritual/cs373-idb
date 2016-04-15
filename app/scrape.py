@@ -96,7 +96,7 @@ def main():
                 print("#########################################")
                 skipped += 1
                 continue # double faced, split, etc.
-            doInsertCard(thing)
+            eds = 0
             for ed in thing['editions']:
                 print(ed['multiverse_id'])
                 if ed['multiverse_id'] == 0:
@@ -106,6 +106,9 @@ def main():
                 doInsertArtist(ed)
                 doInsertSet(ed)
                 doInsertEdition(thing['id'], ed)
+                eds += 1
+            if eds:
+                doInsertCard(thing)
 #        if i > 5:
 #        break
         i += 1
