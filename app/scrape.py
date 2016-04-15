@@ -103,12 +103,12 @@ def main():
                     print("*******************************************")
                     skipped += 1
                     continue
+                if not eds:
+                    doInsertCard(thing)
                 doInsertArtist(ed)
                 doInsertSet(ed)
                 doInsertEdition(thing['id'], ed)
                 eds += 1
-            if eds:
-                doInsertCard(thing)
 #        if i > 5:
 #        break
         i += 1
