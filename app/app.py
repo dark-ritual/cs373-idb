@@ -200,54 +200,46 @@ class Edition(db.Model):
                     rarity=self.rarity, number=self.number, layout=self.layout,
                     card_name=self.card.name, artist_name=self.artist.name, set_name=self.set.name)
 
-def serialize_card_table_data():
+def serialize_card_table_data():    
     sql = '''SELECT
                 c.name,
                 c.card_id,
                 c.cost,
-                GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR ', ') AS editions,
-                GROUP_CONCAT(DISTINCT e.rarity SEPARATOR ', ') AS rarities,
-                GROUP_CONCAT(DISTINCT a.name SEPARATOR ', ') AS artists,
-                GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR ', ') AS artist_ids,
-                GROUP_CONCAT(DISTINCT s.name  SEPARATOR ', ') AS sets,
-                GROUP_CONCAT(DISTINCT s.set_id SEPARATOR ', ') AS set_ids,
+                GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR '|!|') AS editions,
+                GROUP_CONCAT(DISTINCT e.rarity SEPARATOR '|!|') AS rarities,
+                GROUP_CONCAT(DISTINCT a.name SEPARATOR '|!|') AS artists,
+                GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR '|!|') AS artist_ids,
+                GROUP_CONCAT(DISTINCT s.name  SEPARATOR '|!|') AS sets,
+                GROUP_CONCAT(DISTINCT s.set_id SEPARATOR '|!|') AS set_ids,
                 count(*) AS num_editions
-            FROM
-                card AS c
-            LEFT JOIN
-                edition AS e ON e.card_id = c.card_id
-            LEFT JOIN
-                artist AS a ON a.artist_id = e.artist_id
-            LEFT JOIN
-                `set` AS s ON s.set_id = e.set_id
-            GROUP BY
-                c.name
+        FROM
+            card AS c
+        LEFT JOIN
+            edition AS e ON e.card_id = c.card_id
+        LEFT JOIN
+            artist AS a ON a.artist_id = e.artist_id
+        LEFT JOIN
+            `set` AS s ON s.set_id = e.set_id
+        GROUP BY
+            c.name
     '''
-    # convert the list of dicts to an array of objects
+    #convert the list of dicts to an array of objects
     ret = []
-    for i in db.engine.execute(sql).fetchall():
+    for x, i in enumerate(db.engine.execute(sql).fetchall()):
         artists=[]
         if i['artists'] != None:
-            dbArtists=i['artists'].split(',')
-            artist_ids=i['artist_ids'].split(',')
-            key=0
-            for j in dbArtists:
-                if key < len(artist_ids):
-                    artists.append({'artist_id':artist_ids[key], 'name':j})
-                else:
-                    artists.append({'artist_id':'', 'name':j})
-                key=key+1
+            dbArtists=i['artists'].split('|!|')
+            artist_ids=i['artist_ids'].split('|!|')
+            for key, j in enumerate(dbArtists):
+                artists.append({'artist_id':artist_ids[key], 'name':j})
+
         sets=[]
         if i['sets'] != None:
-            dbSets=i['sets'].split(',')
-            set_ids=i['set_ids'].split(',')
-            key=0
-            for j in dbSets:
-                if key < len(set_ids):
-                    sets.append({'set_id':set_ids[key], 'name':j})
-                else:
-                    sets.append({'set_id':'', 'name':j})
-                key=key+1
+            dbSets=i['sets'].split('|!|')
+            set_ids=i['set_ids'].split('|!|')
+            for key, j in enumerate(dbSets):
+                sets.append({'set_id':set_ids[key], 'name':j})
+
         ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'],
         'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':sets, 
         'num_editions':i['num_editions']})
@@ -310,8 +302,8 @@ def index(): # pragma: no cover
 ######################
 # Routes for JSON API REST Endpoints
 ######################
-@app.route('/api/artists/<int:page>',  methods=['GET', 'POST'])
-def artistsAPI(page): # pragma: no cover
+@app.route('/api/artists',  methods=['GET'])
+def artistsAPI(): # pragma: no cover
     logger.debug("artists")
     LIM = 25 # page length
     artists = [artist.serialize_part for artist in Artist.query.limit(LIM).offset(LIM*(page-1)).all()]
@@ -319,11 +311,11 @@ def artistsAPI(page): # pragma: no cover
                      indent=4, separators=(',', ': '))
 
 @app.route('/api/artistTable', methods=['GET'])
-def artistTable():
+def artistTable(): # pragma: no cover
     return json.dumps(serialize_artist_table_data(), sort_keys=True,
                      indent=4, separators=(',', ': '))
 
-@app.route('/api/artists/<path:artist_id>', methods=['GET', 'POST'])
+@app.route('/api/artists/<path:artist_id>', methods=['GET'])
 def artistAPI(artist_id): # pragma: no cover
     logger.debug("artist")
     artist = [Artist.query.get(artist_id).serialize_full]
@@ -339,11 +331,11 @@ def setsAPI(page): # pragma: no cover
                      indent=4, separators=(',', ': '))
 
 @app.route('/api/setTable', methods=['GET'])
-def setTable():
+def setTable(): # pragma: no cover
     return json.dumps(serialize_set_table_data(), sort_keys=True,
                      indent=4, separators=(',', ': '))
 
-@app.route('/api/sets/<path:set_id>',  methods=['GET', 'POST'])
+@app.route('/api/sets/<path:set_id>',  methods=['GET'])
 def setAPI(set_id): # pragma: no cover
     logger.debug("card_set")
     card_set = [Set.query.get(set_id).serialize_full]
@@ -359,18 +351,18 @@ def cardsAPI(page): # pragma: no cover
                      indent=4, separators=(',', ': '))
 
 @app.route('/api/cardsTable', methods=['GET'])
-def cardsTable():
+def cardsTable(): # pragma: no cover
     return json.dumps(serialize_card_table_data(), sort_keys=True,
                      indent=4, separators=(',', ': '))
 
-@app.route('/api/cards/<path:card_id>',  methods=['GET', 'POST'])
+@app.route('/api/cards/<path:card_id>',  methods=['GET'])
 def cardAPI(card_id): # pragma: no cover
     logger.debug("card")
     card = [Card.query.get(card_id).serialize_full]
     return json.dumps(card, sort_keys=True,
                      indent=4, separators=(',', ': '))
 
-@app.route('/api/editions/<path:multiverse_id>',  methods=['GET', 'POST'])
+@app.route('/api/editions/<path:multiverse_id>',  methods=['GET'])
 def editionAPI(multiverse_id): # pragma: no cover
     logger.debug("edition")
     edition = [Edition.query.get(multiverse_id).serialize]
