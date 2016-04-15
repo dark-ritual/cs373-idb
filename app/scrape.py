@@ -106,7 +106,8 @@ def main():
                 doInsertArtist(ed)
                 doInsertSet(ed)
                 doInsertEdition(thing['id'], ed)
-#        break
+#        if i > 5:
+        break
         i += 1
         g = get(url.format(i))
         j = g.json()

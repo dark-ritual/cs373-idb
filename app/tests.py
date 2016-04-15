@@ -177,6 +177,47 @@ class MainTestCase(unittest.TestCase):
             app.Card.query.filter_by(card_id='test-card').delete()
             app.db.session.commit()
 
+    def test_card_serialize_table_data(self):
+        try:
+            oldlen = len(app.serialize_card_table_data())
+            artist_args = dict(artist_id='stephanie', name='Stephanie')
+            app.addArtist(artist_args)
+            set_args = dict(set_id='SOA', name='Set of Awesome')
+            app.addSet(set_args)
+            card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
+                            cost='{2}{W}', cmc=3, text='Flying',
+                            formats='standard=True', types='Creature',
+                            subtypes='Sample', power='3', toughness='2')
+            app.addCard(card_args)
+            edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
+                               image_url='dummy-url',
+                               card_id='sample-text', flavor='With rope...',
+                               rarity='common', number='24', layout='normal')
+            app.addEdition(edition_args)
+            self.assertEqual(1+oldlen, len(app.serialize_card_table_data()))
+
+            # artist_args = dict(artist_id='javier', name='Javier')
+            # app.addArtist(artist_args)
+            set_args = dict(set_id='JGTHGKJH', name='Javier Grandious Tomahawking')
+            app.addSet(set_args)
+            edition_args = dict(multiverse_id='666', artist_id='stephanie', set_id='JGTHGKJH',
+                               image_url='dummy-url',
+                               card_id='sample-text', flavor='With rope...',
+                               rarity='common', number='24', layout='normal')
+            app.addEdition(edition_args)
+            self.assertEqual(1+oldlen, len(app.serialize_card_table_data()))
+
+        finally:
+            app.Edition.query.filter_by(multiverse_id='-666').delete()
+            app.Edition.query.filter_by(multiverse_id='666').delete()
+            app.Card.query.filter_by(card_id='sample-text').delete()
+            app.Set.query.filter_by(set_id='JGTHGKJH').delete()
+            # app.Artist.query.filter_by(artist_id='javier').delete()
+            app.Set.query.filter_by(set_id='SOA').delete()
+            app.Artist.query.filter_by(artist_id='stephanie').delete()
+            app.db.session.commit()
+            self.assertEqual(oldlen, len(app.serialize_card_table_data()))
+
     def test_card_serialize_full(self):
         try:
             artist_args = dict(artist_id='stephanie', name='Stephanie')
@@ -568,6 +609,7 @@ class MainTestCase(unittest.TestCase):
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
             self.assertEqual(oldlen, len(app.serialize_set_table_data()))
+
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
