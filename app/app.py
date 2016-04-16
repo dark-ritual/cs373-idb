@@ -312,7 +312,8 @@ def json_resp(data): # pragma: no cover
 @app.route('/api/artists',  methods=['GET'])
 def artistsAPI(): # pragma: no cover
     logger.debug("artists")
-    artists = [artist.serialize_part for artist in Artist.query.all()]
+    LIM = 25 # page length
+    artists = [artist.serialize_part for artist in Artist.query.limit(LIM).offset(LIM*(page-1)).all()]
     return json_resp(artists)
 
 @app.route('/api/artists/<path:artist_id>', methods=['GET'])
@@ -325,10 +326,11 @@ def artistAPI(artist_id): # pragma: no cover
 def artistTable(): # pragma: no cover
     return json_resp(serialize_artist_table_data())
 
-@app.route('/api/sets',  methods=['GET'])
-def setsAPI(): # pragma: no cover
+@app.route('/api/sets/<int:page>',  methods=['GET', 'POST'])
+def setsAPI(page): # pragma: no cover
     logger.debug("sets")
-    sets = [card_set.serialize_part for card_set in Set.query.all()]
+    LIM = 25 # page length
+    sets = [card_set.serialize_part for card_set in Set.query.limit(LIM).offset(LIM*(page-1)).all()]
     return json_resp(sets)
 
 @app.route('/api/sets/<path:set_id>',  methods=['GET'])
@@ -342,10 +344,11 @@ def setTable(): # pragma: no cover
     return json_resp(serialize_set_table_data())
 
 
-@app.route('/api/cards',  methods=['GET'])
-def cardsAPI(): # pragma: no cover
+@app.route('/api/cards/<int:page>',  methods=['GET', 'POST'])
+def cardsAPI(page): # pragma: no cover
     logger.debug("cards")
-    cards = [card.serialize_full for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
+    LIM = 25 # page length
+    cards = [card.serialize_full for card in Card.query.limit(LIM).offset(LIM*(page-1)).all()]
     return json_resp(cards)
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET'])
