@@ -5,9 +5,9 @@ HOST: http://darkritual.cards/api/
 
 Data: The Gathering is a simple API allowing players to view cards, sets, and artists.
 
-## All Editions of All Cards [/cards]
+## All Editions of a Page of Cards [/cards/{page}]
 
-### List ALL cards [GET]
+### List 25 cards [GET]
 
 + Response 200 (application/json)
 
@@ -96,9 +96,9 @@ Data: The Gathering is a simple API allowing players to view cards, sets, and ar
         }
             
 
-## All Sets [/sets]
+## Page of Sets [/sets/{page}]
 
-### List ALL sets [GET]
+### List 25 sets [GET]
 
 + Response 200 (application/json)
 
@@ -135,9 +135,9 @@ Data: The Gathering is a simple API allowing players to view cards, sets, and ar
             ]
         }
 
-## All Artists [/artists]
+## Page of Artists [/artists/{page}]
 
-### List all artists [GET]
+### List 25 artists [GET]
 
 + Response 200 (application/json)
 
