@@ -353,8 +353,11 @@ def cardsAPI(): # pragma: no cover
 def cardAPI(card_id): # pragma: no cover
     logger.debug("card")
     card = [Card.query.get(card_id).serialize_full]
-    return json.dumps(card, sort_keys=True,
-                     indent=4, separators=(',', ': '))
+    ret = json.dumps(card, sort_keys=True,
+                   indent=4, separators=(',', ': '))
+    ret = app.make_response(ret)
+    ret.mimetype = 'application/json'
+    return ret
 
 @app.route('/api/cardsTable', methods=['GET'])
 def cardsTable(): # pragma: no cover
