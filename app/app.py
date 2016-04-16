@@ -336,8 +336,11 @@ def setAPI(set_id): # pragma: no cover
 
 @app.route('/api/setTable', methods=['GET'])
 def setTable(): # pragma: no cover
-    return json.dumps(serialize_set_table_data(), sort_keys=True,
+    ret = json.dumps(serialize_set_table_data(), sort_keys=True,
                      indent=4, separators=(',', ': '))
+    ret = app.make_response(ret)
+    ret.mimetype = 'application/json'
+    return ret
 
 @app.route('/api/cards',  methods=['GET'])
 def cardsAPI(): # pragma: no cover
