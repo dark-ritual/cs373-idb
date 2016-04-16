@@ -7,7 +7,6 @@ from getpass import getuser
 from flask import Flask, render_template, redirect, url_for
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
-from array import array
 
 ##################################################################
 ######################## SETUP ###################################
@@ -344,8 +343,11 @@ def setTable(): # pragma: no cover
 def cardsAPI(): # pragma: no cover
     logger.debug("cards")
     cards = [card.serialize_full for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
-    return json.dumps(cards, sort_keys=True,
-                     indent=4, separators=(',', ': '))
+    ret = json.dumps(cards, sort_keys=True,
+                   indent=4, separators=(',', ': '))
+    ret = make_response(ret)
+    ret.mimetype = 'application/json'
+    return ret
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET'])
 def cardAPI(card_id): # pragma: no cover
