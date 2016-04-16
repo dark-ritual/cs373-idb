@@ -227,18 +227,18 @@ def serialize_card_table_data():
     ret = []
     for x, i in enumerate(db.engine.execute(sql).fetchall()):
         artists=[]
-        if i['artists'] != None:
-            dbArtists=i['artists'].split('|!|')
-            artist_ids=i['artist_ids'].split('|!|')
-            for key, j in enumerate(dbArtists):
-                artists.append({'artist_id':artist_ids[key], 'name':j})
+        # if i['artists'] != None:
+        dbArtists=i['artists'].split('|!|')
+        artist_ids=i['artist_ids'].split('|!|')
+        for key, j in enumerate(dbArtists):
+            artists.append({'artist_id':artist_ids[key], 'name':j})
 
         sets=[]
-        if i['sets'] != None:
-            dbSets=i['sets'].split('|!|')
-            set_ids=i['set_ids'].split('|!|')
-            for key, j in enumerate(dbSets):
-                sets.append({'set_id':set_ids[key], 'name':j})
+        # if i['sets'] != None:
+        dbSets=i['sets'].split('|!|')
+        set_ids=i['set_ids'].split('|!|')
+        for key, j in enumerate(dbSets):
+            sets.append({'set_id':set_ids[key], 'name':j})
 
         ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'],
         'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':sets, 
