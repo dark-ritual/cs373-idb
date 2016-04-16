@@ -345,7 +345,7 @@ def cardsAPI(): # pragma: no cover
     cards = [card.serialize_full for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
     ret = json.dumps(cards, sort_keys=True,
                    indent=4, separators=(',', ': '))
-    ret = make_response(ret)
+    ret = app.make_response(ret)
     ret.mimetype = 'application/json'
     return ret
 
