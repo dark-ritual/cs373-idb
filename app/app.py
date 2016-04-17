@@ -309,8 +309,8 @@ def json_resp(data): # pragma: no cover
     ret.mimetype = 'application/json'
     return ret
 
-@app.route('/api/artists',  methods=['GET'])
-def artistsAPI(): # pragma: no cover
+@app.route('/api/artists<int:page>',  methods=['GET'])
+def artistsAPI(page): # pragma: no cover
     logger.debug("artists")
     LIM = 25 # page length
     artists = [artist.serialize_part for artist in Artist.query.limit(LIM).offset(LIM*(page-1)).all()]
