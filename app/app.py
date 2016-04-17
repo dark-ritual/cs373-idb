@@ -309,7 +309,7 @@ def json_resp(data): # pragma: no cover
     ret.mimetype = 'application/json'
     return ret
 
-@app.route('/api/artists<int:page>',  methods=['GET'])
+@app.route('/api/artists/<int:page>',  methods=['GET'])
 def artistsAPI(page): # pragma: no cover
     logger.debug("artists")
     LIM = 25 # page length
