@@ -110,7 +110,7 @@ def main():
                 doInsertEdition(thing['id'], ed)
                 eds += 1
 #        if i > 5:
-#        break
+        break
         i += 1
         g = get(url.format(i))
         j = g.json()

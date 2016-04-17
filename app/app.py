@@ -3,6 +3,10 @@ import os
 import json
 import subprocess
 from getpass import getuser
+import re
+from sqlalchemy.sql import text
+import operator
+
 
 from flask import Flask, render_template, redirect, url_for
 from flask.ext.script import Manager
@@ -200,7 +204,7 @@ class Edition(db.Model):
                     rarity=self.rarity, number=self.number, layout=self.layout,
                     card_name=self.card.name, artist_name=self.artist.name, set_name=self.set.name)
 
-def serialize_card_table_data():    
+def serialize_card_table_data():
     sql = '''SELECT
                 c.name,
                 c.card_id,
@@ -241,7 +245,7 @@ def serialize_card_table_data():
             sets.append({'set_id':set_ids[key], 'name':j})
 
         ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'],
-        'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':sets, 
+        'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':sets,
         'num_editions':i['num_editions']})
     return ret
 
@@ -281,7 +285,85 @@ def serialize_set_table_data():
     ret = []
     for i in db.engine.execute(sql).fetchall():
         ret.append({'name':i['name'], 'set_id':i['set_id'], 'total':i['total'], 'commons':i['commons'], 'uncommons':i['uncommons'], 'rares':i['rares'], 'mythics':i['mythics']})
-    return ret 
+    return ret
+
+cols = ['c.name', 'c.text', 'c.types', 'c.subtypes', 'c.formats', 'c.colors', 'e.flavor', 'e.rarity', 'e.layout',
+        'a.name', 's.set_id', 's.name']
+
+def gensql(andor, number):
+    sql = '''
+select    c.card_id,
+          a.artist_id,
+          s.set_id,
+          c.name,
+          c.text,
+          c.types,
+          c.subtypes,
+          c.formats,
+          c.colors,
+          e.flavor,
+          e.rarity,
+          e.layout,
+          a.name,
+          s.set_id,
+          s.name
+from      card as c
+left join edition as e
+on        e.card_id = c.card_id
+left join artist as a
+on        a.artist_id = e.artist_id
+left join `set` as s
+on        s.set_id = e.set_id
+where'''
+    for i in range(0, number):
+        firstcol = True
+        if i != 0:
+            sql += " " + andor
+        sql += " ("
+        for col in cols:
+            if firstcol:
+                firstcol = False
+            else:
+                sql += "or "
+            sql += " {} like :thing".format(col) + str(i) + "\n"
+        sql += " ) \n"
+    return sql
+
+def foo(args, string):
+    i = 0
+    for arg in args:
+        #print(arg, string)
+        if arg.lower() in str(string).lower():
+            #str(string).replace(arg.lower, "<b>" + arg.lower + "</b>")
+            i += 1
+    return i
+
+def boldify(skwark, args):
+    result = []
+    for thing in skwark:
+        for arg in args:
+            thing = re.sub(r'({})'.format(arg), r'<b>\1</b>', str(thing), flags=re.IGNORECASE)
+        result.append(thing)
+    return list(result)
+
+def search_card_names(isand, args):
+    args = [arg for arg in args.split(" ") if arg != '']
+    if isand:
+        sql = gensql('and', len(args))
+    else:
+        sql = gensql('or', len(args))
+    params = {'thing{}'.format(i): '%%' + res + '%%' for i,res in enumerate(args)}
+    res = db.engine.execute(text(sql), params).fetchall()
+    resd = {i:max(foo(args, col) for col in thing) for i, thing in enumerate(res)}
+    sorted_restup = list(reversed(sorted(resd.items(), key=operator.itemgetter(1))))
+    cats           = [res[index][:3] for index, num in sorted_restup]
+    sorted_results = [boldify(res[index][3:], args) for index, num in sorted_restup]
+    keys = ['card_id', 'artist_id', 'set_id', 'name', 'text', 'types',
+            'subtypes', 'formats', 'colors', 'flavor', 'rarity', 'layout',
+            'artist_name', 'setid', 'set_name']
+    cats.extend(sorted_results)
+    final = [{k:a for k, a in zip(keys, cat)} for cat in cats]
+    return final
 
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################
@@ -302,6 +384,19 @@ def index(): # pragma: no cover
 ######################
 # Routes for JSON API REST Endpoints
 ######################
+
+@app.route('/api/search/or/<path:search_query>', methods=['GET'])
+def orSearchAPI(search_query): # pragma: no cover
+    logger.debug('or search')
+    return json.dumps(search_card_names(0, search_query), sort_keys=True,
+                     indent=4, separators=(',', ': '))
+
+@app.route('/api/search/and/<path:search_query>', methods=['GET'])
+def andSearchAPI(search_query): # pragma: no cover
+    logger.debug('and search')
+    return json.dumps(search_card_names(1, search_query), sort_keys=True,
+                     indent=4, separators=(',', ': '))
+
 @app.route('/api/artists',  methods=['GET'])
 def artistsAPI(): # pragma: no cover
     logger.debug("artists")
