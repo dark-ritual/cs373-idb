@@ -203,6 +203,32 @@ class Edition(db.Model):
                     rarity=self.rarity, number=self.number, layout=self.layout,
                     card_name=self.card.name, artist_name=self.artist.name, set_name=self.set.name)
 
+#def serialize_card_table_data():
+#    sql = '''SELECT
+#                c.name,
+#                c.card_id,
+#                c.cost,
+#                GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR '|!|') AS editions,
+#                GROUP_CONCAT(DISTINCT e.rarity SEPARATOR '|!|') AS rarities,
+#                GROUP_CONCAT(DISTINCT a.name SEPARATOR '|!|') AS artists,
+#                GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR '|!|') AS artist_ids,
+#                GROUP_CONCAT(DISTINCT s.name  SEPARATOR '|!|') AS sets,
+#                GROUP_CONCAT(DISTINCT s.set_id SEPARATOR '|!|') AS set_ids,
+#                count(*) AS num_editions
+#        FROM
+#            card AS c
+#        LEFT JOIN
+#            edition AS e ON e.card_id = c.card_id
+#        LEFT JOIN
+#            artist AS a ON a.artist_id = e.artist_id
+#        LEFT JOIN
+#            `set` AS s ON s.set_id = e.set_id
+#        GROUP BY
+#            c.name
+#    '''
+#    #convert the list of dicts to an array of objects
+#    ret = []
+#    for x, i in enumerate(db.engine.execute(sql).fetchall()):
 def serialize_card_table_data():
     sql = '''SELECT
                 c.name,
@@ -242,7 +268,6 @@ def serialize_card_table_data():
         set_ids=i['set_ids'].split('|!|')
         for key, j in enumerate(dbSets):
             sets.append({'set_id':set_ids[key], 'name':j})
-
         ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'],
         'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':sets,
         'num_editions':i['num_editions']})
@@ -355,14 +380,17 @@ def search_card_names(isand, args):
     res = db.engine.execute(text(sql), params).fetchall()
     resd = {i:max(foo(args, col) for col in thing) for i, thing in enumerate(res)}
     sorted_restup = list(reversed(sorted(resd.items(), key=operator.itemgetter(1))))
-    cats           = [res[index][:3] for index, num in sorted_restup]
+    cats           = [list(res[index][:3]) for index, num in sorted_restup]
     sorted_results = [boldify(res[index][3:], args) for index, num in sorted_restup]
     keys = ['card_id', 'artist_id', 'set_id', 'name', 'text', 'types',
             'subtypes', 'formats', 'colors', 'flavor', 'rarity', 'layout',
             'artist_name', 'setid', 'set_name']
-    cats.extend(sorted_results)
-    final = [{k:a for k, a in zip(keys, cat)} for cat in cats]
-    return final
+    finals = [cat + sr for cat, sr in zip(cats, sorted_results)]
+    print(finals)
+    final = [{k:a for k, a in zip(keys, cat)} for cat in finals]
+    return json.dumps(final, sort_keys=True,
+                      indent=4, separators=(',', ': '))
+#    return final
 
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################

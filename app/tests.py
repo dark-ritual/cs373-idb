@@ -7,7 +7,7 @@ import app
 #from carina.app.app import addSet
 from sqlalchemy import exc
 
-class MainTestCase(unittest.TestCase): 
+class MainTestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -196,8 +196,6 @@ class MainTestCase(unittest.TestCase):
             app.addEdition(edition_args)
             self.assertEqual(1+oldlen, len(app.serialize_card_table_data()))
 
-            # artist_args = dict(artist_id='javier', name='Javier')
-            # app.addArtist(artist_args)
             set_args = dict(set_id='JGTHGKJH', name='Javier Grandious Tomahawking')
             app.addSet(set_args)
             edition_args = dict(multiverse_id='666', artist_id='stephanie', set_id='JGTHGKJH',
@@ -206,7 +204,6 @@ class MainTestCase(unittest.TestCase):
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
             self.assertEqual(1+oldlen, len(app.serialize_card_table_data()))
-
         finally:
             app.Edition.query.filter_by(multiverse_id='-666').delete()
             app.Edition.query.filter_by(multiverse_id='666').delete()
