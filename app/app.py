@@ -11,7 +11,6 @@ import operator
 from flask import Flask, render_template, redirect, url_for
 from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
-from array import array
 
 ##################################################################
 ######################## SETUP ###################################
@@ -385,81 +384,82 @@ def index(): # pragma: no cover
 # Routes for JSON API REST Endpoints
 ######################
 
+def json_resp(data): # pragma: no cover
+    ret = json.dumps(data, sort_keys=True,
+                     indent=4, separators=(',', ': '))
+    ret = app.make_response(ret)
+    ret.mimetype = 'application/json'
+    return ret
+
 @app.route('/api/search/or/<path:search_query>', methods=['GET'])
 def orSearchAPI(search_query): # pragma: no cover
     logger.debug('or search')
     return json.dumps(search_card_names(0, search_query), sort_keys=True,
-                     indent=4, separators=(',', ': '))
+                      indent=4, separators=(',', ': '))
 
 @app.route('/api/search/and/<path:search_query>', methods=['GET'])
 def andSearchAPI(search_query): # pragma: no cover
     logger.debug('and search')
     return json.dumps(search_card_names(1, search_query), sort_keys=True,
-                     indent=4, separators=(',', ': '))
+                      indent=4, separators=(',', ': '))
 
-@app.route('/api/artists',  methods=['GET'])
-def artistsAPI(): # pragma: no cover
+@app.route('/api/artists/<int:page>',  methods=['GET'])
+def artistsAPI(page): # pragma: no cover
     logger.debug("artists")
-    artists = [artist.serialize_part for artist in Artist.query.all()]
-    return json.dumps(artists, sort_keys=True,
-                     indent=4, separators=(',', ': '))
-
-@app.route('/api/artistTable', methods=['GET'])
-def artistTable(): # pragma: no cover
-    return json.dumps(serialize_artist_table_data(), sort_keys=True,
-                     indent=4, separators=(',', ': '))
+    LIM = 25 # page length
+    artists = [artist.serialize_part for artist in Artist.query.limit(LIM).offset(LIM*(page-1)).all()]
+    return json_resp(artists)
 
 @app.route('/api/artists/<path:artist_id>', methods=['GET'])
 def artistAPI(artist_id): # pragma: no cover
     logger.debug("artist")
     artist = [Artist.query.get(artist_id).serialize_full]
-    return json.dumps(artist, sort_keys=True,
-                     indent=4, separators=(',', ': '))
+    return json_resp(artist)
 
-@app.route('/api/sets',  methods=['GET'])
-def setsAPI(): # pragma: no cover
+@app.route('/api/artistTable', methods=['GET'])
+def artistTable(): # pragma: no cover
+    return json_resp(serialize_artist_table_data())
+
+@app.route('/api/sets/<int:page>',  methods=['GET', 'POST'])
+def setsAPI(page): # pragma: no cover
     logger.debug("sets")
-    sets = [card_set.serialize_part for card_set in Set.query.all()]
-    return json.dumps(sets, sort_keys=True,
-                     indent=4, separators=(',', ': '))
-
-@app.route('/api/setTable', methods=['GET'])
-def setTable(): # pragma: no cover
-    return json.dumps(serialize_set_table_data(), sort_keys=True,
-                     indent=4, separators=(',', ': '))
+    LIM = 25 # page length
+    sets = [card_set.serialize_part for card_set in Set.query.limit(LIM).offset(LIM*(page-1)).all()]
+    return json_resp(sets)
 
 @app.route('/api/sets/<path:set_id>',  methods=['GET'])
 def setAPI(set_id): # pragma: no cover
     logger.debug("card_set")
     card_set = [Set.query.get(set_id).serialize_full]
-    return json.dumps(card_set, sort_keys=True,
-                     indent=4, separators=(',', ': '))
+    return json_resp(card_set)
 
-@app.route('/api/cards',  methods=['GET'])
-def cardsAPI(): # pragma: no cover
+@app.route('/api/setTable', methods=['GET'])
+def setTable(): # pragma: no cover
+    return json_resp(serialize_set_table_data())
+
+
+@app.route('/api/cards/<int:page>',  methods=['GET', 'POST'])
+def cardsAPI(page): # pragma: no cover
     logger.debug("cards")
-    cards = [card.serialize_full for card in Card.query.all()] #NOTE: thanks to the @property serializers on the Card model!
-    return json.dumps(cards, sort_keys=True,
-                     indent=4, separators=(',', ': '))
-
-@app.route('/api/cardsTable', methods=['GET'])
-def cardsTable(): # pragma: no cover
-    return json.dumps(serialize_card_table_data(), sort_keys=True,
-                     indent=4, separators=(',', ': '))
+    LIM = 25 # page length
+    cards = [card.serialize_full for card in Card.query.limit(LIM).offset(LIM*(page-1)).all()]
+    return json_resp(cards)
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET'])
 def cardAPI(card_id): # pragma: no cover
     logger.debug("card")
     card = [Card.query.get(card_id).serialize_full]
-    return json.dumps(card, sort_keys=True,
-                     indent=4, separators=(',', ': '))
+    return json_resp(card)
+
+@app.route('/api/cardsTable', methods=['GET'])
+def cardsTable(): # pragma: no cover
+    return json_resp(serialize_card_table_data())
 
 @app.route('/api/editions/<path:multiverse_id>',  methods=['GET'])
 def editionAPI(multiverse_id): # pragma: no cover
     logger.debug("edition")
     edition = [Edition.query.get(multiverse_id).serialize]
-    return json.dumps(edition, sort_keys=True,
-                     indent=4, separators=(',', ': '))
+    return json_resp(edition)
 
 ##################################################################
 ###################### FLASK MANAGER COMMANDS ####################
