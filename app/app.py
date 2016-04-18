@@ -314,7 +314,7 @@ def serialize_set_table_data():
 cols = ['c.name', 'c.text', 'c.types', 'c.subtypes', 'c.formats', 'c.colors', 'e.flavor', 'e.rarity', 'e.layout',
         'a.name', 's.set_id', 's.name']
 
-def gensql(andor, number):
+def gensql(number):
     sql = '''
 select    c.card_id,
           a.artist_id,
@@ -342,7 +342,7 @@ where'''
     for i in range(0, number):
         firstcol = True
         if i != 0:
-            sql += " " + andor
+            sql += " " + ' or '
         sql += " ("
         for col in cols:
             if firstcol:
@@ -370,12 +370,9 @@ def boldify(skwark, args):
         result.append(thing)
     return list(result)
 
-def search_card_names(isand, args):
+def search_card_names(args):
     args = [arg for arg in args.split(" ") if arg != '']
-    if isand:
-        sql = gensql('and', len(args))
-    else:
-        sql = gensql('or', len(args))
+    sql = gensql(len(args))
     params = {'thing{}'.format(i): '%%' + res + '%%' for i,res in enumerate(args)}
     res = db.engine.execute(text(sql), params).fetchall()
     resd = {i:max(foo(args, col) for col in thing) for i, thing in enumerate(res)}
@@ -419,16 +416,10 @@ def json_resp(data): # pragma: no cover
     ret.mimetype = 'application/json'
     return ret
 
-@app.route('/api/search/or/<path:search_query>', methods=['GET'])
-def orSearchAPI(search_query): # pragma: no cover
-    logger.debug('or search')
-    return json.dumps(search_card_names(0, search_query), sort_keys=True,
-                      indent=4, separators=(',', ': '))
-
-@app.route('/api/search/and/<path:search_query>', methods=['GET'])
-def andSearchAPI(search_query): # pragma: no cover
+@app.route('/api/search/<path:search_query>', methods=['GET'])
+def searchAPI(search_query): # pragma: no cover
     logger.debug('and search')
-    return json.dumps(search_card_names(1, search_query), sort_keys=True,
+    return json.dumps(search_card_names(search_query), sort_keys=True,
                       indent=4, separators=(',', ': '))
 
 @app.route('/api/artists/<int:page>',  methods=['GET'])
