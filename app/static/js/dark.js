@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var dark = angular.module('dark', [ 'ngRoute', 'darkControllers', 'cardsServices', 'setsServices', 'artistsServices', 'cardinstanceServices', 'artistinstanceServices', 'setinstanceServices', 'angularUtils.directives.dirPagination' ]);
+var dark = angular.module('dark', [ 'ngRoute', 'slick', 'darkControllers', 'cardsServices', 'setsServices', 'artistsServices', 'cardinstanceServices', 'artistinstanceServices', 'setinstanceServices', 'angularUtils.directives.dirPagination' ]);
 
 dark.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/cards', {

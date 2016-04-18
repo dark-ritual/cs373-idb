@@ -9,6 +9,63 @@ var darkControllers = angular.module('darkControllers', []);
 //#################################################
 
 dark.controller('HomeController', ['$scope', function($scope) {
+	
+	$('.center').slick({
+		centerMode : true,
+		centerPadding : '60px',
+		slidesToShow : 3,
+		autoplay : true,
+		autoplaySpeed : 2000,
+		responsive : [ {
+			breakpoint : 768,
+			settings : {
+				arrows : false,
+				centerMode : true,
+				centerPadding : '40px',
+				slidesToShow : 3
+			}
+		}, {
+			breakpoint : 480,
+			settings : {
+				arrows : false,
+				centerMode : true,
+				centerPadding : '40px',
+				slidesToShow : 1
+			}
+		} ]
+	});
+	
+	$scope.carouselOptions = [ {
+		name : "1",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=386731&type=card"
+	}, {
+		name : "2",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=19733&type=card"
+	}, {
+		name : "3",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=201141&type=card"
+	}, {
+		name : "4",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=184622&type=card"
+	}, {
+		name : "5",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=243215&type=card"
+	}, {
+		name : "6",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=391928&type=card"
+	}, {
+		name : "7",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=394699&type=card"
+	}, {
+		name : "8",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=407555&type=card"
+	}, {
+		name : "9",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=394570&type=card"
+	}, {
+		name : "10",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=271213&type=card"
+	} ]
 
 } ]);
 
@@ -105,13 +162,6 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 
 	// create the list of entries
 	$scope.cards = Cards.query();
-
-	/*for(card in $scope.cards) {
-		currentCost = card.cost;
-		// TODO: parse currentCost to get a color "type" and a numerical "value" for every color in the string
-		newCost = [{type:"white", value:4}];
-		card.cost = newCost;
-	}*/
 } ]);
 
 //#################################################
@@ -275,9 +325,6 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 	// create the list of entries
 	$scope.artistinstances = ArtistInstance.query($routeParams);
 
-	//$scope.getName = function(card_id){
-	//	return CardInstance.query(card_id).name;
-	//}
 } ]);
 
 //#######################################################
@@ -309,13 +356,7 @@ dark.controller('SetInstanceController', ['$scope',  '$routeParams', 'SetInstanc
 
 	// create the list of entries
     $scope.setinstances = SetInstance.query($routeParams)
-/*	$scope.setsinstance = [
-	                  { image: "../static/images/imagename", name: "Admonition Angel", artist:"Steve Argyle", type:"Creature - Flying", text:"Landfall — Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.\nWhen Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.", sets: "WorldWake"},
-	                  { image: "../static/images/imagename", name: "Angelic Arbiter", artist: "Text to fill in...", sets: "Magic: The Gathering-Commander"},
-	    ];
-*/
 
-	//$scope.set = "Worldwake";
 } ]);
 
 //###############################################

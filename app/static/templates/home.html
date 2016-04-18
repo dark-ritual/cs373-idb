@@ -1,10 +1,31 @@
 <!-- Main Content -->
-<div class="container container-extra" style="color:#FFFFFF">
+
+<div class="container container-extra" style="color: #FFFFFF">
 	<div class="row bottom-margin">
-		<span class="yelling-font">Welcome!</span> 
-		<p>The Dark Ritual presents: Data: The Gathering Database. Here we have information regarding the cards, artists, and sets of MtG card game. Feel free to explore the website!
-		</p>
-		<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/wizards_magic" data-widget-id="717527961843273728">Tweets by @wizards_magic</a>
+		<span class="yelling-font">Welcome!</span>
+		<p>The Dark Ritual presents: Data: The Gathering Database. Here we
+			have information regarding the cards, artists, and sets of MtG card
+			game. Feel free to explore the website!</p>
+		<p></p>
+		<div class="content">
+		<slick center-mode="true" center-padding="60px" variable-width="true"
+			adaptive-height="true" slides-to-show=3 autoplay="true"
+			autoplay-speed="2000" pause-on-hover="true"
+			responsive="[{breakpoint: 768,settings: {arrows: false,centerMode: true,centerPadding: '40px',slidesToShow: 3}},{breakpoint: 480,settings: {arrows: false,centerMode: true,centerPadding: '40px',slidesToShow: 1}}]">
+			
+		<div style="background-image: url('{{option.imageUrl}}')"
+			class="slider center" ng-repeat="option in carouselOptions">
+			<h3>{{option.name}}</h3>
+		</div>
+		</slick>
+	</div>
+		<p></p>
+		<a class="twitter-timeline" data-dnt="true"
+			href="https://twitter.com/wizards_magic"
+			data-widget-id="717527961843273728">Tweets by @wizards_magic</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-	</div> <!-- /row -->
+	</div>
+	<!-- /row -->
 </div>
+
+
