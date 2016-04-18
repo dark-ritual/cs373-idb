@@ -383,11 +383,11 @@ def search_card_names(args):
             'subtypes', 'formats', 'colors', 'flavor', 'rarity', 'layout',
             'artist_name', 'setid', 'set_name']
     finals = [cat + sr for cat, sr in zip(cats, sorted_results)]
-    print(finals)
+    #print(finals)
     final = [{k:a for k, a in zip(keys, cat)} for cat in finals]
-    return json.dumps(final, sort_keys=True,
-                      indent=4, separators=(',', ': '))
-#    return final
+#    return json.dumps(final, sort_keys=True,
+#                      indent=4, separators=(',', ': '))
+    return final
 
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################
@@ -419,8 +419,7 @@ def json_resp(data): # pragma: no cover
 @app.route('/api/search/<path:search_query>', methods=['GET'])
 def searchAPI(search_query): # pragma: no cover
     logger.debug('and search')
-    return json.dumps(search_card_names(search_query), sort_keys=True,
-                      indent=4, separators=(',', ': '))
+    return json_resp(search_card_names(search_query))
 
 @app.route('/api/artists/<int:page>',  methods=['GET'])
 def artistsAPI(page): # pragma: no cover
