@@ -157,7 +157,7 @@ var anchor = svg.append("g")
 var graphic = deep.selectAll("svg,canvas");
 
 var image = new Image;
-image.src = "../static/images/collage.jpg";
+image.src = "../static/images/collage.png";
 image.onload = resized;
 
 d3.select(window)
