@@ -20,6 +20,11 @@ a{
 	color: orange;
     text-decoration: none;
     background-color: transparent;
+    padding-left: 20px;
+}
+
+p {
+	padding-left:20px;
 }
 
 p.capitalize{
