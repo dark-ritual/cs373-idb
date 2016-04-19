@@ -1,6 +1,6 @@
 <div class="container" ng-controller="CardsController">
   
-  <table class="table table-striped table-hover table-condensed">
+  <table class="table table-striped table-hover table-condensed" id="roundedbg-table">
     
     <thead>
       <tr>
@@ -29,7 +29,7 @@
         	<div ng-if="card.editions != None">{{ card.num_editions }}</div>
         </td>
         <td>
-        	<p class="capitalize" ng-repeat="rarity in splitString(card.rarities, ',')">{{ rarity }}</p>
+        	<p class="capitalize" ng-repeat="rarity in splitString(card.rarities, '|!|')">{{ rarity }}</p>
         </td>
         <td>
         	<div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>

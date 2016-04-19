@@ -31,4 +31,4 @@ pip install --upgrade pip
 # get the requirements
 pip install -r requirements.txt
 # run it like on the cluster, except here we do port 8000!
-gunicorn app:app -b 0.0.0.0:8000
+gunicorn app:app -b 0.0.0.0:8080

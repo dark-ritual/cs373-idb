@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ArtistsController">  
+<div class="container" ng-controller="ResultsController">
   
   <table class="table table-striped table-hover table-condensed" id="roundedbg-table">
     
@@ -15,33 +15,34 @@
     </thead>
     
     <tbody>
-      <tr dir-paginate="artist in artists | orderBy:sortType:sortReverse | itemsPerPage:25">
+      <tr dir-paginate="card in cards | orderBy:sortType:sortReverse | itemsPerPage:25">
         <td>
-          <a href="#/artists/{{ artist.artist_id }}">{{ artist.name }}
+        	<a href="#/cards/{{ card.card_id }}" ng-bind-html="card.name"></a>
         </td>
         <td>
-          <p>{{ artist.total }}</p>
+        	<a href="#/artists/{{ card.artist_id }}" ng-bind-html="card.artist_name"></a>
         </td>
         <td>
-          <p>{{ artist.commons }}</p>
+          <a href="#/sets/{{ card.set_id }}" ng-bind-html="card.set_name"></a>
+        </td>
+        <td width="250px">
+          <p ng-bind-html="card.text"></p>
+          <p><small><i ng-bind-html="card.flavor"></i></small></p>
         </td>
         <td>
-          <p>{{ artist.uncommons }}</p>
+        	<p class="capitalize" ng-bind-html="card.rarity"></p>
         </td>
         <td>
-          <p>{{ artist.rares }}</p>
-        </td>
-        <td>
-          <p>{{ artist.mythics }}</p>
+        	<div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
         </td>
       </tr>
     </tbody>
   </table>
   <center>
-    <dir-pagination-controls
+  	<dir-pagination-controls
        max-size="5"
        direction-links="true"
        boundary-links="true" >
-    </dir-pagination-controls>
+  	</dir-pagination-controls>
   </center>
 </div>
