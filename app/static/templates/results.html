@@ -23,13 +23,14 @@
         	<a href="#/artists/{{ card.artist_id }}" ng-bind-html="card.artist_name"></a>
         </td>
         <td>
-          <p ng-repeat="set in card.sets"><a href="#/sets/{{ set.set_id }}"> {{  set.name  }}
+          <a href="#/sets/{{ card.set_id }}" ng-bind-html="card.set_name"></a>
+        </td>
+        <td width="250px">
+          <p ng-bind-html="card.text"></p>
+          <p><small><i ng-bind-html="card.flavor"></i></small></p>
         </td>
         <td>
-        	<div ng-if="card.editions != None">{{ card.num_editions }}</div>
-        </td>
-        <td>
-        	<p class="capitalize" ng-repeat="rarity in splitString(card.rarities, '|!|')">{{ rarity }}</p>
+        	<p class="capitalize" ng-bind-html="card.rarity"></p>
         </td>
         <td>
         	<div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>

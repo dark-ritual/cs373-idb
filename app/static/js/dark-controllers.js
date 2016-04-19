@@ -103,7 +103,22 @@ dark.controller('SearchController', [ '$scope', '$location', function($scope, $l
 //#################################################
 
 dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', function($scope, $routeParams, NavSearch) {
+	$scope.lastSortType = 'card';
+	$scope.sortType 	  = 'card';
+	$scope.sortReverse  = false;
+	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}]
+
 	$scope.cards = NavSearch.query($routeParams);
+
+	$scope.sort = function(tableHeader) {
+		$scope.sortType = tableHeader.sortType;
+		if($scope.sortType == $scope.lastSortType) {
+			$scope.sortReverse = !$scope.sortReverse;
+		} else {
+			$scope.lastSortType = $scope.sortType;
+		}
+	}
+
 } ]);
 
 //#################################################
