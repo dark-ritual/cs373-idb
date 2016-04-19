@@ -64,7 +64,7 @@ hbar {
 .yelling-font {
 	color: orange;
 	font-size: 4em;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-family: magicFont;
 }
 
 .bottom-margin {
