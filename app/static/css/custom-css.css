@@ -13,7 +13,7 @@ th{
 	text-align: left;
 	font-weight: bold;
 	font-size: 1.75em;
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-family: magicFont;
 }
 
 a{
@@ -146,4 +146,14 @@ hbar {
 .table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
     padding: 5px;
     padding-left: 25px;
+}
+
+@font-face {
+    font-family: magicFontBold;
+    src: url(../fonts/belerensmallcaps-bold-webfont.ttf);
+}
+
+@font-face {
+    font-family: magicFont;
+    src: url(../fonts/beleren-bold-webfont.ttf);
 }
