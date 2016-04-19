@@ -1,12 +1,12 @@
 #examples {
-  background: #ddd;
+  background: #000;
   height: 460px;
   margin-bottom: 2em;
   overflow: hidden;
   padding: 0;
   position: relative;
-  border-top: solid 1px #fff;
-  border-bottom: solid 1px #fff;
+  border-top: solid 1px #000;
+  border-bottom: solid 1px #000;
 }
 
 #examples:after,
@@ -46,7 +46,7 @@
 
 .example-mesh {
   fill: none;
-  stroke: #fff;
+  stroke: #000;
   stroke-width: 2px;
 }
 
