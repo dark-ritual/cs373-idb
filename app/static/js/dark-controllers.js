@@ -88,6 +88,25 @@ dark.controller('ActiveNavBarController', [ '$scope', '$location', function($sco
 } ]);
 
 //#################################################
+//#############NavSearch Controller###################
+//#################################################
+
+dark.controller('SearchController', [ '$scope', '$location', function($scope, $location) {
+	$scope.searchInput = "";
+	$scope.search = function() {
+		$location.path("/results/" + $scope.searchInput);
+	}
+} ]);
+
+//#################################################
+//#############Results Controller###################
+//#################################################
+
+dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', function($scope, $routeParams, NavSearch) {
+	$scope.cards = NavSearch.query($routeParams);
+} ]);
+
+//#################################################
 //#############Cards Controller####################
 //#################################################
 

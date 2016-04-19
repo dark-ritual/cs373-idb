@@ -39,12 +39,12 @@
 				<div class="row">
 					<div class="col-lg-5"
 						style="padding-left: 80px; padding-top: 10px;">
-						<div class="input-group">
-							<input type="text" class="form-control"
-								placeholder="Search for..."> <span
-								class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						<div class="input-group" ng-controller="SearchController">
+							<input ng-model="searchInput" type="text" class="form-control"
+								placeholder="Search for...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit" ng-click="search()">
+									<span class="glyphicon glyphicon-search" aria-hidden="true">{{searchInput}}</span>
 								</button>
 							</span>
 						</div>
@@ -84,18 +84,20 @@
 	<script src="../static/js/angular.js"></script>
 	<script src="../static/js/angular-route.min.js"></script>
 	<script src="../static/js/angular-resource.min.js"></script>
+	<script src="../static/js/angular-sanitize.min.js"></script>
 	<script src="../static/js/dirPagination.js"></script>
 	<script src="../static/js/slick/slick.min.js"></script>
 	<script src="../static/js/slick/directive/slick.min.js"></script>
 	<!-- Our Angular Application -->
 	<script src="../static/js/dark.js"></script>
-	<script src="../static/js/dark-controllers.js"></script>
 	<script src="../static/js/dark-cards-services.js"></script>
 	<script src="../static/js/dark-artists-services.js"></script>
 	<script src="../static/js/dark-sets-services.js"></script>
 	<script src="../static/js/dark-cardinstance-services.js"></script>
 	<script src="../static/js/dark-artistinstance-services.js"></script>
 	<script src="../static/js/dark-setinstance-services.js"></script>
+	<script src="../static/js/dark-search-services.js"></script>
+	<script src="../static/js/dark-controllers.js"></script>
 	<script src="../static/js/d3.v3.min.js"></script>
 </body>
 </html>
