@@ -377,16 +377,18 @@ def search_card_names(args):
     res = db.engine.execute(text(sql), params).fetchall()
     resd = {i:max(foo(args, col) for col in thing) for i, thing in enumerate(res)}
     sorted_restup = list(reversed(sorted(resd.items(), key=operator.itemgetter(1))))
-    cats           = [list(res[index][:3]) for index, num in sorted_restup]
-    sorted_results = [boldify(res[index][3:], args) for index, num in sorted_restup]
+    cats_and           = [list(res[index][:3]) for index, num in sorted_restup if num == len(args)]
+    sorted_results_and = [boldify(res[index][3:], args) for index, num in sorted_restup if num == len(args)]
+    cats_or            = [list(res[index][:3]) for index, num in sorted_restup if num < len(args)]
+    sorted_results_or  = [boldify(res[index][3:], args) for index, num in sorted_restup if num < len(args)]
     keys = ['card_id', 'artist_id', 'set_id', 'name', 'text', 'types',
             'subtypes', 'formats', 'colors', 'flavor', 'rarity', 'layout',
             'artist_name', 'setid', 'set_name']
-    finals = [cat + sr for cat, sr in zip(cats, sorted_results)]
-    #print(finals)
-    final = [{k:a for k, a in zip(keys, cat)} for cat in finals]
-#    return json.dumps(final, sort_keys=True,
-#                      indent=4, separators=(',', ': '))
+    finals_and = [cat + sr for cat, sr in zip(cats_and, sorted_results_and)]
+    finals_or  = [cat + sr for cat, sr in zip(cats_or,  sorted_results_or)]
+    final_and = [{k:a for k, a in zip(keys, cat)} for cat in finals_and]
+    final_or  = [{k:a for k, a in zip(keys, cat)} for cat in finals_or]
+    final = dict(AND=final_and, OR=final_or)
     return final
 
 ##################################################################
@@ -418,7 +420,7 @@ def json_resp(data): # pragma: no cover
 
 @app.route('/api/search/<path:search_query>', methods=['GET'])
 def searchAPI(search_query): # pragma: no cover
-    logger.debug('and search')
+    logger.debug('search')
     return json_resp(search_card_names(search_query))
 
 @app.route('/api/artists/<int:page>',  methods=['GET'])
