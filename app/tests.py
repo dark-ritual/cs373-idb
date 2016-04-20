@@ -198,7 +198,7 @@ class MainTestCase(unittest.TestCase):
 
             set_args = dict(set_id='JGTHGKJH', name='Javier Grandious Tomahawking')
             app.addSet(set_args)
-            edition_args = dict(multiverse_id='666', artist_id='stephanie', set_id='JGTHGKJH',
+            edition_args = dict(multiverse_id='-667', artist_id='stephanie', set_id='JGTHGKJH',
                                image_url='dummy-url',
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
@@ -206,7 +206,7 @@ class MainTestCase(unittest.TestCase):
             self.assertEqual(1+oldlen, len(app.serialize_card_table_data()))
         finally:
             app.Edition.query.filter_by(multiverse_id='-666').delete()
-            app.Edition.query.filter_by(multiverse_id='666').delete()
+            app.Edition.query.filter_by(multiverse_id='-667').delete()
             app.Card.query.filter_by(card_id='sample-text').delete()
             app.Set.query.filter_by(set_id='JGTHGKJH').delete()
             # app.Artist.query.filter_by(artist_id='javier').delete()
