@@ -388,7 +388,7 @@ def search_card_names(args):
     finals_or  = [cat + sr for cat, sr in zip(cats_or,  sorted_results_or)]
     final_and = [{k:a for k, a in zip(keys, cat)} for cat in finals_and]
     final_or  = [{k:a for k, a in zip(keys, cat)} for cat in finals_or]
-    final = dict(AND=final_and, OR=final_or)
+    final = [final_and, final_or]
     return final
 
 ##################################################################
