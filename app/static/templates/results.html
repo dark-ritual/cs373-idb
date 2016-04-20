@@ -19,6 +19,9 @@
     <tbody>
       <tr ng-repeat="(id, card) in cards[0]">
         <td>
+          <a href="#/cards/{{ card.card_id }}"><img src="{{ card.image_url }}" width="100px"></a>
+        </td>
+        <td>
         	<a href="#/cards/{{ card.card_id }}" ng-bind-html="card.name"></a>
         </td>
         <td>
@@ -37,7 +40,6 @@
         <td>
         	<div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
         </td>
-      </tr>
     </tbody>
   </table>
 

@@ -316,13 +316,15 @@ def serialize_set_table_data():
 
 
 def gensql(number):
-    cols = ['c.name', 'c.text', 'c.types', 'c.subtypes', 'c.formats',
+    cols = ['c.name', 'c.text', 'c.types','c.cost', 'e.image_url', 'c.subtypes', 'c.formats',
             'c.colors', 'e.flavor', 'e.rarity', 'e.layout','a.name',
             's.set_id', 's.name']
     sqlBase = '''
 select    c.card_id,
           a.artist_id,
           s.set_id,
+          c.cost,
+          e.image_url,
           c.name,
           c.text,
           c.types,
@@ -374,17 +376,18 @@ def bold_search_terms(data, terms):
     return list(result_data)
 
 def search_card_names(term_str):
+    num_id_cols        = 5
     terms              = [term for term in term_str.split(" ") if term != '']
     sql                = gensql(len(terms))
     parameters         = {'term{}'.format(i): '%%' + term + '%%' for i, term in enumerate(terms)}
     results            = db.engine.execute(text(sql), parameters).fetchall()
     result_dict        = {i:max(count_matches(terms, col) for col in result) for i, result in enumerate(results)}
     sorted_result_dict = list(reversed(sorted(result_dict.items(), key=itemgetter(1))))
-    sorted_and_ids     = [list(results[index][:3]) for index, num in sorted_result_dict if num == len(terms)]
-    sorted_and_results = [bold_search_terms(results[index][3:], terms) for index, num in sorted_result_dict if num == len(terms)]
-    sorted_or_ids      = [list(results[index][:3]) for index, num in sorted_result_dict if num < len(terms)]
-    sorted_or_results  = [bold_search_terms(results[index][3:], terms) for index, num in sorted_result_dict if num < len(terms)]
-    keys               = ['card_id', 'artist_id', 'set_id', 'name', 'text',
+    sorted_and_ids     = [list(results[index][:num_id_cols]) for index, num in sorted_result_dict if num == len(terms)]
+    sorted_and_results = [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num == len(terms)]
+    sorted_or_ids      = [list(results[index][:num_id_cols]) for index, num in sorted_result_dict if num < len(terms)]
+    sorted_or_results  = [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num < len(terms)]
+    keys               = ['card_id', 'artist_id', 'set_id', 'cost', 'image_url', 'name', 'text',
                           'types', 'subtypes', 'formats', 'colors', 'flavor',
                           'rarity', 'layout', 'artist_name', 'setid',
                           'set_name']

@@ -106,7 +106,7 @@ dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', fun
 	$scope.lastSortType = 'card';
 	$scope.sortType 	  = 'card';
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}]
+	$scope.tableHeaders = [{label: "", sortType:""}, {label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}]
 	$scope.cards = NavSearch.query($routeParams);
 	// debugger;
 	// $scope.andResults = $scope.cards[0];
@@ -119,6 +119,39 @@ dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', fun
 		} else {
 			$scope.lastSortType = $scope.sortType;
 		}
+	}
+
+	$scope.convertCost = function(costString){
+		if(costString != null){
+			costString = costString.replace(new RegExp("{","g"), '');
+			var array = costString.split("}");
+			for(var i=0;i<array.length;i++) {
+				if(array[i]=="U"){
+					array[i]="mtg-blue";
+				} else if(array[i]=="B"){
+					array[i]="mtg-black";
+				} else if(array[i]=="W"){
+					array[i]="mtg-white";
+				} else if(array[i]=="R"){
+					array[i]="mtg-red";
+				} else if(array[i]=="G"){
+					array[i]="mtg-green";
+				} else if(array[i]=="W/U") {
+					array[i]="mtg-white-blue";
+				} else {
+					if(array[i].length > 0) {
+						if(array[i].indexOf("/") > -1) {
+							if(array[i]=="2/U") {
+								array[i]="mtg-any2-blue";
+							}  
+						} else {
+							array[i]="mtg-any"+array[i];
+						}
+					}
+				}
+			}
+		}
+		return array;
 	}
 
 } ]);
