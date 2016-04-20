@@ -4,7 +4,6 @@
   <div class="container">
     <p><span class="yelling-font" style="font-family: magicFontBold; font-size: 4.15em;">AND Results</span></p>
   </div>
-  <p> and: {{ cards }} </p>
   <table class="table table-striped table-hover table-condensed" id="roundedbg-table">
     <thead>
       <tr>
@@ -18,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr dir-paginate="card in andResults | orderBy:sortType:sortReverse | itemsPerPage:25">
+      <tr ng-repeat="(id, card) in cards[0]">
         <td>
         	<a href="#/cards/{{ card.card_id }}" ng-bind-html="card.name"></a>
         </td>
@@ -44,7 +43,7 @@
 
 <!-- OR Results -->
   <div class="container">
-    <p><span class="yelling-font" style="font-family: magicFontBold; font-size: 4.15em;">AND Results</span></p>
+    <p><span class="yelling-font" style="font-family: magicFontBold; font-size: 4.15em;">OR Results</span></p>
   </div>
   <table class="table table-striped table-hover table-condensed" id="roundedbg-table">
     <thead>
@@ -60,7 +59,7 @@
     </thead>
     
     <tbody>
-      <tr dir-paginate="card in cards | orderBy:sortType:sortReverse | itemsPerPage:25">
+      <tr ng-repeat="(id, card) in cards[1]">
         <td>
           <a href="#/cards/{{ card.card_id }}" ng-bind-html="card.name"></a>
         </td>

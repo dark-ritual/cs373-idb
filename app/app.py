@@ -368,9 +368,9 @@ def bold_search_terms(data, terms):
     result_data = []
     for field in data:
         for term in terms:
-            subbed_field = sub(r'({})'.format(term), r'<b>\1</b>',
+            field = sub(r'({})'.format(term), r'<font color="DeepSkyBlue"><b>\1</b></font>',
                                str(field), flags=IGNORECASE)
-        result_data.append(subbed_field)
+        result_data.append(field)
     return list(result_data)
 
 def search_card_names(term_str):

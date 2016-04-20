@@ -5,7 +5,7 @@
 var dark = angular.module('dark', [ 'ngRoute', 'ngSanitize', 'slick', 'darkControllers', 'cardsServices', 'setsServices', 'artistsServices', 'cardinstanceServices', 'artistinstanceServices', 'setinstanceServices', 'searchServices', 'angularUtils.directives.dirPagination' ]);
 
 dark.config([ '$routeProvider', function($routeProvider) {
-	$routeProvider.when('/results/:q', {
+	$routeProvider.when('/results/:search_query', {
 		templateUrl : '../static/templates/results.html',
 		controller : 'ResultsController'
 	}).when('/cards', {

@@ -107,10 +107,11 @@ dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', fun
 	$scope.sortType 	  = 'card';
 	$scope.sortReverse  = false;
 	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}]
-
 	$scope.cards = NavSearch.query($routeParams);
-	//$scope.andResults = $scope.cards[0];
-	//$scope.orResults = $scope.cards[1];
+	// debugger;
+	// $scope.andResults = $scope.cards[0];
+	// $scope.orResults = $scope.cards[1];
+	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
 		if($scope.sortType == $scope.lastSortType) {
@@ -300,6 +301,7 @@ dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Arti
 dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstance', function($scope, $routeParams, CardInstance) {
 
 	$scope.cardinstance = CardInstance.query($routeParams)
+
 	$scope.convertCost = function(costString){
 		if(costString != null){
 			costString = costString.replace(new RegExp("{","g"), '');
