@@ -160,7 +160,7 @@ dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', fun
 //#############Cards Controller####################
 //#################################################
 
-dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
+dark.controller('CardsController', ['$scope', '$routeParams','Cards', function($scope, $routeParams, Cards) {
 	$scope.lastSortType = 'card';
 	$scope.sortType     = 'card'; // set the default sort type
 	$scope.sortReverse  = false;
@@ -232,7 +232,8 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	}
 
 	// create the list of entries
-	$scope.cards = Cards.query();
+	$scope.cards = Cards.query($routeParams);
+	$scope.page_num = parseInt($routeParams["page_num"]);
 } ]);
 
 //#################################################
