@@ -314,8 +314,7 @@ def serialize_set_table_data():
 cols = ['c.name', 'c.text', 'c.types', 'c.subtypes', 'c.formats', 'c.colors', 'e.flavor', 'e.rarity', 'e.layout',
         'a.name', 's.set_id', 's.name']
 
-def gensql(number):
-    sql = '''
+sqlBase = '''
 select    c.card_id,
           a.artist_id,
           s.set_id,
@@ -339,19 +338,22 @@ on        a.artist_id = e.artist_id
 left join `set` as s
 on        s.set_id = e.set_id
 where'''
+
+def gensql(number):
+    global sqlBase
     for i in range(0, number):
         firstcol = True
         if i != 0:
-            sql += " " + ' or '
-        sql += " ("
+            sqlBase += " " + ' or '
+        sqlBase += " ("
         for col in cols:
             if firstcol:
                 firstcol = False
             else:
-                sql += "or "
-            sql += " {} like :thing".format(col) + str(i) + "\n"
-        sql += " ) \n"
-    return sql
+                sqlBase += "or "
+            sqlBase += " {} like :thing".format(col) + str(i) + "\n"
+        sqlBase += " ) \n"
+    return sqlBase
 
 def foo(args, string):
     i = 0
@@ -388,7 +390,7 @@ def search_card_names(args):
     finals_or  = [cat + sr for cat, sr in zip(cats_or,  sorted_results_or)]
     final_and = [{k:a for k, a in zip(keys, cat)} for cat in finals_and]
     final_or  = [{k:a for k, a in zip(keys, cat)} for cat in finals_or]
-    final = dict(AND=final_and, OR=final_or)
+    final = [final_and, final_or]
     return final
 
 ##################################################################
