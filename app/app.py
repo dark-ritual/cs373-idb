@@ -1,25 +1,29 @@
-import logging
-import os
-import json
-import subprocess
-from getpass import getuser
-import re
-from sqlalchemy.sql import text
-import operator
-
-
-from flask import Flask, render_template, redirect, url_for
-from flask.ext.script import Manager
+from flask                import Flask
+from flask                import redirect
+from flask                import render_template
+from flask                import url_for
+from flask.ext.script     import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
+from getpass              import getuser
+from json                 import dumps
+from logging              import basicConfig
+from logging              import ERROR
+from logging              import getLogger
+from operator             import itemgetter
+from os                   import getenv
+from re                   import IGNORECASE
+from re                   import sub
+from sqlalchemy.sql       import text
+from subprocess           import PIPE
+from subprocess           import Popen
 
 ##################################################################
 ######################## SETUP ###################################
 ##################################################################
 
-logging.basicConfig(
-    level=logging.ERROR,
-    format='%(levelname)s: %(message)s')
-logger = logging.getLogger(__name__)
+basicConfig(level=ERROR,
+            format='%(levelname)s: %(message)s')
+logger = getLogger(__name__)
 
 
 if getuser() == 'marklindberg': # pragma: no cover
@@ -32,18 +36,19 @@ else: # pragma: no cover
     SQLALCHEMY_DATABASE_URI = \
         '{engine}://{username}:{password}@{hostname}/{database}?charset=utf8'.format(
             engine='mysql+pymysql',
-            username=os.getenv('MYSQL_USER', 'root'),
-            password=os.getenv('MYSQL_PASSWORD', ''),
-            hostname=os.getenv('MYSQL_HOST', '127.0.0.1'),
-            database=os.getenv('MYSQL_DATABASE', 'guestbook'))
+            username=getenv('MYSQL_USER', 'root'),
+            password=getenv('MYSQL_PASSWORD', ''),
+            hostname=getenv('MYSQL_HOST', '127.0.0.1'),
+            database=getenv('MYSQL_DATABASE', 'guestbook'))
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
+app.config['SQLALCHEMY_DATABASE_URI']        = SQLALCHEMY_DATABASE_URI
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN']  = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 manager = Manager(app)
-db = SQLAlchemy(app)
+db      = SQLAlchemy(app)
 
 ##################################################################
 ######################## MODELS ##################################
@@ -54,14 +59,16 @@ class Artist(db.Model):
 
     artist_id      = db.Column(db.String(191),  primary_key=True)
     name           = db.Column(db.String(256),  nullable=False)
-    multiverse_ids = db.relationship('Edition', backref ='artist', lazy='dynamic')
+    multiverse_ids = db.relationship('Edition', backref='artist',
+                                     lazy='dynamic')
 
     def __init__(self, artist_id, name):
         self.artist_id = artist_id
         self.name      = name
 
     def __repr__(self):
-        return "[Artist: artist_id={}, name={}]".format(self.artist_id, self.name)
+        return "[Artist: artist_id={}, name={}]".format(self.artist_id,
+                                                        self.name)
 
     @property
     def serialize_part(self):
@@ -75,7 +82,7 @@ class Artist(db.Model):
 
     @property
     def serialize_multiverse_ids(self):
-        return [ item.serialize for item in self.multiverse_ids ]
+        return [item.serialize for item in self.multiverse_ids]
 
 
 class Set(db.Model):
@@ -104,7 +111,7 @@ class Set(db.Model):
 
     @property
     def serialize_multiverse_ids(self):
-        return [ item.serialize for item in self.multiverse_ids ]
+        return [item.serialize for item in self.multiverse_ids]
 
 class Card(db.Model):
     __tablename__ = 'card'
@@ -120,7 +127,8 @@ class Card(db.Model):
     subtypes       = db.Column(db.String(256),  nullable=True)
     power          = db.Column(db.String(256),  nullable=True)
     toughness      = db.Column(db.String(256),  nullable=True)
-    multiverse_ids = db.relationship('Edition', backref ='card', lazy='dynamic')
+    multiverse_ids = db.relationship('Edition', backref ='card',
+                                     lazy='dynamic')
 
     def __init__(self, cost, cmc, text, types, name, card_id, formats,
                  subtypes, colors, power, toughness):
@@ -161,13 +169,14 @@ class Card(db.Model):
 
     @property
     def serialize_multiverse_ids(self):
-        return [ item.serialize for item in self.multiverse_ids ]
+        return [item.serialize for item in self.multiverse_ids]
 
 class Edition(db.Model):
     __tablename__ = 'edition'
 
     multiverse_id = db.Column(db.String(191), primary_key=True)
-    artist_id     = db.Column(db.String(191), db.ForeignKey('artist.artist_id'))
+    artist_id     = db.Column(db.String(191),
+                              db.ForeignKey('artist.artist_id'))
     set_id        = db.Column(db.String(191), db.ForeignKey('set.set_id'))
     card_id       = db.Column(db.String(191), db.ForeignKey('card.card_id'))
     image_url     = db.Column(db.String(256), nullable=False)
@@ -201,34 +210,9 @@ class Edition(db.Model):
                     set_id=self.set_id, card_id=self.card_id,
                     image_url=self.image_url, flavor=self.flavor,
                     rarity=self.rarity, number=self.number, layout=self.layout,
-                    card_name=self.card.name, artist_name=self.artist.name, set_name=self.set.name)
+                    card_name=self.card.name, artist_name=self.artist.name,
+                    set_name=self.set.name)
 
-#def serialize_card_table_data():
-#    sql = '''SELECT
-#                c.name,
-#                c.card_id,
-#                c.cost,
-#                GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR '|!|') AS editions,
-#                GROUP_CONCAT(DISTINCT e.rarity SEPARATOR '|!|') AS rarities,
-#                GROUP_CONCAT(DISTINCT a.name SEPARATOR '|!|') AS artists,
-#                GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR '|!|') AS artist_ids,
-#                GROUP_CONCAT(DISTINCT s.name  SEPARATOR '|!|') AS sets,
-#                GROUP_CONCAT(DISTINCT s.set_id SEPARATOR '|!|') AS set_ids,
-#                count(*) AS num_editions
-#        FROM
-#            card AS c
-#        LEFT JOIN
-#            edition AS e ON e.card_id = c.card_id
-#        LEFT JOIN
-#            artist AS a ON a.artist_id = e.artist_id
-#        LEFT JOIN
-#            `set` AS s ON s.set_id = e.set_id
-#        GROUP BY
-#            c.name
-#    '''
-#    #convert the list of dicts to an array of objects
-#    ret = []
-#    for x, i in enumerate(db.engine.execute(sql).fetchall()):
 def serialize_card_table_data():
     sql = '''SELECT
                 c.name,
@@ -254,23 +238,27 @@ def serialize_card_table_data():
     '''
     #convert the list of dicts to an array of objects
     ret = []
-    for x, i in enumerate(db.engine.execute(sql).fetchall()):
+    for table_data in db.engine.execute(sql).fetchall():
         artists=[]
-        # if i['artists'] != None:
-        dbArtists=i['artists'].split('|!|')
-        artist_ids=i['artist_ids'].split('|!|')
-        for key, j in enumerate(dbArtists):
-            artists.append({'artist_id':artist_ids[key], 'name':j})
+        dbArtists=table_data['artists'].split('|!|')
+        artist_ids=table_data['artist_ids'].split('|!|')
+        for index, artist_name in enumerate(dbArtists):
+            artists.append({'artist_id':artist_ids[index], 'name':artist_name})
 
         sets=[]
-        # if i['sets'] != None:
-        dbSets=i['sets'].split('|!|')
-        set_ids=i['set_ids'].split('|!|')
-        for key, j in enumerate(dbSets):
-            sets.append({'set_id':set_ids[key], 'name':j})
-        ret.append({'name':i['name'], 'card_id':i['card_id'], 'cost':i['cost'],
-        'editions':i['editions'], 'rarities':i['rarities'], 'artists':artists, 'sets':sets,
-        'num_editions':i['num_editions']})
+        dbSets=table_data['sets'].split('|!|')
+        set_ids=table_data['set_ids'].split('|!|')
+        for index, set_name in enumerate(dbSets):
+            sets.append({'set_id':set_ids[index], 'name':set_name})
+        ret.append({'name':table_data['name'],
+                    'card_id':table_data['card_id'],
+                    'cost':table_data['cost'],
+                    'editions':table_data['editions'],
+                    'rarities':table_data['rarities'],
+                    'artists':artists,
+                    'sets':sets,
+                    'num_editions':table_data['num_editions']
+                  })
     return ret
 
 def serialize_artist_table_data():
@@ -288,8 +276,15 @@ def serialize_artist_table_data():
           '''
     # convert the list of dicts to an array of objects
     ret = []
-    for i in db.engine.execute(sql).fetchall():
-        ret.append({'name':i['name'], 'artist_id':i['artist_id'], 'total':i['total'], 'commons':i['commons'], 'uncommons':i['uncommons'], 'rares':i['rares'], 'mythics':i['mythics']})
+    for table_data in db.engine.execute(sql).fetchall():
+        ret.append({'name':table_data['name'],
+                    'artist_id':table_data['artist_id'],
+                    'total':table_data['total'],
+                    'commons':table_data['commons'],
+                    'uncommons':table_data['uncommons'],
+                    'rares':table_data['rares'],
+                    'mythics':table_data['mythics']
+                  })
     return ret
 
 def serialize_set_table_data():
@@ -307,15 +302,24 @@ def serialize_set_table_data():
           '''
     # convert the list of dicts to an array of objects
     ret = []
-    for i in db.engine.execute(sql).fetchall():
-        ret.append({'name':i['name'], 'set_id':i['set_id'], 'total':i['total'], 'commons':i['commons'], 'uncommons':i['uncommons'], 'rares':i['rares'], 'mythics':i['mythics']})
+    for table_data in db.engine.execute(sql).fetchall():
+        ret.append({'name':table_data['name'],
+                    'set_id':table_data['set_id'],
+                    'total':table_data['total'],
+                    'commons':table_data['commons'],
+                    'uncommons':table_data['uncommons'],
+                    'rares':table_data['rares'],
+                    'mythics':table_data['mythics']
+                  })
     return ret
 
-cols = ['c.name', 'c.text', 'c.types', 'c.subtypes', 'c.formats', 'c.colors', 'e.flavor', 'e.rarity', 'e.layout',
-        'a.name', 's.set_id', 's.name']
+
 
 def gensql(number):
-    sql = '''
+    cols = ['c.name', 'c.text', 'c.types', 'c.subtypes', 'c.formats',
+            'c.colors', 'e.flavor', 'e.rarity', 'e.layout','a.name',
+            's.set_id', 's.name']
+    sqlBase = '''
 select    c.card_id,
           a.artist_id,
           s.set_id,
@@ -342,54 +346,53 @@ where'''
     for i in range(0, number):
         firstcol = True
         if i != 0:
-            sql += " " + ' or '
-        sql += " ("
+            sqlBase += " " + ' or '
+        sqlBase += " ("
         for col in cols:
             if firstcol:
                 firstcol = False
             else:
-                sql += "or "
-            sql += " {} like :thing".format(col) + str(i) + "\n"
-        sql += " ) \n"
-    return sql
+                sqlBase += "or "
+            sqlBase += " {} like :term".format(col) + str(i) + "\n"
+        sqlBase += " ) \n"
+    return sqlBase
 
-def foo(args, string):
-    i = 0
-    for arg in args:
-        #print(arg, string)
-        if arg.lower() in str(string).lower():
-            #str(string).replace(arg.lower, "<b>" + arg.lower + "</b>")
-            i += 1
-    return i
+def count_matches(targets, source):
+    matches = 0
+    for target in targets:
+        if target.lower() in str(source).lower():
+            matches += 1
+    return matches
 
-def boldify(skwark, args):
-    result = []
-    for thing in skwark:
-        for arg in args:
-            thing = re.sub(r'({})'.format(arg), r'<b>\1</b>', str(thing), flags=re.IGNORECASE)
-        result.append(thing)
-    return list(result)
+def bold_search_terms(data, terms):
+    result_data = []
+    for field in data:
+        for term in terms:
+            subbed_field = sub(r'({})'.format(term), r'<b>\1</b>',
+                               str(field), flags=IGNORECASE)
+        result_data.append(subbed_field)
+    return list(result_data)
 
-def search_card_names(args):
-    args = [arg for arg in args.split(" ") if arg != '']
-    sql = gensql(len(args))
-    params = {'thing{}'.format(i): '%%' + res + '%%' for i,res in enumerate(args)}
-    res = db.engine.execute(text(sql), params).fetchall()
-    resd = {i:max(foo(args, col) for col in thing) for i, thing in enumerate(res)}
-    sorted_restup = list(reversed(sorted(resd.items(), key=operator.itemgetter(1))))
-    cats_and           = [list(res[index][:3]) for index, num in sorted_restup if num == len(args)]
-    sorted_results_and = [boldify(res[index][3:], args) for index, num in sorted_restup if num == len(args)]
-    cats_or            = [list(res[index][:3]) for index, num in sorted_restup if num < len(args)]
-    sorted_results_or  = [boldify(res[index][3:], args) for index, num in sorted_restup if num < len(args)]
-    keys = ['card_id', 'artist_id', 'set_id', 'name', 'text', 'types',
-            'subtypes', 'formats', 'colors', 'flavor', 'rarity', 'layout',
-            'artist_name', 'setid', 'set_name']
-    finals_and = [cat + sr for cat, sr in zip(cats_and, sorted_results_and)]
-    finals_or  = [cat + sr for cat, sr in zip(cats_or,  sorted_results_or)]
-    final_and = [{k:a for k, a in zip(keys, cat)} for cat in finals_and]
-    final_or  = [{k:a for k, a in zip(keys, cat)} for cat in finals_or]
-    final = [final_and, final_or]
-    return final
+def search_card_names(term_str):
+    terms              = [term for term in term_str.split(" ") if term != '']
+    sql                = gensql(len(terms))
+    parameters         = {'term{}'.format(i): '%%' + term + '%%' for i, term in enumerate(terms)}
+    results            = db.engine.execute(text(sql), parameters).fetchall()
+    result_dict        = {i:max(count_matches(terms, col) for col in result) for i, result in enumerate(results)}
+    sorted_result_dict = list(reversed(sorted(result_dict.items(), key=itemgetter(1))))
+    sorted_and_ids     = [list(results[index][:3]) for index, num in sorted_result_dict if num == len(terms)]
+    sorted_and_results = [bold_search_terms(results[index][3:], terms) for index, num in sorted_result_dict if num == len(terms)]
+    sorted_or_ids      = [list(results[index][:3]) for index, num in sorted_result_dict if num < len(terms)]
+    sorted_or_results  = [bold_search_terms(results[index][3:], terms) for index, num in sorted_result_dict if num < len(terms)]
+    keys               = ['card_id', 'artist_id', 'set_id', 'name', 'text',
+                          'types', 'subtypes', 'formats', 'colors', 'flavor',
+                          'rarity', 'layout', 'artist_name', 'setid',
+                          'set_name']
+    full_and_results   = [result_id + result for result_id, result in zip(sorted_and_ids, sorted_and_results)]
+    full_or_results    = [result_id + result for result_id, result in zip(sorted_or_ids,  sorted_or_results)]
+    dict_and_results   = [{k:r for k, r in zip(keys, result)} for result in full_and_results]
+    dict_or_results    = [{k:r for k, r in zip(keys, result)} for result in full_or_results]
+    return [dict_and_results, dict_or_results]
 
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################
@@ -412,7 +415,7 @@ def index(): # pragma: no cover
 ######################
 
 def json_resp(data): # pragma: no cover
-    ret = json.dumps(data, sort_keys=True,
+    ret = dumps(data, sort_keys=True,
                      indent=4, separators=(',', ': '))
     ret = app.make_response(ret)
     ret.mimetype = 'application/json'
@@ -532,9 +535,9 @@ if __name__ == '__main__': # pragma: no cover
 
 @app.route('/tests/runtests')
 def tests(): # pragma: no cover
-    p = subprocess.Popen(["python3", "tests.py"],
-        stdout = subprocess.PIPE,
-        stderr = subprocess.PIPE,
-        stdin = subprocess.PIPE)
+    p = Popen(["python3", "tests.py"],
+        stdout = PIPE,
+        stderr = PIPE,
+        stdin  = PIPE)
     out, err = p.communicate()
     return render_template('tests.html', output = (err + out).decode())

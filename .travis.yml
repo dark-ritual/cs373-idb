@@ -26,11 +26,11 @@ before_script:
 script:
     - date
     - ls -al
-    - make IDB2-tests
+    - make IDB3-tests
     - ls -al
     - make models.html
     - ls -al
-    - make IDB2.log
+    - make IDB3.log
     - ls -al
     - make test
     - ls -al
