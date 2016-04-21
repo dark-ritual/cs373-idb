@@ -3,7 +3,7 @@ FILES :=                              	  \
     .travis.yml                           \
     makefile                              \
     apiary.apib							  \
-    IDB2.log                       	 	  \
+    IDB3.log                       	 	  \
     models.html                      	  \
     app/models.py                        	  \
     app/tests.py                        	  \
@@ -38,8 +38,8 @@ config:
 
 scrub:
 	make clean
-	rm -f  IDB2.html
-	rm -f  IDB2.log
+	rm -f  IDB3.html
+	rm -f  IDB3.log
 
 status:
 	make clean
@@ -48,18 +48,18 @@ status:
 	git remote -v
 	git status
 
-test: TestIDB2.tmp
+test: TestIDB3.tmp
 
-IDB2-tests:
+IDB3-tests:
 	git clone https://github.com/dark-ritual/cs373-idb.git
 
 models.html: app/models.py
 	pydoc -w models
 
-IDB2.log:
-	git log > IDB2.log
+IDB3.log:
+	git log > IDB3.log
 
-TestIDB2.tmp: app/tests.py
+TestIDB3.tmp: app/tests.py
 	coverage run    --branch app/tests.py  >  tests.tmp 2>&1
 	coverage report -m --omit=/lusr/lib/python3.4/*,/home/travis/virtualenv/python*,/usr/local/lib/python3.4/*,/usr/lib/python*  >> tests.tmp
 	cat tests.tmp

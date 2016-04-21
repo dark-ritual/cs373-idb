@@ -1,0 +1,94 @@
+<div class="container" ng-controller="ResultsController">
+  
+<!-- AND Results -->
+  <div class="container">
+    <p><span class="yelling-font" style="font-family: magicFontBold; font-size: 4.15em;">AND Results</span></p>
+  </div>
+  <table class="table table-striped table-hover table-condensed" id="roundedbg-table">
+    <thead>
+      <tr>
+      	<th ng-repeat="tableHeader in tableHeaders">
+          <a href ng-click="sort(tableHeader)">
+            {{tableHeader.label}} 
+            <span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="(id, card) in cards[0]">
+        <td>
+          <a href="#/cards/{{ card.card_id }}"><img src="{{ card.image_url }}" width="100px"></a>
+        </td>
+        <td>
+        	<a href="#/cards/{{ card.card_id }}" ng-bind-html="card.name"></a>
+        </td>
+        <td>
+        	<a href="#/artists/{{ card.artist_id }}" ng-bind-html="card.artist_name"></a>
+        </td>
+        <td>
+          <a href="#/sets/{{ card.set_id }}" ng-bind-html="card.set_name"></a>
+        </td>
+        <td width="250px">
+          <p ng-bind-html="card.text"></p>
+          <p><small><i ng-bind-html="card.flavor"></i></small></p>
+        </td>
+        <td>
+        	<p class="capitalize" ng-bind-html="card.rarity"></p>
+        </td>
+        <td>
+        	<div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
+        </td>
+    </tbody>
+  </table>
+
+<!-- OR Results -->
+  <div class="container">
+    <p><span class="yelling-font" style="font-family: magicFontBold; font-size: 4.15em;">OR Results</span></p>
+  </div>
+  <table class="table table-striped table-hover table-condensed" id="roundedbg-table">
+    <thead>
+      <tr>
+        <th ng-repeat="tableHeader in tableHeaders">
+          <a href ng-click="sort(tableHeader)">
+            {{tableHeader.label}} 
+            <span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr ng-repeat="(id, card) in cards[1]">
+        <td>
+          <a href="#/cards/{{ card.card_id }}" ng-bind-html="card.name"></a>
+        </td>
+        <td>
+          <a href="#/artists/{{ card.artist_id }}" ng-bind-html="card.artist_name"></a>
+        </td>
+        <td>
+          <a href="#/sets/{{ card.set_id }}" ng-bind-html="card.set_name"></a>
+        </td>
+        <td width="250px">
+          <p ng-bind-html="card.text"></p>
+          <p><small><i ng-bind-html="card.flavor"></i></small></p>
+        </td>
+        <td>
+          <p class="capitalize" ng-bind-html="card.rarity"></p>
+        </td>
+        <td>
+          <div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <center>
+  	<dir-pagination-controls
+       max-size="5"
+       direction-links="true"
+       boundary-links="true" >
+  	</dir-pagination-controls>
+  </center>
+</div>

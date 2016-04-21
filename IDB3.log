@@ -1,3 +1,452 @@
+commit 8093e2e02937ce2f629fe7e46ca4c3c00dd4fc2a
+Author: Mark Lindberg <marklindberg@wireless-10-146-164-201.public.utexas.edu>
+Date:   Tue Apr 19 21:03:16 2016 -0500
+
+    Added a search test, coverage back at 100%.
+
+commit c1a22c1eb4a7bc851ab9d2ae358de9ef10433bf0
+Merge: d5c4ff0 fad2ff3
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 17:14:10 2016 -0500
+
+    Merge branch 'altDev' into dev
+
+commit fad2ff3e2958f39ada1249dace303aea570569e0
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 17:13:48 2016 -0500
+
+    homescreen changes
+
+commit d5c4ff05bf3d36ae439b88843bbd7a5a31529563
+Author: Mark Lindberg <marklindberg@Marks-MacBook-Pro.local>
+Date:   Tue Apr 19 15:40:15 2016 -0500
+
+    Split AND and OR into separate results, but with single API endpoint.
+
+commit 6d22248c57982a6a06a5d6f5e46fb64106c76f45
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 12:52:42 2016 -0500
+
+    added breaks to home page
+
+commit 29e102cbd9bddf20802e588a64dd6d2e3a2ce645
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 12:40:41 2016 -0500
+
+    changed homepage order
+
+commit 1b599f5e4bbd6a0771c258c39fd387277d5371ca
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 12:37:51 2016 -0500
+
+    made hexbin hover white.
+
+commit b3263d6d1968f52f98a73757c210550f06985db2
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 12:37:03 2016 -0500
+
+    Changed hexbin color to black. Made home page padding-top smaller
+
+commit 88e0a7ee9b30a1f7054b576a070fa8b814086d4f
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 11:47:31 2016 -0500
+
+    added facebook widget
+
+commit 4f4d00e8cd5fb8033dfaeffb971de1d3cbfa0591
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 03:35:45 2016 -0500
+
+    enter key doesn't get press if search bar is out of focus
+
+commit b943e2234393bbdea7fa2894014835cd9f411bb3
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 03:22:55 2016 -0500
+
+    'enter' now registers as search term
+
+commit 7208d085cb6148d165b32758166250b93dcdb7f6
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Tue Apr 19 03:09:49 2016 -0500
+
+    added table headers as well as more content.
+
+commit a43a32b61b76fd950a743a85990719ec2591df6f
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Tue Apr 19 01:02:28 2016 -0500
+
+    Added null check to cardsControllers
+
+commit 58b4c2c3dd6f4a31183370eddb27733f4499916e
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 23:58:43 2016 -0500
+
+    Implemented search on front end. Search results direct to a results page. Results table needs formatting.
+
+commit 5efee2455c0344202d7f1cb378207b4f5071ed5c
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 22:49:34 2016 -0500
+
+    Missing new font in a couple places
+
+commit 31cd283d63fb6648e9f97324ba80e0ad8ea45692
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 22:24:08 2016 -0500
+
+    Changed font to beleren bold (aka MtG font)
+
+commit 70e783663c9f66815cc07b95a07e7603e3781f93
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 21:40:57 2016 -0500
+
+    Finished adjusting icons on about page
+
+commit 6a8e3e34ca6ba6e9f4f5e06ee1f4bf9b4de04532
+Merge: 472d3a0 cdb858f
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Mon Apr 18 18:03:45 2016 -0500
+
+    Merge branch 'altDev' of github.com:dark-ritual/cs373-idb into altDev
+
+commit 472d3a05541bc4829de653b294593b2f29bffb5d
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Mon Apr 18 18:03:38 2016 -0500
+
+    first iteration of collage
+
+commit cdb858f62dec27720ef76e37bebd24f04993effb
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 16:28:00 2016 -0500
+
+    Rearranging information on about.html to make room for carousel
+
+commit 5c10bdcbcc6481dc1ded3a55dbe4d882d1abd8a9
+Merge: d418bd4 cd39236
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Mon Apr 18 16:25:29 2016 -0500
+
+    Merge branch 'altDev' of github.com:dark-ritual/cs373-idb into altDev
+
+commit d418bd48651e9ba0cc327edefd4a6dbcfb0edf17
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Mon Apr 18 16:25:26 2016 -0500
+
+    changed from png to jpg and started working on collage
+
+commit cd39236387e766ab36116a88b6409ee5bd6ec32c
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 15:46:27 2016 -0500
+
+    Added search glyphicon to search button
+
+commit 5ae1e962b47330a4952ab3ab49cff189483bea78
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 15:42:23 2016 -0500
+
+    Added search box to Navbar
+
+commit 02c8faaeb4f6750b3bd8f367dc32a5c59e921e50
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Mon Apr 18 15:37:07 2016 -0500
+
+    organized home page files
+
+commit 1e81abf19ba8eb6bc1af0b07ffceca5925d30576
+Merge: 0247dba 8bcca76
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 15:00:41 2016 -0500
+
+    Merging collageTest into altDev
+
+commit 0247dba19bf068fae8e0ecbcf36bcc8dbb5ffc93
+Merge: f1e4fb5 e5e4523
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 14:54:33 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into altDev
+
+commit 8bcca76681caa56c6d31dc59d41a4023223e57fa
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Mon Apr 18 14:45:16 2016 -0500
+
+    fuh
+
+commit e5e452328579e5c2c081c021616c0a4d65105634
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Mon Apr 18 14:25:32 2016 -0500
+
+    fixed search engine
+
+commit 3f5a39aabdae113afac5aad07fc49ec4e70c9ca0
+Author: Mark Lindberg <marklindberg@wireless-10-146-211-30.public.utexas.edu>
+Date:   Mon Apr 18 09:59:32 2016 -0500
+
+    Changed search API, removed AND search.
+
+commit f1e4fb50659cb3bb910a2f6f158df497c112dcb9
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Mon Apr 18 00:34:22 2016 -0500
+
+    First attempt at home carousel with static data. Needs adjustments to size and positioning
+
+commit 17331a72640e8a8a70b31005a8cc9204a28326bd
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 17 23:26:14 2016 -0500
+
+    Finally got table padding fixed
+
+commit cb8c48e1394b81c45ec5d9823a5f82a7128736ac
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 17 23:19:01 2016 -0500
+
+    Rounded sets table
+
+commit 97285f5dd7ddc25acf71333efe4e39371714d36c
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 17 22:45:50 2016 -0500
+
+    Changed port on runLocal.sh
+
+commit dbda502953d911ce903906f56cf6cb65ce595db4
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 17 22:44:34 2016 -0500
+
+    Changed table to rounded
+
+commit c6fdf0f4a3bea87775b5e1904569025113e4cc52
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 17 22:43:30 2016 -0500
+
+    Added icons.css to index.html
+
+commit 49899f2d55479cdd2088756610211aeff3a67d58
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 17 22:41:31 2016 -0500
+
+    Moved icon css to own file
+
+commit 03e334eb0d7563d8d60c3b980c9888f7be532661
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Sun Apr 17 21:15:41 2016 -0500
+
+    Added roundedbg-table to Artists table and adjusted padding
+
+commit 17aab3e84c299678cb6bbf19536fb21f915fd6ba
+Author: Mark Lindberg <marklindberg@Marks-MacBook-Pro.local>
+Date:   Sat Apr 16 22:50:37 2016 -0500
+
+    A test is broken locally. Unsure why.
+
+commit d3ba51dbb7684242488fd5aa54c6b81e59e9438f
+Merge: 2b14552 b5b6430
+Author: Mark Lindberg <marklindberg@Marks-MacBook-Pro.local>
+Date:   Sat Apr 16 22:24:49 2016 -0500
+
+    Commit for merge.
+
+commit 2b14552d6f79f60504c32c6066ddf5de76372a68
+Author: Mark Lindberg <marklindberg@Marks-MacBook-Pro.local>
+Date:   Sat Apr 16 22:22:44 2016 -0500
+
+    Search APEs.
+
+commit b5b64300b8e95d6831338a9b9b3164997c3ff0dd
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Sat Apr 16 19:03:40 2016 -0500
+
+    added / for petah
+
+commit 48b230998c1bb0a62188bef6ad36e0db79d4d858
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 19:00:43 2016 -0500
+
+    Fix merge mistake
+
+commit c65f85c42a7e9f2aa5117350a49921418fa5bfed
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 18:56:46 2016 -0500
+
+    Updage pagination in apiary.apib
+
+commit e43992f45f11f3cc14e0375a73fdf3f67ac17f68
+Merge: 8f07a8b caf4e49
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 18:50:08 2016 -0500
+
+    Merged pagination
+
+commit 8f07a8b66ffdf982c65b6b0087ba09ef2ace3de1
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 18:45:01 2016 -0500
+
+    Expanding to all endpoints
+
+commit f494cda618df739e5cda3d0d0933ec123e234aa4
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 18:32:55 2016 -0500
+
+    Fix
+
+commit f2be164809d1b619b06bb80b4b990f09b8d6f424
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 18:25:16 2016 -0500
+
+    Fix
+
+commit fac3bf62e15721592bfb2515db0f9fa487351be4
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 18:21:01 2016 -0500
+
+    make_response fix
+
+commit 8ad74ac4435d00066cba89983927635d01dc267f
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 18:13:11 2016 -0500
+
+    JSON response format
+
+commit dfc7d6bb19943aa51e41b334548f2ebd5c6723d8
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Sat Apr 16 18:04:29 2016 -0500
+
+    js and images
+
+commit 4ac4e283c094cd817d692e2f2418b86822e4f234
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Sat Apr 16 18:03:37 2016 -0500
+
+    collage tests
+
+commit 2990797f5600e6421f0e9678a8189b72919734d6
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 17:15:06 2016 -0500
+
+    minor doc change
+
+commit 8e449b920e7d0ae4fb7561a8479e7c8850ddb030
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 17:13:14 2016 -0500
+
+    minor reorganization
+
+commit 45d242e513409a301c999f7d8d4714363f25093c
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Sat Apr 16 16:51:17 2016 -0500
+
+    removed static example pages
+
+commit caf4e491a1abcf9af2c0925202841d18c0c1d434
+Merge: 88db447 41c1d34
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Sat Apr 16 14:40:04 2016 -0500
+
+    Merge branch 'dev' into dev-peter
+
+commit 41c1d3476fde692872e709f7def0e0148ec08d6d
+Author: Mark Lindberg <marklindberg@Marks-MacBook-Pro.local>
+Date:   Fri Apr 15 00:52:11 2016 -0500
+
+    Fixified scrape.py.
+
+commit 7c6a9318f23bdf099aaec4a8039b1a9d83376f34
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 15 00:16:03 2016 -0500
+
+    scrape doesn't create cards without artists or sets
+
+commit 88db4477f67ac30edab41265c90706f9b79a026b
+Merge: 76ac63b 6bc4a6a
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 14 21:30:54 2016 -0500
+
+    merge
+
+commit 6bc4a6a0ee591e847670fcd49f2134758b248560
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 14 21:27:12 2016 -0500
+
+    reverted unbreak and scrape to default. Removed POST from rest api
+
+commit 2f4d34f17dbb167e7c07da6a9cca23dfe517a6f0
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 14 21:24:45 2016 -0500
+
+    fixed cards not appearing. Mark w/h
+
+commit 76ac63bed5f56623bfb73cc4f82368f63b39fee7
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 14 21:21:21 2016 -0500
+
+    Initial pagination for artists, cards, and sets
+
+commit 2057feaeaa5ff2c045b4a99c5cb50c190517245c
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 14 18:58:06 2016 -0500
+
+    tests with Mark. Fixed database destruction
+
+commit a3a4fd0949a35f510ab5ef6db420c6de77099006
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 14 18:35:50 2016 -0500
+
+    Fixed tests with new dir structure
+
+commit 30754164ace6733a7ce94c3193988303f597eb25
+Merge: 1fe2e3e 37a23fe
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 14 18:06:30 2016 -0500
+
+    Merge branch 'dev-peter' of https://github.com/dark-ritual/cs373-idb into dev-peter
+
+commit 1fe2e3ee167ed6122f34b49ff26795cd75ebe125
+Merge: 14c39c2 4a24072
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 14 18:05:14 2016 -0500
+
+    Merge branch 'dev' of https://github.com/dark-ritual/cs373-idb into dev-peter
+
+commit 4a24072cbdb3d281feeec35167c4bcded377ed8b
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Thu Apr 14 17:57:44 2016 -0500
+
+    fixed card, artist, set names
+
+commit 37a23fe6580dc053390cad5b954fb471250ab025
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Thu Apr 14 17:51:30 2016 -0500
+
+    Added .env to .gitignore
+
+commit 14c39c2380d8a333f1056212af5fdf590a9faac8
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 14 17:43:18 2016 -0500
+
+    Small directory fixes
+
+commit 76c55773174a41d525e0cd182286fb5e08d4aa91
+Author: Peter Scamman <pscamman@gmail.com>
+Date:   Thu Apr 14 17:38:33 2016 -0500
+
+    Directory restructure
+
+commit e806303d9e08e777e4cd6108765484e2f90366da
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Fri Apr 8 20:54:11 2016 -0500
+
+    Fixed bug related to card not having an edition
+
+commit 78b6df72cac8060400fdb20b7361ffc1ad052245
+Author: sls498 <shanell.smith@utexas.edu>
+Date:   Fri Apr 8 20:33:28 2016 -0500
+
+    Added null checks to sql serialization for bad data coming from external API
+
+commit 059435a1ce74ab2cc5c59bc9dd77e8dfc83a6884
+Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
+Date:   Fri Apr 8 18:52:54 2016 -0500
+
+    updated log
+
 commit 744ae7990f337daacc45208ba9ec8488cfac6ac6
 Author: Javier E. De la Garza S <javier.delagarza@gmail.com>
 Date:   Fri Apr 8 18:46:42 2016 -0500

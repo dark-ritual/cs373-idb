@@ -124,9 +124,9 @@ class MainTestCase(unittest.TestCase):
             app.Artist.query.filter_by(artist_id='mark').delete()
             app.db.session.commit()
 
-    def test_artist_serialize_table_data(self):
+    def test_artist_serialize_table_data_paginated(self):
         try:
-            oldlen = len(app.serialize_artist_table_data())
+            oldlen = len(app.serialize_artist_table_data_paginated(0))
             artist_args = dict(artist_id='stephanie', name='Stephanie')
             app.addArtist(artist_args)
             set_args = dict(set_id='SOA', name='Set of Awesome')
@@ -141,7 +141,6 @@ class MainTestCase(unittest.TestCase):
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
-            self.assertEqual(1+oldlen, len(app.serialize_artist_table_data()))
         finally:
             app.Artist.query.filter_by(artist_id='mark').delete()
             app.Edition.query.filter_by(multiverse_id='-666').delete()
@@ -149,7 +148,7 @@ class MainTestCase(unittest.TestCase):
             app.Set.query.filter_by(set_id='SOA').delete()
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
-            self.assertEqual(oldlen, len(app.serialize_artist_table_data()))
+            self.assertEqual(oldlen, len(app.serialize_artist_table_data_paginated(0)))
 
     def test_card_repr(self):
         try:
@@ -177,9 +176,9 @@ class MainTestCase(unittest.TestCase):
             app.Card.query.filter_by(card_id='test-card').delete()
             app.db.session.commit()
 
-    def test_card_serialize_table_data(self):
+    def test_card_serialize_table_data_pagination(self):
         try:
-            oldlen = len(app.serialize_card_table_data())
+            oldlen = len(app.serialize_card_table_data_paginated(0))
             artist_args = dict(artist_id='stephanie', name='Stephanie')
             app.addArtist(artist_args)
             set_args = dict(set_id='SOA', name='Set of Awesome')
@@ -194,26 +193,24 @@ class MainTestCase(unittest.TestCase):
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
-            self.assertEqual(1+oldlen, len(app.serialize_card_table_data()))
 
             set_args = dict(set_id='JGTHGKJH', name='Javier Grandious Tomahawking')
             app.addSet(set_args)
-            edition_args = dict(multiverse_id='666', artist_id='stephanie', set_id='JGTHGKJH',
+            edition_args = dict(multiverse_id='-667', artist_id='stephanie', set_id='JGTHGKJH',
                                image_url='dummy-url',
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
-            self.assertEqual(1+oldlen, len(app.serialize_card_table_data()))
         finally:
             app.Edition.query.filter_by(multiverse_id='-666').delete()
-            app.Edition.query.filter_by(multiverse_id='666').delete()
+            app.Edition.query.filter_by(multiverse_id='-667').delete()
             app.Card.query.filter_by(card_id='sample-text').delete()
             app.Set.query.filter_by(set_id='JGTHGKJH').delete()
             # app.Artist.query.filter_by(artist_id='javier').delete()
             app.Set.query.filter_by(set_id='SOA').delete()
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
-            self.assertEqual(oldlen, len(app.serialize_card_table_data()))
+            self.assertEqual(oldlen, len(app.serialize_card_table_data_paginated(0)))
 
     def test_card_serialize_full(self):
         try:
@@ -468,6 +465,30 @@ class MainTestCase(unittest.TestCase):
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
 
+    def test_search_1(self):
+        try:
+            artist_args = dict(artist_id='stephanie', name='Stephanie')
+            app.addArtist(artist_args)
+            set_args = dict(set_id='SOA', name='Set of Awesome')
+            app.addSet(set_args)
+            card_args = dict(card_id='sample-text', name='AoeUIDHtnS SNthDIueoA', colors='[White]',
+                            cost='{2}{W}', cmc=3, text='Flying',
+                            formats='standard=True', types='Creature',
+                            subtypes='Sample', power='3', toughness='2')
+            app.addCard(card_args)
+            edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
+                               image_url='dummy-url',
+                               card_id='sample-text', flavor='With rope...',
+                               rarity='common', number='24', layout='normal')
+            app.addEdition(edition_args)
+            self.assertEqual(len(app.search_card_names('aoeuidhtns snthdiueoa')[0]), 1)
+        finally:
+            app.Edition.query.filter_by(multiverse_id='-666').delete()
+            app.Card.query.filter_by(card_id='sample-text').delete()
+            app.Set.query.filter_by(set_id='SOA').delete()
+            app.Artist.query.filter_by(artist_id='stephanie').delete()
+            app.db.session.commit()
+
     def test_set_repr(self):
         try:
             set_args = dict(set_id='XXX', name='Xtra Xtravagant Xet')
@@ -580,9 +601,9 @@ class MainTestCase(unittest.TestCase):
             app.Set.query.filter_by(set_id='XXX').delete()
             app.db.session.commit()
 
-    def test_set_serialize_table_data(self):
+    def test_set_serialize_table_data_pagination(self):
         try:
-            oldlen = len(app.serialize_set_table_data())
+            oldlen = len(app.serialize_set_table_data_paginated(0))
             artist_args = dict(artist_id='stephanie', name='Stephanie')
             app.addArtist(artist_args)
             set_args = dict(set_id='SOA', name='Set of Awesome')
@@ -597,7 +618,6 @@ class MainTestCase(unittest.TestCase):
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
-            self.assertEqual(1+oldlen, len(app.serialize_set_table_data()))
         finally:
             app.Artist.query.filter_by(artist_id='mark').delete()
             app.Edition.query.filter_by(multiverse_id='-666').delete()
@@ -605,7 +625,7 @@ class MainTestCase(unittest.TestCase):
             app.Set.query.filter_by(set_id='SOA').delete()
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
-            self.assertEqual(oldlen, len(app.serialize_set_table_data()))
+            self.assertEqual(oldlen, len(app.serialize_set_table_data_paginated(0)))
 
 
 if __name__ == '__main__': # pragma: no cover

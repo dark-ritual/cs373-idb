@@ -4,25 +4,82 @@
 
 var darkControllers = angular.module('darkControllers', []);
 
-//#################################################
-//#############Home Controller#####################
-//#################################################
+// #################################################
+// #############Home Controller#####################
+// #################################################
 
 dark.controller('HomeController', ['$scope', function($scope) {
+	
+	$('.center').slick({
+		centerMode : true,
+		centerPadding : '60px',
+		slidesToShow : 3,
+		autoplay : true,
+		autoplaySpeed : 2000,
+		responsive : [ {
+			breakpoint : 768,
+			settings : {
+				arrows : false,
+				centerMode : true,
+				centerPadding : '40px',
+				slidesToShow : 3
+			}
+		}, {
+			breakpoint : 480,
+			settings : {
+				arrows : false,
+				centerMode : true,
+				centerPadding : '40px',
+				slidesToShow : 1
+			}
+		} ]
+	});
+	
+	$scope.carouselOptions = [ {
+		name : "1",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=386731&type=card"
+	}, {
+		name : "2",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=19733&type=card"
+	}, {
+		name : "3",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=201141&type=card"
+	}, {
+		name : "4",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=184622&type=card"
+	}, {
+		name : "5",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=243215&type=card"
+	}, {
+		name : "6",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=391928&type=card"
+	}, {
+		name : "7",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=394699&type=card"
+	}, {
+		name : "8",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=407555&type=card"
+	}, {
+		name : "9",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=394570&type=card"
+	}, {
+		name : "10",
+		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=271213&type=card"
+	} ]
 
 } ]);
 
-//#################################################
-//#############About Controller####################
-//#################################################
+// #################################################
+// #############About Controller####################
+// #################################################
 
 dark.controller('AboutController', ['$scope', function($scope) {
 
 } ]);
 
-//#################################################
-//#############NavBar Controller###################
-//#################################################
+// #################################################
+// #############NavBar Controller###################
+// #################################################
 
 dark.controller('ActiveNavBarController', [ '$scope', '$location', function($scope, $location) {
 	$scope.isActive = function(viewLocation) {
@@ -30,11 +87,49 @@ dark.controller('ActiveNavBarController', [ '$scope', '$location', function($sco
 	};
 } ]);
 
-//#################################################
-//#############Cards Controller####################
-//#################################################
+// #################################################
+// #############NavSearch Controller###################
+// #################################################
 
-dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
+dark.controller('SearchController', [ '$scope', '$location', function($scope, $location) {
+	$scope.searchInput = "";
+	$scope.search = function() {
+		$location.path("/results/" + $scope.searchInput);
+	}
+} ]);
+
+// #################################################
+// #############Results Controller##################
+// #################################################
+
+dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', 'costIcon', function($scope, $routeParams, NavSearch, costIcon) {
+	$scope.lastSortType = 'card';
+	$scope.sortType 	  = 'card';
+	$scope.sortReverse  = false;
+	$scope.tableHeaders = [{label: "", sortType:""}, {label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
+	$scope.cards = NavSearch.query($routeParams);
+	// debugger;
+	// $scope.andResults = $scope.cards[0];
+	// $scope.orResults = $scope.cards[1];
+	
+	$scope.sort = function(tableHeader) {
+		$scope.sortType = tableHeader.sortType;
+		if($scope.sortType == $scope.lastSortType) {
+			$scope.sortReverse = !$scope.sortReverse;
+		} else {
+			$scope.lastSortType = $scope.sortType;
+		}
+	}
+
+	$scope.convertCost = costIcon;
+}]);
+
+
+// #################################################
+// #############Cards Controller####################
+// #################################################
+
+dark.controller('CardsController', ['$scope','Cards', 'costIcon', '$routeParams', function($scope, Cards, costIcon, $routeParams) {
 	$scope.lastSortType = 'card';
 	$scope.sortType     = 'card'; // set the default sort type
 	$scope.sortReverse  = false;
@@ -55,36 +150,7 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 		return array;
 	}
 	
-	$scope.convertCost = function(costString){
-		costString = costString.replace(new RegExp("{","g"), '');
-		var array = costString.split("}");
-		for(var i=0;i<array.length;i++) {
-			if(array[i]=="U"){
-				array[i]="mtg-blue";
-			} else if(array[i]=="B"){
-				array[i]="mtg-black";
-			} else if(array[i]=="W"){
-				array[i]="mtg-white";
-			} else if(array[i]=="R"){
-				array[i]="mtg-red";
-			} else if(array[i]=="G"){
-				array[i]="mtg-green";
-			} else if(array[i]=="W/U") {
-				array[i]="mtg-white-blue";
-			} else {
-				if(array[i].length > 0) {
-					if(array[i].indexOf("/") > -1) {
-						if(array[i]=="2/U") {
-							array[i]="mtg-any2-blue";
-						}  
-					} else {
-						array[i]="mtg-any"+array[i];
-					}
-				}
-			}
-		}
-		return array;
-	}
+	$scope.convertCost = costIcon;
 	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
@@ -104,21 +170,15 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	}
 
 	// create the list of entries
-	$scope.cards = Cards.query();
-
-	/*for(card in $scope.cards) {
-		currentCost = card.cost;
-		// TODO: parse currentCost to get a color "type" and a numerical "value" for every color in the string
-		newCost = [{type:"white", value:4}];
-		card.cost = newCost;
-	}*/
+	$scope.cards = Cards.query($routeParams);
+	$scope.page_num = parseInt($routeParams["page_num"]);
 } ]);
 
-//#################################################
-//#############Sets Controller#####################
-//#################################################
+// #################################################
+// #############Sets Controller#####################
+// #################################################
 
-dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
+dark.controller('SetsController', ['$scope', '$routeParams', 'Sets', function($scope, $routeParams, Sets) {
 	$scope.lastSortType = 'set';
 	$scope.sortType     = 'set'; // set the default sort type
 	$scope.sortReverse  = false;
@@ -157,14 +217,15 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	}
 
 	// create the list of entries
-	$scope.sets = Sets.query();
+	$scope.sets = Sets.query($routeParams);
+	$scope.page_num = parseInt($routeParams["page_num"])
 } ]);
 
-//#################################################
-//#############Artists Controller##################
-//#################################################
+// #################################################
+// #############Artists Controller##################
+// #################################################
 
-dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Artists) {
+dark.controller('ArtistsController', ['$scope', '$routeParams', 'Artists', function($scope, $routeParams, Artists) {
 	$scope.lastSortType = 'artist';
 	$scope.sortType     = 'artist'; // set the default sort type
 	$scope.sortReverse  = false;
@@ -203,51 +264,57 @@ dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Arti
 	}
 
 	// create the list of entries
-	$scope.artists = Artists.query();
+	$scope.artists = Artists.query($routeParams);
+	$scope.page_num = parseInt($routeParams["page_num"])
 } ]);
 
-//##########################################################
-//#############Card Instance Controller#####################
-//##########################################################
+// ##########################################################
+// #############Card Instance Controller#####################
+// ##########################################################
 
-dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstance', function($scope, $routeParams, CardInstance) {
+dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstance', 'costIcon', function($scope, $routeParams, CardInstance, costIcon) {
 
-	$scope.cardinstance = CardInstance.query($routeParams)
-	$scope.convertCost = function(costString){
-		costString = costString.replace(new RegExp("{","g"), '');
-		var array = costString.split("}");
-		for(var i=0;i<array.length;i++) {
-			if(array[i]=="U"){
-				array[i]="mtg-blue";
-			} else if(array[i]=="B"){
-				array[i]="mtg-black";
-			} else if(array[i]=="W"){
-				array[i]="mtg-white";
-			} else if(array[i]=="R"){
-				array[i]="mtg-red";
-			} else if(array[i]=="G"){
-				array[i]="mtg-green";
-			} else if(array[i]=="W/U") {
-				array[i]="mtg-white-blue";
-			} else {
-				if(array[i].length > 0) {
-					if(array[i].indexOf("/") > -1) {
-						if(array[i]=="2/U") {
-							array[i]="mtg-any2-blue";
-						}  
-					} else {
-						array[i]="mtg-any"+array[i];
-					}
+	$scope.cardinstance = CardInstance.query($routeParams, function(data){ // Massage the data before it gets put into the template
+		// turn types from json string to array
+		data[0].types = angular.fromJson(data[0].types.replace(/\'/g,"\""));
+		// if we have subtypes
+		if (data[0].subtypes !== null) {
+			// turn subtypes from json string to array
+			data[0].subtypes = angular.fromJson(data[0].subtypes.replace(/\'/g,"\""));
+			// make new array that holds all the types+subtypes
+			data[0].alltypes = data[0].types.concat(data[0].subtypes);
+		}
+		// we don't have subtypes
+		else {
+			// all types are just types
+			data[0].alltypes = data[0].types;
+		}
+		// parse the text for a card and inject <div> for color icons
+		var textArray = data[0].text.split(" ");
+		for(var i=0;i<textArray.length;i++) {
+			if(textArray[i].includes('{') && textArray[i].includes('}')) {
+				var start = textArray[i].indexOf('{');
+				var end = textArray[i].lastIndexOf('}');
+				var colors = textArray[i].substring(start,end+1);
+				var cssColors = costIcon(colors);
+				for(var j=0;j<cssColors.length;j++) {
+					cssColors[j] = "<div class=\"" + cssColors[j] + " mtg-text-icon\"></div>";
 				}
+				textArray[i] = textArray[i].substring(0,start) + cssColors.join("") + textArray[i].substring(end+1,textArray[i].length);
 			}
 		}
-		return array;
+		data[0].text = textArray.join(" ");
+	});
+	
+	$scope.cardTypes = function(typeString, subtypeString){
 	}
+
+	$scope.convertCost = costIcon;
 } ]);
 
-//##########################################################
-//#############Artists Instance Controller##################
-//##########################################################
+// ##########################################################
+// #############Artists Instance Controller##################
+// ##########################################################
 
 dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistInstance', function($scope, $routeParams, ArtistInstance) {
 
@@ -275,14 +342,11 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 	// create the list of entries
 	$scope.artistinstances = ArtistInstance.query($routeParams);
 
-	//$scope.getName = function(card_id){
-	//	return CardInstance.query(card_id).name;
-	//}
 } ]);
 
-//#######################################################
-//#############Set Instance Controller##################
-//#######################################################
+// #######################################################
+// #############Set Instance Controller##################
+// #######################################################
 
 dark.controller('SetInstanceController', ['$scope',  '$routeParams', 'SetInstance', function($scope, $routeParams, SetInstance) {
 
@@ -309,18 +373,12 @@ dark.controller('SetInstanceController', ['$scope',  '$routeParams', 'SetInstanc
 
 	// create the list of entries
     $scope.setinstances = SetInstance.query($routeParams)
-/*	$scope.setsinstance = [
-	                  { image: "../static/images/imagename", name: "Admonition Angel", artist:"Steve Argyle", type:"Creature - Flying", text:"Landfall — Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.\nWhen Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.", sets: "WorldWake"},
-	                  { image: "../static/images/imagename", name: "Angelic Arbiter", artist: "Text to fill in...", sets: "Magic: The Gathering-Commander"},
-	    ];
-*/
 
-	//$scope.set = "Worldwake";
 } ]);
 
-//###############################################
-//#############Tests Controller##################
-//###############################################
+// ###############################################
+// #############Tests Controller##################
+// ###############################################
 
 darkControllers.controller('TestsController', function($scope, $http, $location) {
 	$scope.result = "Click below to run tests (may take a few moments)."
@@ -331,7 +389,8 @@ darkControllers.controller('TestsController', function($scope, $http, $location)
 			var txt = document.createElement("textarea");
 			txt.innerHTML = response.data;
 			var text = txt.value;
-			$scope.result = txt.value;//.substring(2,text.length - 1).replace(/\\n/g, "<br>");
+			$scope.result = txt.value;// .substring(2,text.length -
+										// 1).replace(/\\n/g, "<br>");
 	   })
 	}
 } );
