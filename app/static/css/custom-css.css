@@ -22,7 +22,7 @@ a{
     background-color: transparent;
 }
 
-p.capitalize{
+.capitalize{
 	text-transform: capitalize;
 }
 	

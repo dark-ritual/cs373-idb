@@ -4,9 +4,9 @@
 
 var darkControllers = angular.module('darkControllers', []);
 
-//#################################################
-//#############Home Controller#####################
-//#################################################
+// #################################################
+// #############Home Controller#####################
+// #################################################
 
 dark.controller('HomeController', ['$scope', function($scope) {
 	
@@ -69,17 +69,17 @@ dark.controller('HomeController', ['$scope', function($scope) {
 
 } ]);
 
-//#################################################
-//#############About Controller####################
-//#################################################
+// #################################################
+// #############About Controller####################
+// #################################################
 
 dark.controller('AboutController', ['$scope', function($scope) {
 
 } ]);
 
-//#################################################
-//#############NavBar Controller###################
-//#################################################
+// #################################################
+// #############NavBar Controller###################
+// #################################################
 
 dark.controller('ActiveNavBarController', [ '$scope', '$location', function($scope, $location) {
 	$scope.isActive = function(viewLocation) {
@@ -87,9 +87,9 @@ dark.controller('ActiveNavBarController', [ '$scope', '$location', function($sco
 	};
 } ]);
 
-//#################################################
-//#############NavSearch Controller###################
-//#################################################
+// #################################################
+// #############NavSearch Controller###################
+// #################################################
 
 dark.controller('SearchController', [ '$scope', '$location', function($scope, $location) {
 	$scope.searchInput = "";
@@ -98,15 +98,15 @@ dark.controller('SearchController', [ '$scope', '$location', function($scope, $l
 	}
 } ]);
 
-//#################################################
-//#############Results Controller###################
-//#################################################
+// #################################################
+// #############Results Controller##################
+// #################################################
 
-dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', function($scope, $routeParams, NavSearch) {
+dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', 'costIcon', function($scope, $routeParams, NavSearch, costIcon) {
 	$scope.lastSortType = 'card';
 	$scope.sortType 	  = 'card';
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "", sortType:""}, {label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}]
+	$scope.tableHeaders = [{label: "", sortType:""}, {label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
 	$scope.cards = NavSearch.query($routeParams);
 	// debugger;
 	// $scope.andResults = $scope.cards[0];
@@ -121,46 +121,15 @@ dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', fun
 		}
 	}
 
-	$scope.convertCost = function(costString){
-		if(costString != null){
-			costString = costString.replace(new RegExp("{","g"), '');
-			var array = costString.split("}");
-			for(var i=0;i<array.length;i++) {
-				if(array[i]=="U"){
-					array[i]="mtg-blue";
-				} else if(array[i]=="B"){
-					array[i]="mtg-black";
-				} else if(array[i]=="W"){
-					array[i]="mtg-white";
-				} else if(array[i]=="R"){
-					array[i]="mtg-red";
-				} else if(array[i]=="G"){
-					array[i]="mtg-green";
-				} else if(array[i]=="W/U") {
-					array[i]="mtg-white-blue";
-				} else {
-					if(array[i].length > 0) {
-						if(array[i].indexOf("/") > -1) {
-							if(array[i]=="2/U") {
-								array[i]="mtg-any2-blue";
-							}  
-						} else {
-							array[i]="mtg-any"+array[i];
-						}
-					}
-				}
-			}
-		}
-		return array;
-	}
+	$scope.convertCost = costIcon;
+}]);
 
-} ]);
 
-//#################################################
-//#############Cards Controller####################
-//#################################################
+// #################################################
+// #############Cards Controller####################
+// #################################################
 
-dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
+dark.controller('CardsController', ['$scope','Cards', 'costIcon', function($scope, Cards, costIcon) {
 	$scope.lastSortType = 'card';
 	$scope.sortType     = 'card'; // set the default sort type
 	$scope.sortReverse  = false;
@@ -181,38 +150,7 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 		return array;
 	}
 	
-	$scope.convertCost = function(costString){
-		if(costString != null){
-			costString = costString.replace(new RegExp("{","g"), '');
-			var array = costString.split("}");
-			for(var i=0;i<array.length;i++) {
-				if(array[i]=="U"){
-					array[i]="mtg-blue";
-				} else if(array[i]=="B"){
-					array[i]="mtg-black";
-				} else if(array[i]=="W"){
-					array[i]="mtg-white";
-				} else if(array[i]=="R"){
-					array[i]="mtg-red";
-				} else if(array[i]=="G"){
-					array[i]="mtg-green";
-				} else if(array[i]=="W/U") {
-					array[i]="mtg-white-blue";
-				} else {
-					if(array[i].length > 0) {
-						if(array[i].indexOf("/") > -1) {
-							if(array[i]=="2/U") {
-								array[i]="mtg-any2-blue";
-							}  
-						} else {
-							array[i]="mtg-any"+array[i];
-						}
-					}
-				}
-			}
-		}
-		return array;
-	}
+	$scope.convertCost = costIcon;
 	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
@@ -235,9 +173,9 @@ dark.controller('CardsController', ['$scope','Cards', function($scope, Cards) {
 	$scope.cards = Cards.query();
 } ]);
 
-//#################################################
-//#############Sets Controller#####################
-//#################################################
+// #################################################
+// #############Sets Controller#####################
+// #################################################
 
 dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	$scope.lastSortType = 'set';
@@ -281,9 +219,9 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	$scope.sets = Sets.query();
 } ]);
 
-//#################################################
-//#############Artists Controller##################
-//#################################################
+// #################################################
+// #############Artists Controller##################
+// #################################################
 
 dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Artists) {
 	$scope.lastSortType = 'artist';
@@ -327,51 +265,53 @@ dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Arti
 	$scope.artists = Artists.query();
 } ]);
 
-//##########################################################
-//#############Card Instance Controller#####################
-//##########################################################
+// ##########################################################
+// #############Card Instance Controller#####################
+// ##########################################################
 
-dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstance', function($scope, $routeParams, CardInstance) {
+dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstance', 'costIcon', function($scope, $routeParams, CardInstance, costIcon) {
 
-	$scope.cardinstance = CardInstance.query($routeParams)
-
-	$scope.convertCost = function(costString){
-		if(costString != null){
-			costString = costString.replace(new RegExp("{","g"), '');
-			var array = costString.split("}");
-			for(var i=0;i<array.length;i++) {
-				if(array[i]=="U"){
-					array[i]="mtg-blue";
-				} else if(array[i]=="B"){
-					array[i]="mtg-black";
-				} else if(array[i]=="W"){
-					array[i]="mtg-white";
-				} else if(array[i]=="R"){
-					array[i]="mtg-red";
-				} else if(array[i]=="G"){
-					array[i]="mtg-green";
-				} else if(array[i]=="W/U") {
-					array[i]="mtg-white-blue";
-				} else {
-					if(array[i].length > 0) {
-						if(array[i].indexOf("/") > -1) {
-							if(array[i]=="2/U") {
-								array[i]="mtg-any2-blue";
-							}  
-						} else {
-							array[i]="mtg-any"+array[i];
-						}
-					}
+	$scope.cardinstance = CardInstance.query($routeParams, function(data){ // Massage the data before it gets put into the template
+		// turn types from json string to array
+		data[0].types = angular.fromJson(data[0].types.replace(/\'/g,"\""));
+		// if we have subtypes
+		if (data[0].subtypes !== null) {
+			// turn subtypes from json string to array
+			data[0].subtypes = angular.fromJson(data[0].subtypes.replace(/\'/g,"\""));
+			// make new array that holds all the types+subtypes
+			data[0].alltypes = data[0].types.concat(data[0].subtypes);
+		}
+		// we don't have subtypes
+		else {
+			// all types are just types
+			data[0].alltypes = data[0].types;
+		}
+		// parse the text for a card and inject <div> for color icons
+		var textArray = data[0].text.split(" ");
+		for(var i=0;i<textArray.length;i++) {
+			if(textArray[i].includes('{') && textArray[i].includes('}')) {
+				var start = textArray[i].indexOf('{');
+				var end = textArray[i].lastIndexOf('}');
+				var colors = textArray[i].substring(start,end+1);
+				var cssColors = costIcon(colors);
+				for(var j=0;j<cssColors.length;j++) {
+					cssColors[j] = "<div class=\"" + cssColors[j] + " mtg-text-icon\"></div>";
 				}
+				textArray[i] = textArray[i].substring(0,start) + cssColors.join("") + textArray[i].substring(end+1,textArray[i].length);
 			}
 		}
-		return array;
+		data[0].text = textArray.join(" ");
+	});
+	
+	$scope.cardTypes = function(typeString, subtypeString){
 	}
+
+	$scope.convertCost = costIcon;
 } ]);
 
-//##########################################################
-//#############Artists Instance Controller##################
-//##########################################################
+// ##########################################################
+// #############Artists Instance Controller##################
+// ##########################################################
 
 dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistInstance', function($scope, $routeParams, ArtistInstance) {
 
@@ -401,9 +341,9 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 
 } ]);
 
-//#######################################################
-//#############Set Instance Controller##################
-//#######################################################
+// #######################################################
+// #############Set Instance Controller##################
+// #######################################################
 
 dark.controller('SetInstanceController', ['$scope',  '$routeParams', 'SetInstance', function($scope, $routeParams, SetInstance) {
 
@@ -433,9 +373,9 @@ dark.controller('SetInstanceController', ['$scope',  '$routeParams', 'SetInstanc
 
 } ]);
 
-//###############################################
-//#############Tests Controller##################
-//###############################################
+// ###############################################
+// #############Tests Controller##################
+// ###############################################
 
 darkControllers.controller('TestsController', function($scope, $http, $location) {
 	$scope.result = "Click below to run tests (may take a few moments)."
@@ -446,7 +386,8 @@ darkControllers.controller('TestsController', function($scope, $http, $location)
 			var txt = document.createElement("textarea");
 			txt.innerHTML = response.data;
 			var text = txt.value;
-			$scope.result = txt.value;//.substring(2,text.length - 1).replace(/\\n/g, "<br>");
+			$scope.result = txt.value;// .substring(2,text.length -
+										// 1).replace(/\\n/g, "<br>");
 	   })
 	}
 } );

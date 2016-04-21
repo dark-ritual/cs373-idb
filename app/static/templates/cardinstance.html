@@ -22,14 +22,14 @@
             <td><a href="#/sets/{{ cardinstance[0].multiverse_ids[0].set_id  }}">{{ cardinstance[0].multiverse_ids[0].set_name }}</td>
           </tr>
           <tr>
-            <td class="text-right"><b>Type:</b></td>
-            <td>{{ cardinstance[0].types }}</td>
+            <td class="text-right"><b>Type<span ng-if="cardinstance[0].alltypes.length > 1">s</span>:</b></td>
+            <td><span class="capitalize" ng-repeat="type in cardinstance[0].alltypes">{{ type }}<span ng-show="!$last">, </span></span></td>
           </tr>
-          <tr>
+          <tr ng-if="cardinstance[0].cmc > 0">
             <td class="text-right"><b>Converted Mana Cost:</b></td>
-            <td>{{ cardinstance[0].cmc }}</td>
+            <td >{{ cardinstance[0].cmc }}</td>
           </tr>
-          <tr>
+          <tr ng-if="cardinstance[0].cost.length > 0">
             <td class="text-right"><b>Cost:</b></td>
             <td> 
               <div ng-repeat="costClass in convertCost(cardinstance[0].cost) track by $index" class="{{ costClass }} mtg-standard"></div>
@@ -37,15 +37,15 @@
           </tr>
           <tr>
             <td class="text-right"><b>Card Text:</b></td>
-            <td>{{ cardinstance[0].text }} </td>
+            <td><span ng-bind-html="cardinstance[0].text"></span></td>
           </tr>
-          <tr>
+          <tr ng-if="cardinstance[0].power.length > 0 && cardinstance[0].toughness.length > 0">
             <td class="text-right"><b>P/T:</b></td>
             <td>{{ cardinstance[0].power }} / {{ cardinstance[0].toughness }}</td>
           </tr>
           <tr>
             <td class="text-right"><b>Rarity:</b></td>
-            <td>{{ cardinstance[0].multiverse_ids[0].rarity }}</td>
+            <td class="capitalize">{{ cardinstance[0].multiverse_ids[0].rarity }}</td>
           </tr>
         </tbody>
       </table>
