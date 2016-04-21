@@ -213,54 +213,6 @@ class Edition(db.Model):
                     card_name=self.card.name, artist_name=self.artist.name,
                     set_name=self.set.name)
 
-def serialize_card_table_data():
-    sql = '''SELECT
-                c.name,
-                c.card_id,
-                c.cost,
-                GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR '|!|') AS editions,
-                GROUP_CONCAT(DISTINCT e.rarity SEPARATOR '|!|') AS rarities,
-                GROUP_CONCAT(DISTINCT a.name SEPARATOR '|!|') AS artists,
-                GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR '|!|') AS artist_ids,
-                GROUP_CONCAT(DISTINCT s.name  SEPARATOR '|!|') AS sets,
-                GROUP_CONCAT(DISTINCT s.set_id SEPARATOR '|!|') AS set_ids,
-                count(*) AS num_editions
-        FROM
-            card AS c
-        LEFT JOIN
-            edition AS e ON e.card_id = c.card_id
-        LEFT JOIN
-            artist AS a ON a.artist_id = e.artist_id
-        LEFT JOIN
-            `set` AS s ON s.set_id = e.set_id
-        GROUP BY
-            c.name
-    '''
-    #convert the list of dicts to an array of objects
-    ret = []
-    for table_data in db.engine.execute(sql).fetchall():
-        artists=[]
-        dbArtists=table_data['artists'].split('|!|')
-        artist_ids=table_data['artist_ids'].split('|!|')
-        for index, artist_name in enumerate(dbArtists):
-            artists.append({'artist_id':artist_ids[index], 'name':artist_name})
-
-        sets=[]
-        dbSets=table_data['sets'].split('|!|')
-        set_ids=table_data['set_ids'].split('|!|')
-        for index, set_name in enumerate(dbSets):
-            sets.append({'set_id':set_ids[index], 'name':set_name})
-        ret.append({'name':table_data['name'],
-                    'card_id':table_data['card_id'],
-                    'cost':table_data['cost'],
-                    'editions':table_data['editions'],
-                    'rarities':table_data['rarities'],
-                    'artists':artists,
-                    'sets':sets,
-                    'num_editions':table_data['num_editions']
-                  })
-    return ret
-
 def serialize_card_table_data_paginated(page_num):
     num = db.engine.execute('''SELECT
                         count(*)
@@ -271,7 +223,6 @@ def serialize_card_table_data_paginated(page_num):
     firstrow = cards_per_page * page_num
     #TODO:
     # Sanity Check
-    print(firstrow)
     sql = '''SELECT
                 c.name,
                 c.card_id,
