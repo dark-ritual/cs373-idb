@@ -178,7 +178,7 @@ dark.controller('CardsController', ['$scope','Cards', 'costIcon', '$routeParams'
 // #############Sets Controller#####################
 // #################################################
 
-dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
+dark.controller('SetsController', ['$scope', '$routeParams', 'Sets', function($scope, $routeParams, Sets) {
 	$scope.lastSortType = 'set';
 	$scope.sortType     = 'set'; // set the default sort type
 	$scope.sortReverse  = false;
@@ -217,14 +217,15 @@ dark.controller('SetsController', ['$scope', 'Sets', function($scope, Sets) {
 	}
 
 	// create the list of entries
-	$scope.sets = Sets.query();
+	$scope.sets = Sets.query($routeParams);
+	$scope.page_num = parseInt($routeParams["page_num"])
 } ]);
 
 // #################################################
 // #############Artists Controller##################
 // #################################################
 
-dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Artists) {
+dark.controller('ArtistsController', ['$scope', '$routeParams', 'Artists', function($scope, $routeParams, Artists) {
 	$scope.lastSortType = 'artist';
 	$scope.sortType     = 'artist'; // set the default sort type
 	$scope.sortReverse  = false;
@@ -263,7 +264,8 @@ dark.controller('ArtistsController', ['$scope', 'Artists', function($scope, Arti
 	}
 
 	// create the list of entries
-	$scope.artists = Artists.query();
+	$scope.artists = Artists.query($routeParams);
+	$scope.page_num = parseInt($routeParams["page_num"])
 } ]);
 
 // ##########################################################
