@@ -8,7 +8,14 @@ var darkControllers = angular.module('darkControllers', []);
 // #############Home Controller#####################
 // #################################################
 
-dark.controller('HomeController', ['$scope', function($scope) {
+dark.controller('HomeController', ['$scope', function($scope) {} ]);
+
+// #################################################
+// #############About Controller####################
+// #################################################
+
+dark.controller('AboutController', ['$scope', function($scope) {
+
 	
 	$('.center').slick({
 		centerMode : true,
@@ -67,13 +74,7 @@ dark.controller('HomeController', ['$scope', function($scope) {
 		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=271213&type=card"
 	} ]
 
-} ]);
 
-// #################################################
-// #############About Controller####################
-// #################################################
-
-dark.controller('AboutController', ['$scope', function($scope) {
 
 } ]);
 
@@ -88,7 +89,7 @@ dark.controller('ActiveNavBarController', [ '$scope', '$location', function($sco
 } ]);
 
 // #################################################
-// #############NavSearch Controller###################
+// #############NavSearch Controller################
 // #################################################
 
 dark.controller('SearchController', [ '$scope', '$location', function($scope, $location) {
@@ -318,7 +319,7 @@ dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstan
 
 dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistInstance', function($scope, $routeParams, ArtistInstance) {
 
-	$scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Set", sortType:"sets"}];
+	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Information", sortType: "name"}, {label: "Set", sortType:"set"}];
 
 	$scope.range = function(start, end)
 	{
@@ -350,7 +351,7 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 
 dark.controller('SetInstanceController', ['$scope',  '$routeParams', 'SetInstance', function($scope, $routeParams, SetInstance) {
 
-    $scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Artist"}];
+    $scope.tableHeaders = [{label: "Card", sortType: "name"}, {label: "Information", sortType: "name"}, {label: "Artist", sortType:"artist"}];
 
 	$scope.range = function(start, end)
 	{
@@ -394,3 +395,20 @@ darkControllers.controller('TestsController', function($scope, $http, $location)
 	   })
 	}
 } );
+
+//###############################################
+//#############Scroll Controller#################
+//###############################################
+
+darkControllers.controller('ScrollController', ['$scope', '$location', '$anchorScroll',
+function ($scope, $location, $anchorScroll) {
+  $scope.gotoTop = function() {
+    // set the location.hash to the id of
+    // the element you wish to scroll to.
+    $location.hash('top');
+
+    // call $anchorScroll()
+    $anchorScroll();
+  };
+}]);
+
