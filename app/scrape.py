@@ -6,9 +6,9 @@ def doInsertCard(card):
     card_args       = {}
     card_args['cost']    = card['cost']
     card_args['cmc']     = card['cmc']
-    card_args['text']    = card['text'].replace('−', '-')
-    card_args['types']   = str(card['types'])
-    card_args['name']    = card['name']
+    card_args['text']    = card['text'].replace('−', '-').replace('æ', 'ae').replace('Æ', 'Ae')
+    card_args['types']   = str(card['types']).replace('Æ', 'Ae')
+    card_args['name']    = card['name'].replace('æ', 'ae')
     card_args['card_id'] = card['id']
     card_args['formats'] = str(card['formats'])
     if 'subtypes' in card:
