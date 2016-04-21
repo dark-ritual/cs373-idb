@@ -215,7 +215,7 @@ class Edition(db.Model):
 
 def serialize_card_table_data_paginated(page_num):
     try:
-        int(page_num)
+        page_num = int(page_num)
     except:
         page_num = 0
     if page_num < 0:
@@ -267,7 +267,7 @@ def serialize_card_table_data_paginated(page_num):
 
 def serialize_artist_table_data_paginated(page_num):
     try:
-        int(page_num)
+        page_num = int(page_num)
     except:
         page_num = 0
     if page_num < 0:
@@ -303,7 +303,7 @@ def serialize_artist_table_data_paginated(page_num):
 
 def serialize_set_table_data_paginated(page_num):
     try:
-        int(page_num)
+        page_num = int(page_num)
     except:
         page_num = 0
     if page_num < 0:
@@ -402,7 +402,7 @@ def bold_search_terms(data, terms):
 
 def search_card_names(term_str, page_num):
     try:
-        int(page_num)
+        page_num = int(page_num)
     except:
         page_num = 0
     if page_num < 0:

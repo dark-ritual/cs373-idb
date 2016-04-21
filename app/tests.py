@@ -175,6 +175,12 @@ class MainTestCase(unittest.TestCase):
             app.db.session.commit()
             self.assertEqual(oldlen, len(app.serialize_artist_table_data_paginated(0)))
 
+    def test_artist_serialize_table_data_pagination_sanity(self):
+        data = app.serialize_artist_table_data_paginated(0)
+        self.assertEqual(data, app.serialize_artist_table_data_paginated(-42))
+        self.assertEqual(data, app.serialize_artist_table_data_paginated("Fred"))
+        self.assertEqual(data, app.serialize_artist_table_data_paginated("0"))
+
     def test_card_repr(self):
         try:
             card_args = dict(card_id='test-card', name='Test Card', colors="['White']",
@@ -237,6 +243,12 @@ class MainTestCase(unittest.TestCase):
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
             self.assertEqual(oldlen, len(app.serialize_card_table_data_paginated(0)))
+
+    def test_card_serialize_table_data_pagination_sanity(self):
+        data = app.serialize_card_table_data_paginated(0)
+        self.assertEqual(data, app.serialize_card_table_data_paginated(-42))
+        self.assertEqual(data, app.serialize_card_table_data_paginated("Fred"))
+        self.assertEqual(data, app.serialize_card_table_data_paginated("0"))
 
     def test_card_serialize_full(self):
         try:
@@ -516,6 +528,12 @@ class MainTestCase(unittest.TestCase):
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
 
+    def test_search_pagination_sanity(self):
+        data = app.search_card_names('flying', 0)
+        self.assertEqual(data, app.search_card_names('flyiNG', -42))
+        self.assertEqual(data, app.search_card_names('FlYing', "Fred"))
+        self.assertEqual(data, app.search_card_names('FLYIng', "0"))
+
     def test_set_repr(self):
         try:
             set_args = dict(set_id='XXX', name='Xtra Xtravagant Xet')
@@ -654,6 +672,12 @@ class MainTestCase(unittest.TestCase):
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
             self.assertEqual(oldlen, len(app.serialize_set_table_data_paginated(0)))
+
+    def test_set_serialize_table_data_pagination_sanity(self):
+        data = app.serialize_set_table_data_paginated(0)
+        self.assertEqual(data, app.serialize_set_table_data_paginated(-42))
+        self.assertEqual(data, app.serialize_set_table_data_paginated("Fred"))
+        self.assertEqual(data, app.serialize_set_table_data_paginated("0"))
 
     def test_searchAPI(self):
         try:
