@@ -18,28 +18,36 @@
     </thead>
     <tbody>
       <tr ng-repeat="card in cards" ng-if="card.result_type=='AND'">
-          <td>
-            <a href="#/cards/{{ card.card_id }}"><img src="{{ card.image_url }}" width="100px"></a>
-          </td>
-          <td>
-          	<a href="#/cards/{{ card.card_id }}" ng-bind-html="card.name"></a>
-          </td>
-          <td>
-          	<a href="#/artists/{{ card.artist_id }}" ng-bind-html="card.artist_name"></a>
-          </td>
-          <td>
-            <a href="#/sets/{{ card.set_id }}" ng-bind-html="card.set_name"></a>
-          </td>
-          <td width="250px">
-            <p ng-bind-html="card.text"></p>
-            <p><small><i ng-bind-html="card.flavor"></i></small></p>
-          </td>
-          <td>
-          	<p class="capitalize" ng-bind-html="card.rarity"></p>
-          </td>
-          <td>
-          	<div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
-          </td>
+        <td>
+        	<div ng-controller="ScrollController">
+          		<a ng-click="gotoTop()" href="#/cards/{{ card.card_id }}"><img src="{{ card.image_url }}" width="100px"></a>
+        	</div>
+        </td>
+        <td>
+        	<div ng-controller="ScrollController">
+        		<a ng-click="gotoTop()" href="#/cards/{{ card.card_id }}" ng-bind-html="card.name"></a>
+        	</div>
+        </td>
+        <td>
+        	<div ng-controller="ScrollController">
+        		<a ng-click="gotoTop()" href="#/artists/{{ card.artist_id }}" ng-bind-html="card.artist_name"></a>
+        	</div>
+        </td>
+        <td>
+        	<div ng-controller="ScrollController">
+          		<a ng-click="gotoTop()" href="#/sets/{{ card.set_id }}" ng-bind-html="card.set_name"></a>
+        	</div>
+        </td>
+        <td width="250px">
+		<p ng-bind-html="card.text"></p>
+          	<p><small><i ng-bind-html="card.flavor"></i></small></p>
+        </td>
+        <td>
+        	<p style="text-transform: capitalize" ng-bind-html="card.rarity"></p>
+        </td>
+        <td>
+        	<div ng-repeat="costClass in convertCost(card.cost) track by $index" class="{{ costClass }} mtg-standard"></div>
+        </td>
       </tr>
     </tbody>
   </table>

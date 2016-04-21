@@ -1,8 +1,3 @@
-<style>
-p.big {
-	line-height: 3;
-}
-</style>
 <div class="container bottom-margin" style="color: #FFFFFF">
 	<div class="row">
 		<div class="col-sm-6">
@@ -12,52 +7,52 @@ p.big {
 			<span class="yelling-font" style="font-family: magicFontBold; font-size: 4.15em;">Team Dark Ritual</span>
 			<p>We are a group of 6 eclectic college students with a love of
 				rituals of the darkest nature. We strive to create a friendly
-				atmosphere and impart knowledge about the wonders of Magic cards.
+				atmosphere and impart knowledge about the wonders of Magic cards.</p>
 			<p>This page will be updated as the project continues.</p>
 
-			<p></p>
+			<p/>
 			<div class="col-sm-4">
 				<p class="yelling-font" style="font-size: 1.75em; font-family: magicFont;">Stats</p>
-				<p>
-					Total # of Commits: 263<br>Total # of Issues: 42 <br>Total
-					# of Unit Tests: 26
-				</p>
+				<p>Total # of Commits: 263
+				<br>Total # of Issues: 42
+				<br>Total # of Unit Tests: 26</p>
 			</div>
 
-			<p></p>
+			<p/>
 			<div class="col-sm-4">
 				<p class="yelling-font" style="font-size: 1.75em; font-family: magicFont;">Resources</p>
 					<p>
-					<a href="http://docs.darkritual.apiary.io/#"><img src="../static/images/apiarylogo.png" width="30px"> API</a>
+						<a href="http://docs.darkritual.apiary.io/#"><img src="../static/images/apiarylogo.png" width="30px"> API</a>
 					</p>
 					<p>
-					<a href="https://github.com/dark-ritual/cs373-idb/issues"><img src="../static/images/github-logo.png" height="30px"> Issue Tracker</a>
+						<a href="https://github.com/dark-ritual/cs373-idb/issues"><img src="../static/images/github-logo.png" height="30px"> Issue Tracker</a>
 					</p>
 					<p>
-					<a href="https://github.com/dark-ritual/cs373-idb"><img src="../static/images/github-logo.png" height="30px"> Repo</a>
+						<a href="https://github.com/dark-ritual/cs373-idb"><img src="../static/images/github-logo.png" height="30px"> Repo</a>
 					</p>
 					<p>
-					<a href="https://github.com/dark-ritual/cs373-idb/wiki"><img src="../static/images/github-logo.png" height="30px"> Wiki</a>
+						<a href="https://github.com/dark-ritual/cs373-idb/wiki"><img src="../static/images/github-logo.png" height="30px"> Wiki</a>
 					</p>
 					<p>
-					<a href="#/tests"><img src="../static/images/tests-logo.png" height="30px"> Run Tests</a>
+						<a href="#/tests"><img src="../static/images/tests-logo.png" height="30px"> Run Tests</a>
 					</p>
 				<p>
 			</div>
 			<div class="col-sm-4">
 				<p class="yelling-font" style="font-size: 1.75em; font-family: magicFont;">Data Sources
 				</p>
-				<a href="http://mtgsalvation.gamepedia.com/Main_Page"> MtG
-					Salvation</a> - for card set information <br> <a
-					href="http://gatherer.wizards.com/Pages/Default.aspx"> Gatherer</a>
-				- for card lists & artist information
+					<p>
+						<a href="http://mtgsalvation.gamepedia.com/Main_Page"> MtG Salvation</a> - for card set information 
+					</p>
+					<p> 
+						<a href="http://gatherer.wizards.com/Pages/Default.aspx"> Gatherer</a> - for card lists & artist information 
+					</p>
 			</div>
-</div>
+		</div>
+		
 			<div class="row" id="roundedbg-table">
 				<div class="col-lg-12">
-					<p class="big">
-					<p>
-						<p class="yelling-font" style="font-size: 2.8em; font-family: magicFont;"><b>Tools Used</b></p>
+					<p class="yelling-font" style="font-size: 2.8em; font-family: magicFont;"><b>Tools Used</b>
 					</p>
 					<div class="col-lg-6">
 						<p>
@@ -88,8 +83,7 @@ p.big {
 					
 					<div class="col-lg-6">
 						<p>
-							<img src="../static/images/namecheap-logo.png" width="30px">
-							Namecheap
+							<img src="../static/images/namecheap-logo.png" width="30px"> Namecheap
 						</p>
 						<p>
 							<img src="../static/images/apiarylogo.png" width="30px"> Apiary
@@ -112,7 +106,6 @@ p.big {
 						<p>
 							<img src="../static/images/carina-logo.png" width="30px"> Carina
 						</p>
-						</p>
 					</div>
 				</div>
 			</div>
@@ -120,16 +113,17 @@ p.big {
 	</div>
 </div>
 
+
 <div class="content">
 	<slick center-mode="true" center-padding="60px" variable-width="true"
 		adaptive-height="true" slides-to-show=3 autoplay="true"
 		autoplay-speed="2000" pause-on-hover="true"
 		responsive="[{breakpoint: 768,settings: {arrows: false,centerMode: true,centerPadding: '40px',slidesToShow: 3}},{breakpoint: 480,settings: {arrows: false,centerMode: true,centerPadding: '40px',slidesToShow: 1}}]">
 
-	<div style="background-image: url('{{option.imageUrl}}')"
-		class="slider center" ng-repeat="option in carouselOptions">
-		<h3>{{option.name}}</h3>
-	</div>
+		<div style="background-image: url('{{option.imageUrl}}'); width:100%; height:auto;"
+			class="slider center" ng-repeat="option in carouselOptions">
+			<h3>{{option.name}}</h3>
+		</div>
 	</slick>
 </div>
 
@@ -139,9 +133,17 @@ p.big {
 	<div class="row bottom-margin">
 		<!-- First Row -->
 		<div class="col-sm-3">
-			<td><img class="centerimg" src="../static/images/JavierV1.0.png"
-				width="200px"></td>
+			<td>
+				<img class="centerimg" src="../static/images/JavierV1.0.png" width="200px">
+			</td>
 		</div>
+		<div class="col-sm-3" id="roundedbg-about">
+			<p><b>Javier De La Garza</b> - <i>Legendary Creature</i></p>
+			<p>CS Student. Master Salsa Maker.</p>
+			<p>Major Responsibilities: Frontend Bootstrap, AngularJS, and Wiki</p>
+			<p># Commits: 124
+			<br># Issues: 8
+			<br># Unit Tests: 0</p>
 		<div class="col-sm-3" id="roundedbg-table">
 			<b>Javier De La Garza</b> - <i>Legendary Creature</i>
 			<p>CS Student. Master Salsa Maker.
@@ -151,9 +153,17 @@ p.big {
 				# Commits: 124 <br># Issues: 8 <br># Unit Tests: 0
 		</div>
 		<div class="col-sm-3">
-			<td><img class="centerimg"
-				src="../static/images/ShanellV1.0.png" width="200px"></td>
+			<td>
+				<img class="centerimg" src="../static/images/ShanellV1.0.png" width="200px">
+			</td>
 		</div>
+		<div class="col-sm-3" id="roundedbg-about">
+			<p><b>Shanell</b> - <i>Legendary Creature</i></p>
+			<p>CS Student.</p>
+			<p>Major Responsibilities: Docker/Carina Set-up, Frontend, Bootstrap, AngularJS, Wiki.</p>
+			<p># Commits: 47
+			<br># Issues: 9
+			<br># Unit Tests: 0</p>
 		<div class="col-sm-3" id="roundedbg-table">
 			<b>Shanell</b> - <i>Legendary Creature</i>
 			<p>CS Student.
@@ -166,9 +176,17 @@ p.big {
 	<div class="row bottom-margin">
 		<!-- Second Row -->
 		<div class="col-sm-3">
-			<td><img class="centerimg" src="../static/images/PeterV1.0.png"
-				width="200px"></td>
+			<td>
+				<img class="centerimg" src="../static/images/PeterV1.0.png" width="200px">
+			</td>
 		</div>
+		<div class="col-sm-3" id="roundedbg-about">
+			<p><b>Peter</b> - <i>Legendary Creature</i></p>
+			<p>CS Student.</p>
+			<p>Major Responsibilities: Wiki, RESTful API, Python Unit Tests.</p>
+			<p># Commits: 29
+			<br># Issues: 8
+			<br># Unit Tests: 10</p>
 		<div class="col-sm-3" id="roundedbg-table">
 			<b>Peter</b> - <i>Legendary Creature</i>
 			<p>CS Student.
@@ -180,9 +198,17 @@ p.big {
 				# Commits: 29 <br># Issues: 8 <br># Unit Tests: 10
 		</div>
 		<div class="col-sm-3">
-			<td><img class="centerimg"
-				src="../static/images/StephanieV1.0.png" width="200px"></td>
+			<td>
+				<img class="centerimg" src="../static/images/StephanieV1.0.png" width="200px">
+			</td>
 		</div>
+		<div class="col-sm-3" id="roundedbg-about">
+			<p><b>Stephanie Wilbur</b> - <i>Legendary Creature</i></p>
+			<p>CS Student. Enjoys fly fishing.</p>
+			<p>Major Responsibilities: SQL Database, Python Unit Tests, Scraping.</p>
+			<p># Commits: 3
+			<br># Issues: 8
+			<br># Unit Tests: 26</p>
 		<div class="col-sm-3" id="roundedbg-table">
 			<b>Stephanie Wilbur</b> - <i>Legendary Creature</i>
 			<p>CS Student. Enjoys fly fishing.
@@ -195,9 +221,17 @@ p.big {
 	<div class="row bottom-margin">
 		<!-- Third Row -->
 		<div class="col-sm-3">
-			<td><img class="centerimg" src="../static/images/MarkV1.0.png"
-				width="200px"></td>
+			<td>
+				<img class="centerimg" src="../static/images/MarkV1.0.png" width="200px">
+			</td>
 		</div>
+		<div class="col-sm-3" id="roundedbg-about">
+			<p><b>Mark</b> - <i>Legendary Creature</i></p>
+			<p>CS Student. Cult leader.</p>
+			<p>Major Responsibilities: SQL Database, Python Unit Testing, Scraping.</p>
+			<p># Commits: 56
+			<br># Issues: 8
+			<br># Unit Tests: 26</p>
 		<div class="col-sm-3" id="roundedbg-table">
 			<b>Mark</b> - <i>Legendary Creature</i>
 			<p>CS Student. Cult leader.
@@ -207,9 +241,17 @@ p.big {
 				# Commits: 56 <br># Issues: 8 <br># Unit Tests: 26
 		</div>
 		<div class="col-sm-3">
-			<td><img class="centerimg" src="../static/images/TonyaV1.0.png"
-				width="200px"></td>
+			<td>
+				<img class="centerimg" src="../static/images/TonyaV1.0.png" width="200px">
+			</td>
 		</div>
+		<div class="col-sm-3" id="roundedbg-about">
+			<p><b>Tonya Howard</b> - <i>Legendary Creature</i></p>
+			<p>CS Student. Wants to eat cake all day.</p>
+			<p>Major Responsibilities: Bootstrap, Frontend Website Design.</p>
+			<p># Commits: 12
+			<br># Issues: 1
+			<br># Unit Tests: 0</p>
 		<div class="col-sm-3" id="roundedbg-table">
 			<b>Tonya Howard</b> - <i>Legendary Creature</i>
 			<p>CS Student. Wants to eat cake all day.

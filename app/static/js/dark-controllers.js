@@ -8,7 +8,14 @@ var darkControllers = angular.module('darkControllers', []);
 // #############Home Controller#####################
 // #################################################
 
-dark.controller('HomeController', ['$scope', function($scope) {
+dark.controller('HomeController', ['$scope', function($scope) {} ]);
+
+// #################################################
+// #############About Controller####################
+// #################################################
+
+dark.controller('AboutController', ['$scope', function($scope) {
+
 	
 	$('.center').slick({
 		centerMode : true,
@@ -37,43 +44,25 @@ dark.controller('HomeController', ['$scope', function($scope) {
 	
 	$scope.carouselOptions = [ {
 		name : "1",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=386731&type=card"
+		imageUrl : "../static/images/JavierV1.0.png"
 	}, {
 		name : "2",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=19733&type=card"
+		imageUrl : "../static/images/ShanellV1.0.png"
 	}, {
 		name : "3",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=201141&type=card"
+		imageUrl : "../static/images/PeterV1.0.png"
 	}, {
 		name : "4",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=184622&type=card"
+		imageUrl : "../static/images/StephanieV1.0.png"
 	}, {
 		name : "5",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=243215&type=card"
+		imageUrl : "../static/images/MarkV1.0.png"
 	}, {
 		name : "6",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=391928&type=card"
-	}, {
-		name : "7",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=394699&type=card"
-	}, {
-		name : "8",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=407555&type=card"
-	}, {
-		name : "9",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=394570&type=card"
-	}, {
-		name : "10",
-		imageUrl : "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=271213&type=card"
+		imageUrl : "../static/images/TonyaV1.0.png"
 	} ]
 
-} ]);
 
-// #################################################
-// #############About Controller####################
-// #################################################
-
-dark.controller('AboutController', ['$scope', function($scope) {
 
 } ]);
 
@@ -88,7 +77,7 @@ dark.controller('ActiveNavBarController', [ '$scope', '$location', function($sco
 } ]);
 
 // #################################################
-// #############NavSearch Controller###################
+// #############NavSearch Controller################
 // #################################################
 
 dark.controller('SearchController', [ '$scope', '$location', function($scope, $location) {
@@ -319,7 +308,7 @@ dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstan
 
 dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistInstance', function($scope, $routeParams, ArtistInstance) {
 
-	$scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Set", sortType:"sets"}];
+	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Information", sortType: "name"}, {label: "Set", sortType:"set"}];
 
 	$scope.range = function(start, end)
 	{
@@ -351,7 +340,7 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 
 dark.controller('SetInstanceController', ['$scope',  '$routeParams', 'SetInstance', function($scope, $routeParams, SetInstance) {
 
-    $scope.tableHeaders = [{label: "Card"}, {label: "Information"}, {label: "Artist"}];
+    $scope.tableHeaders = [{label: "Card", sortType: "name"}, {label: "Information", sortType: "name"}, {label: "Artist", sortType:"artist"}];
 
 	$scope.range = function(start, end)
 	{
@@ -395,3 +384,20 @@ darkControllers.controller('TestsController', function($scope, $http, $location)
 	   })
 	}
 } );
+
+//###############################################
+//#############Scroll Controller#################
+//###############################################
+
+darkControllers.controller('ScrollController', ['$scope', '$location', '$anchorScroll',
+function ($scope, $location, $anchorScroll) {
+  $scope.gotoTop = function() {
+    // set the location.hash to the id of
+    // the element you wish to scroll to.
+    $location.hash('top');
+
+    // call $anchorScroll()
+    $anchorScroll();
+  };
+}]);
+
