@@ -20,10 +20,10 @@ dark.config([ '$routeProvider', function($routeProvider) {
 	}).when('/sets/:set_id', {
 		templateUrl : '../static/templates/setinstance.html',
 		controller : 'SetInstanceController'
-	}).when('/sets', {
+	}).when('/sets/page/:page_num', {
 		templateUrl : '../static/templates/sets.html',
 		controller : 'SetsController'
-	}).when('/artists', {
+	}).when('/artists/page/:page_num', {
 		templateUrl : '../static/templates/artists.html',
 		controller : 'ArtistsController'
 	}).when('/about', {

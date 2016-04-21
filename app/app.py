@@ -214,40 +214,27 @@ class Edition(db.Model):
                     set_name=self.set.name)
 
 def serialize_card_table_data_paginated(page_num):
-    num = db.engine.execute('''SELECT
-                        count(*)
-        FROM
-            card
-    ''').fetchone()[0]
     cards_per_page = 25
     firstrow = cards_per_page * page_num
     #TODO:
     # Sanity Check
-    sql = '''SELECT
-                c.name,
-                c.card_id,
-                c.cost,
-                GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR '|!|') AS editions,
-                GROUP_CONCAT(DISTINCT e.rarity SEPARATOR '|!|') AS rarities,
-                GROUP_CONCAT(DISTINCT a.name SEPARATOR '|!|') AS artists,
-                GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR '|!|') AS artist_ids,
-                GROUP_CONCAT(DISTINCT s.name  SEPARATOR '|!|') AS sets,
-                GROUP_CONCAT(DISTINCT s.set_id SEPARATOR '|!|') AS set_ids,
-                count(*) AS num_editions
-        FROM
-            card AS c
-        LEFT JOIN
-            edition AS e ON e.card_id = c.card_id
-        LEFT JOIN
-            artist AS a ON a.artist_id = e.artist_id
-        LEFT JOIN
-            `set` AS s ON s.set_id = e.set_id
-        GROUP BY
-            c.name
-        LIMIT
-            25
-        OFFSET
-            {}
+    sql = '''select    c.name,
+                       c.card_id,
+                       c.cost,
+                       GROUP_CONCAT(DISTINCT e.multiverse_id SEPARATOR '|!|') AS editions,
+                       GROUP_CONCAT(DISTINCT e.rarity SEPARATOR '|!|') AS rarities,
+                       GROUP_CONCAT(DISTINCT a.name SEPARATOR '|!|') AS artists,
+                       GROUP_CONCAT(DISTINCT a.artist_id SEPARATOR '|!|') AS artist_ids,
+                       GROUP_CONCAT(DISTINCT s.name  SEPARATOR '|!|') AS sets,
+                       GROUP_CONCAT(DISTINCT s.set_id SEPARATOR '|!|') AS set_ids,
+                       count(*) AS num_editions
+             from      card AS c
+             left join edition AS e ON e.card_id = c.card_id
+             left join  artist AS a ON a.artist_id = e.artist_id
+             left join  `set` AS s ON s.set_id = e.set_id
+             group by   c.name
+             limit      25
+             offset     {}
     '''.format(firstrow)
     #convert the list of dicts to an array of objects
     ret = []
@@ -274,7 +261,11 @@ def serialize_card_table_data_paginated(page_num):
                   })
     return ret
 
-def serialize_artist_table_data():
+def serialize_artist_table_data_paginated(page_num):
+    cards_per_page = 25
+    firstrow = cards_per_page * page_num
+    #TODO:
+    # Sanity Check
     sql = '''select     a.name,
                         a.artist_id,
                         count(*) as total,
@@ -286,7 +277,9 @@ def serialize_artist_table_data():
              inner join edition as e
              on         a.artist_id=e.artist_id
              group by   a.artist_id
-          '''
+             limit      25
+             offset     {}
+          '''.format(firstrow)
     # convert the list of dicts to an array of objects
     ret = []
     for table_data in db.engine.execute(sql).fetchall():
@@ -300,7 +293,11 @@ def serialize_artist_table_data():
                   })
     return ret
 
-def serialize_set_table_data():
+def serialize_set_table_data_paginated(page_num):
+    cards_per_page = 25
+    firstrow = cards_per_page * page_num
+    #TODO:
+    # Sanity Check
     sql = '''select     s.name,
                         s.set_id,
                         count(*) as total,
@@ -312,7 +309,9 @@ def serialize_set_table_data():
              inner join edition as e
              on         s.set_id=e.set_id
              group by   s.set_id
-          '''
+             limit      25
+             offset     {}
+          '''.format(firstrow)
     # convert the list of dicts to an array of objects
     ret = []
     for table_data in db.engine.execute(sql).fetchall():
@@ -442,11 +441,11 @@ def searchAPI(search_query): # pragma: no cover
     logger.debug('search')
     return json_resp(search_card_names(search_query))
 
-@app.route('/api/artists/<int:page>',  methods=['GET'])
+@app.route('/api/artists/page/<int:page>',  methods=['GET'])
 def artistsAPI(page): # pragma: no cover
     logger.debug("artists")
     LIM = 25 # page length
-    artists = [artist.serialize_part for artist in Artist.query.limit(LIM).offset(LIM*(page-1)).all()]
+    artists = serialize_artist_table_data_paginated(page)
     return json_resp(artists)
 
 @app.route('/api/artists/<path:artist_id>', methods=['GET'])
@@ -459,11 +458,10 @@ def artistAPI(artist_id): # pragma: no cover
 def artistTable(): # pragma: no cover
     return json_resp(serialize_artist_table_data())
 
-@app.route('/api/sets/<int:page>',  methods=['GET', 'POST'])
+@app.route('/api/sets/page/<int:page>',  methods=['GET'])
 def setsAPI(page): # pragma: no cover
     logger.debug("sets")
-    LIM = 25 # page length
-    sets = [card_set.serialize_part for card_set in Set.query.limit(LIM).offset(LIM*(page-1)).all()]
+    sets = serialize_set_table_data_paginated(page)
     return json_resp(sets)
 
 @app.route('/api/sets/<path:set_id>',  methods=['GET'])
