@@ -214,10 +214,14 @@ class Edition(db.Model):
                     set_name=self.set.name)
 
 def serialize_card_table_data_paginated(page_num):
+    try:
+        int(page_num)
+    except:
+        page_num = 0
+    if page_num < 0:
+        page_num = 0
     cards_per_page = 25
     firstrow = cards_per_page * page_num
-    #TODO:
-    # Sanity Check
     sql = '''select    c.name,
                        c.card_id,
                        c.cost,
@@ -262,10 +266,14 @@ def serialize_card_table_data_paginated(page_num):
     return ret
 
 def serialize_artist_table_data_paginated(page_num):
+    try:
+        int(page_num)
+    except:
+        page_num = 0
+    if page_num < 0:
+        page_num = 0
     cards_per_page = 25
     firstrow = cards_per_page * page_num
-    #TODO:
-    # Sanity Check
     sql = '''select     a.name,
                         a.artist_id,
                         count(*) as total,
@@ -294,10 +302,14 @@ def serialize_artist_table_data_paginated(page_num):
     return ret
 
 def serialize_set_table_data_paginated(page_num):
+    try:
+        int(page_num)
+    except:
+        page_num = 0
+    if page_num < 0:
+        page_num = 0
     cards_per_page = 25
     firstrow = cards_per_page * page_num
-    #TODO:
-    # Sanity Check
     sql = '''select     s.name,
                         s.set_id,
                         count(*) as total,
@@ -389,7 +401,12 @@ def bold_search_terms(data, terms):
     return list(result_data)
 
 def search_card_names(term_str, page_num):
-    # TODO: Sanity check the page_num
+    try:
+        int(page_num)
+    except:
+        page_num = 0
+    if page_num < 0:
+        page_num = 0
     num_id_cols        = 5
     terms              = [term for term in term_str.split(" ") if term != '']
     sql                = gensql(len(terms), page_num)
