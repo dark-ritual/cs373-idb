@@ -4,34 +4,44 @@
 		<p class="yelling-font text-center">{{ setinstances[0].name }} </p>
 	</div>
 
-	<div class="container" id="roundedbg-table">
+	<div class="container">
   		<div class="col-md-12 center-block">
-	   	<table class="table table-striped table-hover table-condensed">
+	   		<table class="table table-striped table-hover table-condensed" id="roundedbg-table">
 
-	   		<thread>
-	          	<tr>
-	            	<th ng-repeat="tableHeader in tableHeaders">
-		              	<a href ng-click="sort(tableHeader)">
-		                {{tableHeader.label}} 
-		                <span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-		                <span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-		              	</a>
-	            	</th>
-	          	</tr>
-	   		</thread>
+	   			<thread>
+	          		<tr>
+	            		<th ng-repeat="tableHeader in tableHeaders">
+		              		<a href ng-click="sort(tableHeader)">
+		                		{{tableHeader.label}} 
+		                		<span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+		                		<span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+		              		</a>
+	            		</th>
+	          		</tr>
+	   			</thread>
 
-	        <tbody>
-	          <tr ng-repeat="multiverse_id in setinstances[0].multiverse_ids | orderBy:sortType:sortReverse">
-	            <td><a href="#/cards/{{ multiverse_id.card_id }}"><img src="{{ multiverse_id.image_url }}" height="150px"></a></td>
-	            <td>
-	              <p><b><a href="#/cards/{{ multiverse_id.card_id }}">{{ multiverse_id.card_name }} </a></b></p>
-	              <p class="capitalize">{{ multiverse_id.rarity }}</p>
-	              <p>{{ multiverse_id.flavor }}</p>
-	            </td>
-	            <td><a href="#/artists/{{ multiverse_id.artist_id }}">{{ multiverse_id.artist_name }}</a></td>
-	          </tr>
-	        </tbody>
-       	</table>
+	        	<tbody>
+	          		<tr ng-repeat="multiverse_id in setinstances[0].multiverse_ids | orderBy:sortType:sortReverse">
+	            		<td>
+	            			<div ng-controller="ScrollController">
+	            				<a ng-click="gotoTop()" href="#/cards/{{ multiverse_id.card_id }}"><img src="{{ multiverse_id.image_url }}" height="150px"></a>
+	            			</div>	
+	            		</td>
+	            		<td>
+	            			<div ng-controller="ScrollController">
+	              				<p><b><a ng-click="gotoTop()" href="#/cards/{{ multiverse_id.card_id }}">{{ multiverse_id.card_name }} </a></b></p>
+	              				<p style="text-transform: capitalize;">{{ multiverse_id.rarity }}</p>
+	              				<p>{{ multiverse_id.flavor }}</p>
+	              			</div>
+	           			</td>
+	            		<td>
+	            			<div ng-controller="ScrollController">
+	            				<a ng-click="gotoTop()" href="#/artists/{{ multiverse_id.artist_id }}">{{ multiverse_id.artist_name }}</a>
+	            			</div>	
+	            		</td>
+	          		</tr>
+	        	</tbody>
+       		</table>
 		</div>
   	</div>
 </div>
