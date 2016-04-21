@@ -327,7 +327,7 @@ def serialize_set_table_data_paginated(page_num):
 
 
 
-def gensql(number):
+def gensql(num_terms, page_num):
     cols = ['c.name', 'c.text', 'c.types','c.cost', 'e.image_url', 'c.subtypes', 'c.formats',
             'c.colors', 'e.flavor', 'e.rarity', 'e.layout','a.name',
             's.set_id', 's.name']
@@ -357,7 +357,7 @@ on        a.artist_id = e.artist_id
 left join `set` as s
 on        s.set_id = e.set_id
 where'''
-    for i in range(0, number):
+    for i in range(0, num_terms):
         firstcol = True
         if i != 0:
             sqlBase += " " + ' or '
@@ -369,6 +369,7 @@ where'''
                 sqlBase += "or "
             sqlBase += " {} like :term".format(col) + str(i) + "\n"
         sqlBase += " ) \n"
+    sqlBase += " limit 25 offset {}".format(page_num * 25)
     return sqlBase
 
 def count_matches(targets, source):
@@ -387,27 +388,30 @@ def bold_search_terms(data, terms):
         result_data.append(field)
     return list(result_data)
 
-def search_card_names(term_str):
+def search_card_names(term_str, page_num):
+    # TODO: Sanity check the page_num
     num_id_cols        = 5
     terms              = [term for term in term_str.split(" ") if term != '']
-    sql                = gensql(len(terms))
+    sql                = gensql(len(terms), page_num)
     parameters         = {'term{}'.format(i): '%%' + term + '%%' for i, term in enumerate(terms)}
     results            = db.engine.execute(text(sql), parameters).fetchall()
     result_dict        = {i:max(count_matches(terms, col) for col in result) for i, result in enumerate(results)}
     sorted_result_dict = list(reversed(sorted(result_dict.items(), key=itemgetter(1))))
     sorted_and_ids     = [list(results[index][:num_id_cols]) for index, num in sorted_result_dict if num == len(terms)]
-    sorted_and_results = [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num == len(terms)]
+    sorted_and_results = [result + ['AND'] for result in [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num == len(terms)]]
     sorted_or_ids      = [list(results[index][:num_id_cols]) for index, num in sorted_result_dict if num < len(terms)]
-    sorted_or_results  = [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num < len(terms)]
+    sorted_or_results  = [result + ['OR'] for result in [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num < len(terms)]]
+    for i, result in enumerate(sorted_or_results):
+        sorted_or_results[i] = sorted_or_results + ['OR']
     keys               = ['card_id', 'artist_id', 'set_id', 'cost', 'image_url', 'name', 'text',
                           'types', 'subtypes', 'formats', 'colors', 'flavor',
                           'rarity', 'layout', 'artist_name', 'setid',
-                          'set_name']
+                          'set_name', 'result_type']
     full_and_results   = [result_id + result for result_id, result in zip(sorted_and_ids, sorted_and_results)]
     full_or_results    = [result_id + result for result_id, result in zip(sorted_or_ids,  sorted_or_results)]
     dict_and_results   = [{k:r for k, r in zip(keys, result)} for result in full_and_results]
     dict_or_results    = [{k:r for k, r in zip(keys, result)} for result in full_or_results]
-    return [dict_and_results, dict_or_results]
+    return dict_and_results + dict_or_results
 
 ##################################################################
 ###################### VIEWS/CONTROLLERS #########################
@@ -436,10 +440,10 @@ def json_resp(data): # pragma: no cover
     ret.mimetype = 'application/json'
     return ret
 
-@app.route('/api/search/<path:search_query>', methods=['GET'])
-def searchAPI(search_query): # pragma: no cover
+@app.route('/api/search/<path:search_query>/<int:page>', methods=['GET'])
+def searchAPI(search_query, page): # pragma: no cover
     logger.debug('search')
-    return json_resp(search_card_names(search_query))
+    return json_resp(search_card_names(search_query, page))
 
 @app.route('/api/artists/page/<int:page>',  methods=['GET'])
 def artistsAPI(page): # pragma: no cover

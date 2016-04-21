@@ -141,6 +141,7 @@ class MainTestCase(unittest.TestCase):
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
+            app.serialize_artist_table_data_paginated(0)
         finally:
             app.Artist.query.filter_by(artist_id='mark').delete()
             app.Edition.query.filter_by(multiverse_id='-666').delete()
@@ -201,6 +202,7 @@ class MainTestCase(unittest.TestCase):
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
+            app.serialize_card_table_data_paginated(0)
         finally:
             app.Edition.query.filter_by(multiverse_id='-666').delete()
             app.Edition.query.filter_by(multiverse_id='-667').delete()
@@ -481,7 +483,8 @@ class MainTestCase(unittest.TestCase):
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
-            self.assertEqual(len(app.search_card_names('aoeuidhtns snthdiueoa')[0]), 1)
+            self.assertEqual(len(app.search_card_names('aoeuidhtns snthdiueoa', 0)), 1)
+            self.assertEqual(len(app.search_card_names('aoeuidhtns tsaoehaeuhohteouahs', 0)), 1) # To get an "or" result
         finally:
             app.Edition.query.filter_by(multiverse_id='-666').delete()
             app.Card.query.filter_by(card_id='sample-text').delete()
@@ -618,6 +621,7 @@ class MainTestCase(unittest.TestCase):
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
+            app.serialize_set_table_data_paginated(0)
         finally:
             app.Artist.query.filter_by(artist_id='mark').delete()
             app.Edition.query.filter_by(multiverse_id='-666').delete()
