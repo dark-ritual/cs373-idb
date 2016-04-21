@@ -7,6 +7,30 @@ import app
 #from carina.app.app import addSet
 from sqlalchemy import exc
 
+def insert_subroutine():
+        artist_args = dict(artist_id='stephanie', name='Stephanie')
+        app.addArtist(artist_args)
+        set_args = dict(set_id='SOA', name='Set of Awesome')
+        app.addSet(set_args)
+        card_args = dict(card_id='sample-text', name='Sample Text', colors='[White]',
+                        cost='{2}{W}', cmc=3, text='Flying',
+                        formats='standard=True', types='Creature',
+                        subtypes='Sample', power='3', toughness='2')
+        app.addCard(card_args)
+        edition_args = dict(multiverse_id='-666', artist_id='stephanie', set_id='SOA',
+                           image_url='dummy-url',
+                           card_id='sample-text', flavor='With rope...',
+                           rarity='common', number='24', layout='normal')
+        app.addEdition(edition_args)
+        
+def delete_subroutine():
+        app.Artist.query.filter_by(artist_id='mark').delete()
+        app.Edition.query.filter_by(multiverse_id='-666').delete()
+        app.Card.query.filter_by(card_id='sample-text').delete()
+        app.Set.query.filter_by(set_id='SOA').delete()
+        app.Artist.query.filter_by(artist_id='stephanie').delete()
+        app.db.session.commit()
+
 class MainTestCase(unittest.TestCase):
 
     @classmethod
@@ -631,6 +655,61 @@ class MainTestCase(unittest.TestCase):
             app.db.session.commit()
             self.assertEqual(oldlen, len(app.serialize_set_table_data_paginated(0)))
 
+    def test_searchAPI(self):
+        try:
+            insert_subroutine()
+            app.searchAPI("Sample", 0)
+        finally:
+            delete_subroutine()
+
+    def test_artistsAPI(self):
+        try:
+            insert_subroutine()
+            app.artistsAPI(0)
+        finally:
+            delete_subroutine()
+
+    def test_artistAPI(self):
+        try:
+            insert_subroutine()
+            app.artistAPI("stephanie")
+        finally:
+            delete_subroutine()
+
+    def test_setsAPI(self):
+        try:
+            insert_subroutine()
+            app.setsAPI(0)
+        finally:
+            delete_subroutine()
+
+    def test_setAPI(self):
+        try:
+            insert_subroutine()
+            app.setAPI("SOA")
+        finally:
+            delete_subroutine()
+
+    def test_cardsAPI(self):
+        try:
+            insert_subroutine()
+            app.cardsAPI(0)
+        finally:
+            delete_subroutine()
+
+    def test_cardAPI(self):
+        try:
+            insert_subroutine()
+            app.cardAPI("sample-text")
+        finally:
+            delete_subroutine()
+
+    def test_editionAPI(self):
+        try:
+            insert_subroutine()
+            app.editionAPI(-666)
+        finally:
+            delete_subroutine()
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
