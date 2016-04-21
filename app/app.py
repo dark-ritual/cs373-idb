@@ -431,7 +431,7 @@ def index(): # pragma: no cover
 # Routes for JSON API REST Endpoints
 ######################
 
-def json_resp(data): # pragma: no cover
+def json_resp(data):
     ret = dumps(data, sort_keys=True,
                      indent=4, separators=(',', ': '))
     ret = app.make_response(ret)
@@ -456,10 +456,6 @@ def artistAPI(artist_id): # pragma: no cover
     artist = [Artist.query.get(artist_id).serialize_full]
     return json_resp(artist)
 
-@app.route('/api/artistTable', methods=['GET'])
-def artistTable(): # pragma: no cover
-    return json_resp(serialize_artist_table_data())
-
 @app.route('/api/sets/page/<int:page>',  methods=['GET'])
 def setsAPI(page): # pragma: no cover
     logger.debug("sets")
@@ -472,11 +468,6 @@ def setAPI(set_id): # pragma: no cover
     card_set = [Set.query.get(set_id).serialize_full]
     return json_resp(card_set)
 
-@app.route('/api/setTable', methods=['GET'])
-def setTable(): # pragma: no cover
-    return json_resp(serialize_set_table_data())
-
-
 @app.route('/api/cards/page/<int:page>',  methods=['GET'])
 def cardsAPI(page): # pragma: no cover
     logger.debug("cards")
@@ -488,10 +479,6 @@ def cardAPI(card_id): # pragma: no cover
     logger.debug("card")
     card = [Card.query.get(card_id).serialize_full]
     return json_resp(card)
-
-@app.route('/api/cardsTable', methods=['GET'])
-def cardsTable(): # pragma: no cover
-    return json_resp(serialize_card_table_data())
 
 @app.route('/api/editions/<path:multiverse_id>',  methods=['GET'])
 def editionAPI(multiverse_id): # pragma: no cover
