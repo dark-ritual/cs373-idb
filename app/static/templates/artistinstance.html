@@ -1,38 +1,51 @@
 <div class="container" ng-controller="ArtistInstanceController">
 
-  <div class="view-container">
-    <p class="yelling-font text-center">{{ artistinstances[0].name }}</p>
-  </div>
-
-	<div class="container" id="roundedbg-table">
-		<div class="col-md-12 center-block">
-			<table class="table table-striped table-hover table-condensed">
-
-        <thread>
-          <tr>
-            <th ng-repeat="tableHeader in tableHeaders">
-              <a href ng-click="sort(tableHeader)">
-                {{tableHeader.label}} 
-                <span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                <span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-              </a>
-            </th>
-          </tr>
-        </thread>
-
-        <tbody>
-          <tr ng-repeat="multiverse_id in artistinstances[0].multiverse_ids | orderBy:sortType:sortReverse">
-            <td><a href="#/cards/{{ multiverse_id.card_id }}"><img src="{{ multiverse_id.image_url }}" height="150px" ></a></td>
-            <td>
-              <b><a href="#/cards/{{ multiverse_id.card_id }}">{{ multiverse_id.card_name }} </a></b>
-              <br>{{ multiverse_id.rarity }}
-              <br>{{ multiverse_id.flavor }}
-            </td>
-            <td><a href="#/sets/{{ multiverse_id.set_id }}">{{ multiverse_id.set_name }}</td>
-          </tr>
-        </tbody>
-      </table>
-		</div>
+	<div class="view-container">
+    	<p class="yelling-font text-center">{{ artistinstances[0].name }}</p>
 	</div>
 
+	<div class="container">
+		<div class="col-md-12 center-block">
+			<table class="table table-striped table-hover table-condensed" id="roundedbg-table">
+
+        		<thread>
+          			<tr>
+            			<th ng-repeat="tableHeader in tableHeaders">
+              				<a href ng-click="sort(tableHeader)">
+                				{{tableHeader.label}}
+                				<span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                				<span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              				</a>
+            			</th>
+          			</tr>
+        		</thread>
+
+        		<tbody>
+          			<tr ng-repeat="multiverse_id in artistinstances[0].multiverse_ids | orderBy:sortType:sortReverse">
+          				<td>
+          					<div ng-controller="ScrollController">
+            	    			<a ng-click="gotoTop()" href="#/cards/{{ multiverse_id.card_id }}"><img src="{{ multiverse_id.image_url }}" height="150px" ></a>
+           				</div>
+           				</td>
+           				<td>
+           					<p>
+           						<div ng-controller="ScrollController">
+              						<b><a ng-click="gotoTop()" href="#/cards/{{ multiverse_id.card_id }}">{{ multiverse_id.card_name }}</a></b>
+              					</div>
+              				</p>
+              				<p style="text-transform: capitalize;">{{ multiverse_id.rarity }}</p>
+              				<p>{{ multiverse_id.flavor }}</p>
+            			</td>
+            			<td>
+            				<p>
+            					<div ng-controller="ScrollController">
+            						<a ng-click="gotoTop()" href="#/sets/{{ multiverse_id.set_id }}">{{ multiverse_id.set_name }}</a>
+            					</div>
+            				</p>
+            			</td>
+    				</tr>
+ 				</tbody>
+ 			</table>
+		</div>
+	</div>
 </div>
