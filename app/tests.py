@@ -22,7 +22,7 @@ def insert_subroutine():
                            card_id='sample-text', flavor='With rope...',
                            rarity='common', number='24', layout='normal')
         app.addEdition(edition_args)
-        
+
 def delete_subroutine():
         app.Artist.query.filter_by(artist_id='mark').delete()
         app.Edition.query.filter_by(multiverse_id='-666').delete()
@@ -707,7 +707,7 @@ class MainTestCase(unittest.TestCase):
     def test_editionAPI(self):
         try:
             insert_subroutine()
-            app.editionAPI(-666)
+            app.editionAPI("-666")
         finally:
             delete_subroutine()
 
