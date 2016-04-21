@@ -94,7 +94,7 @@ dark.controller('ActiveNavBarController', [ '$scope', '$location', function($sco
 dark.controller('SearchController', [ '$scope', '$location', function($scope, $location) {
 	$scope.searchInput = "";
 	$scope.search = function() {
-		$location.path("/results/" + $scope.searchInput);
+		$location.path("/results/" + $scope.searchInput + "/0");
 	}
 } ]);
 
@@ -108,6 +108,7 @@ dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', 'co
 	$scope.sortReverse  = false;
 	$scope.tableHeaders = [{label: "", sortType:""}, {label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
 	$scope.cards = NavSearch.query($routeParams);
+	$scope.page_num = parseInt($routeParams["page_num"]);
 	// debugger;
 	// $scope.andResults = $scope.cards[0];
 	// $scope.orResults = $scope.cards[1];

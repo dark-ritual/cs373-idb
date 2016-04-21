@@ -72,7 +72,7 @@ dark.factory('costIcon', function() {
 });
 
 dark.config([ '$routeProvider', function($routeProvider) {
-	$routeProvider.when('/results/:search_query', {
+	$routeProvider.when('/results/:search_query/:page_num', {
 		templateUrl : '../static/templates/results.html',
 		controller : 'ResultsController'
 	}).when('/cards/page/:page_num', {

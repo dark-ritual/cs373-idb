@@ -401,8 +401,6 @@ def search_card_names(term_str, page_num):
     sorted_and_results = [result + ['AND'] for result in [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num == len(terms)]]
     sorted_or_ids      = [list(results[index][:num_id_cols]) for index, num in sorted_result_dict if num < len(terms)]
     sorted_or_results  = [result + ['OR'] for result in [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num < len(terms)]]
-    for i, result in enumerate(sorted_or_results):
-        sorted_or_results[i] = sorted_or_results + ['OR']
     keys               = ['card_id', 'artist_id', 'set_id', 'cost', 'image_url', 'name', 'text',
                           'types', 'subtypes', 'formats', 'colors', 'flavor',
                           'rarity', 'layout', 'artist_name', 'setid',
