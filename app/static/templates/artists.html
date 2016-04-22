@@ -6,7 +6,7 @@
 		      	<li ng-if="(page_num - 3) >= 0"><a href="#/artists/page/0/{{ sort_col }}"><<</a></li>
 	    	  	<li ng-if="(page_num - 2) >= 0"><a href="#/artists/page/{{ page_num - 2}}/{{ sort_col }}">{{ page_num - 2 }}</a></li>
 	      		<li ng-if="(page_num - 1) >= 0"><a href="#/artists/page/{{ page_num - 1}}/{{ sort_col }}">{{ page_num - 1 }}</a></li>
-		      	<li class="active"><a href="#/artists/page/{{ page_num}}">{{ page_num }}</a></li>
+		      	<li class="active"><a href="">{{ page_num }}</a></li>
 		      	<li ng-if="(page_num + 1) <= 23"><a href="#/artists/page/{{ page_num + 1}}/{{ sort_col }}">{{ page_num + 1 }}</a></li>
 	    	  	<li ng-if="(page_num + 2) <= 23"><a href="#/artists/page/{{ page_num + 2}}/{{ sort_col }}">{{ page_num + 2 }}</a></li>
 	      		<li ng-if="(page_num + 3) <= 23"><a href="#/artists/page/23/{{ sort_col }}">>></a></li>
@@ -59,7 +59,7 @@
 				<li ng-if="(page_num - 3) >= 0"><a href="#/artists/page/0/{{ sort_col }}"><<</a></li>
 				<li ng-if="(page_num - 2) >= 0"><a href="#/artists/page/{{ page_num - 2}}/{{ sort_col }}">{{ page_num - 2 }}</a></li>
 				<li ng-if="(page_num - 1) >= 0"><a href="#/artists/page/{{ page_num - 1}}/{{ sort_col }}">{{ page_num - 1 }}</a></li>
-				<li class="active"><a href="#/artists/page/{{ page_num}}">{{ page_num }}</a></li>
+				<li class="active"><a href="">{{ page_num }}</a></li>
 				<li ng-if="(page_num + 1) <= 23"><a href="#/artists/page/{{ page_num + 1}}/{{ sort_col }}">{{ page_num + 1 }}</a></li>
 				<li ng-if="(page_num + 2) <= 23"><a href="#/artists/page/{{ page_num + 2}}/{{ sort_col }}">{{ page_num + 2 }}</a></li>
 				<li ng-if="(page_num + 3) <= 23"><a href="#/artists/page/23/{{ sort_col }}">>></a></li>

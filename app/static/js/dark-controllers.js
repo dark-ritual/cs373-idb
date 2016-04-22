@@ -158,43 +158,19 @@ dark.controller('SetsController', ['$scope', '$routeParams', 'Sets', function($s
 	$scope.lastSortType = 'set';
 	$scope.sortType     = 'set'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Set", sortType:"name"},  {label: "Common", sortType:"commons"}, {label: "Uncommon", sortType:"uncommons"}, {label: "Rare", sortType:"rares"}, {label: "Mythic", sortType:"mythics"}, {label: "Total", sortType:"total"}];
-
-	$scope.range = function(start, end)
-	{
-	    var array = new Array();
-	    for(var i = start; i < end; i++)
-	    {
-	        array.push(i);
-	    }
-	    return array;
-	}
-
-	$scope.sort = function(tableHeader) {
-		$scope.sortType = tableHeader.sortType;
-		if($scope.sortType == $scope.lastSortType) {
-			$scope.sortReverse = !$scope.sortReverse;
-		} else {
-			$scope.lastSortType = $scope.sortType;
-		}
-	}
-
-	$scope.splitString = function(string){
-		var array = string.split(',');
-		return array;
-	}
-
-	$scope.count = function(a){
-		return a.length;
-	}
-
-	$scope.trim = function(a){
-		return s[1];
-	}
+	$scope.tableHeaders = [
+		{label: "Set", sortType:"name", column:0},  
+		{label: "Common", sortType:"commons", column:1}, 
+		{label: "Uncommon", sortType:"uncommons", column:2}, 
+		{label: "Rare", sortType:"rares", column:3}, 
+		{label: "Mythic", sortType:"mythics", column:4}, 
+		{label: "Total", sortType:"total", column:5}
+	];
 
 	// create the list of entries
 	$scope.sets = Sets.query($routeParams);
 	$scope.page_num = parseInt($routeParams["page_num"])
+	$scope.sort_col = parseInt($routeParams["sort_col"]);
 } ]);
 
 // #################################################
