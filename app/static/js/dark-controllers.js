@@ -123,45 +123,30 @@ dark.controller('CardsController', ['$scope','Cards', 'costIcon', '$routeParams'
 	$scope.lastSortType = 'card';
 	$scope.sortType     = 'card'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Edition(s)", sortType:"num_editions"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
-
-	$scope.range = function(start, end)
-	{
-	    var array = new Array();
-	    for(var i = start; i < end; i++)
-	    {
-	        array.push(i);
-	    }
-	    return array;
-	}
+	$scope.tableHeaders = [
+		{label: "Card", sortType:"card_id", column: 0}, 
+		{label: "Artist(s)", sortType:"artist_id", column: 1}, 
+		{label: "Set(s)", sortType:"set_id", column: 2}, 
+		{label: "Edition(s)", sortType:"editions", column: 3}, 
+		{label: "Rarity", sortType:"rarity", column: 4}, 
+		{label: "Cost", sortType:"cost"}];
 	
 	$scope.splitString = function(s, char){
 		var array = s.split(char);
 		return array;
 	}
+
+	$scope.sort_col = function(tableHeader, order){
+
+	}
 	
 	$scope.convertCost = costIcon;
-	
-	$scope.sort = function(tableHeader) {
-		$scope.sortType = tableHeader.sortType;
-		if($scope.sortType == $scope.lastSortType) {
-			$scope.sortReverse = !$scope.sortReverse;
-		} else {
-			$scope.lastSortType = $scope.sortType;
-		}
-	}
-
-	$scope.count = function(a){
-		return a.length;
-	}
-
-	$scope.trim = function(a){
-		return s[1];
-	}
 
 	// create the list of entries
 	$scope.cards = Cards.query($routeParams);
 	$scope.page_num = parseInt($routeParams["page_num"]);
+	$scope.sort_col = parseInt($routeParams["sort_col"]);
+
 } ]);
 
 // #################################################

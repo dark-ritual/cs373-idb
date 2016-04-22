@@ -75,7 +75,7 @@ dark.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/results/:search_query/:page_num', {
 		templateUrl : '../static/templates/results.html',
 		controller : 'ResultsController'
-	}).when('/cards/page/:page_num', {
+	}).when('/cards/page/:page_num/:sort_col', {
 		templateUrl : '../static/templates/cards.html',
 		controller : 'CardsController'
 	}).when('/cards/:card_id', {

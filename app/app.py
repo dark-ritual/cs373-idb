@@ -213,13 +213,27 @@ class Edition(db.Model):
                     card_name=self.card.name, artist_name=self.artist.name,
                     set_name=self.set.name)
 
-def serialize_card_table_data_paginated(page_num):
+def serialize_card_table_data_paginated(page_num, sort_col):
+    col_id_dict = ["e.card_id asc",
+        "a.artist_id asc",
+        "s.set_id asc",
+        "editions asc",
+        "rarity asc",
+        "e.card_id desc",
+        "a.artist_id desc",
+        "s.set_id desc",
+        "editions desc",
+        "rarity desc"]
     try:
-        int(page_num)
+        page_num = int(page_num)
     except:
         page_num = 0
     if page_num < 0:
         page_num = 0
+    try:
+        col_id = col_id_dict[sort_col]
+    except:
+        col_id = col_id_dict[0]
     cards_per_page = 25
     firstrow = cards_per_page * page_num
     sql = '''select    c.name,
@@ -237,9 +251,10 @@ def serialize_card_table_data_paginated(page_num):
              left join  artist AS a ON a.artist_id = e.artist_id
              left join  `set` AS s ON s.set_id = e.set_id
              group by   c.name
+             order by   {}
              limit      25
              offset     {}
-    '''.format(firstrow)
+    '''.format(col_id, firstrow)
     #convert the list of dicts to an array of objects
     ret = []
     for table_data in db.engine.execute(sql).fetchall():
@@ -485,10 +500,10 @@ def setAPI(set_id): # pragma: no cover
     card_set = [Set.query.get(set_id).serialize_full]
     return json_resp(card_set)
 
-@app.route('/api/cards/page/<int:page>',  methods=['GET'])
-def cardsAPI(page): # pragma: no cover
+@app.route('/api/cards/page/<int:page>/<int:sort_col>',  methods=['GET'])
+def cardsAPI(page, sort_col): # pragma: no cover
     logger.debug("cards")
-    cards = serialize_card_table_data_paginated(page)
+    cards = serialize_card_table_data_paginated(page, sort_col)
     return json_resp(cards)
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET'])
