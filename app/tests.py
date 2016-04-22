@@ -22,7 +22,7 @@ def insert_subroutine():
                            card_id='sample-text', flavor='With rope...',
                            rarity='common', number='24', layout='normal')
         app.addEdition(edition_args)
-        
+
 def delete_subroutine():
         app.Artist.query.filter_by(artist_id='mark').delete()
         app.Edition.query.filter_by(multiverse_id='-666').delete()
@@ -175,6 +175,12 @@ class MainTestCase(unittest.TestCase):
             app.db.session.commit()
             self.assertEqual(oldlen, len(app.serialize_artist_table_data_paginated(0)))
 
+    def test_artist_serialize_table_data_pagination_sanity(self):
+        data = app.serialize_artist_table_data_paginated(0)
+        self.assertEqual(data, app.serialize_artist_table_data_paginated(-42))
+        self.assertEqual(data, app.serialize_artist_table_data_paginated("Fred"))
+        self.assertEqual(data, app.serialize_artist_table_data_paginated("0"))
+
     def test_card_repr(self):
         try:
             card_args = dict(card_id='test-card', name='Test Card', colors="['White']",
@@ -237,6 +243,12 @@ class MainTestCase(unittest.TestCase):
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
             self.assertEqual(oldlen, len(app.serialize_card_table_data_paginated(0)))
+
+    def test_card_serialize_table_data_pagination_sanity(self):
+        data = app.serialize_card_table_data_paginated(0)
+        self.assertEqual(data, app.serialize_card_table_data_paginated(-42))
+        self.assertEqual(data, app.serialize_card_table_data_paginated("Fred"))
+        self.assertEqual(data, app.serialize_card_table_data_paginated("0"))
 
     def test_card_serialize_full(self):
         try:
@@ -516,6 +528,12 @@ class MainTestCase(unittest.TestCase):
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
 
+    def test_search_pagination_sanity(self):
+        data = app.search_card_names('flying', 0)
+        self.assertEqual(data, app.search_card_names('flyiNG', -42))
+        self.assertEqual(data, app.search_card_names('FlYing', "Fred"))
+        self.assertEqual(data, app.search_card_names('FLYIng', "0"))
+
     def test_set_repr(self):
         try:
             set_args = dict(set_id='XXX', name='Xtra Xtravagant Xet')
@@ -655,6 +673,12 @@ class MainTestCase(unittest.TestCase):
             app.db.session.commit()
             self.assertEqual(oldlen, len(app.serialize_set_table_data_paginated(0)))
 
+    def test_set_serialize_table_data_pagination_sanity(self):
+        data = app.serialize_set_table_data_paginated(0)
+        self.assertEqual(data, app.serialize_set_table_data_paginated(-42))
+        self.assertEqual(data, app.serialize_set_table_data_paginated("Fred"))
+        self.assertEqual(data, app.serialize_set_table_data_paginated("0"))
+
     def test_searchAPI(self):
         try:
             insert_subroutine()
@@ -707,7 +731,7 @@ class MainTestCase(unittest.TestCase):
     def test_editionAPI(self):
         try:
             insert_subroutine()
-            app.editionAPI(-666)
+            app.editionAPI("-666")
         finally:
             delete_subroutine()
 
