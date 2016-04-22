@@ -418,20 +418,35 @@ on        a.artist_id = e.artist_id
 left join `set` as s
 on        s.set_id = e.set_id
 where'''
+    countBase = '''
+select    count(*)
+from      card as c
+left join edition as e
+on        e.card_id = c.card_id
+left join artist as a
+on        a.artist_id = e.artist_id
+left join `set` as s
+on        s.set_id = e.set_id
+where'''
     for i in range(0, num_terms):
         firstcol = True
         if i != 0:
             sqlBase += " " + ' or '
+            countBase += " " + ' or '
         sqlBase += " ("
+        countBase += " ("
         for col in cols:
             if firstcol:
                 firstcol = False
             else:
                 sqlBase += "or "
+                countBase += "or "
             sqlBase += " {} like :term".format(col) + str(i) + "\n"
+            countBase += " {} like :term".format(col) + str(i) + "\n"
         sqlBase += " ) \n"
+        countBase += " ) \n"
     sqlBase += " limit 25 offset {}".format(page_num * 25)
-    return sqlBase
+    return sqlBase, countBase
 
 def count_matches(targets, source):
     matches = 0
@@ -458,19 +473,25 @@ def search_card_names(term_str, page_num):
         page_num = 0
     num_id_cols        = 5
     terms              = [term for term in term_str.split(" ") if term != '']
-    sql                = gensql(len(terms), page_num)
     parameters         = {'term{}'.format(i): '%%' + term + '%%' for i, term in enumerate(terms)}
+    sql, sql_count     = gensql(len(terms), page_num)
+    total              = (db.engine.execute(text(sql_count), parameters).fetchone()[0] + 24)//25
+    if page_num > (total - 1):
+        print(total)
+        page_num = total - 1
+        sql, sql_count = gensql(len(terms), page_num)
+
     results            = db.engine.execute(text(sql), parameters).fetchall()
     result_dict        = {i:max(count_matches(terms, col) for col in result) for i, result in enumerate(results)}
     sorted_result_dict = list(reversed(sorted(result_dict.items(), key=itemgetter(1))))
     sorted_and_ids     = [list(results[index][:num_id_cols]) for index, num in sorted_result_dict if num == len(terms)]
-    sorted_and_results = [result + ['AND'] for result in [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num == len(terms)]]
+    sorted_and_results = [result + [total, 'AND'] for result in [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num == len(terms)]]
     sorted_or_ids      = [list(results[index][:num_id_cols]) for index, num in sorted_result_dict if num < len(terms)]
-    sorted_or_results  = [result + ['OR'] for result in [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num < len(terms)]]
+    sorted_or_results  = [result + [total, 'OR'] for result in [bold_search_terms(results[index][num_id_cols:], terms) for index, num in sorted_result_dict if num < len(terms)]]
     keys               = ['card_id', 'artist_id', 'set_id', 'cost', 'image_url', 'name', 'text',
                           'types', 'subtypes', 'formats', 'colors', 'flavor',
                           'rarity', 'layout', 'artist_name', 'setid',
-                          'set_name', 'result_type']
+                          'set_name', 'num_pages', 'result_type']
     full_and_results   = [result_id + result for result_id, result in zip(sorted_and_ids, sorted_and_results)]
     full_or_results    = [result_id + result for result_id, result in zip(sorted_or_ids,  sorted_or_results)]
     dict_and_results   = [{k:r for k, r in zip(keys, result)} for result in full_and_results]

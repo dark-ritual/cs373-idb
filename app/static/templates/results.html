@@ -1,5 +1,15 @@
 <div class="container" ng-controller="ResultsController">
-<!-- <p>All: {{ cards }}</p> -->
+<!-- Pagination -->
+<p> {{ num_pages }} bla</p>
+  <center>
+    <ul class="pagination">
+      <li ng-if="(page_num - 1) >= 0"><a href="#/results/{{ search_query }}/0"><<</a></li>
+      <li ng-if="(page_num - 1) >= 0"><a href="#/results/{{ search_query }}/{{ page_num - 1}}"><</a></li>
+      <li class="active"><a href="">{{ page_num }}</a></li>
+      <li ><a href="#/results/{{ search_query }}/{{ page_num + 1}}">></a></li>
+    </ul>
+  </center>
+
 <!-- AND Results -->
   <div class="container">
     <p><span class="yelling-font" style="font-family: magicFontBold; font-size: 4.15em;">AND Results</span></p>
@@ -8,11 +18,7 @@
     <thead>
       <tr>
       	<th ng-repeat="tableHeader in tableHeaders">
-          <a href ng-click="sort(tableHeader)">
             {{tableHeader.label}} 
-            <span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-            <span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-          </a>
         </th>
       </tr>
     </thead>
@@ -95,7 +101,13 @@
           </td>
       </tr>
     </tbody>
-  </table>
+  </table>  
   <center>
+    <ul class="pagination">
+      <li ng-if="(page_num - 1) >= 0"><a href="#/results/{{ search_query }}/0"><<</a></li>
+      <li ng-if="(page_num - 1) >= 0"><a href="#/results/{{ search_query }}/{{ page_num - 1}}"><</a></li>
+      <li class="active"><a href="">{{ page_num }}</a></li>
+      <li ><a href="#/results/{{ search_query }}/{{ page_num + 1}}">></a></li>
+    </ul>
   </center>
 </div>

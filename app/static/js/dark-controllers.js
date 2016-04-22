@@ -98,6 +98,7 @@ dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', 'co
 	$scope.tableHeaders = [{label: "", sortType:""}, {label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
 	$scope.cards = NavSearch.query($routeParams);
 	$scope.page_num = parseInt($routeParams["page_num"]);
+	$scope.search_query = $routeParams["search_query"]
 	// debugger;
 	// $scope.andResults = $scope.cards[0];
 	// $scope.orResults = $scope.cards[1];
