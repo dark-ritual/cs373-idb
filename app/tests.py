@@ -533,6 +533,7 @@ class MainTestCase(unittest.TestCase):
         self.assertEqual(data, app.search_card_names('flyiNG', -42))
         self.assertEqual(data, app.search_card_names('FlYing', "Fred"))
         self.assertEqual(data, app.search_card_names('FLYIng', "0"))
+        app.search_card_names('Flying', 439932)
 
     def test_set_repr(self):
         try:
