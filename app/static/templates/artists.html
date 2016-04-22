@@ -3,13 +3,13 @@
 	<div ng-controller="ScrollController">
 		<center ng-click="gotoTop()">
 			<ul class="pagination">
-		      	<li ng-if="(page_num - 3) >= 0"><a href="#/artists/page/0"><<</a></li>
-	    	  	<li ng-if="(page_num - 2) >= 0"><a href="#/artists/page/{{ page_num - 2}}">{{ page_num - 2 }}</a></li>
-	      		<li ng-if="(page_num - 1) >= 0"><a href="#/artists/page/{{ page_num - 1}}">{{ page_num - 1 }}</a></li>
+		      	<li ng-if="(page_num - 3) >= 0"><a href="#/artists/page/0/{{ sort_col }}"><<</a></li>
+	    	  	<li ng-if="(page_num - 2) >= 0"><a href="#/artists/page/{{ page_num - 2}}/{{ sort_col }}">{{ page_num - 2 }}</a></li>
+	      		<li ng-if="(page_num - 1) >= 0"><a href="#/artists/page/{{ page_num - 1}}/{{ sort_col }}">{{ page_num - 1 }}</a></li>
 		      	<li class="active"><a href="#/artists/page/{{ page_num}}">{{ page_num }}</a></li>
-		      	<li ng-if="(page_num + 1) <= 23"><a href="#/artists/page/{{ page_num + 1}}">{{ page_num + 1 }}</a></li>
-	    	  	<li ng-if="(page_num + 2) <= 23"><a href="#/artists/page/{{ page_num + 2}}">{{ page_num + 2 }}</a></li>
-	      		<li ng-if="(page_num + 3) <= 23"><a href="#/artists/page/23">>></a></li>
+		      	<li ng-if="(page_num + 1) <= 23"><a href="#/artists/page/{{ page_num + 1}}/{{ sort_col }}">{{ page_num + 1 }}</a></li>
+	    	  	<li ng-if="(page_num + 2) <= 23"><a href="#/artists/page/{{ page_num + 2}}/{{ sort_col }}">{{ page_num + 2 }}</a></li>
+	      		<li ng-if="(page_num + 3) <= 23"><a href="#/artists/page/23/{{ sort_col }}">>></a></li>
     		</ul>
   		</center>
   	</div>
@@ -18,18 +18,17 @@
     
     	<thead>
       		<tr>
-      			<th ng-repeat="tableHeader in tableHeaders">
-          			<a href ng-click="sort(tableHeader)">
+      			<th ng-repeat="tableHeader in tableHeaders" style="white-space:nowrap">
             			{{tableHeader.label}} 
-            			<span ng-show="sortType == tableHeader.sortType && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-            			<span ng-show="sortType == tableHeader.sortType && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+            			<a ng-href="#/artists/page/{{ page_num }}/{{ tableHeader.column }}"><span class="glyphicon glyphicon-chevron-down"></span></a>
+            			<a ng-href="#/artists/page/{{ page_num }}/{{ tableHeader.column + 6 }}"><span class="glyphicon glyphicon-chevron-up"></span></a>
           			</a>
         		</th>
       		</tr>
     	</thead>
     
     	<tbody>
-      		<tr dir-paginate="artist in artists | orderBy:sortType:sortReverse | itemsPerPage:25">
+      		<tr ng-repeat="artist in artists">
         		<td>
         			<div ng-controller="ScrollController">
           				<a ng-click="gotoTop()" href="#/artists/{{ artist.artist_id }}">{{ artist.name }}</a>
@@ -57,13 +56,13 @@
 	<div ng-controller="ScrollController">
 		<center ng-click="gotoTop()">
 			<ul class="pagination">
-				<li ng-if="(page_num - 3) >= 0"><a href="#/artists/page/0"><<</a></li>
-				<li ng-if="(page_num - 2) >= 0"><a href="#/artists/page/{{ page_num - 2}}">{{ page_num - 2 }}</a></li>
-				<li ng-if="(page_num - 1) >= 0"><a href="#/artists/page/{{ page_num - 1}}">{{ page_num - 1 }}</a></li>
+				<li ng-if="(page_num - 3) >= 0"><a href="#/artists/page/0/{{ sort_col }}"><<</a></li>
+				<li ng-if="(page_num - 2) >= 0"><a href="#/artists/page/{{ page_num - 2}}/{{ sort_col }}">{{ page_num - 2 }}</a></li>
+				<li ng-if="(page_num - 1) >= 0"><a href="#/artists/page/{{ page_num - 1}}/{{ sort_col }}">{{ page_num - 1 }}</a></li>
 				<li class="active"><a href="#/artists/page/{{ page_num}}">{{ page_num }}</a></li>
-				<li ng-if="(page_num + 1) <= 23"><a href="#/artists/page/{{ page_num + 1}}">{{ page_num + 1 }}</a></li>
-				<li ng-if="(page_num + 2) <= 23"><a href="#/artists/page/{{ page_num + 2}}">{{ page_num + 2 }}</a></li>
-				<li ng-if="(page_num + 3) <= 23"><a href="#/artists/page/23">>></a></li>
+				<li ng-if="(page_num + 1) <= 23"><a href="#/artists/page/{{ page_num + 1}}/{{ sort_col }}">{{ page_num + 1 }}</a></li>
+				<li ng-if="(page_num + 2) <= 23"><a href="#/artists/page/{{ page_num + 2}}/{{ sort_col }}">{{ page_num + 2 }}</a></li>
+				<li ng-if="(page_num + 3) <= 23"><a href="#/artists/page/23/{{ sort_col }}">>></a></li>
 			</ul>
 		</center>
 	</div>

@@ -280,13 +280,29 @@ def serialize_card_table_data_paginated(page_num, sort_col):
                   })
     return ret
 
-def serialize_artist_table_data_paginated(page_num):
+def serialize_artist_table_data_paginated(page_num, sort_col):
+    col_id_dict = ["a.artist_id asc",
+        "total asc",
+        "commons asc",
+        "uncommons asc",
+        "rares asc",
+        "mythics asc",
+        "a.artist_id desc",
+        "total desc",
+        "commons desc",
+        "uncommons desc",
+        "rares desc",
+        "mythics desc"]
     try:
         page_num = int(page_num)
     except:
         page_num = 0
     if page_num < 0:
         page_num = 0
+    try:
+        col_id = col_id_dict[sort_col]
+    except:
+        col_id = col_id_dict[0]
     cards_per_page = 25
     firstrow = cards_per_page * page_num
     sql = '''select     a.name,
@@ -300,9 +316,10 @@ def serialize_artist_table_data_paginated(page_num):
              inner join edition as e
              on         a.artist_id=e.artist_id
              group by   a.artist_id
+             order by   {}
              limit      25
              offset     {}
-          '''.format(firstrow)
+          '''.format(col_id, firstrow)
     # convert the list of dicts to an array of objects
     ret = []
     for table_data in db.engine.execute(sql).fetchall():
@@ -475,11 +492,11 @@ def searchAPI(search_query, page): # pragma: no cover
     logger.debug('search')
     return json_resp(search_card_names(search_query, page))
 
-@app.route('/api/artists/page/<int:page>',  methods=['GET'])
-def artistsAPI(page): # pragma: no cover
+@app.route('/api/artists/page/<int:page>/<int:sort_col>',  methods=['GET'])
+def artistsAPI(page, sort_col): # pragma: no cover
     logger.debug("artists")
     LIM = 25 # page length
-    artists = serialize_artist_table_data_paginated(page)
+    artists = serialize_artist_table_data_paginated(page, sort_col)
     return json_resp(artists)
 
 @app.route('/api/artists/<path:artist_id>', methods=['GET'])

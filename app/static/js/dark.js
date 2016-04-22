@@ -87,10 +87,10 @@ dark.config([ '$routeProvider', function($routeProvider) {
 	}).when('/sets/:set_id', {
 		templateUrl : '../static/templates/setinstance.html',
 		controller : 'SetInstanceController'
-	}).when('/sets/page/:page_num', {
+	}).when('/sets/page/:page_num/:sort_col', {
 		templateUrl : '../static/templates/sets.html',
 		controller : 'SetsController'
-	}).when('/artists/page/:page_num', {
+	}).when('/artists/page/:page_num/:sort_col', {
 		templateUrl : '../static/templates/artists.html',
 		controller : 'ArtistsController'
 	}).when('/about', {

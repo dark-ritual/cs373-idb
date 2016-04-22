@@ -129,7 +129,8 @@ dark.controller('CardsController', ['$scope','Cards', 'costIcon', '$routeParams'
 		{label: "Set(s)", sortType:"set_id", column: 2}, 
 		{label: "Edition(s)", sortType:"editions", column: 3}, 
 		{label: "Rarity", sortType:"rarity", column: 4}, 
-		{label: "Cost", sortType:"cost"}];
+		{label: "Cost", sortType:"cost"}
+	];
 	
 	$scope.splitString = function(s, char){
 		var array = s.split(char);
@@ -204,43 +205,24 @@ dark.controller('ArtistsController', ['$scope', '$routeParams', 'Artists', funct
 	$scope.lastSortType = 'artist';
 	$scope.sortType     = 'artist'; // set the default sort type
 	$scope.sortReverse  = false;
-	$scope.tableHeaders = [{label: "Artist", sortType:"name"}, {label: "Total", sortType:"total"}, {label: "Common", sortType:"commons"}, {label: "Uncommon", sortType:"uncommons"}, {label: "Rare", sortType:"rares"}, {label: "Mythic", sortType:"mythics"}];
-
-	$scope.range = function(start, end)
-	{
-	    var array = new Array();
-	    for(var i = start; i < end; i++)
-	    {
-	        array.push(i);
-	    }
-	    return array;
-	}
+	$scope.tableHeaders = [
+		{label: "Artist", sortType:"name", column:0}, 
+		{label: "Total", sortType:"total", column:1}, 
+		{label: "Common", sortType:"commons", column:2}, 
+		{label: "Uncommon", sortType:"uncommons", column:3}, 
+		{label: "Rare", sortType:"rares", column:4}, 
+		{label: "Mythic", sortType:"mythics", column:5}
+	];
 
 	$scope.splitString = function(s, char, trim){
 		var array = s.split(char);
 		return array;
 	}
 
-	$scope.sort = function(tableHeader) {
-		$scope.sortType = tableHeader.sortType;
-		if($scope.sortType == $scope.lastSortType) {
-			$scope.sortReverse = !$scope.sortReverse;
-		} else {
-			$scope.lastSortType = $scope.sortType;
-		}
-	}
-
-	$scope.count = function(a){
-		return a.length;
-	}
-
-	$scope.trim = function(a){
-		return s[1];
-	}
-
 	// create the list of entries
 	$scope.artists = Artists.query($routeParams);
-	$scope.page_num = parseInt($routeParams["page_num"])
+	$scope.page_num = parseInt($routeParams["page_num"]);
+	$scope.sort_col = parseInt($routeParams["sort_col"]);
 } ]);
 
 // ##########################################################
