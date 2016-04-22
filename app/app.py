@@ -445,7 +445,7 @@ where'''
             countBase += " {} like :term".format(col) + str(i) + "\n"
         sqlBase += " ) \n"
         countBase += " ) \n"
-    sqlBase += " limit 25 offset {}".format(page_num * 25)
+    sqlBase += " limit 25 offset {}".format(max(page_num * 25,0))
     return sqlBase, countBase
 
 def count_matches(targets, source):
@@ -477,7 +477,6 @@ def search_card_names(term_str, page_num):
     sql, sql_count     = gensql(len(terms), page_num)
     total              = (db.engine.execute(text(sql_count), parameters).fetchone()[0] + 24)//25
     if page_num > (total - 1):
-        print(total)
         page_num = total - 1
         sql, sql_count = gensql(len(terms), page_num)
 
