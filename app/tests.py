@@ -648,7 +648,7 @@ class MainTestCase(unittest.TestCase):
 
     def test_set_serialize_table_data_pagination(self):
         try:
-            oldlen = len(app.serialize_set_table_data_paginated(0))
+            oldlen = len(app.serialize_set_table_data_paginated(0, 0))
             artist_args = dict(artist_id='stephanie', name='Stephanie')
             app.addArtist(artist_args)
             set_args = dict(set_id='SOA', name='Set of Awesome')
@@ -663,7 +663,7 @@ class MainTestCase(unittest.TestCase):
                                card_id='sample-text', flavor='With rope...',
                                rarity='common', number='24', layout='normal')
             app.addEdition(edition_args)
-            app.serialize_set_table_data_paginated(0)
+            app.serialize_set_table_data_paginated(0, 0)
         finally:
             app.Artist.query.filter_by(artist_id='mark').delete()
             app.Edition.query.filter_by(multiverse_id='-666').delete()
@@ -671,13 +671,13 @@ class MainTestCase(unittest.TestCase):
             app.Set.query.filter_by(set_id='SOA').delete()
             app.Artist.query.filter_by(artist_id='stephanie').delete()
             app.db.session.commit()
-            self.assertEqual(oldlen, len(app.serialize_set_table_data_paginated(0)))
+            self.assertEqual(oldlen, len(app.serialize_set_table_data_paginated(0, 0)))
 
     def test_set_serialize_table_data_pagination_sanity(self):
-        data = app.serialize_set_table_data_paginated(0)
-        self.assertEqual(data, app.serialize_set_table_data_paginated(-42))
-        self.assertEqual(data, app.serialize_set_table_data_paginated("Fred"))
-        self.assertEqual(data, app.serialize_set_table_data_paginated("0"))
+        data = app.serialize_set_table_data_paginated(0, 0)
+        self.assertEqual(data, app.serialize_set_table_data_paginated(-42, 0))
+        self.assertEqual(data, app.serialize_set_table_data_paginated("Fred", "FRED"))
+        self.assertEqual(data, app.serialize_set_table_data_paginated("0", 0))
 
     def test_searchAPI(self):
         try:
@@ -703,7 +703,7 @@ class MainTestCase(unittest.TestCase):
     def test_setsAPI(self):
         try:
             insert_subroutine()
-            app.setsAPI(0)
+            app.setsAPI(0, 0)
         finally:
             delete_subroutine()
 
