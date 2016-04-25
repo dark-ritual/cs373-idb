@@ -138,10 +138,6 @@ dark.controller('CardsController', ['$scope','Cards', 'costIcon', '$routeParams'
 		var array = s.split(char);
 		return array;
 	}
-
-	$scope.sort_col = function(tableHeader, order){
-
-	}
 	
 	$scope.convertCost = costIcon.costString;
 
@@ -329,3 +325,14 @@ function ($scope, $location, $anchorScroll) {
   };
 }]);
 
+// ##########################################################
+// ########### Vas Controller #############
+// ##########################################################
+
+dark.controller('VasController', ['$scope',  '$routeParams', 'Vas', function($scope, $routeParams, Vas) {
+
+	// create the list of entries
+	$routeParams.query = "cards/0";
+	$scope.states = Vas.query($routeParams);
+
+} ]);
