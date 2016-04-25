@@ -99,6 +99,9 @@ dark.config([ '$routeProvider', function($routeProvider) {
 	}).when('/tests',{
 		templateUrl : '../static/templates/tests.html',
 		controller : 'TestsController'
+    }).when('/vas-api',{
+        templateUrl : '../static/templates/vas-api.html',
+        controller : 'VasController'
 	}).otherwise({
 		templateUrl : '../static/templates/home.html',
 		controller : 'HomeController'

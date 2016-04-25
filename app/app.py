@@ -532,8 +532,14 @@ def searchAPI(search_query, page): # pragma: no cover
 @app.route('/api/artists/page/<int:page>/<int:sort_col>',  methods=['GET'])
 def artistsAPI(page, sort_col): # pragma: no cover
     logger.debug("artists")
-    LIM = 25 # page length
     artists = serialize_artist_table_data_paginated(page, sort_col)
+    return json_resp(artists)
+
+@app.route('/api/artists/<int:page>',  methods=['GET'])
+def artistsPublicAPI(page): # pragma: no cover
+    logger.debug("artists")
+    LIM = 25 # page length
+    artists = [artist.serialize_part for artist in Artist.query.limit(LIM).offset(LIM*(page)).all()]
     return json_resp(artists)
 
 @app.route('/api/artists/<path:artist_id>', methods=['GET'])
@@ -548,6 +554,13 @@ def setsAPI(page, sort_col): # pragma: no cover
     sets = serialize_set_table_data_paginated(page, sort_col)
     return json_resp(sets)
 
+@app.route('/api/sets/<int:page>',  methods=['GET'])
+def setsPublicAPI(page): # pragma: no cover
+    logger.debug("sets")
+    LIM = 25 # page length
+    sets = [card_set.serialize_part for card_set in Set.query.limit(LIM).offset(LIM*(page)).all()]
+    return json_resp(sets)
+
 @app.route('/api/sets/<path:set_id>',  methods=['GET'])
 def setAPI(set_id): # pragma: no cover
     logger.debug("card_set")
@@ -558,6 +571,13 @@ def setAPI(set_id): # pragma: no cover
 def cardsAPI(page, sort_col): # pragma: no cover
     logger.debug("cards")
     cards = serialize_card_table_data_paginated(page, sort_col)
+    return json_resp(cards)
+
+@app.route('/api/cards/<int:page>',  methods=['GET'])
+def cardsPublicAPI(page): # pragma: no cover
+    logger.debug("cards")
+    LIM = 25 # page length
+    cards = [card.serialize_full for card in Card.query.limit(LIM).offset(LIM*(page)).all()]
     return json_resp(cards)
 
 @app.route('/api/cards/<path:card_id>',  methods=['GET'])
