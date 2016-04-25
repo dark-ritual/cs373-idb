@@ -1,4 +1,5 @@
 <div class="container" ng-controller="VasController">
+	<p> {{ states }}
 	<div class="container bottom-margin" style="color: #FFFFFF">
 		<style>
 			.state{
@@ -73,19 +74,22 @@
 				Object.keys({{ cities }}).forEach(function(c){
 					if(stateDict[c.state_code]){
 						stateDict[c.state_code][0] += 1;
-					}else
+					}else{
 						stateDict[c.state_code] = [1,0];
+					}
 				});
 				Object.keys({{ neighborhoods }}).forEach(function(n){
 					if(stateDict[n.state_code]){
 						stateDict[n.state_code][1] += 1;
-					}else
+					}else{
 						stateDict[c.state_code] = [0,1];
+					}
 				});
 				var max = 0;
 				stateDict.forEach(function(s, v){
-					if(v[1] > max)
+					if(v[1] > max){
 						max = v[1];
+					}
 				});
 
 
@@ -107,7 +111,7 @@
 					});
 				/* draw states on id #statesvg */	
 				uStates.draw("#statesvg", sampleData, tooltipHtml);
-			</script>
+			</script> 
 
 
 		</body>
