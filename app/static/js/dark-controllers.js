@@ -96,12 +96,13 @@ dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', 'co
 	$scope.sortType 	  = 'card';
 	$scope.sortReverse  = false;
 	$scope.tableHeaders = [{label: "", sortType:""}, {label: "Card", sortType:"name"}, {label: "Artist(s)", sortType:"artists"}, {label: "Set(s)", sortType:"sets"}, {label: "Text", sortType:"text"}, {label: "Rarity", sortType:"rarities"}, {label: "Cost", sortType:"cost"}];
-	$scope.cards = NavSearch.query($routeParams);
+	$scope.cards = NavSearch.query($routeParams, function(data) {
+		for(var i = 0; i < data.length; i++) {
+			data[i].text = costIcon.cardTextParse(data[i].text);
+		}
+	});
 	$scope.page_num = parseInt($routeParams["page_num"]);
 	$scope.search_query = $routeParams["search_query"]
-	// debugger;
-	// $scope.andResults = $scope.cards[0];
-	// $scope.orResults = $scope.cards[1];
 	
 	$scope.sort = function(tableHeader) {
 		$scope.sortType = tableHeader.sortType;
@@ -112,7 +113,7 @@ dark.controller('ResultsController', [ '$scope','$routeParams', 'NavSearch', 'co
 		}
 	}
 
-	$scope.convertCost = costIcon;
+	$scope.convertCost = costIcon.costString;
 }]);
 
 
@@ -142,7 +143,7 @@ dark.controller('CardsController', ['$scope','Cards', 'costIcon', '$routeParams'
 
 	}
 	
-	$scope.convertCost = costIcon;
+	$scope.convertCost = costIcon.costString;
 
 	// create the list of entries
 	$scope.cards = Cards.query($routeParams);
@@ -223,27 +224,11 @@ dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstan
 			// all types are just types
 			data[0].alltypes = data[0].types;
 		}
-		// parse the text for a card and inject <div> for color icons
-		var textArray = data[0].text.split(" ");
-		for(var i=0;i<textArray.length;i++) {
-			if(textArray[i].includes('{') && textArray[i].includes('}')) {
-				var start = textArray[i].indexOf('{');
-				var end = textArray[i].lastIndexOf('}');
-				var colors = textArray[i].substring(start,end+1);
-				var cssColors = costIcon(colors);
-				for(var j=0;j<cssColors.length;j++) {
-					cssColors[j] = "<div class=\"" + cssColors[j] + " mtg-text-icon\"></div>";
-				}
-				textArray[i] = textArray[i].substring(0,start) + cssColors.join("") + textArray[i].substring(end+1,textArray[i].length);
-			}
-		}
-		data[0].text = textArray.join(" ");
+		
+		data[0].text = costIcon.cardTextParse(data[0].text);
 	});
-	
-	$scope.cardTypes = function(typeString, subtypeString){
-	}
 
-	$scope.convertCost = costIcon;
+	$scope.convertCost = costIcon.costString;
 } ]);
 
 // ##########################################################
@@ -323,8 +308,7 @@ darkControllers.controller('TestsController', function($scope, $http, $location)
 			var txt = document.createElement("textarea");
 			txt.innerHTML = response.data;
 			var text = txt.value;
-			$scope.result = txt.value;// .substring(2,text.length -
-										// 1).replace(/\\n/g, "<br>");
+			$scope.result = txt.value;
 	   })
 	}
 } );
