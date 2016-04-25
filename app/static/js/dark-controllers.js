@@ -332,7 +332,10 @@ function ($scope, $location, $anchorScroll) {
 dark.controller('VasController', ['$scope',  '$routeParams', 'Vas', function($scope, $routeParams, Vas) {
 
 	// create the list of entries
-	$routeParams.query = "cards/0";
+	$routeParams.query = "states";
 	$scope.states = Vas.query($routeParams);
-
+	$routeParams.query = "cities";
+	$scope.cities = Vas.query($routeParams);
+	$routeParams.query = "neighborhoods";
+	$scope.neighborhoods = Vas.query($routeParams);
 } ]);

@@ -57,12 +57,38 @@
 
 				function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
 					return "<h4>"+n+"</h4><table>"+
-						"<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
-						"<tr><td>Average</td><td>"+(d.avg)+"</td></tr>"+
-						"<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
+						"<tr><td>Low</td><td>"+(d.cities)+"</td></tr>"+
+						"<tr><td>Average</td><td>"+(d.neighborhoods)+"</td></tr>"+
 						"</table>";
 				}
 				
+				var sampleData ={};	/* Sample random data. */	
+				["TX", "WA", "NY", "CA"]
+					.forEach(function(d){ 
+						var cities=Math.round(100*Math.random()), 
+							neighborhoods=Math.round(100*Math.random());
+						sampleData[d]={state: 4, cities:5, neighborhoods:68, color:d3.interpolate("#ffffcc", "#800026")/100}; 
+					});
+				var stateDict = {};
+				Object.keys({{ cities }}).forEach(function(c){
+					if(stateDict[c.state_code]){
+						stateDict[c.state_code][0] += 1;
+					}else
+						stateDict[c.state_code] = [1,0];
+				});
+				Object.keys({{ neighborhoods }}).forEach(function(n){
+					if(stateDict[n.state_code]){
+						stateDict[n.state_code][1] += 1;
+					}else
+						stateDict[c.state_code] = [0,1];
+				});
+				var max = 0;
+				stateDict.forEach(function(s, v){
+					if(v[1] > max)
+						max = v[1];
+				});
+
+
 				var sampleData ={};	/* Sample random data. */	
 				["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
 				"ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
@@ -70,16 +96,19 @@
 				"CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
 				"WI", "MO", "AR", "OK", "KS", "LS", "VA"]
 					.forEach(function(d){ 
-						var low=Math.round(100*Math.random()), 
-							mid=Math.round(100*Math.random()), 
-							high=Math.round(100*Math.random());
-						sampleData[d]={low:d3.min([low,mid,high]), high:d3.max([low,mid,high]), 
-								avg:Math.round((low+mid+high)/3), color:d3.interpolate("#ffffcc", "#800026")(low/100)}; 
+						if(stateDict[d]){
+							var cities=stateDict[d][0], 
+								neighborhoods=stateDict[d][1];
+							sampleData[d]={cities:cities, neighborhoods:neighborhoods, color:d3.interpolate("#ffffcc", "#800026")(neighborhoods/max)};
+						}else{
+							sampleData[d]={cities:0, neighborhoods:0, color:d3.interpolate("#ffffcc", "#800026")(0)}
+
+						}
 					});
-				
 				/* draw states on id #statesvg */	
 				uStates.draw("#statesvg", sampleData, tooltipHtml);
 			</script>
+
 
 		</body>
 	</div>
