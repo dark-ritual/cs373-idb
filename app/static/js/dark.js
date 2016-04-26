@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var dark = angular.module('dark', [ 'ngRoute', 'ngSanitize', 'slick', 'darkControllers', 'cardsServices', 'setsServices', 'artistsServices', 'cardinstanceServices', 'artistinstanceServices', 'setinstanceServices', 'searchServices', 'angularUtils.directives.dirPagination', 'vasServices' ]);
+var dark = angular.module('dark', [ 'ngRoute', 'ngSanitize', 'darkControllers', 'cardsServices', 'setsServices', 'artistsServices', 'cardinstanceServices', 'artistinstanceServices', 'setinstanceServices', 'searchServices', 'angularUtils.directives.dirPagination', 'vasServices' ]);
 
 dark.factory('costIcon', function() {
 	var service={}

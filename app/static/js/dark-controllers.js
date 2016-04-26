@@ -14,57 +14,7 @@ dark.controller('HomeController', ['$scope', function($scope) {} ]);
 // #############About Controller####################
 // #################################################
 
-dark.controller('AboutController', ['$scope', function($scope) {
-
-	
-	$('.center').slick({
-		centerMode : true,
-		centerPadding : '60px',
-		slidesToShow : 3,
-		autoplay : true,
-		autoplaySpeed : 2000,
-		responsive : [ {
-			breakpoint : 768,
-			settings : {
-				arrows : false,
-				centerMode : true,
-				centerPadding : '40px',
-				slidesToShow : 3
-			}
-		}, {
-			breakpoint : 480,
-			settings : {
-				arrows : false,
-				centerMode : true,
-				centerPadding : '40px',
-				slidesToShow : 1
-			}
-		} ]
-	});
-	
-	$scope.carouselOptions = [ {
-		name : "1",
-		imageUrl : "../static/images/JavierV1.0.png"
-	}, {
-		name : "2",
-		imageUrl : "../static/images/ShanellV1.0.png"
-	}, {
-		name : "3",
-		imageUrl : "../static/images/PeterV1.0.png"
-	}, {
-		name : "4",
-		imageUrl : "../static/images/StephanieV1.0.png"
-	}, {
-		name : "5",
-		imageUrl : "../static/images/MarkV1.0.png"
-	}, {
-		name : "6",
-		imageUrl : "../static/images/TonyaV1.0.png"
-	} ]
-
-
-
-} ]);
+dark.controller('AboutController', ['$scope', function($scope) {} ]);
 
 // #################################################
 // #############NavBar Controller###################
