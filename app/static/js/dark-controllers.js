@@ -281,54 +281,10 @@ function ($scope, $location, $anchorScroll) {
 
 dark.controller('VasController', ['$scope', 'Vas', function($scope, Vas) {
 
-	// // create the list of entries
-	// $routeParams.query = "states";
+	// get entries
 	$scope.states = Vas.states();
-	// $routeParams.query = "cities";
 	$scope.cities = Vas.cities();
-	// $routeParams.query = "neighborhoods";
 	$scope.neighborhoods = Vas.neighborhoods();
-	/*$scope.states = Vas.query($routeParams);
-	$scope.cities = Vas.query($routeParams);*/
-	//$scope.neighborhoods = Vas.query($routeParams);
-	
-	//var url = "http://virtual-address.space/api/states?callback=JSON_CALLBACK";
-	
-//	$http({
-//		  method: 'GET', url: "http://virtual-address.space/api/states?callback"
-//		}).then(function successCallback(response) {
-//		    $scope.states = response.data;
-//		  }, function errorCallback(response) {
-//		    // called asynchronously if an error occurs
-//		    // or server returns response with an error status.
-//		  });
-//	
-//	$http({
-//		  method: 'GET', url: "http://virtual-address.space/api/cities?callback"
-//		}).then(function successCallback(response) {
-//		    $scope.cities = response.data;
-//		  }, function errorCallback(response) {
-//		    // called asynchronously if an error occurs
-//		    // or server returns response with an error status.
-//		  });
-//	
-//	$http({
-//		  method: 'GET', url: "http://virtual-address.space/api/neighborhoods?callback"
-//		}).then(function successCallback(response) {
-//		    $scope.neighborhoods = response.data;
-//		  }, function errorCallback(response) {
-//		    // called asynchronously if an error occurs
-//		    // or server returns response with an error status.
-//		  });
-	
-	/*$http.jsonp(url).
-		success(function(data, status, headers, config) {
-	    }).
-	    error(function(data, status, headers, config) {
-	        $scope.error = true;
-	    });*/
-	debugger;
-
 
 	$scope.scripts = [];
 	$scope.scripts.push({src:'../static/js/uStates.js'});
