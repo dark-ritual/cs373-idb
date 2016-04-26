@@ -149,9 +149,9 @@ dark.controller('ArtistsController', ['$scope', '$routeParams', 'Artists', funct
 	$scope.sort_col = parseInt($routeParams["sort_col"]);
 } ]);
 
-// ##########################################################
-// #############Card Instance Controller#####################
-// ##########################################################
+// #################################################
+// ##########Card Instance Controller###############
+// #################################################
 
 dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstance', 'costIcon', function($scope, $routeParams, CardInstance, costIcon) {
 
@@ -177,9 +177,9 @@ dark.controller('CardInstanceController', ['$scope', '$routeParams', 'CardInstan
 	$scope.convertCost = costIcon.costString;
 } ]);
 
-// ##########################################################
-// #############Artists Instance Controller##################
-// ##########################################################
+// ####################################################
+// ##########Artists Instance Controller###############
+// ####################################################
 
 dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistInstance', function($scope, $routeParams, ArtistInstance) {
 
@@ -209,9 +209,9 @@ dark.controller('ArtistInstanceController', ['$scope',  '$routeParams', 'ArtistI
 
 } ]);
 
-// #######################################################
-// #############Set Instance Controller##################
-// #######################################################
+// ####################################################
+// #############Set Instance Controller################
+// ####################################################
 
 dark.controller('SetInstanceController', ['$scope',  '$routeParams', 'SetInstance', function($scope, $routeParams, SetInstance) {
 
@@ -275,9 +275,9 @@ function ($scope, $location, $anchorScroll) {
   };
 }]);
 
-// ##########################################################
-// ########### Vas Controller #############
-// ##########################################################
+// ##############################################
+// ################Vas Controller################
+// ##############################################
 
 dark.controller('VasController', ['$scope',  '$routeParams', 'Vas', function($scope, $routeParams, Vas) {
 
