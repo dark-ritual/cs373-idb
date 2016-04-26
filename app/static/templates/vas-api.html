@@ -1,5 +1,5 @@
 <div class="container" ng-controller="VasController">
-	<p> {{ states }}
+	<p> {{ states }} </p>
 	<div class="container bottom-margin" style="color: #FFFFFF">
 		<style>
 			.state{
@@ -51,68 +51,9 @@
 		</style>
 		<body>
 			<div id="tooltip"></div><!-- div to hold tooltip. -->
-			<svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
+			<center><svg width="960" height="600" id="statesvg"></svg></center> <!-- svg to hold the map. -->
 			<script src="../static/js/uStates.js"></script> <!-- creates uStates. -->
-			<script src="../static/js/d3.v3.min.js"></script>
-			<script>
-
-				function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
-					return "<h4>"+n+"</h4><table>"+
-						"<tr><td>Low</td><td>"+(d.cities)+"</td></tr>"+
-						"<tr><td>Average</td><td>"+(d.neighborhoods)+"</td></tr>"+
-						"</table>";
-				}
-				
-				var sampleData ={};	/* Sample random data. */	
-				["TX", "WA", "NY", "CA"]
-					.forEach(function(d){ 
-						var cities=Math.round(100*Math.random()), 
-							neighborhoods=Math.round(100*Math.random());
-						sampleData[d]={state: 4, cities:5, neighborhoods:68, color:d3.interpolate("#ffffcc", "#800026")/100}; 
-					});
-				var stateDict = {};
-				Object.keys({{ cities }}).forEach(function(c){
-					if(stateDict[c.state_code]){
-						stateDict[c.state_code][0] += 1;
-					}else{
-						stateDict[c.state_code] = [1,0];
-					}
-				});
-				Object.keys({{ neighborhoods }}).forEach(function(n){
-					if(stateDict[n.state_code]){
-						stateDict[n.state_code][1] += 1;
-					}else{
-						stateDict[c.state_code] = [0,1];
-					}
-				});
-				var max = 0;
-				stateDict.forEach(function(s, v){
-					if(v[1] > max){
-						max = v[1];
-					}
-				});
-
-
-				var sampleData ={};	/* Sample random data. */	
-				["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
-				"ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
-				"MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
-				"CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
-				"WI", "MO", "AR", "OK", "KS", "LS", "VA"]
-					.forEach(function(d){ 
-						if(stateDict[d]){
-							var cities=stateDict[d][0], 
-								neighborhoods=stateDict[d][1];
-							sampleData[d]={cities:cities, neighborhoods:neighborhoods, color:d3.interpolate("#ffffcc", "#800026")(neighborhoods/max)};
-						}else{
-							sampleData[d]={cities:0, neighborhoods:0, color:d3.interpolate("#ffffcc", "#800026")(0)}
-
-						}
-					});
-				/* draw states on id #statesvg */	
-				uStates.draw("#statesvg", sampleData, tooltipHtml);
-			</script> 
-
+			<script src="../static/js/usmap.js"></script>
 
 		</body>
 	</div>
