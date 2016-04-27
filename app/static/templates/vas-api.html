@@ -1,7 +1,4 @@
 <div class="container" ng-controller="VasController">
-	<p> {{ states }} </p>
-	<p> {{ cities }} </p>
-	<p> {{ neighborhoods }} </p>
 	<div class="container bottom-margin" style="color: #FFFFFF">
 		<style>
 			.state{
@@ -52,11 +49,13 @@
 			}
 		</style>
 		<body>
+			<p class="yelling-font">What is this?</p>
+			<p>This is team BASK's Virtual-Address Space RESTful API. We adquired their data from their RESTful API and are showing the number of cities and neighborhoods per state. Data can be easily added to allow a wider array of states, but due to the limited datbase of BASK we are only showing Texas, California, Washington, and New York.
+			</p>
 			<div id="tooltip"></div><!-- div to hold tooltip. -->
 			<center><svg width="960" height="600" id="statesvg"></svg></center> <!-- svg to hold the map. -->
 			<script src="../static/js/uStates.js"></script> <!-- creates uStates. -->
 			<script src="../static/js/usmap.js"></script>
-
 		</body>
 	</div>
 </div>

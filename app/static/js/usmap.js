@@ -10819,7 +10819,7 @@ var sampleData ={};
 		if(stateDict[d]){
 			var cities=stateDict[d][0], 
 				neighborhoods=stateDict[d][1];
-			sampleData[d]={cities:cities, neighborhoods:neighborhoods, color:d3.interpolate("#ffffcc", "#800026")(neighborhoods/max)};
+			sampleData[d]={cities:cities, neighborhoods:neighborhoods, color:d3.interpolate("#ffffcc", "#800026")(((max+neighborhoods)/2)/max)};
 		}else{
 			sampleData[d]={cities:0, neighborhoods:0, color:d3.interpolate("#ffffcc", "#800026")(0)}
 
