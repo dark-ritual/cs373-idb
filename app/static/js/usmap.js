@@ -10809,6 +10809,8 @@ Object.keys(stateDict).forEach(function(s){
 	}
 });
 
+var cities = [];
+var neighborhoods = [];
 var sampleData ={};	
 ["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
 "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
@@ -10824,6 +10826,7 @@ var sampleData ={};
 			sampleData[d]={cities:0, neighborhoods:0, color:d3.interpolate("#ffffcc", "#800026")(0)}
 
 		}
+		debugger;
 	});
 /* draw states on id #statesvg */	
 uStates.draw("#statesvg", sampleData, tooltipHtml);
